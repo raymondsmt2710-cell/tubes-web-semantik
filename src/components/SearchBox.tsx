@@ -1,26 +1,40 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface SearchBoxProps {
   defaultValue?: string;
   placeholder?: string;
   size?: "hero" | "inline";
+  /** Bila diisi, pencarian ditangani pemanggil (mis. halaman katalog). */
+  onSearch?: (query: string) => void;
 }
 
 export default function SearchBox({
   defaultValue = "",
-  placeholder = "Cari museum, kota, atau tema…",
+  placeholder = "Cari nama museum, mis. Sriwijaya…",
   size = "hero",
+  onSearch,
 }: SearchBoxProps) {
   const router = useRouter();
   const [query, setQuery] = useState(defaultValue);
 
+  useEffect(() => {
+    setQuery(defaultValue);
+  }, [defaultValue]);
+
   function submit(event: React.FormEvent) {
     event.preventDefault();
+    const trimmed = query.trim();
+
+    if (onSearch) {
+      onSearch(trimmed);
+      return;
+    }
+
     const params = new URLSearchParams();
-    if (query.trim()) params.set("q", query.trim());
+    if (trimmed) params.set("q", trimmed);
     router.push(`/katalog${params.toString() ? `?${params.toString()}` : ""}`);
   }
 
