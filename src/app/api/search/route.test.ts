@@ -40,7 +40,7 @@ describe("GET /api/search", () => {
 
     await GET(new Request("http://localhost/api/search?province=Aceh"));
 
-    expect(sent).toContain('FILTER(?province = "Aceh")');
+    expect(sent).toContain('FILTER(STR(?province) = "Aceh")');
   });
 
   it("mengurutkan hasil teks dan menandai kelompok utama/sekunder", async () => {

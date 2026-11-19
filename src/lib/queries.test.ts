@@ -11,7 +11,8 @@ import {
 describe("searchCatalogQuery", () => {
   it("menyaring provinsi di dalam SPARQL, bukan setelahnya", () => {
     const q = searchCatalogQuery({ province: "Aceh" });
-    expect(q).toContain('FILTER(?province = "Aceh")');
+    // Label provinsi bertanda bahasa (@id), jadi perbandingan harus lewat STR().
+    expect(q).toContain('FILTER(STR(?province) = "Aceh")');
   });
 
   it("selalu membatasi hasil dengan LIMIT 300", () => {
@@ -41,7 +42,7 @@ describe("searchCatalogQuery", () => {
   it("menyaring tema dengan FILTER EXISTS agar museum multi-tema tetap utuh", () => {
     const q = searchCatalogQuery({ theme: "etnografi" });
     expect(q).toContain("FILTER EXISTS");
-    expect(q).toContain('FILTER(?themeFilterLabel = "etnografi")');
+    expect(q).toContain('FILTER(STR(?themeFilterLabel) = "etnografi")');
   });
 
   it("menyaring tahun minimum dengan FILTER numerik", () => {
@@ -51,7 +52,7 @@ describe("searchCatalogQuery", () => {
 
   it("menyaring era dengan FILTER", () => {
     const q = searchCatalogQuery({ era: "kolonial" });
-    expect(q).toContain('FILTER(?era = "kolonial")');
+    expect(q).toContain('FILTER(STR(?era) = "kolonial")');
   });
 
   it("mengabaikan minYear yang bukan bilangan", () => {

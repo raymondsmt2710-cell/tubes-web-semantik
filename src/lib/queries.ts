@@ -107,7 +107,8 @@ export function searchCatalogQuery(params: CatalogParams = {}): string {
   const filters: string[] = [];
 
   if (params.province && params.province.trim()) {
-    filters.push(`FILTER(?province = "${sparqlString(params.province.trim())}")`);
+    // Label memakai xml:lang="id", sehingga "Aceh"@id tidak sama dengan "Aceh".
+    filters.push(`FILTER(STR(?province) = "${sparqlString(params.province.trim())}")`);
   }
 
   if (params.theme && params.theme.trim()) {
@@ -115,13 +116,13 @@ export function searchCatalogQuery(params: CatalogParams = {}): string {
       `FILTER EXISTS {
     ?museum sdp:hasTheme ?themeFilterResource .
     ?themeFilterResource rdfs:label ?themeFilterLabel .
-    FILTER(?themeFilterLabel = "${sparqlString(params.theme.trim())}")
+    FILTER(STR(?themeFilterLabel) = "${sparqlString(params.theme.trim())}")
   }`,
     );
   }
 
   if (params.era && params.era.trim()) {
-    filters.push(`FILTER(?era = "${sparqlString(params.era.trim())}")`);
+    filters.push(`FILTER(STR(?era) = "${sparqlString(params.era.trim())}")`);
   }
 
   if (
