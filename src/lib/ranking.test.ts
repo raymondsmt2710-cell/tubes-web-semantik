@@ -18,8 +18,17 @@ describe("similarity", () => {
     expect(similarity("museumn", "Museum Negeri Aceh")).toBeGreaterThanOrEqual(0.95);
   });
 
-  it("memberi skor 0.6 untuk potongan kata di tengah nama", () => {
-    expect(similarity("negeri", "Museum Negeri Aceh")).toBeCloseTo(0.6, 5);
+  it("mengenali satu kata yang muncul di tengah nama", () => {
+    expect(similarity("aceh", "Museum Negeri Aceh")).toBeGreaterThanOrEqual(
+      PRIMARY_THRESHOLD,
+    );
+    expect(similarity("timah", "Museum Timah Indonesia")).toBeGreaterThanOrEqual(
+      PRIMARY_THRESHOLD,
+    );
+  });
+
+  it("memberi skor 0.6 untuk potongan yang bukan kata utuh", () => {
+    expect(similarity("seum", "Museum Negeri Aceh")).toBeCloseTo(0.6, 5);
   });
 
   it("memberi skor rendah untuk nama yang tidak berhubungan", () => {

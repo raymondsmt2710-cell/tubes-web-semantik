@@ -52,6 +52,15 @@ export function similarity(query: string, name: string): number {
   const wordInitials = initials(n);
   if (q === wordInitials || compactQuery === wordInitials) return 0.85;
 
+  // Satu kata yang berdiri sendiri di dalam nama ("aceh" pada "Museum Negeri
+  // Aceh") adalah kecocokan kuat, bukan sekadar potongan huruf.
+  if (
+    q.length >= 2 &&
+    n.split(/\s+/).some((word) => word.length >= 2 && word.startsWith(q))
+  ) {
+    return 0.8;
+  }
+
   // Query banyak kata ("museum aceh") dianggap kuat bila semua katanya muncul.
   const queryTokens = q.split(/\s+/).filter(Boolean);
   if (queryTokens.length > 1 && queryTokens.every((token) => n.includes(token))) {
