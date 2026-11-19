@@ -51,7 +51,8 @@ Lewat UI:
    npm run upload:fuseki
    ```
 
-   Skrip ini menjalankan `CLEAR DEFAULT` lalu mengunggah
+   Skrip ini mengosongkan graph default lewat Graph Store Protocol
+   (`DELETE` pada `FUSEKI_UPDATE?default`) lalu mengunggah
    `data/museum-sumatera.rdf` sebagai RDF/XML ke graph default.
 
 ### Cara B — lewat UI Fuseki

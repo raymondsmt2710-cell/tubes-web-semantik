@@ -1,6 +1,21 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
+// Next.js memuat .env otomatis, tetapi skrip yang dijalankan lewat tsx tidak.
+// Muat di sini supaya `npm run upload:fuseki` menghormati isi .env; nilai yang
+// sudah ada di shell tidak ditimpa.
+const loadEnvFile = (
+  process as unknown as { loadEnvFile?: (path?: string) => void }
+).loadEnvFile;
+
+if (typeof loadEnvFile === "function") {
+  try {
+    loadEnvFile();
+  } catch {
+    // .env opsional: endpoint boleh diisi langsung lewat environment shell.
+  }
+}
+
 const rdfPath = fileURLToPath(new URL("../data/museum-sumatera.rdf", import.meta.url));
 
 const updateEndpoint = process.env.FUSEKI_UPDATE?.trim();
@@ -28,12 +43,14 @@ async function main() {
   const body = readFileSync(rdfPath, "utf-8");
 
   console.log("Membersihkan graph default...");
-  const clearResponse = await fetch(updateEndpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `update=${encodeURIComponent("CLEAR DEFAULT")}`,
+  // FUSEKI_UPDATE menunjuk Graph Store Protocol (/data). "CLEAR DEFAULT"
+  // adalah operasi SPARQL Update yang ditolak endpoint ini, jadi kosongkan
+  // graph lewat DELETE ?default sesuai GSP.
+  const separator = updateEndpoint.includes("?") ? "&" : "?";
+  const clearResponse = await fetch(`${updateEndpoint}${separator}default`, {
+    method: "DELETE",
   });
-  if (!clearResponse.ok) {
+  if (!clearResponse.ok && clearResponse.status !== 404) {
     console.error(`Gagal membersihkan graph (${clearResponse.status}).`);
     console.error((await clearResponse.text()).slice(0, 500));
     process.exit(1);
