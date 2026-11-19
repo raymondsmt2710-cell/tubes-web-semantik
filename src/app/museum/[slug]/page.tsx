@@ -65,8 +65,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const result = await loadMuseum(slug);
 
-  if (result.status !== "ok") {
+  if (result.status === "notfound") {
     return { title: "Museum tidak ditemukan — Museum Sumatera" };
+  }
+
+  if (result.status === "offline") {
+    return { title: "Basis data tidak terjangkau — Museum Sumatera" };
   }
 
   return {
