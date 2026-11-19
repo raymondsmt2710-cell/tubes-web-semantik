@@ -1,0 +1,122 @@
+@prefix sdp:  <https://museumsumatera.id/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix res:  <https://museumsumatera.id/resource/> .
+
+@prefix : <https://museumsumatera.id/ontology#> .
+
+<https://museumsumatera.id/ontology> a owl:Ontology ;
+    rdfs:label "Ontologi Museum Sumatera"@id ;
+    rdfs:comment "Ontologi untuk data museum di Pulau Sumatera. Setiap properti punya satu arti; tidak ada properti bermakna ganda."@id .
+
+# ---------------------------------------------------------------- Kelas
+
+sdp:Museum a owl:Class ;
+    rdfs:label "Museum"@id ;
+    rdfs:comment "Sebuah museum di Pulau Sumatera."@id .
+
+sdp:Province a owl:Class ;
+    rdfs:label "Provinsi"@id ;
+    rdfs:comment "Provinsi di Pulau Sumatera."@id .
+
+sdp:City a owl:Class ;
+    rdfs:label "Kota atau Kabupaten"@id ;
+    rdfs:comment "Lokasi kota atau kabupaten tempat museum berada."@id .
+
+sdp:Theme a owl:Class ;
+    rdfs:label "Tema"@id ;
+    rdfs:comment "Tema koleksi museum."@id .
+
+sdp:Era a owl:Class ;
+    rdfs:label "Era"@id ;
+    rdfs:comment "Periode sejarah yang diwakili koleksi museum."@id .
+
+sdp:Chapter a owl:Class ;
+    rdfs:label "Bab"@id ;
+    rdfs:comment "Bab dalam alur pameran, dari Aceh hingga Lampung."@id .
+
+# ------------------------------------------------------- Object property
+
+sdp:locatedInProvince a owl:ObjectProperty ;
+    rdfs:label "berlokasi di provinsi"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:Province .
+
+sdp:locatedInCity a owl:ObjectProperty ;
+    rdfs:label "berlokasi di kota"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:City .
+
+sdp:partOfProvince a owl:ObjectProperty ;
+    rdfs:label "bagian dari provinsi"@id ;
+    rdfs:domain sdp:City ;
+    rdfs:range sdp:Province .
+
+sdp:hasTheme a owl:ObjectProperty ;
+    rdfs:label "memiliki tema"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:Theme .
+
+sdp:hasEra a owl:ObjectProperty ;
+    rdfs:label "memiliki era"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:Era .
+
+sdp:chapter a owl:ObjectProperty ;
+    rdfs:label "berada di bab"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:Chapter .
+
+# ----------------------------------------------------- Datatype property
+
+sdp:establishedYear a owl:DatatypeProperty ;
+    rdfs:label "tahun berdiri"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:gYear .
+
+sdp:description a owl:DatatypeProperty ;
+    rdfs:label "deskripsi"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:string .
+
+sdp:imageUrl a owl:DatatypeProperty ;
+    rdfs:label "tautan gambar"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:anyURI .
+
+sdp:officialUrl a owl:DatatypeProperty ;
+    rdfs:label "situs resmi"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:anyURI .
+
+sdp:address a owl:DatatypeProperty ;
+    rdfs:label "alamat"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:string .
+
+sdp:latitude a owl:DatatypeProperty ;
+    rdfs:label "lintang"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:decimal .
+
+sdp:longitude a owl:DatatypeProperty ;
+    rdfs:label "bujur"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:decimal .
+
+sdp:admissionNote a owl:DatatypeProperty ;
+    rdfs:label "catatan kunjungan"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:string .
+
+sdp:verificationStatus a owl:DatatypeProperty ;
+    rdfs:label "status verifikasi data"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:string .
+
+sdp:chapterIndex a owl:DatatypeProperty ;
+    rdfs:label "urutan bab"@id ;
+    rdfs:domain sdp:Chapter ;
+    rdfs:range xsd:integer .

@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:sdp="https://museumsumatera.id/ontology#"
+    xmlns:res="https://museumsumatera.id/resource/">
+
+    <!-- Kelas -->
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Museum">
+        <rdfs:label xml:lang="id">Museum</rdfs:label>
+        <rdfs:comment xml:lang="id">Sebuah museum di Pulau Sumatera.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Province">
+        <rdfs:label xml:lang="id">Provinsi</rdfs:label>
+        <rdfs:comment xml:lang="id">Provinsi di Pulau Sumatera.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#City">
+        <rdfs:label xml:lang="id">Kota atau Kabupaten</rdfs:label>
+        <rdfs:comment xml:lang="id">Lokasi kota atau kabupaten.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Theme">
+        <rdfs:label xml:lang="id">Tema</rdfs:label>
+        <rdfs:comment xml:lang="id">Tema koleksi museum.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Era">
+        <rdfs:label xml:lang="id">Era</rdfs:label>
+        <rdfs:comment xml:lang="id">Periode sejarah yang diwakili koleksi.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Chapter">
+        <rdfs:label xml:lang="id">Bab</rdfs:label>
+        <rdfs:comment xml:lang="id">Bab dalam alur pameran.</rdfs:comment>
+    </owl:Class>
+
+    <!-- Object property -->
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#locatedInProvince">
+        <rdfs:label xml:lang="id">berlokasi di provinsi</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Province"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#locatedInCity">
+        <rdfs:label xml:lang="id">berlokasi di kota</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#City"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#partOfProvince">
+        <rdfs:label xml:lang="id">bagian dari provinsi</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#City"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Province"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasTheme">
+        <rdfs:label xml:lang="id">memiliki tema</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Theme"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasEra">
+        <rdfs:label xml:lang="id">memiliki era</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Era"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#chapter">
+        <rdfs:label xml:lang="id">berada di bab</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Chapter"/>
+    </owl:ObjectProperty>
+
+    <!-- Datatype property -->
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#establishedYear">
+        <rdfs:label xml:lang="id">tahun berdiri</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#gYear"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#description">
+        <rdfs:label xml:lang="id">deskripsi</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#imageUrl">
+        <rdfs:label xml:lang="id">tautan gambar</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#officialUrl">
+        <rdfs:label xml:lang="id">situs resmi</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#address">
+        <rdfs:label xml:lang="id">alamat</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#latitude">
+        <rdfs:label xml:lang="id">lintang</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#longitude">
+        <rdfs:label xml:lang="id">bujur</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#admissionNote">
+        <rdfs:label xml:lang="id">catatan kunjungan</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#verificationStatus">
+        <rdfs:label xml:lang="id">status verifikasi data</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#chapterIndex">
+        <rdfs:label xml:lang="id">urutan bab</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Chapter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+
+    <!-- Instance provinsi -->
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/aceh">
+        <rdfs:label xml:lang="id">Aceh</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/bangka-belitung">
+        <rdfs:label xml:lang="id">Bangka Belitung</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/bengkulu">
+        <rdfs:label xml:lang="id">Bengkulu</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/jambi">
+        <rdfs:label xml:lang="id">Jambi</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/kepulauan-riau">
+        <rdfs:label xml:lang="id">Kepulauan Riau</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/lampung">
+        <rdfs:label xml:lang="id">Lampung</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/riau">
+        <rdfs:label xml:lang="id">Riau</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/sumatera-barat">
+        <rdfs:label xml:lang="id">Sumatera Barat</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/sumatera-selatan">
+        <rdfs:label xml:lang="id">Sumatera Selatan</rdfs:label>
+    </sdp:Province>
+
+    <sdp:Province rdf:about="https://museumsumatera.id/resource/province/sumatera-utara">
+        <rdfs:label xml:lang="id">Sumatera Utara</rdfs:label>
+    </sdp:Province>
+
+    <!-- Instance kota -->
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/banda-aceh">
+        <rdfs:label xml:lang="id">Banda Aceh</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/aceh-besar">
+        <rdfs:label xml:lang="id">Aceh Besar</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/aceh-utara">
+        <rdfs:label xml:lang="id">Aceh Utara</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/medan">
+        <rdfs:label xml:lang="id">Medan</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/samosir">
+        <rdfs:label xml:lang="id">Samosir</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/toba">
+        <rdfs:label xml:lang="id">Toba</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/deli-serdang">
+        <rdfs:label xml:lang="id">Deli Serdang</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/pekanbaru">
+        <rdfs:label xml:lang="id">Pekanbaru</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/tanjungpinang">
+        <rdfs:label xml:lang="id">Tanjungpinang</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/lingga">
+        <rdfs:label xml:lang="id">Lingga</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/siak">
+        <rdfs:label xml:lang="id">Siak</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/padang">
+        <rdfs:label xml:lang="id">Padang</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/agam">
+        <rdfs:label xml:lang="id">Agam</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/pasaman">
+        <rdfs:label xml:lang="id">Pasaman</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/sawahlunto">
+        <rdfs:label xml:lang="id">Sawahlunto</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/jambi">
+        <rdfs:label xml:lang="id">Jambi</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/bengkulu">
+        <rdfs:label xml:lang="id">Bengkulu</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/palembang">
+        <rdfs:label xml:lang="id">Palembang</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/pangkalpinang">
+        <rdfs:label xml:lang="id">Pangkalpinang</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/bandar-lampung">
+        <rdfs:label xml:lang="id">Bandar Lampung</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/pesawaran">
+        <rdfs:label xml:lang="id">Pesawaran</rdfs:label>
+    </sdp:City>
+
+    <sdp:City rdf:about="https://museumsumatera.id/resource/city/lampung-timur">
+        <rdfs:label xml:lang="id">Lampung Timur</rdfs:label>
+    </sdp:City>
+
+    <!-- Instance tema -->
+
+    <sdp:Theme rdf:about="https://museumsumatera.id/resource/theme/perjuangan">
+        <rdfs:label xml:lang="id">perjuangan</rdfs:label>
+    </sdp:Theme>
+
+    <sdp:Theme rdf:about="https://museumsumatera.id/resource/theme/arkeologi">
+        <rdfs:label xml:lang="id">arkeologi</rdfs:label>
+    </sdp:Theme>
+
+    <sdp:Theme rdf:about="https://museumsumatera.id/resource/theme/etnografi">
+        <rdfs:label xml:lang="id">etnografi</rdfs:label>
+    </sdp:Theme>
+
+    <sdp:Theme rdf:about="https://museumsumatera.id/resource/theme/seni-budaya">
+        <rdfs:label xml:lang="id">seni-budaya</rdfs:label>
+    </sdp:Theme>
+
+    <sdp:Theme rdf:about="https://museumsumatera.id/resource/theme/sains-teknologi">
+        <rdfs:label xml:lang="id">sains-teknologi</rdfs:label>
+    </sdp:Theme>
+
+    <sdp:Theme rdf:about="https://museumsumatera.id/resource/theme/sejarah-alam">
+        <rdfs:label xml:lang="id">sejarah-alam</rdfs:label>
+    </sdp:Theme>
+
+    <!-- Instance era -->
+
+    <sdp:Era rdf:about="https://museumsumatera.id/resource/era/pra-kolonial">
+        <rdfs:label xml:lang="id">pra-kolonial</rdfs:label>
+    </sdp:Era>
+
+    <sdp:Era rdf:about="https://museumsumatera.id/resource/era/kolonial">
+        <rdfs:label xml:lang="id">kolonial</rdfs:label>
+    </sdp:Era>
+
+    <sdp:Era rdf:about="https://museumsumatera.id/resource/era/kemerdekaan">
+        <rdfs:label xml:lang="id">kemerdekaan</rdfs:label>
+    </sdp:Era>
+
+    <sdp:Era rdf:about="https://museumsumatera.id/resource/era/modern">
+        <rdfs:label xml:lang="id">modern</rdfs:label>
+    </sdp:Era>
+
+    <!-- Instance bab -->
+
+    <sdp:Chapter rdf:about="https://museumsumatera.id/resource/chapter/1">
+        <rdfs:label xml:lang="id">Bab I</rdfs:label>
+        <rdfs:comment xml:lang="id">Dari Pelabuhan ke Pedalaman</rdfs:comment>
+        <sdp:chapterIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:chapterIndex>
+    </sdp:Chapter>
+
+    <sdp:Chapter rdf:about="https://museumsumatera.id/resource/chapter/2">
+        <rdfs:label xml:lang="id">Bab II</rdfs:label>
+        <rdfs:comment xml:lang="id">Tanah Karo dan Danau Toba</rdfs:comment>
+        <sdp:chapterIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:chapterIndex>
+    </sdp:Chapter>
+
+    <sdp:Chapter rdf:about="https://museumsumatera.id/resource/chapter/3">
+        <rdfs:label xml:lang="id">Bab III</rdfs:label>
+        <rdfs:comment xml:lang="id">Jejak Kerajaan Melayu</rdfs:comment>
+        <sdp:chapterIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:chapterIndex>
+    </sdp:Chapter>
+
+    <sdp:Chapter rdf:about="https://museumsumatera.id/resource/chapter/4">
+        <rdfs:label xml:lang="id">Bab IV</rdfs:label>
+        <rdfs:comment xml:lang="id">Rumah Gadang dan Perang Padri</rdfs:comment>
+        <sdp:chapterIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</sdp:chapterIndex>
+    </sdp:Chapter>
+
+    <sdp:Chapter rdf:about="https://museumsumatera.id/resource/chapter/5">
+        <rdfs:label xml:lang="id">Bab V</rdfs:label>
+        <rdfs:comment xml:lang="id">Antara Batanghari dan Bukit Barisan</rdfs:comment>
+        <sdp:chapterIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</sdp:chapterIndex>
+    </sdp:Chapter>
+
+    <sdp:Chapter rdf:about="https://museumsumatera.id/resource/chapter/6">
+        <rdfs:label xml:lang="id">Bab VI</rdfs:label>
+        <rdfs:comment xml:lang="id">Sungai Musi dan Timah</rdfs:comment>
+        <sdp:chapterIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</sdp:chapterIndex>
+    </sdp:Chapter>
+
+    <sdp:Chapter rdf:about="https://museumsumatera.id/resource/chapter/7">
+        <rdfs:label xml:lang="id">Bab VII</rdfs:label>
+        <rdfs:comment xml:lang="id">Gerbang Selat Sunda</rdfs:comment>
+        <sdp:chapterIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7</sdp:chapterIndex>
+    </sdp:Chapter>
+
+    <!-- Instance museum -->
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-aceh">
+        <rdfs:label xml:lang="id">Museum Negeri Aceh</rdfs:label>
+        <sdp:description xml:lang="id">Museum tertua di Aceh yang menempati bekas gedung pameran kolonial dari awal abad ke-20. Koleksinya mencakup naskah, senjata tradisional, dan benda sehari-hari masyarakat Aceh, termasuk koleksi Rumoh Aceh di halaman belakang.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/aceh"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/banda-aceh"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/1"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1915</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Sultan Mahmudsyah No. 12, Banda Aceh</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.5483</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">95.3238</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-tsunami-aceh">
+        <rdfs:label xml:lang="id">Museum Tsunami Aceh</rdfs:label>
+        <sdp:description xml:lang="id">Dibangun sebagai peringatan bencana tsunami 26 Desember 2004. Lorong masuknya berbentuk gelombang, dan ruang pamer berisi foto, benda peninggalan, serta kisah penyintas yang disusun sebagai ruang refleksi.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/aceh"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/banda-aceh"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/1"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/sejarah-alam"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/modern"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2009</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Sultan Iskandar Muda, Banda Aceh</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.5476</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">95.3153</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-cut-nyak-dhien">
+        <rdfs:label xml:lang="id">Museum Cut Nyak Dhien</rdfs:label>
+        <sdp:description xml:lang="id">Menempati rumah panggung tempat Cut Nyak Dhien ditangkap pada 1905. Ruang pamer menyimpan replika pakaian, senjata, dan diorama yang mengisahkan perjuangan Aceh melawan kolonial.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/aceh"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/aceh-besar"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/1"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/perjuangan"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Lam Pisang, Aceh Besar</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.3878</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">95.4729</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-malikussaleh">
+        <rdfs:label xml:lang="id">Museum Malikussaleh</rdfs:label>
+        <sdp:description xml:lang="id">Berada di kawasan bekas Kerajaan Samudera Pasai, kerajaan Islam pertama di Nusantara. Koleksinya berupa fragmen batu nisan, mata uang kuno, dan temuan arkeologis dari situs sekitar.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/aceh"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/aceh-utara"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/1"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/pra-kolonial"/>
+        <sdp:address xml:lang="id">Kecamatan Samudera, Aceh Utara</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5.1697</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">97.1783</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara">
+        <rdfs:label xml:lang="id">Museum Negeri Provinsi Sumatera Utara</rdfs:label>
+        <sdp:description xml:lang="id">Museum provinsi yang menyimpan koleksi budaya Batak, Melayu, Nias, dan etnis lain di Sumatera Utara. Bangunannya bekas kediaman seorang pedagang, dan halamannya memuat rumah adat serta meriam peninggalan.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-utara"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/medan"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/2"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1954</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. H.M. Joni No. 51, Medan</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.5894</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">98.6747</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo">
+        <rdfs:label xml:lang="id">Museum Huta Bolon Simanindo</rdfs:label>
+        <sdp:description xml:lang="id">Kompleks rumah adat Batak Toba di tepi Danau Toba yang difungsikan sebagai museum. Pengunjung dapat melihat rumah panggung, lumbung padi, dan pertunjukan tari Sigale-gale.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-utara"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/samosir"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/2"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Simanindo, Kabupaten Samosir</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.6853</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">98.7694</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center">
+        <rdfs:label xml:lang="id">Museum TB Silalahi Center</rdfs:label>
+        <sdp:description xml:lang="id">Didirikan di Balige dengan koleksi seni dan artefak Batak yang dikumpulkan secara pribadi. Tata pamernya modern dan menyertakan ruang audiovisual tentang budaya Danau Toba.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-utara"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/toba"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/2"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/modern"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">2008</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Patuan Nagari, Balige, Kabupaten Toba</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.3333</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">99.0667</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii">
+        <rdfs:label xml:lang="id">Museum Sisingamangaraja XII</rdfs:label>
+        <sdp:description xml:lang="id">Mengisahkan perlawanan Sisingamangaraja XII terhadap pemerintahan kolonial Belanda di Tanah Batak. Koleksinya mencakup senjata tradisional, foto sejarah, dan benda pribadi keluarga raja.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-utara"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/toba"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/2"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/perjuangan"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Balige, Kabupaten Toba</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.3402</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">99.0708</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang">
+        <rdfs:label xml:lang="id">Museum Daerah Deli Serdang</rdfs:label>
+        <sdp:description xml:lang="id">Museum kabupaten yang memamerkan koleksi etnografi Melayu Deli serta temuan arkeologis dari pesisir timur Sumatera Utara. Sering dipakai sebagai ruang pembelajaran sekolah setempat.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-utara"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/deli-serdang"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/2"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:address xml:lang="id">Lubuk Pakam, Kabupaten Deli Serdang</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.5586</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">98.8759</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-sang-nila-utama">
+        <rdfs:label xml:lang="id">Museum Sang Nila Utama</rdfs:label>
+        <sdp:description xml:lang="id">Museum negeri Riau dengan arsitektur berlambang rumah adat Melayu. Koleksinya mencakup tenun songket, perahu tradisional, dan benda upacara masyarakat Melayu pesisir.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/riau"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/pekanbaru"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/3"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1976</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Jenderal Sudirman No. 194, Pekanbaru</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5071</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">101.4478</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah">
+        <rdfs:label xml:lang="id">Museum Sultan Sulaiman Badrul Alamsyah</rdfs:label>
+        <sdp:description xml:lang="id">Menempati bekas istana Kesultanan Riau-Lingga di Pulau Penyengat dan sekitarnya. Koleksinya meliputi manuskrip Melayu, naskah keagamaan, dan benda kerajaan.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/kepulauan-riau"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/tanjungpinang"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/3"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Jl. Ketapang, Tanjungpinang</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.9186</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">104.4467</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-linggam-cahaya">
+        <rdfs:label xml:lang="id">Museum Linggam Cahaya</rdfs:label>
+        <sdp:description xml:lang="id">Museum daerah di bekas pusat Kesultanan Lingga yang menyimpan koleksi kerajaan Melayu, termasuk naskah, alat musik, dan peninggalan masa kejayaan Lingga.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/kepulauan-riau"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/lingga"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/3"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Daik, Kabupaten Lingga</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-0.2079</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">104.6169</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-istana-siak">
+        <rdfs:label xml:lang="id">Museum Istana Siak Sri Indrapura</rdfs:label>
+        <sdp:description xml:lang="id">Istana Asserayah Hasyimiah yang dialihfungsikan menjadi museum. Bangunan kuning berarsitektur Melayu-Eropa ini menyimpan koleksi kerajaan Siak, termasuk alat musik dan benda upacara.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/riau"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/siak"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/3"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Jl. Sultan Syarif Kasim, Siak Sri Indrapura</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7933</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">102.0525</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-adityawarman">
+        <rdfs:label xml:lang="id">Museum Adityawarman</rdfs:label>
+        <sdp:description xml:lang="id">Museum provinsi Sumatera Barat dengan atap bergonjong menyerupai rumah gadang. Koleksinya mencakup ukiran Minangkabau, kain songket, dan dokumen sejarah alam.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-barat"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/padang"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/4"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1950</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Diponegoro No. 10, Padang</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-0.9471</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.3547</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka">
+        <rdfs:label xml:lang="id">Museum Rumah Kelahiran Buya Hamka</rdfs:label>
+        <sdp:description xml:lang="id">Rumah kelahiran ulama dan sastrawan Hamka di tepi Danau Maninjau. Ruangannya memuat buku, foto, dan benda pribadi yang menandai jejak hidupnya.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-barat"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/agam"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/4"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Nagari Sungai Batang, Kabupaten Agam</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-0.3078</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.1147</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-tuanku-imam-bonjol">
+        <rdfs:label xml:lang="id">Museum Tuanku Imam Bonjol</rdfs:label>
+        <sdp:description xml:lang="id">Berada di kawasan kelahiran Tuanku Imam Bonjol, pemimpin Perang Padri. Museum ini menampilkan diorama pertempuran, senjata, dan naskah yang berkaitan dengan perang tersebut.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-barat"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/pasaman"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/4"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/perjuangan"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Bonjol, Kabupaten Pasaman</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.0208</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.2222</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto">
+        <rdfs:label xml:lang="id">Museum Kereta Api Sawahlunto</rdfs:label>
+        <sdp:description xml:lang="id">Mengisi bekas stasiun dan depo lokomotif yang menghubungkan tambang batu bara Ombilin dengan pelabuhan. Koleksinya berupa lokomotif uap, gerbong, dan peralatan kereta peninggalan kolonial.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-barat"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/sawahlunto"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/4"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/sains-teknologi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/sejarah-alam"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Jl. Raya Sawahlunto, Sawahlunto</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-0.6811</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">100.7744</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-jambi">
+        <rdfs:label xml:lang="id">Museum Negeri Jambi</rdfs:label>
+        <sdp:description xml:lang="id">Menyimpan koleksi budaya Melayu Jambi dan temuan dari kawasan Batanghari, termasuk arca dan benda megalitik. Bangunannya berarsitektur rumah panggung dengan ornamen khas.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/jambi"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/jambi"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/5"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1986</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Urip Sumoharjo, Jambi</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1.6101</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103.6131</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-siginjai">
+        <rdfs:label xml:lang="id">Museum Siginjai</rdfs:label>
+        <sdp:description xml:lang="id">Museum yang mengangkat nama siginjai, ikat pinggang pusaka raja Jambi. Koleksinya mencakup keramik Cina, arca, dan benda upacara masyarakat Jambi.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/jambi"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/jambi"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/5"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1988</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Prof. Dr. Sri Soedewi, Jambi</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-1.6044</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">103.5811</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu">
+        <rdfs:label xml:lang="id">Museum Negeri Bengkulu</rdfs:label>
+        <sdp:description xml:lang="id">Museum provinsi dengan koleksi budaya Rejang, Serawai, dan Enggano. Terdapat pula koleksi sejarah alam serta replika bunga rafflesia yang menjadi ikon Bengkulu.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/bengkulu"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/bengkulu"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/5"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/sejarah-alam"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1978</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Pembangunan No. 08, Bengkulu</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-3.7956</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">102.2658</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno">
+        <rdfs:label xml:lang="id">Rumah Pengasingan Bung Karno</rdfs:label>
+        <sdp:description xml:lang="id">Rumah tempat Soekarno diasingkan pada 1938–1942, kini dikelola sebagai museum. Ruangannya dipertahankan seperti masa itu, lengkap dengan barang pribadi dan dokumentasi pengasingan.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/bengkulu"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/bengkulu"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/5"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/perjuangan"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1938</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Soekarno-Hatta, Bengkulu</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-3.7985</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">102.2712</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan">
+        <rdfs:label xml:lang="id">Museum Negeri Sumatera Selatan Balaputra Dewa</rdfs:label>
+        <sdp:description xml:lang="id">Museum provinsi Sumatera Selatan dengan koleksi arca Hindu-Buddha, keramik, dan tenun songket Palembang. Namanya diambil dari raja Sriwijaya, Balaputra Dewa.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-selatan"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/palembang"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/6"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1978</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Srijaya Negara, Palembang</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-2.9761</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">104.7353</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-sultan-mahmud-badaruddin-ii">
+        <rdfs:label xml:lang="id">Museum Sultan Mahmud Badaruddin II</rdfs:label>
+        <sdp:description xml:lang="id">Menempati bekas kediaman Sultan Mahmud Badaruddin II di tepi Sungai Musi. Koleksinya mencakup benda kerajaan Palembang, senjata, dan dokumentasi perlawanan terhadap kolonial.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-selatan"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/palembang"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/6"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/perjuangan"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kolonial"/>
+        <sdp:address xml:lang="id">Jl. Merdeka, Palembang</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-2.9917</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">104.7603</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-taman-purbakala-sriwijaya">
+        <rdfs:label xml:lang="id">Museum Taman Purbakala Kerajaan Sriwijaya</rdfs:label>
+        <sdp:description xml:lang="id">Situs bekas permukiman masa Sriwijaya yang dilengkapi museum terbuka. Pengunjung dapat melihat struktur bata kuno, temuan keramik, dan replika prasasti di lokasi aslinya.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/sumatera-selatan"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/palembang"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/6"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/pra-kolonial"/>
+        <sdp:address xml:lang="id">Jl. Syakyakirti, Palembang</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-2.9589</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">104.7322</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-timah-indonesia">
+        <rdfs:label xml:lang="id">Museum Timah Indonesia</rdfs:label>
+        <sdp:description xml:lang="id">Museum yang mengisahkan sejarah penambangan timah di Bangka Belitung sejak masa kolonial. Koleksinya mencakup peralatan tambang, mineral, dan diorama tambang terbuka.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/bangka-belitung"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/pangkalpinang"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/6"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/sains-teknologi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/sejarah-alam"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1997</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Jenderal Ahmad Yani, Pangkalpinang</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-2.1316</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">106.1169</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-lampung">
+        <rdfs:label xml:lang="id">Museum Negeri Lampung Ruwa Jurai</rdfs:label>
+        <sdp:description xml:lang="id">Museum provinsi Lampung dengan koleksi budaya Saibatin dan Pepadun, termasuk kain tapis dan replika rumah adat. Bangunannya menjadi rujukan pembelajaran sejarah lokal.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/lampung"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/bandar-lampung"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/7"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/etnografi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/kemerdekaan"/>
+        <sdp:establishedYear rdf:datatype="http://www.w3.org/2001/XMLSchema#gYear">1988</sdp:establishedYear>
+        <sdp:address xml:lang="id">Jl. Dr. Ryacudu, Bandar Lampung</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-5.3819</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">105.2592</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung">
+        <rdfs:label xml:lang="id">Museum Ketransmigrasian Lampung</rdfs:label>
+        <sdp:description xml:lang="id">Museum yang mendokumentasikan sejarah program transmigrasi di Indonesia, dengan Lampung sebagai salah satu tujuan utama. Koleksinya berupa foto, dokumen, dan peralatan hidup para transmigran.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/lampung"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/pesawaran"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/7"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/sains-teknologi"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/seni-budaya"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/modern"/>
+        <sdp:address xml:lang="id">Bagelen, Kabupaten Pesawaran</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-5.2667</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">105.1333</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+    <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-purbakala-pugung-raharjo">
+        <rdfs:label xml:lang="id">Museum Purbakala Pugung Raharjo</rdfs:label>
+        <sdp:description xml:lang="id">Situs megalitik di tengah perkebunan yang menyimpan batu berundak, arca, dan benteng tanah peninggalan masa pra-sejarah hingga klasik. Sebagian koleksinya dipamerkan di rumah joglo sederhana di dalam situs.</sdp:description>
+        <sdp:locatedInProvince rdf:resource="https://museumsumatera.id/resource/province/lampung"/>
+        <sdp:locatedInCity rdf:resource="https://museumsumatera.id/resource/city/lampung-timur"/>
+        <sdp:chapter rdf:resource="https://museumsumatera.id/resource/chapter/7"/>
+        <sdp:hasTheme rdf:resource="https://museumsumatera.id/resource/theme/arkeologi"/>
+        <sdp:hasEra rdf:resource="https://museumsumatera.id/resource/era/pra-kolonial"/>
+        <sdp:address xml:lang="id">Sekampung Udik, Kabupaten Lampung Timur</sdp:address>
+        <sdp:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-5.3167</sdp:latitude>
+        <sdp:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">105.4833</sdp:longitude>
+        <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
+    </sdp:Museum>
+
+</rdf:RDF>
