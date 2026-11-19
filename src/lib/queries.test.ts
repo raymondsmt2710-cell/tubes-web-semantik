@@ -1,0 +1,131 @@
+import { describe, it, expect } from "vitest";
+import {
+  chaptersQuery,
+  museumsByChapterQuery,
+  searchCatalogQuery,
+  museumBySlugQuery,
+  relatedCandidatesQuery,
+  mapMuseumRow,
+} from "./queries";
+
+describe("searchCatalogQuery", () => {
+  it("menyaring provinsi di dalam SPARQL, bukan setelahnya", () => {
+    const q = searchCatalogQuery({ province: "Aceh" });
+    expect(q).toContain('FILTER(?province = "Aceh")');
+  });
+
+  it("selalu membatasi hasil dengan LIMIT 300", () => {
+    expect(searchCatalogQuery({})).toContain("LIMIT 300");
+  });
+
+  it("meng-escape tanda kutip pada input provinsi", () => {
+    const q = searchCatalogQuery({ province: 'Aceh" OR 1=1' });
+    expect(q).toContain('\\"');
+    expect(q).not.toContain('"Aceh" OR 1=1"');
+  });
+
+  it("memakai ORDER BY DESC(?year) saat sort=year dan order=desc", () => {
+    expect(searchCatalogQuery({ sort: "year", order: "desc" })).toMatch(
+      /ORDER BY DESC\(\?year\)/i,
+    );
+  });
+
+  it("memakai ORDER BY ASC(?name) secara default", () => {
+    expect(searchCatalogQuery({})).toMatch(/ORDER BY ASC\(\?name\)/i);
+  });
+
+  it("tidak menambahkan filter tema bila tema kosong", () => {
+    expect(searchCatalogQuery({})).not.toContain("themeFilterLabel");
+  });
+
+  it("menyaring tema dengan FILTER EXISTS agar museum multi-tema tetap utuh", () => {
+    const q = searchCatalogQuery({ theme: "etnografi" });
+    expect(q).toContain("FILTER EXISTS");
+    expect(q).toContain('FILTER(?themeFilterLabel = "etnografi")');
+  });
+
+  it("menyaring tahun minimum dengan FILTER numerik", () => {
+    const q = searchCatalogQuery({ minYear: 1900 });
+    expect(q).toContain("?year >= 1900");
+  });
+
+  it("menyaring era dengan FILTER", () => {
+    const q = searchCatalogQuery({ era: "kolonial" });
+    expect(q).toContain('FILTER(?era = "kolonial")');
+  });
+
+  it("mengabaikan minYear yang bukan bilangan", () => {
+    const q = searchCatalogQuery({ minYear: Number.NaN });
+    expect(q).not.toContain("?year >=");
+  });
+});
+
+describe("museumsByChapterQuery", () => {
+  it("membatasi hasil pada nomor bab yang diminta", () => {
+    const q = museumsByChapterQuery(3);
+    expect(q).toContain("FILTER(?chapterIndex = 3)");
+  });
+
+  it("menolak nomor bab di luar 1..7", () => {
+    expect(() => museumsByChapterQuery(0)).toThrow(/bab/i);
+    expect(() => museumsByChapterQuery(8)).toThrow(/bab/i);
+    expect(() => museumsByChapterQuery(1.5)).toThrow(/bab/i);
+  });
+});
+
+describe("chaptersQuery", () => {
+  it("menghitung jumlah museum per bab dengan COUNT", () => {
+    const q = chaptersQuery();
+    expect(q).toContain("COUNT(?museum)");
+    expect(q).toContain("GROUP BY");
+  });
+});
+
+describe("museumBySlugQuery / relatedCandidatesQuery", () => {
+  it("mencari museum lewat segmen terakhir URI", () => {
+    expect(museumBySlugQuery("museum-negeri-aceh")).toContain("museum-negeri-aceh");
+    expect(museumBySlugQuery("museum-negeri-aceh")).toContain("LIMIT 1");
+  });
+
+  it("meng-escape slug yang berisi tanda kutip", () => {
+    expect(museumBySlugQuery('x"y')).toContain('\\"');
+  });
+
+  it("kandidat terkait mengecualikan museum itu sendiri di dalam SPARQL", () => {
+    const q = relatedCandidatesQuery("museum-negeri-aceh");
+    expect(q).toContain("FILTER(?slug != \"museum-negeri-aceh\")");
+  });
+});
+
+describe("mapMuseumRow", () => {
+  it("memetakan binding SPARQL ke MuseumDTO lengkap", () => {
+    const dto = mapMuseumRow({
+      museum: { type: "uri", value: "https://museumsumatera.id/resource/museum/x" },
+      slug: { type: "literal", value: "x" },
+      name: { type: "literal", value: "Museum X" },
+      province: { type: "literal", value: "Aceh" },
+      themes: { type: "literal", value: "etnografi|perjuangan" },
+      year: { type: "literal", value: "1930" },
+      chapterIndex: { type: "literal", value: "1" },
+    });
+
+    expect(dto).toMatchObject({
+      uri: "https://museumsumatera.id/resource/museum/x",
+      slug: "x",
+      name: "Museum X",
+      province: "Aceh",
+      themes: ["etnografi", "perjuangan"],
+      establishedYear: 1930,
+      chapterIndex: 1,
+      city: null,
+      verificationStatus: "perlu-verifikasi",
+    });
+  });
+
+  it("tidak meledak saat tahun atau tema tidak ada", () => {
+    const dto = mapMuseumRow({ name: { type: "literal", value: "Museum Y" } });
+    expect(dto.establishedYear).toBeNull();
+    expect(dto.themes).toEqual([]);
+    expect(dto.establishedYear).not.toBe(0);
+  });
+});
