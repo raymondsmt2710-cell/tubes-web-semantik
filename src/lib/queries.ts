@@ -106,6 +106,24 @@ function orderClause(sort: CatalogParams["sort"], order: CatalogParams["order"])
 export function searchCatalogQuery(params: CatalogParams = {}): string {
   const filters: string[] = [];
 
+  if (params.q && params.q.trim()) {
+    // Setiap kata harus muncul di salah satu bidang. Perbandingan memakai
+    // LCASE + COALESCE agar aman untuk literal berbahasa dan field kosong.
+    for (const token of params.q.trim().split(/\s+/).filter(Boolean)) {
+      const needle = sparqlString(token.toLowerCase());
+      filters.push(
+        `FILTER(
+    CONTAINS(LCASE(STR(?name)), "${needle}") ||
+    CONTAINS(LCASE(COALESCE(STR(?city), "")), "${needle}") ||
+    CONTAINS(LCASE(COALESCE(STR(?province), "")), "${needle}") ||
+    CONTAINS(LCASE(COALESCE(STR(?themes), "")), "${needle}") ||
+    CONTAINS(LCASE(COALESCE(STR(?era), "")), "${needle}") ||
+    CONTAINS(LCASE(COALESCE(STR(?description), "")), "${needle}")
+  )`,
+      );
+    }
+  }
+
   if (params.province && params.province.trim()) {
     // Label memakai xml:lang="id", sehingga "Aceh"@id tidak sama dengan "Aceh".
     filters.push(`FILTER(STR(?province) = "${sparqlString(params.province.trim())}")`);

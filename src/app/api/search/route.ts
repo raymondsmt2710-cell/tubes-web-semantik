@@ -36,7 +36,21 @@ export async function GET(request: Request): Promise<Response> {
       return NextResponse.json(body);
     }
 
-    const { primary, secondary, scores } = rankMuseums(museums, params.q);
+    const { primary, secondary, scores } = rankMuseums(
+      museums,
+      params.q,
+      (museum) =>
+        [
+          museum.name,
+          museum.city,
+          museum.province,
+          museum.era,
+          museum.description,
+          museum.themes.join(" "),
+        ]
+          .filter(Boolean)
+          .join(" "),
+    );
     const ordered = [...primary, ...secondary];
     const primarySlugs = new Set(primary.map((museum) => museum.slug));
 

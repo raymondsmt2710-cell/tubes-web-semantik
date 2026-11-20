@@ -50,12 +50,12 @@ export default async function Home() {
         <div className="mt-10 max-w-xl">
           <SearchBox />
           <p className="text-xs text-[--ink-soft] mt-2">
-            Pencarian ini mencocokkan nama museum: “Aceh”, “Sriwijaya”,
-            “timah”. Untuk kota, tema, atau era, gunakan penyaring di{" "}
+            Pencarian mencocokkan nama, kota, provinsi, tema, era, dan deskripsi:
+            “Medan”, “etnografi”, “timah”. Penyaring di{" "}
             <Link href="/katalog" className="underline">
               katalog
-            </Link>
-            .
+            </Link>{" "}
+            mempersempit hasil lebih lanjut.
           </p>
         </div>
 

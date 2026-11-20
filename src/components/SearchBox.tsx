@@ -13,7 +13,7 @@ interface SearchBoxProps {
 
 export default function SearchBox({
   defaultValue = "",
-  placeholder = "Cari nama museum, mis. Sriwijaya…",
+  placeholder = "Cari nama museum, kota, atau tema, mis. Medan…",
   size = "hero",
   onSearch,
 }: SearchBoxProps) {

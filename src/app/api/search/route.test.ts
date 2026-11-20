@@ -89,4 +89,32 @@ describe("GET /api/search", () => {
     expect(body.ranking).toBeUndefined();
     expect(body.museums[0].themes).toEqual(["arkeologi"]);
   });
+
+  it("menemukan museum lewat kota meski namanya tidak memuat kata kunci", async () => {
+    const bindings = [
+      {
+        museum: { type: "uri", value: "https://museumsumatera.id/resource/museum/a" },
+        slug: { type: "literal", value: "a" },
+        name: { type: "literal", value: "Museum Negeri Provinsi Sumatera Utara" },
+        city: { type: "literal", value: "Medan" },
+        province: { type: "literal", value: "Sumatera Utara" },
+        themes: { type: "literal", value: "etnografi" },
+      },
+      {
+        museum: { type: "uri", value: "https://museumsumatera.id/resource/museum/b" },
+        slug: { type: "literal", value: "b" },
+        name: { type: "literal", value: "Museum Timah Indonesia" },
+        city: { type: "literal", value: "Pangkalpinang" },
+        province: { type: "literal", value: "Bangka Belitung" },
+        themes: { type: "literal", value: "sains-teknologi" },
+      },
+    ];
+    vi.stubGlobal("fetch", vi.fn(async () => okResponse(bindings)));
+
+    const response = await GET(new Request("http://localhost/api/search?q=medan"));
+    const body = await response.json();
+
+    expect(body.museums[0].slug).toBe("a");
+    expect(body.ranking[0]).toMatchObject({ slug: "a", group: "primary" });
+  });
 });

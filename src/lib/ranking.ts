@@ -89,11 +89,31 @@ export interface Ranked<T> {
 }
 
 /**
+ * Skor untuk kecocokan di luar nama (kota, provinsi, tema, era, deskripsi).
+ * Semua kata harus muncul supaya "seni budaya" tidak lolos hanya karena satu
+ * kata. Nilainya di bawah kecocokan nama agar nama tetap diprioritaskan.
+ */
+function fieldMatchScore(query: string, haystack: string): number {
+  const tokens = normalize(query).split(/\s+/).filter(Boolean);
+  const hay = normalize(haystack);
+  if (tokens.length === 0 || !hay) return 0;
+  return tokens.every((token) => hay.includes(token)) ? 0.75 : 0;
+}
+
+/**
  * Memisahkan kandidat menjadi "hasil utama" (skor ≥ 0.7) dan "hasil lain".
  * Semua kandidat tetap dikembalikan supaya pengguna bisa melihat seluruh
  * hasil penyaringan; urutannya deterministik agar bisa diuji.
+ *
+ * `searchText` opsional memungkinkan kecocokan di luar nama (kota, tema,
+ * deskripsi) tetap diangkat sebagai hasil utama, tanpa mengalahkan nama yang
+ * benar-benar mirip.
  */
-export function rankMuseums<T extends { name: string }>(rows: T[], query: string): Ranked<T> {
+export function rankMuseums<T extends { name: string }>(
+  rows: T[],
+  query: string,
+  searchText?: (row: T) => string,
+): Ranked<T> {
   const trimmed = query.trim();
   const scores = new Map<string, number>();
 
@@ -104,7 +124,11 @@ export function rankMuseums<T extends { name: string }>(rows: T[], query: string
   }
 
   const scored = rows.map((row) => {
-    const score = similarity(trimmed, row.name);
+    const nameScore = similarity(trimmed, row.name);
+    const fieldScore = searchText
+      ? fieldMatchScore(trimmed, searchText(row))
+      : 0;
+    const score = Math.max(nameScore, fieldScore);
     scores.set(row.name, score);
     return { row, score };
   });

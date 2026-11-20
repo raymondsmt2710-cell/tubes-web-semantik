@@ -59,6 +59,35 @@ describe("searchCatalogQuery", () => {
     const q = searchCatalogQuery({ minYear: Number.NaN });
     expect(q).not.toContain("?year >=");
   });
+
+  it("mencari q di nama, kota, provinsi, tema, era, dan deskripsi di dalam SPARQL", () => {
+    const q = searchCatalogQuery({ q: "medan" });
+    expect(q).toContain('CONTAINS(LCASE(STR(?name)), "medan")');
+    expect(q).toContain('CONTAINS(LCASE(COALESCE(STR(?city), "")), "medan")');
+    expect(q).toContain(
+      'CONTAINS(LCASE(COALESCE(STR(?province), "")), "medan")',
+    );
+    expect(q).toContain('CONTAINS(LCASE(COALESCE(STR(?themes), "")), "medan")');
+    expect(q).toContain('CONTAINS(LCASE(COALESCE(STR(?era), "")), "medan")');
+    expect(q).toContain(
+      'CONTAINS(LCASE(COALESCE(STR(?description), "")), "medan")',
+    );
+  });
+
+  it("memecah q banyak kata menjadi beberapa filter yang semuanya harus cocok", () => {
+    const q = searchCatalogQuery({ q: "museum aceh" });
+    expect(q).toContain('"museum"');
+    expect(q).toContain('"aceh"');
+    expect(q.match(/CONTAINS\(LCASE\(STR\(\?name\)\)/g)).toHaveLength(2);
+  });
+
+  it("tidak menambahkan filter teks saat q kosong", () => {
+    expect(searchCatalogQuery({ q: "   " })).not.toContain("CONTAINS");
+  });
+
+  it("meng-escape tanda kutip pada q", () => {
+    expect(searchCatalogQuery({ q: 'x"y' })).toContain('\\"');
+  });
 });
 
 describe("museumsByChapterQuery", () => {

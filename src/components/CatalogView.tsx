@@ -161,7 +161,7 @@ export default function CatalogView() {
           size="inline"
           defaultValue={params.q ?? ""}
           onSearch={(query) => update({ ...params, q: query || undefined })}
-          placeholder="Cari nama museum…"
+          placeholder="Cari nama, kota, atau tema…"
         />
       </div>
 

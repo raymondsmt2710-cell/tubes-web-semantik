@@ -103,9 +103,14 @@ pembagian provinsi berubah.
 - Kandidat dibatasi `LIMIT 300` sebelum masuk ke pemeringkatan teks di
   JavaScript. Pemeringkatan hanya menyusun ulang nama yang sudah lolos
   penyaringan; ia tidak menambah atau menghapus museum.
+- Kata kunci `q` juga disaring **di dalam SPARQL** dan mencocokkan nama museum,
+  kota, provinsi, tema, era, serta deskripsi. Setiap kata pada `q` harus muncul
+  di salah satu bidang tersebut, jadi "museum aceh" dan "medan" sama-sama bisa
+  ditemukan tanpa mengetik nama lengkap.
 - Hasil dibagi menjadi "hasil utama" dan "hasil lainnya" berdasarkan skor
-  kemiripan nama. Bila kata kunci kosong, seluruh katalog ditampilkan tanpa
-  peringkat.
+  kemiripan nama; kecocokan di kota/tema/deskripsi (skor 0.75) ikut diangkat
+  sebagai hasil utama tetapi tidak mengalahkan nama yang benar-benar mirip.
+  Bila kata kunci kosong, seluruh katalog ditampilkan tanpa peringkat.
 
 ## Benang merah
 

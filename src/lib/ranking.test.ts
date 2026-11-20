@@ -75,4 +75,26 @@ describe("rankMuseums", () => {
     const { secondary } = rankMuseums(seri, "zzz");
     expect(secondary.map((r) => r.name)).toEqual(["Museum A", "Museum B"]);
   });
+
+  it("menaikkan kecocokan kota/tema ke hasil utama lewat searchText", () => {
+    const rows = [
+      { name: "Museum Negeri Sumatera Utara", hay: "medan sumatera utara" },
+      { name: "Museum Timah Indonesia", hay: "pangkalpinang bangka belitung" },
+    ];
+    const { primary } = rankMuseums(rows, "medan", (row) => row.hay);
+    expect(primary.map((row) => row.name)).toEqual([
+      "Museum Negeri Sumatera Utara",
+    ]);
+  });
+
+  it("nama tetap lebih tinggi daripada kecocokan field", () => {
+    const rows = [
+      { name: "Museum Medan", hay: "medan" },
+      { name: "Museum Lain", hay: "medan" },
+    ];
+    const { scores } = rankMuseums(rows, "medan", (row) => row.hay);
+    expect(scores.get("Museum Medan")).toBeGreaterThan(
+      scores.get("Museum Lain") ?? 0,
+    );
+  });
 });
