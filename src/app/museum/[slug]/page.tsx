@@ -2,11 +2,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import MuseumGallery from "@/components/MuseumGallery";
+import ExhibitList from "@/components/ExhibitList";
+import SourceList from "@/components/SourceList";
 import MuseumImage from "@/components/MuseumImage";
 import ThreadOfRelation from "@/components/ThreadOfRelation";
 import VerificationBadge from "@/components/VerificationBadge";
 import { chapterByIndex } from "@/lib/chapters";
 import {
+  attachMuseumDetail,
   mapMuseumRow,
   museumBySlugQuery,
   relatedCandidatesQuery,
@@ -42,7 +46,7 @@ const loadMuseum = cache(async (slug: string): Promise<LoadResult> => {
     const rows = await runSelect(museumBySlugQuery(slug));
     if (rows.length === 0) return { status: "notfound" };
 
-    const museum = mapMuseumRow(rows[0]);
+    const museum = await attachMuseumDetail(mapMuseumRow(rows[0]));
 
     let related: RelatedDTO[] = [];
     try {
@@ -174,6 +178,24 @@ export default async function MuseumPage({ params }: PageProps) {
               </p>
             </section>
 
+            {museum.history.length > 0 && (
+              <section className="mt-10">
+                <h2 className="text-lg">Sejarah</h2>
+                <div className="mt-3 space-y-3 text-[--ink-soft] leading-relaxed measure">
+                  {museum.history.map((paragraph, index) => (
+                    <p key={index} className="m-0">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="mt-10">
+              <h2 className="text-lg">Isi pameran</h2>
+              <ExhibitList exhibits={museum.exhibits} />
+            </section>
+
             {museum.officialUrl && (
               <p className="mt-5 text-sm">
                 <a
@@ -225,7 +247,11 @@ export default async function MuseumPage({ params }: PageProps) {
           </aside>
         </div>
 
+        <MuseumGallery images={museum.gallery} museumName={museum.name} />
+
         <ThreadOfRelation related={related} baseName={museum.name} />
+
+        <SourceList sources={museum.sources} />
       </main>
     </div>
   );

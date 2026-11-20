@@ -95,6 +95,33 @@ export function validateMuseums(records: MuseumRecord[]): ValidationIssue[] {
       }
     }
 
+    if (record.history || record.exhibits?.length || record.gallery?.length) {
+      record.sources?.forEach((source, index) => {
+        if (!source.url?.startsWith("http")) {
+          add(
+            "sources",
+            "error",
+            `Sumber ke-${index + 1} tidak memakai URL http(s): "${source.url}".`,
+          );
+        }
+      });
+      for (const [index, image] of (record.gallery ?? []).entries()) {
+        if (!image.src) {
+          add("gallery", "error", `Foto ke-${index + 1} tidak punya src.`);
+        }
+        if (!image.license) {
+          add(
+            "gallery",
+            "warning",
+            `Foto ke-${index + 1} tidak mencantumkan lisensi; kredit wajib jelas.`,
+          );
+        }
+        if (!image.sourceUrl) {
+          add("gallery", "warning", `Foto ke-${index + 1} tidak mencantumkan tautan sumber.`);
+        }
+      }
+    }
+
     if (record.verificationStatus === "perlu-verifikasi") {
       add(
         "verificationStatus",

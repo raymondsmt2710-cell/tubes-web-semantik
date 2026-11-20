@@ -37,6 +37,10 @@ sdp:Chapter a owl:Class ;
     rdfs:label "Bab"@id ;
     rdfs:comment "Bab dalam alur pameran, dari Aceh hingga Lampung."@id .
 
+sdp:Collection a owl:Class ;
+    rdfs:label "Koleksi"@id ;
+    rdfs:comment "Klasifikasi koleksi yang dimiliki museum."@id .
+
 # ------------------------------------------------------- Object property
 
 sdp:locatedInProvince a owl:ObjectProperty ;
@@ -63,6 +67,11 @@ sdp:hasEra a owl:ObjectProperty ;
     rdfs:label "memiliki era"@id ;
     rdfs:domain sdp:Museum ;
     rdfs:range sdp:Era .
+
+sdp:hasCollection a owl:ObjectProperty ;
+    rdfs:label "memiliki koleksi"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:Collection .
 
 sdp:chapter a owl:ObjectProperty ;
     rdfs:label "berada di bab"@id ;
@@ -120,3 +129,8 @@ sdp:chapterIndex a owl:DatatypeProperty ;
     rdfs:label "urutan bab"@id ;
     rdfs:domain sdp:Chapter ;
     rdfs:range xsd:integer .
+
+sdp:chapterTitle a owl:DatatypeProperty ;
+    rdfs:label "judul bab"@id ;
+    rdfs:domain sdp:Chapter ;
+    rdfs:range xsd:string .

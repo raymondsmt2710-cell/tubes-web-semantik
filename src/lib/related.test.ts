@@ -22,6 +22,10 @@ function museum(overrides: Partial<MuseumDTO> = {}): MuseumDTO {
     verificationStatus: "perlu-verifikasi",
     chapterIndex: 1,
     chapterTitle: "Dari Pelabuhan ke Pedalaman",
+    history: [],
+    exhibits: [],
+    gallery: [],
+    sources: [],
     ...overrides,
   };
 }

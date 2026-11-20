@@ -1,6 +1,12 @@
-import { sparqlString, type SparqlBinding } from "./sparql";
+import { sparqlString, runSelect, type SparqlBinding } from "./sparql";
 import { SDP, RES } from "./ontology";
-import type { MuseumDTO, VerificationStatus } from "./types";
+import type {
+  Exhibit,
+  MuseumDTO,
+  MuseumImage,
+  SourceRef,
+  VerificationStatus,
+} from "./types";
 
 const PREFIXES = `
 PREFIX sdp:  <${SDP}>
@@ -28,6 +34,7 @@ const MUSEUM_PROJECTION = `
   ?museum
   ?name
   ?description
+  ?history
   ?imageUrl
   ?officialUrl
   ?address
@@ -59,6 +66,7 @@ const MUSEUM_PATTERNS = `
   }
 
   OPTIONAL { ?museum sdp:description ?description . }
+  OPTIONAL { ?museum sdp:history ?history . }
   OPTIONAL { ?museum sdp:imageUrl ?imageUrl . }
   OPTIONAL { ?museum sdp:officialUrl ?officialUrl . }
   OPTIONAL { ?museum sdp:address ?address . }
@@ -88,7 +96,7 @@ const MUSEUM_PATTERNS = `
   OPTIONAL {
     ?museum sdp:chapter ?chapterResource .
     ?chapterResource sdp:chapterIndex ?chapterIndex ;
-                    rdfs:comment ?chapterTitle .
+                    sdp:chapterTitle ?chapterTitle .
   }
 
   OPTIONAL {
@@ -99,8 +107,13 @@ const MUSEUM_PATTERNS = `
 
 function orderClause(sort: CatalogParams["sort"], order: CatalogParams["order"]): string {
   const direction = order === "desc" ? "DESC" : "ASC";
-  const variable = sort === "year" ? "?year" : "?name";
-  return `ORDER BY ${direction}(${variable})`;
+
+  if (sort === "year") {
+    // Museum tanpa tahun diletakkan di ujung, bukan di awal, untuk kedua arah.
+    return `ORDER BY (BOUND(?year) = false) ${direction}(?year)`;
+  }
+
+  return `ORDER BY ${direction}(?name)`;
 }
 
 export function searchCatalogQuery(params: CatalogParams = {}): string {
@@ -213,6 +226,65 @@ LIMIT ${Math.trunc(limit)}
 `;
 }
 
+/**
+ * Isi pameran, galeri, dan sumber disimpan sebagai subjek terpisah di graf.
+ * Kueri rincian menariknya per museum supaya kueri katalog tetap ringan.
+ * Path foto sudah ditulis lengkap sebagai datatype property, jadi tidak perlu
+ * diturunkan dari URI.
+ */
+export function museumExhibitsQuery(slug: string): string {
+  return `${PREFIXES}
+SELECT ?index ?title ?description
+WHERE {
+  ${museumIri(slug)} sdp:hasExhibit ?node .
+  ?node sdp:exhibitIndex ?index ;
+        sdp:exhibitTitle ?title .
+  OPTIONAL { ?node sdp:exhibitDescription ?description . }
+}
+ORDER BY ?index
+`;
+}
+
+export function museumImagesQuery(slug: string): string {
+  return `${PREFIXES}
+SELECT ?index ?src ?alt ?caption ?credit ?license ?licenseUrl ?sourceUrl
+WHERE {
+  ${museumIri(slug)} sdp:hasImage ?node .
+  ?node sdp:imageIndex ?index ;
+        sdp:imageSource ?sourceUrl .
+  OPTIONAL { ?node sdp:imageUrl ?src . }
+  OPTIONAL { ?node sdp:imageAlt ?alt . }
+  OPTIONAL { ?node sdp:imageCaption ?caption . }
+  OPTIONAL { ?node sdp:imageCredit ?credit . }
+  OPTIONAL { ?node sdp:imageLicense ?license . }
+  OPTIONAL { ?node sdp:imageLicenseUrl ?licenseUrl . }
+}
+ORDER BY ?index
+`;
+}
+
+export function museumSourcesQuery(slug: string): string {
+  return `${PREFIXES}
+SELECT ?index ?label ?url
+WHERE {
+  ${museumIri(slug)} sdp:hasSource ?node .
+  ?node sdp:sourceIndex ?index ;
+        sdp:sourceLabel ?label ;
+        sdp:sourceUrl ?url .
+}
+ORDER BY ?index
+`;
+}
+
+/**
+ * IRI museum ditulis penuh, bukan prefixed name. Sebagian mesin SPARQL
+ * (termasuk Oxigraph yang dipakai uji integrasi) menolak prefixed name di
+ * posisi subjek, sedangkan IRI penuh diterima semua mesin.
+ */
+function museumIri(slug: string): string {
+  return `<${RES}museum/${slug}>`;
+}
+
 function str(binding: SparqlBinding, key: string): string | null {
   const value = binding[key]?.value;
   return value === undefined || value === "" ? null : value;
@@ -249,5 +321,94 @@ export function mapMuseumRow(binding: SparqlBinding): MuseumDTO {
     verificationStatus: (str(binding, "verification") ?? "perlu-verifikasi") as VerificationStatus,
     chapterIndex: num(binding, "chapterIndex"),
     chapterTitle: str(binding, "chapterTitle"),
+    history: splitParagraphs(str(binding, "history")),
+    exhibits: [],
+    gallery: [],
+    sources: [],
+  };
+}
+
+/** Sejarah disimpan sebagai satu literal dengan paragraf dipisah baris kosong. */
+function splitParagraphs(value: string | null): string[] {
+  if (!value) return [];
+  return value
+    .split(/\n\s*\n/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+}
+
+export function mapExhibitRow(binding: SparqlBinding): Exhibit {
+  return {
+    title: str(binding, "title") ?? "Tanpa judul",
+    description: str(binding, "description") ?? "",
+  };
+}
+
+export function mapGalleryRow(binding: SparqlBinding): MuseumImage {
+  return {
+    src: str(binding, "src") ?? "",
+    alt: str(binding, "alt") ?? "",
+    caption: str(binding, "caption") ?? "",
+    credit: str(binding, "credit") ?? "Tidak dicatat",
+    license: str(binding, "license") ?? "Tidak dicatat",
+    licenseUrl: str(binding, "licenseUrl"),
+    sourceUrl: str(binding, "sourceUrl") ?? "",
+  };
+}
+
+export function mapSourceRow(binding: SparqlBinding): SourceRef {
+  return {
+    label: str(binding, "label") ?? str(binding, "url") ?? "Sumber",
+    url: str(binding, "url") ?? "",
+  };
+}
+
+/**
+ * Menjalankan SELECT lalu memetakan setiap baris. `rows` dapat diisi pemanggil
+ * (mis. uji integrasi dengan mesin SPARQL lokal) supaya kueri yang dipakai di
+ * sini tetap sama persis dengan yang dipakai halaman.
+ */
+export async function loadRows<T>(
+  query: string,
+  map: (binding: SparqlBinding) => T | null,
+  rows?: (query: string) => SparqlBinding[],
+): Promise<T[]> {
+  try {
+    const bindings = rows ? rows(query) : await runSelect(query);
+    return bindings
+      .map(map)
+      .filter((item): item is T => item !== null && item !== undefined);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Melengkapi museum dari kueri katalog dengan isi pameran, galeri, dan sumber.
+ * Dipakai halaman detail; kueri katalog sendiri tidak menarik rincian ini.
+ */
+export async function attachMuseumDetail(
+  museum: MuseumDTO,
+  rows?: (query: string) => SparqlBinding[],
+): Promise<MuseumDTO> {
+  const [exhibits, gallery, sources] = await Promise.all([
+    loadRows(museumExhibitsQuery(museum.slug), mapExhibitRow, rows),
+    loadRows(
+      museumImagesQuery(museum.slug),
+      (row) => {
+        const image = mapGalleryRow(row);
+        return image.src ? image : null;
+      },
+      rows,
+    ),
+    loadRows(museumSourcesQuery(museum.slug), mapSourceRow, rows),
+  ]);
+
+  return {
+    ...museum,
+    exhibits,
+    gallery,
+    sources,
+    imageUrl: museum.imageUrl ?? gallery[0]?.src ?? null,
   };
 }

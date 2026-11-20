@@ -93,22 +93,136 @@ describe("buildRdf", () => {
     expect(xml).toContain(`<sdp:chapter rdf:resource="${RES}chapter/1"/>`);
   });
 
+  it("menautkan kota ke provinsinya dan menulis judul bab", () => {
+    const xml = buildRdf([base]);
+    expect(xml).toContain(`<sdp:partOfProvince rdf:resource="${RES}province/aceh"/>`);
+    expect(xml).toContain(
+      '<sdp:chapterTitle xml:lang="id">Dari Pelabuhan ke Pedalaman</sdp:chapterTitle>',
+    );
+  });
+
+  it("menolak satu kota yang tercatat di dua provinsi", () => {
+    expect(() =>
+      buildRdf([
+        base,
+        { ...base, slug: "museum-lain", province: "Sumatera Utara" },
+      ]),
+    ).toThrow(/Kota Uji/);
+  });
+
   it("mendeklarasikan kelas dan properti ontologi", () => {
     const xml = buildRdf([base]);
-    for (const cls of ["Museum", "Province", "City", "Theme", "Era", "Chapter"]) {
+    for (const cls of ["Museum", "Province", "City", "Theme", "Era", "Chapter", "Collection"]) {
       expect(xml).toContain(`#${cls}">`);
     }
     for (const prop of [
       "locatedInProvince",
       "locatedInCity",
+      "partOfProvince",
       "hasTheme",
       "hasEra",
+      "hasCollection",
       "chapter",
       "establishedYear",
       "verificationStatus",
       "chapterIndex",
+      "chapterTitle",
     ]) {
       expect(xml).toContain(`#${prop}">`);
+    }
+  });
+});
+
+describe("ontology/museum-sumatera.ttl", () => {
+  it("mendeklarasikan istilah yang dipakai generator dan kueri", () => {
+    const ttl = readFileSync(
+      fileURLToPath(new URL("../ontology/museum-sumatera.ttl", import.meta.url)),
+      "utf-8",
+    );
+
+    for (const term of [
+      "sdp:Museum",
+      "sdp:Collection",
+      "sdp:hasCollection",
+      "sdp:chapterTitle",
+      "sdp:partOfProvince",
+      "sdp:chapterIndex",
+    ]) {
+      expect(ttl).toContain(term);
+    }
+  });
+});
+
+describe("buildRdf: sejarah, pameran, galeri, dan sumber", () => {
+  const enriched: MuseumRecord = {
+    ...base,
+    history: ["Paragraf pertama.", "Paragraf kedua."],
+    exhibits: [{ title: "Koleksi Uji", description: "Penjelasan koleksi uji." }],
+    gallery: [
+      {
+        src: "/images/museums/museum-uji/1.jpg",
+        alt: "Foto uji",
+        caption: "Keterangan foto uji",
+        credit: "Fotografer Uji",
+        license: "CC BY-SA 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Uji.jpg",
+      },
+    ],
+    sources: [{ label: "Sumber Uji", url: "https://example.org/uji" }],
+  };
+
+  it("menggabungkan paragraf sejarah menjadi satu literal", () => {
+    const xml = buildRdf([enriched]);
+    expect(xml).toContain("Paragraf pertama.\n\nParagraf kedua.");
+    expect(countOf(xml, "<sdp:history")).toBe(1);
+  });
+
+  it("menulis isi pameran sebagai subjek sdp:Exhibit berurutan", () => {
+    const xml = buildRdf([enriched]);
+    expect(xml).toContain(`<sdp:Exhibit rdf:about="${RES}museum/museum-uji/exhibit/1">`);
+    expect(xml).toContain("Penjelasan koleksi uji.");
+    expect(xml).toContain(`<sdp:hasExhibit rdf:resource="${RES}museum/museum-uji/exhibit/1"/>`);
+  });
+
+  it("menulis foto beserta kredit, lisensi, dan tautan sumber", () => {
+    const xml = buildRdf([enriched]);
+    expect(xml).toContain("<sdp:imageCredit");
+    expect(xml).toContain("CC BY-SA 4.0");
+    expect(xml).toContain("https://commons.wikimedia.org/wiki/File:Uji.jpg");
+    expect(xml).toContain(`<sdp:hasImage rdf:resource="${RES}museum/museum-uji/image/1"/>`);
+  });
+
+  it("memakai foto galeri pertama sebagai gambar utama museum", () => {
+    const xml = buildRdf([{ ...enriched, imageUrl: null }]);
+    expect(xml).toContain(
+      '<sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-uji/1.jpg</sdp:imageUrl>',
+    );
+  });
+
+  it("menolak foto tanpa lisensi atau tautan sumber", () => {
+    const broken = {
+      ...enriched,
+      gallery: [{ ...enriched.gallery![0], license: "", sourceUrl: "" }],
+    };
+    expect(() => buildRdf([broken])).toThrow(/foto ke-1/);
+  });
+
+  it("menolak sumber yang bukan URL http(s)", () => {
+    expect(() =>
+      buildRdf([{ ...enriched, sources: [{ label: "Uji", url: "bukan-url" }] }]),
+    ).toThrow(/sumber ke-1/);
+  });
+
+  it("setiap museum di data asli punya sejarah, isi pameran, dan sumber", () => {
+    for (const museum of museums) {
+      expect(museum.history?.length, `${museum.slug} tanpa sejarah`).toBeGreaterThan(0);
+      expect(museum.exhibits?.length, `${museum.slug} tanpa isi pameran`).toBeGreaterThan(0);
+      expect(museum.sources?.length, `${museum.slug} tanpa sumber`).toBeGreaterThan(0);
+      for (const image of museum.gallery ?? []) {
+        expect(image.license, `${museum.slug} foto tanpa lisensi`).toBeTruthy();
+        expect(image.sourceUrl, `${museum.slug} foto tanpa sumber`).toMatch(/^https:\/\//);
+      }
     }
   });
 });

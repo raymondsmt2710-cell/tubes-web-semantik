@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { runSelect, FusekiError } from "@/lib/sparql";
-import { mapMuseumRow, museumBySlugQuery, relatedCandidatesQuery } from "@/lib/queries";
+import {
+  attachMuseumDetail,
+  mapMuseumRow,
+  museumBySlugQuery,
+  relatedCandidatesQuery,
+} from "@/lib/queries";
 import { pickRelated } from "@/lib/related";
 import type { MuseumResponse } from "@/lib/types";
 
@@ -27,7 +32,7 @@ export async function GET(request: Request): Promise<Response> {
       );
     }
 
-    const museum = mapMuseumRow(rows[0]);
+    const museum = await attachMuseumDetail(mapMuseumRow(rows[0]));
 
     let related: MuseumResponse["related"] = [];
     try {

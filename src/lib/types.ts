@@ -54,6 +54,30 @@ export const VERIFICATION_STATUSES = ["terverifikasi", "perlu-verifikasi"] as co
 
 export type VerificationStatus = (typeof VERIFICATION_STATUSES)[number];
 
+/** Satu foto museum beserta kredit dan lisensinya. */
+export interface MuseumImage {
+  /** Path lokal (mis. /images/museums/slug/1.jpg) atau URL absolut. */
+  src: string;
+  alt: string;
+  caption: string;
+  credit: string;
+  license: string;
+  licenseUrl: string | null;
+  sourceUrl: string;
+}
+
+/** Satu bagian/isi pameran yang bisa dilihat pengunjung. */
+export interface Exhibit {
+  title: string;
+  description: string;
+}
+
+/** Sumber acuan yang dipakai untuk menulis catatan museum. */
+export interface SourceRef {
+  label: string;
+  url: string;
+}
+
 /** Baris data sumber kebenaran (data/museums.json). */
 export interface MuseumRecord {
   slug: string;
@@ -72,6 +96,14 @@ export interface MuseumRecord {
   admissionNote: string | null;
   chapter: number;
   verificationStatus: VerificationStatus;
+  /** Paragraf sejarah, ditampilkan berurutan. */
+  history?: string[];
+  /** Bagian/isi pameran yang menjadi andalan museum. */
+  exhibits?: Exhibit[];
+  /** Galeri foto berlisensi bebas; entri pertama dipakai sebagai gambar utama. */
+  gallery?: MuseumImage[];
+  /** Sumber yang dipakai untuk menyusun catatan museum. */
+  sources?: SourceRef[];
 }
 
 /** Bentuk yang dipakai UI setelah query SPARQL. */
@@ -94,6 +126,10 @@ export interface MuseumDTO {
   verificationStatus: VerificationStatus;
   chapterIndex: number | null;
   chapterTitle: string | null;
+  history: string[];
+  exhibits: Exhibit[];
+  gallery: MuseumImage[];
+  sources: SourceRef[];
 }
 
 export interface ChapterDTO {

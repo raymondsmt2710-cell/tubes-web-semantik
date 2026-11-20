@@ -63,6 +63,37 @@ function datatypeProperty(
   ];
 }
 
+interface CityInfo {
+  label: string;
+  provinceSlug: string;
+}
+
+/**
+ * Mengumpulkan kota unik beserta provinsinya. Satu slug kota yang muncul di
+ * dua provinsi berbeda adalah kesalahan data: relasi sdp:partOfProvince tidak
+ * bisa menunjuk dua induk sekaligus.
+ */
+function collectCities(records: MuseumRecord[]): Map<string, CityInfo> {
+  const cities = new Map<string, CityInfo>();
+
+  for (const record of records) {
+    if (!record.city) continue;
+    const slug = toSlug(record.city);
+    const provinceSlug = toSlug(record.province);
+    const existing = cities.get(slug);
+
+    if (existing && existing.provinceSlug !== provinceSlug) {
+      throw new Error(
+        `Kota "${record.city}" tercatat di lebih dari satu provinsi: "${existing.provinceSlug}" dan "${provinceSlug}".`,
+      );
+    }
+
+    cities.set(slug, { label: record.city, provinceSlug });
+  }
+
+  return cities;
+}
+
 /**
  * Validasi yang gagal keras SEBELUM satu byte RDF ditulis. Data rusak yang
  * masuk ke Fuseki akan membuat seluruh situs tampak kosong, jadi lebih baik
@@ -70,10 +101,25 @@ function datatypeProperty(
  */
 export function validateRecords(records: MuseumRecord[]): void {
   const seen = new Set<string>();
+  collectCities(records);
 
   for (const record of records) {
     if (!record.slug) {
       throw new Error(`Museum "${record.name ?? "(tanpa nama)"}" tidak punya slug.`);
+    }
+    for (const [index, image] of (record.gallery ?? []).entries()) {
+      if (!image.src || !image.sourceUrl || !image.license) {
+        throw new Error(
+          `Museum "${record.slug}" foto ke-${index + 1} harus punya src, sourceUrl, dan license.`,
+        );
+      }
+    }
+    for (const [index, source] of (record.sources ?? []).entries()) {
+      if (!source.url?.startsWith("http")) {
+        throw new Error(
+          `Museum "${record.slug}" sumber ke-${index + 1} bukan URL http(s): "${source.url}".`,
+        );
+      }
     }
     if (seen.has(record.slug)) {
       throw new Error(`Slug duplikat: "${record.slug}". Setiap museum harus unik.`);
@@ -137,6 +183,18 @@ export function buildRdf(records: MuseumRecord[]): string {
   lines.push(...classBlock("Theme", "Tema", "Tema koleksi museum."));
   lines.push(...classBlock("Era", "Era", "Periode sejarah yang diwakili koleksi."));
   lines.push(...classBlock("Chapter", "Bab", "Bab dalam alur pameran."));
+  lines.push(
+    ...classBlock("Collection", "Koleksi", "Klasifikasi koleksi yang dimiliki museum."),
+  );
+  lines.push(
+    ...classBlock("Exhibit", "Isi Pameran", "Bagian atau koleksi yang dipamerkan di museum."),
+  );
+  lines.push(
+    ...classBlock("Image", "Gambar", "Foto museum atau koleksi beserta kredit dan lisensinya."),
+  );
+  lines.push(
+    ...classBlock("Source", "Sumber", "Rujukan yang dipakai untuk menyusun catatan museum."),
+  );
 
   lines.push("    <!-- Object property -->");
   lines.push("");
@@ -149,6 +207,12 @@ export function buildRdf(records: MuseumRecord[]): string {
   );
   lines.push(...objectProperty("hasTheme", "Museum", "Theme", "memiliki tema"));
   lines.push(...objectProperty("hasEra", "Museum", "Era", "memiliki era"));
+  lines.push(
+    ...objectProperty("hasCollection", "Museum", "Collection", "memiliki koleksi"),
+  );
+  lines.push(...objectProperty("hasExhibit", "Museum", "Exhibit", "memiliki isi pameran"));
+  lines.push(...objectProperty("hasImage", "Museum", "Image", "memiliki foto"));
+  lines.push(...objectProperty("hasSource", "Museum", "Source", "memiliki sumber acuan"));
   lines.push(...objectProperty("chapter", "Museum", "Chapter", "berada di bab"));
 
   lines.push("    <!-- Datatype property -->");
@@ -174,6 +238,37 @@ export function buildRdf(records: MuseumRecord[]): string {
   lines.push(
     ...datatypeProperty("admissionNote", "Museum", `${XSD}string`, "catatan kunjungan"),
   );
+  lines.push(...datatypeProperty("history", "Museum", `${XSD}string`, "sejarah museum"));
+  lines.push(
+    ...datatypeProperty("exhibitIndex", "Exhibit", `${XSD}integer`, "urutan isi pameran"),
+  );
+  lines.push(
+    ...datatypeProperty("exhibitTitle", "Exhibit", `${XSD}string`, "judul isi pameran"),
+  );
+  lines.push(
+    ...datatypeProperty(
+      "exhibitDescription",
+      "Exhibit",
+      `${XSD}string`,
+      "penjelasan isi pameran",
+    ),
+  );
+  lines.push(...datatypeProperty("imageIndex", "Image", `${XSD}integer`, "urutan foto"));
+  lines.push(...datatypeProperty("imageAlt", "Image", `${XSD}string`, "teks alternatif foto"));
+  lines.push(...datatypeProperty("imageCaption", "Image", `${XSD}string`, "keterangan foto"));
+  lines.push(...datatypeProperty("imageCredit", "Image", `${XSD}string`, "kredit fotografer"));
+  lines.push(...datatypeProperty("imageLicense", "Image", `${XSD}string`, "lisensi foto"));
+  lines.push(
+    ...datatypeProperty("imageLicenseUrl", "Image", `${XSD}anyURI`, "tautan lisensi"),
+  );
+  lines.push(
+    ...datatypeProperty("imageSource", "Image", `${XSD}anyURI`, "tautan sumber foto"),
+  );
+  lines.push(
+    ...datatypeProperty("sourceIndex", "Source", `${XSD}integer`, "urutan sumber"),
+  );
+  lines.push(...datatypeProperty("sourceLabel", "Source", `${XSD}string`, "judul sumber"));
+  lines.push(...datatypeProperty("sourceUrl", "Source", `${XSD}anyURI`, "tautan sumber"));
   lines.push(
     ...datatypeProperty(
       "verificationStatus",
@@ -184,6 +279,9 @@ export function buildRdf(records: MuseumRecord[]): string {
   );
   lines.push(
     ...datatypeProperty("chapterIndex", "Chapter", `${XSD}integer`, "urutan bab"),
+  );
+  lines.push(
+    ...datatypeProperty("chapterTitle", "Chapter", `${XSD}string`, "judul bab"),
   );
 
   // ---- Instance provinsi ----
@@ -200,15 +298,17 @@ export function buildRdf(records: MuseumRecord[]): string {
   }
 
   // ---- Instance kota ----
-  const cities = new Map<string, string>();
-  for (const record of records) {
-    if (record.city) cities.set(toSlug(record.city), record.city);
-  }
+  // Satu kota hanya boleh berada di satu provinsi; collectCities() sudah
+  // menolak data yang melanggar aturan itu sebelum sampai ke sini.
+  const cities = collectCities(records);
   lines.push("    <!-- Instance kota -->");
   lines.push("");
   for (const [slug, city] of cities) {
     lines.push(`${INDENT}<sdp:City rdf:about="${RES}city/${slug}">`);
-    lines.push(`${INDENT}    <rdfs:label xml:lang="id">${escapeXml(city)}</rdfs:label>`);
+    lines.push(`${INDENT}    <rdfs:label xml:lang="id">${escapeXml(city.label)}</rdfs:label>`);
+    lines.push(
+      `${INDENT}    <sdp:partOfProvince rdf:resource="${RES}province/${city.provinceSlug}"/>`,
+    );
     lines.push(`${INDENT}</sdp:City>`);
     lines.push("");
   }
@@ -239,7 +339,9 @@ export function buildRdf(records: MuseumRecord[]): string {
   for (const chapter of CHAPTERS) {
     lines.push(`${INDENT}<sdp:Chapter rdf:about="${RES}chapter/${chapter.index}">`);
     lines.push(`${INDENT}    <rdfs:label xml:lang="id">${chapter.label}</rdfs:label>`);
-    lines.push(`${INDENT}    <rdfs:comment xml:lang="id">${escapeXml(chapter.title)}</rdfs:comment>`);
+    lines.push(
+      `${INDENT}    <sdp:chapterTitle xml:lang="id">${escapeXml(chapter.title)}</sdp:chapterTitle>`,
+    );
     lines.push(
       `${INDENT}    <sdp:chapterIndex rdf:datatype="${XSD}integer">${chapter.index}</sdp:chapterIndex>`,
     );
@@ -290,9 +392,35 @@ export function buildRdf(records: MuseumRecord[]): string {
         `${INDENT}    <sdp:longitude rdf:datatype="${XSD}decimal">${record.longitude}</sdp:longitude>`,
       );
     }
-    if (record.imageUrl) {
+    if (record.history && record.history.length > 0) {
+      const paragraphs = record.history
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)
+        .join("\n\n");
       lines.push(
-        `${INDENT}    <sdp:imageUrl rdf:datatype="${XSD}anyURI">${escapeXml(record.imageUrl)}</sdp:imageUrl>`,
+        `${INDENT}    <sdp:history xml:lang="id">${escapeXml(paragraphs)}</sdp:history>`,
+      );
+    }
+    const gallery = record.gallery ?? [];
+    for (const [index, image] of gallery.entries()) {
+      lines.push(
+        `${INDENT}    <sdp:hasImage rdf:resource="${RES}museum/${record.slug}/image/${index + 1}"/>`,
+      );
+    }
+    for (const [index] of (record.exhibits ?? []).entries()) {
+      lines.push(
+        `${INDENT}    <sdp:hasExhibit rdf:resource="${RES}museum/${record.slug}/exhibit/${index + 1}"/>`,
+      );
+    }
+    for (const [index] of (record.sources ?? []).entries()) {
+      lines.push(
+        `${INDENT}    <sdp:hasSource rdf:resource="${RES}museum/${record.slug}/source/${index + 1}"/>`,
+      );
+    }
+    const heroImage = record.imageUrl ?? gallery[0]?.src ?? null;
+    if (heroImage) {
+      lines.push(
+        `${INDENT}    <sdp:imageUrl rdf:datatype="${XSD}anyURI">${escapeXml(heroImage)}</sdp:imageUrl>`,
       );
     }
     if (record.officialUrl) {
@@ -310,6 +438,69 @@ export function buildRdf(records: MuseumRecord[]): string {
     );
     lines.push(`${INDENT}</sdp:Museum>`);
     lines.push("");
+
+    for (const [index, image] of (record.gallery ?? []).entries()) {
+      lines.push(
+        `${INDENT}<sdp:Image rdf:about="${RES}museum/${record.slug}/image/${index + 1}">`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:imageIndex rdf:datatype="${XSD}integer">${index + 1}</sdp:imageIndex>`,
+      );
+      const fields: [string, string | null, string | null][] = [
+        ["imageUrl", image.src, `${XSD}anyURI`],
+        ["imageAlt", image.alt, null],
+        ["imageCaption", image.caption, null],
+        ["imageCredit", image.credit, null],
+        ["imageLicense", image.license, null],
+        ["imageLicenseUrl", image.licenseUrl, `${XSD}anyURI`],
+        ["imageSource", image.sourceUrl, `${XSD}anyURI`],
+      ];
+      for (const [key, value, datatype] of fields) {
+        if (!value) continue;
+        const attr = datatype ? ` rdf:datatype="${datatype}"` : ' xml:lang="id"';
+        lines.push(
+          `${INDENT}    <sdp:${key}${attr}>${escapeXml(value)}</sdp:${key}>`,
+        );
+      }
+      lines.push(`${INDENT}</sdp:Image>`);
+      lines.push("");
+    }
+
+    for (const [index, exhibit] of (record.exhibits ?? []).entries()) {
+      lines.push(
+        `${INDENT}<sdp:Exhibit rdf:about="${RES}museum/${record.slug}/exhibit/${index + 1}">`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:exhibitIndex rdf:datatype="${XSD}integer">${index + 1}</sdp:exhibitIndex>`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:exhibitTitle xml:lang="id">${escapeXml(exhibit.title)}</sdp:exhibitTitle>`,
+      );
+      if (exhibit.description) {
+        lines.push(
+          `${INDENT}    <sdp:exhibitDescription xml:lang="id">${escapeXml(exhibit.description)}</sdp:exhibitDescription>`,
+        );
+      }
+      lines.push(`${INDENT}</sdp:Exhibit>`);
+      lines.push("");
+    }
+
+    for (const [index, source] of (record.sources ?? []).entries()) {
+      lines.push(
+        `${INDENT}<sdp:Source rdf:about="${RES}museum/${record.slug}/source/${index + 1}">`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:sourceIndex rdf:datatype="${XSD}integer">${index + 1}</sdp:sourceIndex>`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:sourceLabel xml:lang="id">${escapeXml(source.label)}</sdp:sourceLabel>`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:sourceUrl rdf:datatype="${XSD}anyURI">${escapeXml(source.url)}</sdp:sourceUrl>`,
+      );
+      lines.push(`${INDENT}</sdp:Source>`);
+      lines.push("");
+    }
   }
 
   lines.push("</rdf:RDF>");

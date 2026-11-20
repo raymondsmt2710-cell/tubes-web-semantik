@@ -57,10 +57,13 @@ memblokir narasi bab.
 
 ```
 data/
-  museums.json            sumber kebenaran data museum
+  museums.json            sumber kebenaran data museum (termasuk sejarah,
+                          isi pameran, galeri, dan sumber acuan)
   museum-sumatera.rdf     hasil generate, berkas yang diunggah ke Fuseki
 ontology/
   museum-sumatera.ttl     ontologi (nama kelas dan properti)
+public/
+  images/museums/<slug>/  foto museum yang sudah diunduh lokal
 scripts/
   generate-rdf.ts         generator RDF/XML
   check-rdf.ts            pemeriksa data
@@ -111,6 +114,35 @@ pembagian provinsi berubah.
   kemiripan nama; kecocokan di kota/tema/deskripsi (skor 0.75) ikut diangkat
   sebagai hasil utama tetapi tidak mengalahkan nama yang benar-benar mirip.
   Bila kata kunci kosong, seluruh katalog ditampilkan tanpa peringkat.
+
+## Catatan museum: sejarah, pameran, dan galeri
+
+Selain data dasar, setiap museum punya isi naratif yang disimpan di
+`data/museums.json` dan ikut masuk ke graf:
+
+| Bagian | Properti RDF | Tampil di |
+|---|---|---|
+| Sejarah (paragraf) | `sdp:history` | bagian **Sejarah** |
+| Isi pameran | `sdp:hasExhibit` → `sdp:Exhibit` | bagian **Isi pameran** |
+| Galeri foto | `sdp:hasImage` → `sdp:Image` | bagian **Galeri** |
+| Sumber acuan | `sdp:hasSource` → `sdp:Source` | bagian **Sumber catatan** |
+
+**Gambar.** Foto diambil hanya dari Wikimedia Commons yang lisensinya jelas
+(CC0, CC BY, CC BY-SA, atau domain publik). Setiap foto disimpan lengkap dengan
+pencipta, nama lisensi, tautan lisensi, dan tautan halaman asalnya. Foto
+diunduh ke `public/images/museums/<slug>/` supaya situs tidak bergantung pada
+hotlink, dan kreditnya ditampilkan di bawah setiap gambar. Foto interior dari
+situs resmi museum tidak dipakai karena hak ciptanya tidak jelas.
+
+**Pemeriksaan data.** `npm run check:rdf` menolak foto tanpa `src`,
+`license`, atau `sourceUrl`, serta menolak sumber yang bukan URL `http(s)`.
+Generator RDF juga berhenti dengan pesan yang menyebut museum dan nomor foto
+bila aturan itu dilanggar.
+
+**Status data.** Semua museum tetap berstatus `perlu-verifikasi`. Catatan
+sejarah disusun ulang dari sumber yang tercantum di setiap halaman, bukan
+salinan langsung, dan pengguna diarahkan memeriksa kanal resmi museum untuk jam
+buka serta harga tiket.
 
 ## Benang merah
 

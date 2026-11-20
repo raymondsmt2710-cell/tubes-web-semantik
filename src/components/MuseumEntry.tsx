@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { themeLabels, yearLabel, type MuseumDTO } from "@/lib/types";
+import { FALLBACK_IMAGE, themeLabels, yearLabel, type MuseumDTO } from "@/lib/types";
 
 interface MuseumEntryProps {
   museum: MuseumDTO;
@@ -19,6 +19,13 @@ export default function MuseumEntry({ museum, index }: MuseumEntryProps) {
             {String(index).padStart(2, "0")}
           </span>
         )}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={museum.imageUrl ?? FALLBACK_IMAGE}
+          alt=""
+          loading="lazy"
+          className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 object-cover border border-[--rule] rounded-sm bg-[--paper-2]"
+        />
         <div className="flex-1 min-w-0">
           <h3 className="font-serif text-lg sm:text-xl leading-snug">{museum.name}</h3>
           <p className="text-xs text-[--ink-soft] mt-1">{meta}</p>
