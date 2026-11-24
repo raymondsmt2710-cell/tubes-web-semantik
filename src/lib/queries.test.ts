@@ -15,6 +15,12 @@ describe("searchCatalogQuery", () => {
     expect(q).toContain('FILTER(STR(?province) = "Aceh")');
   });
 
+  it("kata kunci q juga mencocokkan koleksi dan fasilitas di dalam SPARQL", () => {
+    const q = searchCatalogQuery({ q: "etnografi" });
+    expect(q).toContain("?collections");
+    expect(q).toContain("?facilities");
+  });
+
   it("selalu membatasi hasil dengan LIMIT 300", () => {
     expect(searchCatalogQuery({})).toContain("LIMIT 300");
   });

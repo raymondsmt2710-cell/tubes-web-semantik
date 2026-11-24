@@ -51,6 +51,7 @@ const MUSEUM_PROJECTION = `
   ?themes
   ?types
   ?collections
+  ?facilities
   ?collectionSize
   ?governingBody
   ?openingHours
@@ -87,6 +88,15 @@ const MUSEUM_PATTERNS = `
     WHERE {
       ?museum sdp:hasCollection ?collNode .
       ?collNode sdp:collectionCategory ?collCat .
+    }
+    GROUP BY ?museum
+  }
+
+  OPTIONAL {
+    SELECT ?museum (GROUP_CONCAT(DISTINCT ?facName; separator="|") AS ?facilities)
+    WHERE {
+      ?museum sdp:hasFacility ?facNode .
+      ?facNode sdp:facilityName ?facName .
     }
     GROUP BY ?museum
   }
@@ -166,6 +176,8 @@ export function searchCatalogQuery(params: CatalogParams = {}): string {
     CONTAINS(LCASE(COALESCE(STR(?province), "")), "${needle}") ||
     CONTAINS(LCASE(COALESCE(STR(?themes), "")), "${needle}") ||
     CONTAINS(LCASE(COALESCE(STR(?era), "")), "${needle}") ||
+    CONTAINS(LCASE(COALESCE(STR(?collections), "")), "${needle}") ||
+    CONTAINS(LCASE(COALESCE(STR(?facilities), "")), "${needle}") ||
     CONTAINS(LCASE(COALESCE(STR(?description), "")), "${needle}")
   )`,
       );
