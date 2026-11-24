@@ -60,6 +60,10 @@ export interface MuseumImage {
   src: string;
   alt: string;
   caption: string;
+  /** Judul pendek yang ditampilkan di atas latar belakang foto. */
+  title?: string | null;
+  /** 2–3 kalimat tentang apa yang terlihat dan kaitannya dengan sejarah museum. */
+  background?: string | null;
   credit: string;
   license: string;
   licenseUrl: string | null;

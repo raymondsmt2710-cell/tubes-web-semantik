@@ -214,6 +214,35 @@ describe("buildRdf: sejarah, pameran, galeri, dan sumber", () => {
     ).toThrow(/sumber ke-1/);
   });
 
+  it("menulis latar belakang foto sehingga galeri tidak hanya berisi gambar", () => {
+    const xml = buildRdf([
+      {
+        ...enriched,
+        gallery: [
+          {
+            ...enriched.gallery![0],
+            title: "Lonceng bersejarah",
+            background: "Lonceng ini dipakai sebagai penanda kuasa kesultanan.",
+          },
+        ],
+      },
+    ]);
+    expect(xml).toContain('>Lonceng bersejarah</sdp:imageTitle>');
+    expect(xml).toContain("penanda kuasa kesultanan");
+  });
+
+  it("setiap foto di data asli punya judul dan latar belakang", () => {
+    for (const museum of museums) {
+      for (const image of museum.gallery ?? []) {
+        expect(image.title, `${museum.slug} ${image.src} tanpa judul`).toBeTruthy();
+        expect(
+          (image.background ?? "").length,
+          `${museum.slug} ${image.src} latar belakang terlalu pendek`,
+        ).toBeGreaterThan(80);
+      }
+    }
+  });
+
   it("setiap museum di data asli punya sejarah, isi pameran, dan sumber", () => {
     for (const museum of museums) {
       expect(museum.history?.length, `${museum.slug} tanpa sejarah`).toBeGreaterThan(0);

@@ -25,9 +25,9 @@ describe("searchCatalogQuery", () => {
     expect(q).not.toContain('"Aceh" OR 1=1"');
   });
 
-  it("memakai ORDER BY DESC(?year) saat sort=year dan order=desc", () => {
+  it("mengurutkan tahun menurun dan menaruh museum tanpa tahun di akhir", () => {
     expect(searchCatalogQuery({ sort: "year", order: "desc" })).toMatch(
-      /ORDER BY DESC\(\?year\)/i,
+      /ORDER BY \(BOUND\(\?year\) = false\) DESC\(\?year\)/i,
     );
   });
 

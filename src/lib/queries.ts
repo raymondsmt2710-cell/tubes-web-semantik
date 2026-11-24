@@ -247,12 +247,14 @@ ORDER BY ?index
 
 export function museumImagesQuery(slug: string): string {
   return `${PREFIXES}
-SELECT ?index ?src ?alt ?caption ?credit ?license ?licenseUrl ?sourceUrl
+SELECT ?index ?src ?title ?background ?alt ?caption ?credit ?license ?licenseUrl ?sourceUrl
 WHERE {
   ${museumIri(slug)} sdp:hasImage ?node .
   ?node sdp:imageIndex ?index ;
         sdp:imageSource ?sourceUrl .
   OPTIONAL { ?node sdp:imageUrl ?src . }
+  OPTIONAL { ?node sdp:imageTitle ?title . }
+  OPTIONAL { ?node sdp:imageBackground ?background . }
   OPTIONAL { ?node sdp:imageAlt ?alt . }
   OPTIONAL { ?node sdp:imageCaption ?caption . }
   OPTIONAL { ?node sdp:imageCredit ?credit . }
@@ -349,6 +351,8 @@ export function mapGalleryRow(binding: SparqlBinding): MuseumImage {
     src: str(binding, "src") ?? "",
     alt: str(binding, "alt") ?? "",
     caption: str(binding, "caption") ?? "",
+    title: str(binding, "title"),
+    background: str(binding, "background"),
     credit: str(binding, "credit") ?? "Tidak dicatat",
     license: str(binding, "license") ?? "Tidak dicatat",
     licenseUrl: str(binding, "licenseUrl"),

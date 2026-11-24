@@ -202,6 +202,18 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     </owl:DatatypeProperty>
 
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#imageTitle">
+        <rdfs:label xml:lang="id">judul foto</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Image"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#imageBackground">
+        <rdfs:label xml:lang="id">latar belakang foto</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Image"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
     <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#imageAlt">
         <rdfs:label xml:lang="id">teks alternatif foto</rdfs:label>
         <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Image"/>
@@ -552,6 +564,8 @@ Pada 1969 museum dipindahkan ke Jalan Sultan Alaidin Mahmudsyah atas prakarsa T.
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-aceh/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-aceh/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gedung pameran tetap</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Gedung pameran tetap ini bentuknya memodifikasi rumah tradisional Aceh tetapi memakai struktur dan jendela lebar khas bangunan pameran modern. Di depan gedung terdapat taman dan meriam besi peninggalan Belanda dari abad ke-17. Di dalamnya tersimpan koleksi etnografika, filologika, dan historika dari sekitar 6.038 benda yang tercatat.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Aceh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Aceh di Banda Aceh</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Si Gam</sdp:imageCredit>
@@ -563,6 +577,8 @@ Pada 1969 museum dipindahkan ke Jalan Sultan Alaidin Mahmudsyah atas prakarsa T.
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-aceh/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-aceh/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Lonceng Cakra Donya dan Rumoh Aceh</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Lonceng perunggu ini digantung di menara kayu berlantai tiga di halaman museum, berdekatan dengan Rumoh Aceh beratap rumbia. Menurut catatan museum, Cakra Donya dibawa dari Kesultanan Pasai dan diperkirakan berasal dari abad ke-15; banyak penulis menghubungkannya dengan rombongan Laksamana Cheng Ho. Pada masa kesultanan benda seperti ini berfungsi sebagai penanda kuasa dan pusaka kerajaan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Aceh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Photo of the Rumoh Aceh Krong Bade and the Cakra Donya Bell at the Aceh Museum. Side view by Amrullah, 2026.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Tinta Emas Historia Network</sdp:imageCredit>
@@ -574,6 +590,8 @@ Pada 1969 museum dipindahkan ke Jalan Sultan Alaidin Mahmudsyah atas prakarsa T.
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-aceh/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-aceh/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gerbang Museum Aceh</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Gerbang kayu beratap sirap ini memakai ukiran dan bentuk atap rumah tradisional Aceh. Di belakangnya sudah tampak Rumoh Aceh berwarna gelap dan gedung pameran modern — dua wajah museum yang sama: rumah adat dari Pameran Kolonial 1914 dan bangunan baru hasil proyek Pelita era 1970-an.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Aceh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">The entrance to the Aceh Museum.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Amrullah</sdp:imageCredit>
@@ -649,6 +667,8 @@ Pembangunannya dimulai pada 2008 dengan dana bantuan negara-negara donor yang di
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tsunami-aceh/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tsunami-aceh/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Ruang pamer dengan diorama dan panel foto</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Lantai berlantai karpet biru, panel berdinding bersudut, dan diorama bertutup kaca adalah wajah ruang pamer tetap museum. Diorama pemukiman tampak di kiri, sedangkan di kanan ada danau panorama dan boneka kecil yang menirukan situasi darurat. Pameran ini dirancang sebagai ruang belajar bencana, bukan sekadar galeri foto korban.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Tsunami Aceh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Aceh Tsunami Museum site visit, to take photos of its interior and museum objects.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Rachmat04</sdp:imageCredit>
@@ -660,6 +680,8 @@ Pembangunannya dimulai pada 2008 dengan dana bantuan negara-negara donor yang di
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tsunami-aceh/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tsunami-aceh/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Miniatur masjid yang runtuh</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Maket masjid berkubah yang sebagian blok bangunannya menonjol keluar dari dinding lantai, dikelilingi serakan kayu dan puing, menggambarkan dahsyatnya hantaman gelombang 26 Desember 2004. Banyak masjid di pesisir Aceh hancur atau berdiri miring oleh gelombang itu, dan bangunan yang selamat seperti Masjid Baiturrahman kemudian menjadi titik berkumpul penyintas.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Tsunami Aceh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Aceh Tsunami Museum site visit, to take photos of its interior and museum objects.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Rachmat04</sdp:imageCredit>
@@ -671,6 +693,8 @@ Pembangunannya dimulai pada 2008 dengan dana bantuan negara-negara donor yang di
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tsunami-aceh/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tsunami-aceh/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Plakat Museum Tsunami Aceh</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Plakat logam ini dipasang di dinding pintu masuk utama, dengan relief garis pantai Aceh sebagai latar. Museum dibangun pada 2008 dengan dana donor yang dikoordinasikan BRR, diresmikan Presiden Susilo Bambang Yudhoyono pada 2009, lalu dibuka untuk publik pada 2011.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Tsunami Aceh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Aceh Tsunami Museum site visit, to take photos of its interior and museum objects.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Rachmat04</sdp:imageCredit>
@@ -739,6 +763,8 @@ Rumah aslinya dibakar Belanda pada 1896; yang tersisa hanya pondasi. Bangunan ya
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-cut-nyak-dhien/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-cut-nyak-dhien/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Cut Nyak Dhien setelah ditangkap</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Foto arsip Tropenmuseum ini memperlihatkan Cut Nyak Dhien bersama kerabatnya setelah tertangkap pada 1905 di pedalaman Aceh Besar, dalam kondisi sakit dan sudah berusia lanjut. Ia kemudian diasingkan ke Sumedang, Jawa Barat, dan meninggal di sana pada 1908. Foto semacam ini menjadi koleksi visual museum untuk menautkan kisah perlawanan dengan tokohnya secara langsung.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Cut Nyak Dhien — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Reproduction negative(?). Cut Nyak Dhien (1848-1908) was the wife of Teuku Umar (1840-1899). After his death, she continued the struggle against the Dutch in Aceh, was taken prison</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Unknown author Unknown author</sdp:imageCredit>
@@ -750,6 +776,8 @@ Rumah aslinya dibakar Belanda pada 1896; yang tersisa hanya pondasi. Bangunan ya
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-cut-nyak-dhien/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-cut-nyak-dhien/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Rumah Cut Nyak Dhien di Lampisang</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan ini adalah rumah panggung Aceh yang kini menjadi museum. Hanya pondasi yang masih asli; rumah aslinya dibakar Belanda pada 1896 dan dipugar pada 1981, lalu diresmikan sebagai museum pada 1987. Ukurannya sekitar 25 × 17 meter dengan 65 tiang kayu dan atap rumbia.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Cut Nyak Dhien — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">The Museum Cut Nyak Dhien is located in Lampisang, Aceh, Indonesia in a replica of the house where Teuku Umar and Cut Nyak Dhien once lived.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Andrimubarak</sdp:imageCredit>
@@ -761,6 +789,8 @@ Rumah aslinya dibakar Belanda pada 1896; yang tersisa hanya pondasi. Bangunan ya
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-cut-nyak-dhien/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-cut-nyak-dhien/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Patung Cut Nyak Dhien</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Patung ini berdiri di Museum Mandala Bhakti Wanitatama, Yogyakarta — bukan di Lampisang. Foto ini dipakai sebagai rujukan visual sosok Cut Nyak Dhien dalam busana dan sikap yang lazim digambarkan, karena museum di Lampisang tidak memiliki patung serupa di halamannya.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Cut Nyak Dhien — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">The Statue of Cut Nyak Dhien at the Mandala Bhakti Wanitatama Museum.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Sam Hidayat</sdp:imageCredit>
@@ -834,17 +864,8 @@ Koleksi di kawasan situs berpusat pada tinggalan Samudera Pasai: fragmen batu ni
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-malikussaleh/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-malikussaleh/1.jpg</sdp:imageUrl>
-        <sdp:imageAlt xml:lang="id">Museum Malikussaleh — foto dari Wikimedia Commons</sdp:imageAlt>
-        <sdp:imageCaption xml:lang="id">Zwaard. Zwaard met hoornen greep en houten schede</sdp:imageCaption>
-        <sdp:imageCredit xml:lang="id">Tropenmuseum</sdp:imageCredit>
-        <sdp:imageLicense xml:lang="id">CC BY-SA 3.0</sdp:imageLicense>
-        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://creativecommons.org/licenses/by-sa/3.0</sdp:imageLicenseUrl>
-        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3ACOLLECTIE_TROPENMUSEUM_Zwaard_met_hoornen_greep_en_houten_schede_TMnr_A-3740.jpg</sdp:imageSource>
-    </sdp:Image>
-
-    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-malikussaleh/image/2">
-        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-malikussaleh/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Bangunan museum Islam Samudera Pasai</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Gedung berkubah putih dengan ornamen geometris ini adalah museum khusus di kawasan bekas Kerajaan Samudera Pasai, dibangun bertahap sejak 2011 hingga 2016. Kawasan inilah yang oleh banyak catatan disebut sebagai kerajaan Islam pertama di Nusantara, sehingga koleksi di sekitarnya berpusat pada tinggalan abad ke-13 sampai ke-16.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Malikussaleh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">merupakan museum khusus yang dibangun secara bertahap mulai tahun 2011 sampai dengan 2016 dengan Dana Otsus Kabupaten Aceh Utara. Luas tapakan bangunan ± 500 m2. Bangunan permanen </sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">DISDIKBUD Aceh Utara</sdp:imageCredit>
@@ -852,14 +873,29 @@ Koleksi di kawasan situs berpusat pada tinggalan Samudera Pasai: fragmen batu ni
         <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AMuseum_Islam_Samudra_Pasai_2.jpg</sdp:imageSource>
     </sdp:Image>
 
-    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-malikussaleh/image/3">
-        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-malikussaleh/3.jpg</sdp:imageUrl>
+    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-malikussaleh/image/2">
+        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
+        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-malikussaleh/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gerbang masuk kawasan Samudera Pasai</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Dari gerbang ini pengunjung masuk ke kawasan permukiman yang dahulu menjadi pusat Samudera Pasai, dikelilingi kebun kelapa dan sawah. Nama Malikussaleh merujuk sultan pertama kerajaan itu, yang makamnya menjadi salah satu situs utama di kawasan ini.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Malikussaleh — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">merupakan museum khusus yang dibangun secara bertahap mulai tahun 2011 sampai dengan 2016 dengan Dana Otsus Kabupaten Aceh Utara. Luas tapakan bangunan ± 500 m2. Bangunan permanen </sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">DISDIKBUD Aceh Utara</sdp:imageCredit>
         <sdp:imageLicense xml:lang="id">Public domain</sdp:imageLicense>
         <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AMuseum_islam_samudera_pasai_1.jpg</sdp:imageSource>
+    </sdp:Image>
+
+    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-malikussaleh/image/3">
+        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
+        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-malikussaleh/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Koin emas Samudera Pasai</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Koin emas bertulisan Arab ini adalah mata uang kesultanan Samudera Pasai. Keberadaan mata uang sendiri menunjukkan kerajaan ini sudah memiliki sistem ekonomi dan administrasi yang mapan pada abad ke-13 hingga ke-14, sezaman dengan masa kejayaan jalur dagang Selat Malaka.</sdp:imageBackground>
+        <sdp:imageAlt xml:lang="id">Museum Malikussaleh — foto dari Wikimedia Commons</sdp:imageAlt>
+        <sdp:imageCaption xml:lang="id">Koin Kesultanan Samudera Pasai, berbahan timah, pada masa Sultan Mukmin.</sdp:imageCaption>
+        <sdp:imageCredit xml:lang="id">Original: Unknown, photograph: Rachmat04</sdp:imageCredit>
+        <sdp:imageLicense xml:lang="id">CC BY-SA 4.0</sdp:imageLicense>
+        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://creativecommons.org/licenses/by-sa/4.0</sdp:imageLicenseUrl>
+        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AMUS_Koin_Kesultanan_Samudera_Pasai%3B_1.jpg</sdp:imageSource>
     </sdp:Image>
 
     <sdp:Exhibit rdf:about="https://museumsumatera.id/resource/museum/museum-malikussaleh/exhibit/1">
@@ -917,6 +953,8 @@ Bangunannya menempati lahan sekitar 10.468 m² dengan gedung induk dua lantai ya
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-utara/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gedung induk museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan dua lantai ini berdiri di lahan sekitar 10.468 m² di Jalan H.M. Jhoni, Medan. Peletakan batu pertama berupa sepasang makara dilakukan Presiden Soekarno pada 1954, tetapi museum baru diresmikan pada 19 April 1982 oleh Menteri Pendidikan dan Kebudayaan Daoed Joesoef. Di gedung ini terdapat ruang pameran tetap, ruang pameran temporer, ruang audio visual, dan perpustakaan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Provinsi Sumatera Utara — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Negeri Sumatera Utara Building</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Harditaher</sdp:imageCredit>
@@ -928,6 +966,8 @@ Bangunannya menempati lahan sekitar 10.468 m² dengan gedung induk dua lantai ya
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-utara/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Panel sejarah Provinsi Sumatera Utara</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Panel di ruang pamer ini mencatat bahwa Provinsi Sumatera Utara dibentuk lewat Undang-Undang Nomor 10 Tahun 1948, yang membagi Pulau Sumatera menjadi tiga provinsi. Isi panel menjadi contoh bagaimana museum tidak hanya memamerkan benda, tetapi juga menyusun kronologi pemerintahan sebagai bagian dari narasi sejarah daerah.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Provinsi Sumatera Utara — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Negeri Sumatera Utara adalah salah satu museum terbesar di Sumatera Utara yang berbagai peninggalan sejarah budaya bangsa, hasil seni dan kerajinan dari berbagai suku di Sum</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Najla Khairani Siregar</sdp:imageCredit>
@@ -939,6 +979,8 @@ Bangunannya menempati lahan sekitar 10.468 m² dengan gedung induk dua lantai ya
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-utara/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Tenun di lemari kaca</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Kain tenun dipajang tergantung di dalam lemari kaca, dengan label kecil di atas setiap helai. Koleksi tekstil semacam ini mewakili keragaman suku di Sumatera Utara — Batak, Melayu, Nias, dan lainnya — yang menjadi kekuatan utama museum ini. Hingga 2005 museum mencatat 6.799 koleksi.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Provinsi Sumatera Utara — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Negeri Sumatera Utara merupakan Museum terbesar di Sumatera Utara yang berbagai peninggalan sejarah budaya bangsa, hasil seni dan kerajinan dari berbagai suku di Sumatera Ut</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Najla Khairani Siregar</sdp:imageCredit>
@@ -1007,6 +1049,8 @@ Kompleks ini terdiri atas dua susun rumah adat yang saling berhadapan, masing-ma
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-huta-bolon-simanindo/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Rumah adat Bolon dari samping</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Rumah adat Batak berbentuk rumah panggung dengan atap melengkung ini adalah inti kompleks Huta Bolon Simanindo, warisan Raja Sidauruk sejak 1969. Kompleksnya terdiri atas dua susun rumah adat yang saling berhadapan, masing-masing lima rumah, di tepi Danau Toba.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Huta Bolon Simanindo — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Tampak bagian sebelah kiri</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Nafisathallah</sdp:imageCredit>
@@ -1018,6 +1062,8 @@ Kompleks ini terdiri atas dua susun rumah adat yang saling berhadapan, masing-ma
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-huta-bolon-simanindo/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Tampak depan rumah adat</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Dari depan terlihat struktur rumah panggung dengan tiang penyangga dan ukiran pada bagian atap. Susunan huta (kampung) seperti ini sengaja dipertahankan agar pengunjung memahami rumah adat sebagai bagian dari tata ruang kampung, bukan bangunan tunggal yang berdiri sendiri.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Huta Bolon Simanindo — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Tampak bangunan dari depan</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Nafisathallah</sdp:imageCredit>
@@ -1029,6 +1075,8 @@ Kompleks ini terdiri atas dua susun rumah adat yang saling berhadapan, masing-ma
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-huta-bolon-simanindo/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Patung batu penjaga</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Dua patung batu berwujud sosok duduk ini diletakkan di bawah naungan atap rumbia di area museum. Patung semacam ini dalam tradisi Batak berfungsi sebagai penjaga kampung dan penanda leluhur; gayanya yang sederhana menunjukkan tradisi megalitik yang lebih tua daripada arsitektur rumah adatnya.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Huta Bolon Simanindo — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Koleksi museum di Kabupaten Samosir</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Nafisathallah</sdp:imageCredit>
@@ -1097,6 +1145,8 @@ Museum ini dikenal juga sebagai Museum Batak. Selain ruang pameran, kawasannya m
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tb-silalahi-center/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gedung T.B. Silalahi</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan utama ini adalah wajah kompleks T.B. Silalahi Center, pusat budaya Batak di Balige. Selain sebagai museum, tempat ini dipakai sebagai ruang kegiatan budaya, sehingga fungsinya lebih luas daripada museum pada umumnya.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum TB Silalahi Center — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Front view of T.B. Silalahi Building, Batak Cultural Center</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Sam Hidayat</sdp:imageCredit>
@@ -1108,6 +1158,8 @@ Museum ini dikenal juga sebagai Museum Batak. Selain ruang pameran, kawasannya m
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tb-silalahi-center/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Rumah adat Karo di area museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur. Kehadirannya menunjukkan bahwa kawasan Toba dihuni beberapa sub-etnis Batak dengan bentuk rumah yang berbeda — Karo di utara, Toba di sekitar danau.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum TB Silalahi Center — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Portrait of a traditional Karo house in the T.B. Silalahi Center area</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Sam Hidayat</sdp:imageCredit>
@@ -1119,6 +1171,8 @@ Museum ini dikenal juga sebagai Museum Batak. Selain ruang pameran, kawasannya m
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tb-silalahi-center/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Lanskap sekitar museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige. Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian, danau, dan kehidupan kampung.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum TB Silalahi Center — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Natural scenery around T.B. Silalahi Center</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Sam Hidayat</sdp:imageCredit>
@@ -1167,7 +1221,6 @@ Museum ini dikenal juga sebagai Museum Batak. Selain ruang pameran, kawasannya m
 Koleksinya mencakup senjata tradisional, foto, dan benda peninggalan yang berkaitan dengan perjuangan Sisingamangaraja XII dan masyarakat Batak.</sdp:history>
         <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1"/>
         <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/2"/>
-        <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/exhibit/1"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/exhibit/3"/>
@@ -1179,34 +1232,26 @@ Koleksinya mencakup senjata tradisional, foto, dan benda peninggalan yang berkai
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sisingamangaraja-xii/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Makam di Bakkara</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja dan kini menjadi kawasan makam raja-raja Batak. Kompleks makam ini berada di dekat museum yang mengisahkan perlawanan Sisingamangaraja XII terhadap Belanda, yang berakhir dengan gugurnya raja pada 1907.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sisingamangaraja XII — foto dari Wikimedia Commons</sdp:imageAlt>
-        <sdp:imageCaption xml:lang="id">Appearance of the Toba Sea-Folk Museum</sdp:imageCaption>
-        <sdp:imageCredit xml:lang="id">Tawashi2006</sdp:imageCredit>
-        <sdp:imageLicense xml:lang="id">CC BY-SA 3.0</sdp:imageLicense>
-        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://creativecommons.org/licenses/by-sa/3.0/</sdp:imageLicenseUrl>
-        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AToba_Sea-Folk_Museum01.jpg</sdp:imageSource>
+        <sdp:imageCaption xml:lang="id">Grave and en:Flag of King Sisingamangaraja</sdp:imageCaption>
+        <sdp:imageCredit xml:lang="id">Kontributor Wikimedia Commons</sdp:imageCredit>
+        <sdp:imageLicense xml:lang="id">GFDL</sdp:imageLicense>
+        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.gnu.org/copyleft/fdl.html</sdp:imageLicenseUrl>
+        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AMakam_di_bakkara.jpg</sdp:imageSource>
     </sdp:Image>
 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sisingamangaraja-xii/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Potret Sisingamangaraja XII</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Foto ini berasal dari arsip kolonial dan sudah menjadi domain publik. Sosok Sisingamangaraja XII digambarkan dalam busana kebesaran; potret semacam ini dipakai sebagai rujukan visual untuk patung, prangko, dan lukisan yang dibuat kemudian.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sisingamangaraja XII — foto dari Wikimedia Commons</sdp:imageAlt>
-        <sdp:imageCaption xml:lang="id">Collection of &quot;Ro&quot;(Parts of wooden fishing boats), in the Toba Sea-Folk Museum</sdp:imageCaption>
-        <sdp:imageCredit xml:lang="id">Tawashi2006</sdp:imageCredit>
-        <sdp:imageLicense xml:lang="id">CC BY-SA 3.0</sdp:imageLicense>
-        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://creativecommons.org/licenses/by-sa/3.0/</sdp:imageLicenseUrl>
-        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AToba_Sea-Folk_Museum04.jpg</sdp:imageSource>
-    </sdp:Image>
-
-    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/3">
-        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sisingamangaraja-xii/3.jpg</sdp:imageUrl>
-        <sdp:imageAlt xml:lang="id">Museum Sisingamangaraja XII — foto dari Wikimedia Commons</sdp:imageAlt>
-        <sdp:imageCaption xml:lang="id">Inside of the exhibition house B, in the Toba Sea-Folk Museum</sdp:imageCaption>
-        <sdp:imageCredit xml:lang="id">Tawashi2006</sdp:imageCredit>
-        <sdp:imageLicense xml:lang="id">CC BY-SA 3.0</sdp:imageLicense>
-        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://creativecommons.org/licenses/by-sa/3.0/</sdp:imageLicenseUrl>
-        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AToba_Sea-Folk_Museum06.jpg</sdp:imageSource>
+        <sdp:imageCaption xml:lang="id">Portrait of Sisingamangaraja XII , painted by Augustin Sibarani, from the obverse of the 1,000 rupiah banknote (1987 series)</sdp:imageCaption>
+        <sdp:imageCredit xml:lang="id">Bank of Indonesia</sdp:imageCredit>
+        <sdp:imageLicense xml:lang="id">Public domain</sdp:imageLicense>
+        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3ASisingamangaraja_XII.jpg</sdp:imageSource>
     </sdp:Image>
 
     <sdp:Exhibit rdf:about="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/exhibit/1">
@@ -1263,6 +1308,8 @@ Bangunannya memakai konsep “Itik Pulang Petang” dari filosofi Melayu, yang b
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-daerah-deli-serdang/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Bidang tanah museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Halaman berumput dan deretan pohon ini adalah area museum baru Deli Serdang di Lubuk Pakam, yang dibangun di lahan eks Dinas Pertanian dan diresmikan 8 September 2018. Museum sebelumnya, dibuka 12 Agustus 2003, berada di kompleks perkantoran Tanjung Garbus.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Daerah Deli Serdang — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum of Deli Serdang site visit by GLAM Indonesia team of Wikimedia Indonesia.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Rachmat04</sdp:imageCredit>
@@ -1274,6 +1321,8 @@ Bangunannya memakai konsep “Itik Pulang Petang” dari filosofi Melayu, yang b
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-daerah-deli-serdang/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Panel profil Provinsi Sumatera Utara</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Panel kaca ini memuat data luas, jumlah penduduk, daftar kabupaten/kota, dan fisiografi Sumatera Utara. Letaknya di awal alur pameran, berfungsi memberi konteks geografis sebelum pengunjung masuk ke sejarah Kesultanan Deli dan Serdang.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Daerah Deli Serdang — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Kunjungan ke Museum Deli Serdang tahun 2022.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Bennylin</sdp:imageCredit>
@@ -1285,6 +1334,8 @@ Bangunannya memakai konsep “Itik Pulang Petang” dari filosofi Melayu, yang b
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-daerah-deli-serdang/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Daftar kecamatan Deli Serdang</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Daftar 22 kecamatan ini menjadi penanda bahwa museum adalah museum kabupaten: wilayah yang diceritakan bukan hanya kesultanan, tetapi juga kecamatan-kecamatan yang kini menopang Kabupaten Deli Serdang. Museum menempati gedung berkonsep “Itik Pulang Petang”, filosofi Melayu tentang keteraturan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Daerah Deli Serdang — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Kunjungan ke Museum Deli Serdang tahun 2022.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Bennylin</sdp:imageCredit>
@@ -1341,7 +1392,6 @@ Bangunannya memakai konsep “Itik Pulang Petang” dari filosofi Melayu, yang b
 Setelah kewenangan bidang pemerintahan dialihkan ke daerah lewat Undang-Undang Nomor 22 Tahun 1999, museum ini berubah menjadi museum daerah di bawah Dinas Kebudayaan, Kesenian dan Pariwisata Provinsi Riau. Nama Sang Nila Utama mulai dipakai atas inisiatif kepala museum melalui Surat Keputusan Nomor 227/109.09/MR/C-93 pada 13 Oktober 1993, merujuk raja Bintan yang berkuasa sekitar abad ke-13.</sdp:history>
         <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/image/1"/>
         <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/image/2"/>
-        <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/image/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/exhibit/1"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/exhibit/3"/>
@@ -1354,17 +1404,8 @@ Setelah kewenangan bidang pemerintahan dialihkan ke daerah lewat Undang-Undang N
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sang-nila-utama/1.jpg</sdp:imageUrl>
-        <sdp:imageAlt xml:lang="id">Museum Sang Nila Utama — foto dari Wikimedia Commons</sdp:imageAlt>
-        <sdp:imageCaption xml:lang="id">Statue of en:Sang Nila Utama , a pseudo-legendary Prince from en:Palembang who supposedly founded the en:Kingdom of Singapura in 1299, erected at the en:Raffles Landing Site as par</sdp:imageCaption>
-        <sdp:imageCredit xml:lang="id">Altopian1</sdp:imageCredit>
-        <sdp:imageLicense xml:lang="id">CC BY-SA 4.0</sdp:imageLicense>
-        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://creativecommons.org/licenses/by-sa/4.0</sdp:imageLicenseUrl>
-        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AStatue_of_Sang_Nila_Utama_at_the_Raffles_Landing_Site_(three-quarter_front_view).jpg</sdp:imageSource>
-    </sdp:Image>
-
-    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/image/2">
-        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sang-nila-utama/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Ruang pamer dua lantai</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Interior ini memperlihatkan ruang pamer dengan deretan tiang jingga dan lemari kaca di sepanjang balkon. Museum menempati bangunan dua lantai di kompleks Dinas Kebudayaan Provinsi Riau dan menyimpan sekitar 4.195 koleksi pada 2005, dari fosil, keramik, pakaian adat, sampai sepeda kuno.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sang Nila Utama — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Interior of Sang Nila Utama Museum in Pekanbaru</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Harditaher</sdp:imageCredit>
@@ -1373,9 +1414,11 @@ Setelah kewenangan bidang pemerintahan dialihkan ke daerah lewat Undang-Undang N
         <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AMuseum_Sang_Nila_Utama_interior.jpg</sdp:imageSource>
     </sdp:Image>
 
-    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/image/3">
-        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sang-nila-utama/3.jpg</sdp:imageUrl>
+    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/image/2">
+        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
+        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sang-nila-utama/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gedung Museum Sang Nila Utama</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Gedung inilah Museum Negeri Provinsi Riau yang didirikan 9 Januari 1991. Nama Sang Nila Utama mulai dipakai pada 13 Oktober 1993, merujuk raja Bintan abad ke-13. Setelah kewenangan daerah berubah pada 1999, statusnya menjadi museum daerah di bawah Dinas Kebudayaan Riau.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sang Nila Utama — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum of Pekanbaru</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Harditaher</sdp:imageCredit>
@@ -1436,13 +1479,15 @@ Gedungnya dahulu adalah sekolah dasar pertama di Tanjungpinang, Holland Irlandsc
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/exhibit/4"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/exhibit/5"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/source/1"/>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-sulaiman-badrul-alamsyah/3.jpg</sdp:imageUrl>
+        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-sulaiman-badrul-alamsyah/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-sulaiman-badrul-alamsyah/3.jpg</sdp:imageUrl>
+        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-sulaiman-badrul-alamsyah/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Bekas Holland Irlandsch School</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan beratap limas ini dahulu sekolah dasar pertama di Tanjungpinang, Holland Irlandsch School (HIS), pada masa kolonial Belanda. Pada masa pendudukan Jepang namanya berubah menjadi Futsuko Gakka I, lalu menjadi Sekolah Rakyat setelah kemerdekaan. Sejak 31 Januari 2009 tempat ini menjadi museum.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sultan Sulaiman Badrul Alamsyah — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Sultan Sulaiman Badrul Alamsyah in Kota Tanjung Pinang, Kepulauan Riau 35132, Indonesië</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">MuhammadAditya</sdp:imageCredit>
@@ -1515,6 +1560,8 @@ Pendiriannya berawal dari upaya menyelamatkan benda bersejarah Lingga. Pembangun
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-linggam-cahaya/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Mushaf Al-Qur&apos;an Riau-Lingga</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Mushaf abad ke-19 ini berasal dari Kesultanan Riau-Lingga dan beriluminasi khas Pantai Timur Semenanjung. Selain sebagai kitab, mushaf seperti ini adalah benda seni: pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Linggam Cahaya — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">A volume of the Quran dated from 19th century from the Riau-Lingga Sultanate.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Unknown author Unknown author</sdp:imageCredit>
@@ -1581,6 +1628,8 @@ Sejumlah foto arsip dari awal abad ke-20 memperlihatkan potret Sultan Siak serta
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-istana-siak/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-istana-siak/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Potret Sultan Siak</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Foto studio ini berasal dari arsip kolonial awal abad ke-20 dan memperlihatkan Sultan Siak dalam busana kebesaran. Potret semacam ini biasanya dibuat untuk kepentingan administrasi kolonial sekaligus sebagai penanda hubungan antara kesultanan dan pemerintah Hindia Belanda.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Istana Siak Sri Indrapura — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Studio portrait of the Sultan of Siak</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Unknown author Unknown author</sdp:imageCredit>
@@ -1592,6 +1641,8 @@ Sejumlah foto arsip dari awal abad ke-20 memperlihatkan potret Sultan Siak serta
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-istana-siak/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-istana-siak/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Fasad Istana Siak</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Istana berwarna krem ini memadukan bentuk Eropa — menara, jendela lengkung runcing, dan pintu melengkung — dengan tata ruang istana Melayu. Istana Siak Sri Indrapura dibangun pada masa Sultan Assyaidis Syarif Hasyim Abdul Jalil Syaifuddin dan kini menjadi museum yang menyimpan regalia kesultanan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Istana Siak Sri Indrapura — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Bangunan Istana Siak</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Unknown author Unknown author</sdp:imageCredit>
@@ -1602,6 +1653,8 @@ Sejumlah foto arsip dari awal abad ke-20 memperlihatkan potret Sultan Siak serta
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-istana-siak/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-istana-siak/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Kursi singgasana Kerajaan Siak Sri Indrapura</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Kursi berlapis emas ini dipajang di dalam lemari kaca dengan label “Kursi Singgasana Kerajaan Siak Sri Indrapura”. Singgasana adalah pusat upacara kerajaan: di sinilah sultan menerima pembesar dan tamu, sehingga posisinya dalam tata ruang istana menandai hierarki kekuasaan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Istana Siak Sri Indrapura — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Koleksi Istana</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Unknown author Unknown author</sdp:imageCredit>
@@ -1665,6 +1718,8 @@ Museum ini berdiri di kompleks Lapangan Tugu, Jalan Diponegoro, Padang, di atas 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-adityawarman/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-adityawarman/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gedung utama museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Atap bergonjong berjumlah banyak ini mengadaptasi bentuk rumah gadang Minangkabau ke skala bangunan pameran. Museum Adityawarman dibangun sejak tahun anggaran 1974/1975 dan diresmikan 16 Maret 1977 oleh Menteri Pendidikan dan Kebudayaan Syarif Thayeb, di atas tanah 2,5 hektar bekas Taman Melati.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Adityawarman — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">One of the museums that stores a collection of local and national culture with the architecture of the great Minangkabau traditional house called Rumah Gadang which is located in t</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Rieulraitday</sdp:imageCredit>
@@ -1676,6 +1731,8 @@ Museum ini berdiri di kompleks Lapangan Tugu, Jalan Diponegoro, Padang, di atas 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-adityawarman/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-adityawarman/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Sudut bangunan museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Detail gonjong dan dinding berukir ini memperlihatkan bahwa museum bukan hanya tempat menyimpan koleksi, tetapi juga contoh arsitektur. Nama Adityawarman sendiri diambil dari raja Malayapura abad ke-14, masa ketika pengaruh Minangkabau dan Majapahit bertemu di Sumatera bagian tengah.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Adityawarman — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Adityawarman</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Rhmtdns</sdp:imageCredit>
@@ -1687,6 +1744,8 @@ Museum ini berdiri di kompleks Lapangan Tugu, Jalan Diponegoro, Padang, di atas 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-adityawarman/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-adityawarman/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Rumah gadang dan rangkiang</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Di halaman museum berdiri rumah gadang lengkap dengan rangkiang, lumbung padi beratap gonjong. Kehadirannya membuat museum dijuluki “Taman Mini ala Sumatera Barat”: pengunjung bisa melihat bangunan adat secara utuh, bukan hanya foto atau maketnya.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Adityawarman — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Halaman Rumah Jo Rangkiang Rumah Gadang di Museum Adityawarman Kota Padang dari samping Kiri</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">DwiFidratul</sdp:imageCredit>
@@ -1759,6 +1818,8 @@ Rumah milik nenek Hamka itu hampir hancur pada masa pendudukan Jepang. Pada 2000
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-rumah-kelahiran-buya-hamka/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Rumah kelahiran Buya Hamka</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Rumah kayu beratap gonjong ini adalah rumah tempat Hamka lahir dan tinggal sebelum pindah ke Padang Panjang. Rumah milik neneknya hampir hancur pada masa pendudukan Jepang, lalu dibangun kembali dan diresmikan sebagai museum pada 11 November 2001 oleh Gubernur Zainal Bakar. Lokasinya di tepi Danau Maninjau.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Rumah Kelahiran Buya Hamka — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Rumah Kelahiran Buya Hamka.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Malekhanif at ms.wikipedia</sdp:imageCredit>
@@ -1770,6 +1831,8 @@ Rumah milik nenek Hamka itu hampir hancur pada masa pendudukan Jepang. Pada 2000
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-rumah-kelahiran-buya-hamka/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Serambi rumah museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Serambi beratap ini menjadi ruang masuk museum, dengan ukiran Minang pada bagian atap dan dinding. Di dalamnya tersimpan sekitar 200 judul buku, lima rak kaca karya Hamka, serta benda pribadi seperti koper haji pertama, delapan tongkat, dan baju wisuda lengkap dengan toga.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Rumah Kelahiran Buya Hamka — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Rumah Kelahiran Buya Hamka</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Zhilal Darma</sdp:imageCredit>
@@ -1838,6 +1901,8 @@ Desain bangunannya mengikuti rumah gadang Minangkabau dengan atap bergonjong. Di
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tuanku-imam-bonjol/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tuanku-imam-bonjol/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gedung museum berarsitektur rumah gadang</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan ini mengikuti bentuk rumah gadang dengan atap bergonjong, dibangun Oktober 1987 dan selesai 1990 di areal sekitar 2 hektar di Bonjol, Pasaman. Dindingnya memuat catatan Perang Padri dan silsilah Muhammad Shahab, yang lahir di Bonjol pada 1 Januari 1772.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Tuanku Imam Bonjol — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Tuanku Imam Bonjol di Kabupaten Pasaman, Sumatera Barat</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Zhilal Darma</sdp:imageCredit>
@@ -1849,6 +1914,8 @@ Desain bangunannya mengikuti rumah gadang Minangkabau dengan atap bergonjong. Di
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tuanku-imam-bonjol/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tuanku-imam-bonjol/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Patung Tuanku Imam Bonjol</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Patung putih penunggang kuda ini berdiri di halaman museum, menggambarkan Imam Bonjol sebagai pemimpin perang. Sosoknyalah yang memimpin kaum Padri dalam Perang Padri (1803–1838) melawan Belanda dan kaum adat, hingga akhirnya ditangkap dan diasingkan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Tuanku Imam Bonjol — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Tuanku Imam Bonjol di Kabupaten Pasaman, Sumatera Barat</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Zhilal Darma</sdp:imageCredit>
@@ -1860,6 +1927,8 @@ Desain bangunannya mengikuti rumah gadang Minangkabau dengan atap bergonjong. Di
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-tuanku-imam-bonjol/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tuanku-imam-bonjol/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Halaman dan bangunan museum</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Dari sisi lain terlihat proporsi bangunan 42 × 16,50 meter dengan gonjong di kedua ujungnya. Sejak 1998 museum ini dikelola Pemerintah Kabupaten Pasaman, dan sebagian koleksinya berupa replika karena benda asli Tuanku Imam Bonjol banyak yang hilang atau dicuri.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Tuanku Imam Bonjol — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Tuanku Imam Bonjol di Kabupaten Pasaman, Sumatera Barat</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Zhilal Darma</sdp:imageCredit>
@@ -1932,6 +2001,8 @@ Museum ini adalah museum perkeretaapian kedua di Indonesia setelah Ambarawa. Sta
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-kereta-api-sawahlunto/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Stasiun Sawahlunto dan lokomotif</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Foto ini memperlihatkan peron beratap dengan papan nama SAWAHLUNTO, lokomotif uap kecil di jalur, gerbong ketel biru, dan roda kereta yang diletakkan di tanah berbatu. Stasiun ini berhenti beroperasi pada 2003 setelah tambang batu bara habis, lalu dijadikan museum pada 2005 — museum perkeretaapian kedua di Indonesia setelah Ambarawa.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Kereta Api Sawahlunto — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Kereta Api di Sawahlunto</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Panda Kotmel</sdp:imageCredit>
@@ -1999,6 +2070,8 @@ Koleksinya mencakup keramik, arca, dan benda upacara masyarakat Jambi. Sejak mus
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-jambi/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Museum Siginjei dari arah Danau Sipin</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Museum Siginjei — dulu bernama Museum Negeri Provinsi Jambi — berdiri di Jalan Urip Sumoharjo, kawasan Sungai Putri, Telanaipura. Gedungnya diresmikan 6 Juni 1988 oleh Menteri Pendidikan dan Kebudayaan Fuad Hassan setelah dibangun sejak 18 Februari 1981.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Jambi — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Siginjei</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Firzafp</sdp:imageCredit>
@@ -2069,6 +2142,8 @@ Namanya merujuk siginjai, ikat pinggang pusaka raja Jambi. Museum berdiri di Jal
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-siginjai/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-siginjai/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Panel Residen Pertama Djambi</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Panel ini mencatat bahwa Dr. Syagaf Yahya diangkat sebagai Residen Djambi pada 3 September 1945, lalu digantikan Raden Inukertapati, salah satu pertimbangannya karena ia putra Sultan Thaha Saifuddin. Di bawahnya dipasang dokumen Kongres Rakyat Djambi dan foto-foto kongres itu — bukti bagaimana museum menyusun sejarah pemerintahan dari arsip.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Siginjai — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Residen Pertama Djambi Kantor Residen Djambi dibangun oleh Kolonial Belanda (1928) Sekarang Kantor Satuan Brimob Polda Jambi Pada tanggal 3 September 1945, Dr. Syagaf Yahya diangka</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Muhamad Izzul Fiqih</sdp:imageCredit>
@@ -2080,6 +2155,8 @@ Namanya merujuk siginjai, ikat pinggang pusaka raja Jambi. Museum berdiri di Jal
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-siginjai/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-siginjai/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Instalasi Kilang Avigas</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Instalasi pipa dan tabung berwarna krem ini diberi label “Kilang Avigas — Sumber Energi”. Benda semacam ini menunjukkan bahwa perjuangan kemerdekaan juga berlangsung lewat penguasaan sumber energi dan infrastruktur, bukan hanya pertempuran bersenjata.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Siginjai — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Suatu Kenangan Bukti Nyata Masyarakat Jambi Dalam Mendukung Kemerdekaan 17 Agustus 1945 Sei Bahar, April 1994 Pertamina Unit EP Lap. Jambi Kepala, (Tanda tangan) Yusri Dahar --- KI</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Muhamad Izzul Fiqih</sdp:imageCredit>
@@ -2091,6 +2168,8 @@ Namanya merujuk siginjai, ikat pinggang pusaka raja Jambi. Museum berdiri di Jal
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-siginjai/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-siginjai/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Stempel Dewan Patih Kesultanan Jambi</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Stempel ini pernah dipakai Said Idrus bin Hasan Al Jupri bergelar Pangeran Wiro Kusumo. Cap semacam ini menjadi bukti tertulis berjalannya administrasi kesultanan Jambi, sekaligus menunjukkan bagaimana kekuasaan didelegasikan kepada pejabat di bawah sultan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Siginjai — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">STEMPEL Benda ini pernah dipakai oleh Said Idrus bin Hasan Al Jupri bergelar Pangeran Wiro Kusumo. Beliau salah seorang Dewan Patih Dalam Kesultanan Jambi. STAMP This stamp was use</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Muhamad Izzul Fiqih</sdp:imageCredit>
@@ -2165,6 +2244,8 @@ Koleksinya banyak berupa benda etnografi, seperti peralatan memasak tradisional 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-bengkulu/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Uang kertas 1000 rupiah edisi lama</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Lembaran ini adalah uang kertas 1000 rupiah yang sudah tidak berlaku, disimpan dalam plastik pelindung dengan nomor inventaris 06-211. Koleksi numismatika seperti ini menandai perubahan mata uang Indonesia dari masa ke masa, termasuk masa inflasi tinggi pada 1960-an.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Bengkulu — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">500 rupiah (PMR; reverse), Bengkulu Museum, 2015-04-19</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Crisco 1492</sdp:imageCredit>
@@ -2175,6 +2256,8 @@ Koleksinya banyak berupa benda etnografi, seperti peralatan memasak tradisional 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-bengkulu/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Uang kertas 500 rupiah bertanda LIPPHARTODES</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Pada lembar 500 rupiah ini tercetak cap “LIPPHARTODES PAPERIAH”. Cap semacam ini lazim dipakai pada masa peralihan mata uang, ketika lembar lama diperiksa dan ditandai sebelum tetap atau tidak tetap berlaku. Jejaknya membuat uang bukan hanya alat tukar, tetapi juga arsip administratif.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Bengkulu — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">10 rupiah (South Sumatra; obverse), Bengkulu Museum, 2015-04-19</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Crisco 1492</sdp:imageCredit>
@@ -2185,6 +2268,8 @@ Koleksinya banyak berupa benda etnografi, seperti peralatan memasak tradisional 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-bengkulu/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Perkakas masak dari tempurung</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Alat ini dibuat dari tempurung kelapa dan bilah kayu, dipakai sebagai sendok atau pengaduk dalam masakan tradisional Bengkulu. Koleksi rumah tangga seperti ini tampak sederhana, tetapi justru menunjukkan teknologi sehari-hari masyarakat yang tidak meninggalkan prasasti atau arsip tertulis.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Bengkulu — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Traditional Bengkulu cooking utensils, Bengkulu Museum 2015-04-19</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Crisco 1492</sdp:imageCredit>
@@ -2246,6 +2331,8 @@ Rumah ini kini menjadi museum yang menyimpan jejak masa pengasingan tersebut, te
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/rumah-pengasingan-bung-karno/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Papan nama rumah pengasingan</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Papan ini menandai rumah tempat Soekarno diasingkan di Bengkulu setelah empat tahun di Ende, Flores (1934–1938). Rumah ini kemudian dijadikan museum dan dipelihara sebagai bagian dari perjalanan politik Soekarno sebelum proklamasi.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Rumah Pengasingan Bung Karno — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">This is Bung Karno&apos;s exile house, which until now still exists in Bengkulu City, This house made as Place for residence by Soekarno when undergoing exile in the year of 1938 - 1942</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Azizadisuryo</sdp:imageCredit>
@@ -2257,6 +2344,8 @@ Rumah ini kini menjadi museum yang menyimpan jejak masa pengasingan tersebut, te
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/rumah-pengasingan-bung-karno/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Halaman dan rumah pengasingan</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Rumah beratap limas dengan serambi lebar ini berdiri di atas halaman berpaving, dengan tiang bendera di depannya. Selama di Bengkulu, Soekarno aktif mengajar dan menulis; rumah ini menjadi saksi masa pengasingan yang relatif lebih longgar dibandingkan di Ende.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Rumah Pengasingan Bung Karno — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">In 1933 Soekarno was arrested on charges of carrying out movements and gathering the natives to fight the Dutch, then exiled to Ende, East Nusa Tenggara. After being exiled to Ende</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Herusutimbul</sdp:imageCredit>
@@ -2268,6 +2357,8 @@ Rumah ini kini menjadi museum yang menyimpan jejak masa pengasingan tersebut, te
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/rumah-pengasingan-bung-karno/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Rumah pengasingan dari sisi jalan</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Dari arah jalan terlihat ubun-ubun bangunan dan pagar halaman. Arsip-arsip kolonial mencatat penangkapan Soekarno pada 1933 sebelum pengasingan berantai ke Flores lalu Bengkulu, sehingga rumah ini menandai babak politik tertentu dalam biografinya.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Rumah Pengasingan Bung Karno — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Rumah kediaman Bung Karno pada waktu pengasingan di Bengkulu</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Penikmat Senja</sdp:imageCredit>
@@ -2318,7 +2409,6 @@ Rumah ini kini menjadi museum yang menyimpan jejak masa pengasingan tersebut, te
 Museum ini menyimpan koleksi arca Hindu-Buddha, keramik, tekstil, serta tenun songket Palembang, dan menjadi rujukan utama sejarah Sumatera Selatan.</sdp:history>
         <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/image/1"/>
         <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/image/2"/>
-        <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/image/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/exhibit/1"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/exhibit/3"/>
@@ -2331,6 +2421,8 @@ Museum ini menyimpan koleksi arca Hindu-Buddha, keramik, tekstil, serta tenun so
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-selatan/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Bangunan museum dan halaman</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Gedung ini dikenal sebagai Burgemeesterhuis — rumah wali kota Palembang pada masa kolonial — sebelum menjadi Museum Negeri Sumatera Selatan Balaputra Dewa. Namanya diambil dari Balaputra Dewa, raja Sriwijaya, dan koleksinya mencakup arca Hindu-Buddha, keramik, serta tenun songket Palembang.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Sumatera Selatan Balaputra Dewa — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Also known as Burgemeesterhuis in de Gemeente Palembang (Palembang Municipality Mayor House) during Dutch colonial era, this is textile museum located in Talang Semut, Bukit Kecil,</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Firzafp</sdp:imageCredit>
@@ -2342,23 +2434,14 @@ Museum ini menyimpan koleksi arca Hindu-Buddha, keramik, tekstil, serta tenun so
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-selatan/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Replika Rumah Limas</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Replika rumah limas ini dibangun di halaman museum sebagai contoh rumah adat Sumatera Selatan. Rumah limas bertingkat dan berundak, mencerminkan struktur sosial masyarakat Palembang yang berlapis; replikanya memudahkan pengunjung memahami bentuk aslinya tanpa harus berkunjung ke permukiman.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Sumatera Selatan Balaputra Dewa — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">The replica of Limas house, a South Sumatran traditional house that showed up in Balaputra Dewa Museum (South Sumatra Museum). Notably had to be appeared in IDR 10.000 from 2005 to</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Firzafp</sdp:imageCredit>
         <sdp:imageLicense xml:lang="id">CC BY-SA 4.0</sdp:imageLicense>
         <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://creativecommons.org/licenses/by-sa/4.0</sdp:imageLicenseUrl>
         <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AReplica_of_Rumah_Limas%2C_South_Sumatra_(Balaputra_Dewa)_Museum_-_Sukarame%2C_Palembang%2C_SS_(18_January_2024).jpg</sdp:imageSource>
-    </sdp:Image>
-
-    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/image/3">
-        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-selatan/3.jpg</sdp:imageUrl>
-        <sdp:imageAlt xml:lang="id">Museum Negeri Sumatera Selatan Balaputra Dewa — foto dari Wikimedia Commons</sdp:imageAlt>
-        <sdp:imageCaption xml:lang="id">Gambar Materai Kesultanan Palembang yang ada di Museum SMB II</sdp:imageCaption>
-        <sdp:imageCredit xml:lang="id">Muchtarrprincess</sdp:imageCredit>
-        <sdp:imageLicense xml:lang="id">CC BY 4.0</sdp:imageLicense>
-        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://creativecommons.org/licenses/by/4.0</sdp:imageLicenseUrl>
-        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3AMaterai_Kesultanan_Palembang_Darussalam_(_Museum_SMB_II).jpg</sdp:imageSource>
     </sdp:Image>
 
     <sdp:Exhibit rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/exhibit/1">
@@ -2421,6 +2504,8 @@ Di atas reruntuhannya dibangun gedung baru yang selesai pada 1824 dan dikenal se
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sultan-mahmud-badaruddin-ii/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-mahmud-badaruddin-ii/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Museum Sultan Mahmud Badaruddin II</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan batu dua lantai ini memadukan gaya Eropa dengan arsitektur tropis Hindia. Lokasinya bekas Kuta Lama, istana Sultan Mahmud Badaruddin I yang dihancurkan kolonial Inggris pada 7 Oktober 1823; gedung baru selesai 1824 dan pada 1825 dipakai sebagai kantor residen kolonial.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sultan Mahmud Badaruddin II — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Sultan Mahmud Badaruddin II Museum at BKB Plaza Palembang</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">fitri agung from Pekanbaru, Riau, Indonesia, Indonesia</sdp:imageCredit>
@@ -2432,6 +2517,8 @@ Di atas reruntuhannya dibangun gedung baru yang selesai pada 1824 dan dikenal se
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sultan-mahmud-badaruddin-ii/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-mahmud-badaruddin-ii/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Lukisan pengasingan Sultan Mahmud Badaruddin II</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Lukisan ini menggambarkan pengasingan Sultan Mahmud Badaruddin II setelah Palembang jatuh ke tangan Belanda pada 1821. Peristiwa itu mengakhiri kedaulatan Kesultanan Palembang Darussalam, dan sejak itu wilayahnya diperintah sebagai koloni.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sultan Mahmud Badaruddin II — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Lukisan Pengasingan Sultan Mahmud Badaruddin II</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Losstreak</sdp:imageCredit>
@@ -2443,6 +2530,8 @@ Di atas reruntuhannya dibangun gedung baru yang selesai pada 1824 dan dikenal se
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-sultan-mahmud-badaruddin-ii/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-mahmud-badaruddin-ii/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Potret Sultan Mahmud Badaruddin II</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Potret ini bernuansa romantis, dengan sorban, jubah biru, dan kumis tebal. Sultan Mahmud Badaruddin II (memerintah 1803–1813 dan 1818–1821) dikenal memimpin perlawanan terhadap Belanda dan Inggris; namanya diabadikan sebagai nama museum sejak gedung ini dialihfungsikan pada 1984.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Sultan Mahmud Badaruddin II — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Potrer Lukisan Sultan Mahmud Badaruddin II</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Cendy00</sdp:imageCredit>
@@ -2509,6 +2598,8 @@ Kawasan ini menampilkan struktur bata kuno, temuan arkeologis, dan replika yang 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-taman-purbakala-sriwijaya/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-taman-purbakala-sriwijaya/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Museum Sriwijaya</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan beratap limasan ini adalah museum di dalam Taman Purbakala Kerajaan Sriwijaya, kawasan bekas permukiman masa Sriwijaya di tepi Sungai Musi. Museum menyimpan temuan dari situs dan menjelaskan kehidupan masyarakat Sriwijaya.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Taman Purbakala Kerajaan Sriwijaya — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">The Sriwijaya Museum in Srivijaya Archaeological Park, Palembang, South Sumatra, Indonesia.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Gunawan Kartapranata</sdp:imageCredit>
@@ -2520,6 +2611,8 @@ Kawasan ini menampilkan struktur bata kuno, temuan arkeologis, dan replika yang 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-taman-purbakala-sriwijaya/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-taman-purbakala-sriwijaya/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Pendopo utama</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Pendopo Beratap limasan ini menjadi pusat kegiatan di taman purbakala, dipakai untuk pertemuan dan pameran. Kehadirannya menjadikan kawasan ini museum terbuka: pengunjung belajar dari struktur bata kuno yang dibiarkan di tempatnya, bukan hanya dari benda di dalam lemari kaca.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Taman Purbakala Kerajaan Sriwijaya — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Main pavilion in Limasan house traditional architecture. Srivijaya Archaeological Park, Palembang, South Sumatra, Indonesia. The main pavilion host the replica of Kedukan Bukit ins</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Gunawan Kartapranata</sdp:imageCredit>
@@ -2531,6 +2624,8 @@ Kawasan ini menampilkan struktur bata kuno, temuan arkeologis, dan replika yang 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-taman-purbakala-sriwijaya/image/3">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-taman-purbakala-sriwijaya/3.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Arca Buddha dari masa Sriwijaya</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Arca Buddha yang sudah rusak ini ditemukan di kawasan Sriwijaya dan kini dipajang di halaman salah satu museum Palembang. Temuan arca menjadi bukti bahwa Sriwijaya adalah pusat kajian agama Buddha yang penting: banyak pelajar dari Cina dan India datang ke sini untuk menyalin kitab.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Taman Purbakala Kerajaan Sriwijaya — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">A fragmented Buddha statue was displayed at the yard of Sultan Mahmud Badaruddin II Museum in Palembang, then moved to Taman Purbakala Kerajaan Sriwijaya. The statue was discovered</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Gunawan Kartapranata. Anon</sdp:imageCredit>
@@ -2594,6 +2689,8 @@ PT Timah Tbk lalu melakukan konservasi bangunan bersejarah tersebut. Museum Tima
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-timah-indonesia/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-timah-indonesia/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Museum Timah Pangkalpinang</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Gedung bergaya kolonial ini menjadi museum timah di Pangkalpinang, ibu kota Bangka Belitung. Timah adalah komoditas yang membentuk wajah pulau ini sejak masa Hindia Belanda, sehingga museumnya menyimpan peralatan tambang, foto, dan maket pertambangan.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Timah Indonesia — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Timah (Tin Museum) of Pangkalpinang, Bangka Island.</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Cun Cun</sdp:imageCredit>
@@ -2605,6 +2702,8 @@ PT Timah Tbk lalu melakukan konservasi bangunan bersejarah tersebut. Museum Tima
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-timah-indonesia/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-timah-indonesia/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Museum Timah Indonesia Muntok</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan inilah bekas kantor pusat Pertambangan Timah Bangka (Bankatinwinning) yang dibangun 1915 dan sempat menjadi pusat pemerintahan Belanda di Bangka. Setelah diambil alih tentara Jepang dan terbengkalai, gedung dikonservasi PT Timah Tbk, lalu diresmikan menjadi museum pada 7 November 2013. Museum ini memiliki galeri tentang Kapal Vyner Brooke dan perawat Vivian Bullwinkel.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Timah Indonesia — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Museum Timah Indonesia Muntok</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Cun Cun</sdp:imageCredit>
@@ -2677,6 +2776,8 @@ Nama “Ruwa Jurai” merujuk dua golongan adat Lampung tersebut, dan koleksinya
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-lampung/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Museum Lampung Ruwa Jurai</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Foto ini memperlihatkan pengunjung di area Museum Negeri Lampung Ruwa Jurai, Bandar Lampung. Nama “Ruwa Jurai” merujuk dua golongan adat Lampung — Saibatin di pesisir dan Pepadun di pedalaman — yang menjadi kerangka penyusunan koleksinya.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Negeri Lampung Ruwa Jurai — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Tanah Lampung Museum or Lampung Museum is a museum located in Bandar Lampung City, Lampung province, Indonesia</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Khooirullyhaagakk</sdp:imageCredit>
@@ -2725,7 +2826,6 @@ Nama “Ruwa Jurai” merujuk dua golongan adat Lampung tersebut, dan koleksinya
 
 Koleksinya mencakup foto, dokumen, dan peralatan rumah tangga yang dibawa serta dipakai oleh keluarga transmigran saat membuka lahan baru.</sdp:history>
         <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/1"/>
-        <sdp:hasImage rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/1"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/3"/>
@@ -2737,17 +2837,8 @@ Koleksinya mencakup foto, dokumen, dan peralatan rumah tangga yang dibawa serta 
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-ketransmigrasian-lampung/1.jpg</sdp:imageUrl>
-        <sdp:imageAlt xml:lang="id">Museum Ketransmigrasian Lampung — foto dari Wikimedia Commons</sdp:imageAlt>
-        <sdp:imageCaption xml:lang="id">Foto. Als na ongeveer 1870 steeds meer cultuurmaatschappijen op talloze plaatsen op Sumatra hun geluk gaan beproeven, leven de mensen die een nieuwe onderneming moeten beginnen aan</sdp:imageCaption>
-        <sdp:imageCredit xml:lang="id">Unknown author Unknown author</sdp:imageCredit>
-        <sdp:imageLicense xml:lang="id">CC BY-SA 3.0</sdp:imageLicense>
-        <sdp:imageLicenseUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://creativecommons.org/licenses/by-sa/3.0</sdp:imageLicenseUrl>
-        <sdp:imageSource rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File%3ACOLLECTIE_TROPENMUSEUM_Groepje_mannen_bij_de_eerste_opzichterswoning_cultuuronderneming_Kedongdong_of_Way_Lima_Lampongse_Districten_Zuid-Sumatra._TMnr_60013376.jpg</sdp:imageSource>
-    </sdp:Image>
-
-    <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2">
-        <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
-        <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-ketransmigrasian-lampung/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Anjungan Museum Ketransmigrasian</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Bangunan berbentuk anjungan ini adalah bagian dari museum yang mengisahkan program transmigrasi di Lampung. Lampung menjadi salah satu daerah tujuan terbesar sejak awal abad ke-20, sehingga museumnya dibangun di provinsi ini dan memamerkan rumah tinggal awal, perkakas, serta arsip perpindahan penduduk.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Ketransmigrasian Lampung — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Anjungan Museum Ketransmigrasian Lampung</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Unknown author Unknown author</sdp:imageCredit>
@@ -2806,6 +2897,8 @@ Situsnya menjadi salah satu rujukan penting untuk memahami masa megalitik di Lam
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-purbakala-pugung-raharjo/image/1">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-purbakala-pugung-raharjo/1.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Punden berundak dari udara</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Dari udara terlihat struktur berundak berpagar batu yang membentuk pola mirip tangga dan bilik. Bentuk seperti ini dikenal sebagai punden berundak, ciri tradisi megalitik Nusantara yang berfungsi sebagai tempat pemujaan leluhur. Situs Pugung Raharjo di Lampung Timur menyimpan tinggalan prasejarah hingga masa klasik.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Purbakala Pugung Raharjo — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">A pyramid from Pugung Raharjo megalithic site, Indonesia</sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">BPCB Banten</sdp:imageCredit>
@@ -2816,6 +2909,8 @@ Situsnya menjadi salah satu rujukan penting untuk memahami masa megalitik di Lam
     <sdp:Image rdf:about="https://museumsumatera.id/resource/museum/museum-purbakala-pugung-raharjo/image/2">
         <sdp:imageIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:imageIndex>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-purbakala-pugung-raharjo/2.jpg</sdp:imageUrl>
+        <sdp:imageTitle xml:lang="id">Gundukan berundak di tengah perkebunan</sdp:imageTitle>
+        <sdp:imageBackground xml:lang="id">Dari permukaan, struktur tadi tampak sebagai gundukan berundak yang dikelilingi kebun kelapa dan pematang. Situs ini juga dikaitkan dengan benteng tanah dan arca megalitik, sehingga menjadi salah satu rujukan utama untuk memahami masa prasejarah di Lampung.</sdp:imageBackground>
         <sdp:imageAlt xml:lang="id">Museum Purbakala Pugung Raharjo — foto dari Wikimedia Commons</sdp:imageAlt>
         <sdp:imageCaption xml:lang="id">Prehistoric remains include perforated stones, etched stones, stone mortars, menhirs, terraced altars, and megalithic pools. In the center of the site is the Batu Kandang, locally </sdp:imageCaption>
         <sdp:imageCredit xml:lang="id">Hilman.wu</sdp:imageCredit>

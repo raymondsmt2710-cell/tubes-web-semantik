@@ -254,6 +254,10 @@ export function buildRdf(records: MuseumRecord[]): string {
     ),
   );
   lines.push(...datatypeProperty("imageIndex", "Image", `${XSD}integer`, "urutan foto"));
+  lines.push(...datatypeProperty("imageTitle", "Image", `${XSD}string`, "judul foto"));
+  lines.push(
+    ...datatypeProperty("imageBackground", "Image", `${XSD}string`, "latar belakang foto"),
+  );
   lines.push(...datatypeProperty("imageAlt", "Image", `${XSD}string`, "teks alternatif foto"));
   lines.push(...datatypeProperty("imageCaption", "Image", `${XSD}string`, "keterangan foto"));
   lines.push(...datatypeProperty("imageCredit", "Image", `${XSD}string`, "kredit fotografer"));
@@ -448,6 +452,8 @@ export function buildRdf(records: MuseumRecord[]): string {
       );
       const fields: [string, string | null, string | null][] = [
         ["imageUrl", image.src, `${XSD}anyURI`],
+        ["imageTitle", image.title ?? null, null],
+        ["imageBackground", image.background ?? null, null],
         ["imageAlt", image.alt, null],
         ["imageCaption", image.caption, null],
         ["imageCredit", image.credit, null],
