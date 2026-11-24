@@ -94,10 +94,53 @@ export default function TentangPage() {
           <p className="mt-3 text-sm text-[--ink-soft] measure">
             Di halaman setiap museum ada bagian &ldquo;benang merah&rdquo;. Museum lain
             dipilih bila berbagi tema (+3 per tema), berada di kota yang sama (+2),
-            berada di era yang sama (+1), atau berada di bab yang bersebelahan
-            (+1). Kandidat dengan skor nol tidak ditampilkan, dan urutan seri
-            dipecah berdasarkan nama agar hasilnya tetap sama setiap kali dibuka.
+            berada di era yang sama (+1), berada di bab yang bersebelahan
+            (+1), atau memiliki relasi arsip eksplisit (+4). Kandidat dengan skor
+            nol tidak ditampilkan, dan urutan seri dipecah berdasarkan nama agar
+            hasilnya tetap sama setiap kali dibuka.
           </p>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="text-xl">Struktur ontologi</h2>
+          <div className="mt-4 space-y-3 text-sm text-[--ink-soft] measure">
+            <p>
+              Ontologi ini bukan sekadar daftar kelas. Museum dikelompokkan
+              menjadi subkelas <code className="font-mono text-xs">StateMuseum</code>,{" "}
+              <code className="font-mono text-xs">SiteMuseum</code>, dan{" "}
+              <code className="font-mono text-xs">PrivateMuseum</code> — sebuah museum
+              boleh termasuk lebih dari satu tipe. Setiap museum juga dihubungkan ke
+              entitas pendukung: <code className="font-mono text-xs">Collection</code>{" "}
+              (klasifikasi koleksi), <code className="font-mono text-xs">Facility</code>{" "}
+              (fasilitas), dan <code className="font-mono text-xs">Person</code> (pendiri).
+            </p>
+            <p>
+              Aksioma OWL yang dipakai: properti berpasangan{" "}
+              <code className="font-mono text-xs">owl:inverseOf</code> (mis.{" "}
+              <code className="font-mono text-xs">hasImage ↔ imageOfMuseum</code>),{" "}
+              properti fungsional, <code className="font-mono text-xs">owl:SymmetricProperty</code>{" "}
+              pada <code className="font-mono text-xs">relatedMuseum</code>, dan{" "}
+              <code className="font-mono text-xs">owl:Restriction</code> cardinality
+              (tepat satu provinsi dan bab, minimal satu tema per museum). Karena
+              properti yang memiliki inverse tidak menyimpan domain/range eksplisit,
+              grafnya tetap konsisten saat dijalankan melalui reasoner OWL 2 RL.
+            </p>
+          </div>
+        </section>
+
+        <section className="mt-10">
+          <h2 className="text-xl">Cara memvalidasi ontologi</h2>
+          <div className="mt-4 space-y-3 text-sm text-[--ink-soft] measure">
+            <p>
+              Buka berkas <code className="font-mono text-xs">ontology/museum-sumatera.ttl</code>{" "}
+              di Protégé dan jalankan reasoner HermiT: tidak boleh ada kelas yang
+              berwarna merah (inconsistent). Bila <code className="font-mono text-xs">robot</code>{" "}
+              tersedia, jalankan:
+            </p>
+            <pre className="overflow-x-auto border border-[--rule] bg-[--paper-2] rounded-sm p-3 font-mono text-xs">
+{`robot reason --input ontology/museum-sumatera.ttl --reasoner hermit`}
+            </pre>
+          </div>
         </section>
 
         <section className="mt-10">
