@@ -87,17 +87,40 @@ src/
 Namespace aplikasi: `sdp:` = `https://museumsumatera.id/ontology#`,
 `res:` = `https://museumsumatera.id/resource/`.
 
-- Kelas: `sdp:Museum`, `sdp:Province`, `sdp:City`, `sdp:Theme`, `sdp:Era`,
-  `sdp:Chapter`.
+- Kelas dasar: `sdp:Museum`, `sdp:Province`, `sdp:City`, `sdp:Theme`, `sdp:Era`,
+  `sdp:Chapter`, `sdp:Collection`, `sdp:Exhibit`, `sdp:Image`, `sdp:Source`.
+- **Subkelas museum:** `sdp:StateMuseum`, `sdp:SiteMuseum`, `sdp:PrivateMuseum`
+  (semua `rdfs:subClassOf sdp:Museum`). Sebuah museum boleh punya lebih dari satu
+  tipe; `StateMuseum` dan `PrivateMuseum` dibuat `owl:disjointWith`.
+- **Entitas pendukung:** `sdp:Person` (dengan subkelas `Founder`, `Curator`),
+  `sdp:Facility`, `sdp:HeritageStatus`.
 - Object property: `locatedInProvince`, `locatedInCity`, `partOfProvince`,
-  `hasTheme`, `hasEra`, `chapter`.
+  `hasTheme`, `hasEra`, `chapter`, `hasCollection`, `hasExhibit`, `hasImage`,
+  `hasSource`, `hasFacility`, `hasFounder`, `hasCurator`, `namedAfter`,
+  `relatedMuseum` (simetris), `heritageStatusOf`.
+- **Aksioma OWL:** pasangan `owl:inverseOf` (mis. `hasImage ↔ imageOfMuseum`),
+  properti fungsional (`chapter`, `locatedInCity`, `heritageStatusOf`), dan
+  `owl:Restriction` cardinality pada `Museum` (tepat 1 provinsi & bab, minimal 1
+  tema, maksimal 1 kota). Properti yang memiliki inverse **tidak** menyimpan
+  `rdfs:domain`/`rdfs:range` eksplisit agar graf konsisten di bawah OWL 2 RL.
 - Datatype property: `establishedYear` (`xsd:gYear`), `description`, `imageUrl`,
   `officialUrl`, `address`, `latitude`, `longitude`, `admissionNote`,
-  `verificationStatus`, `chapterIndex`.
+  `verificationStatus`, `chapterIndex`, `chapterTitle`, `collectionSize`
+  (`xsd:integer`), `governingBody`, `openingHours`, `collectionCategory`,
+  `facilityName`, `personName`.
 
 Setiap museum menunjuk langsung ke babnya (`sdp:chapter`). Keanggotaan bab
 sengaja tidak diturunkan dari provinsi supaya alur cerita bisa tetap utuh bila
 pembagian provinsi berubah.
+
+**Memvalidasi ontologi.** Buka `ontology/museum-sumatera.ttl` di Protégé dan
+jalankan HermiT (tidak boleh ada kelas merah = inconsistent). Bila `robot`
+tersedia: `robot reason --input ontology/museum-sumatera.ttl --reasoner hermit`.
+
+**Klasifikasi koleksi & fasilitas.** `Collection` dan `Facility` hanya ditulis
+bila sumber museum menyebutnya secara eksplisit — bukan dikarang dari tema. Karena
+itu sebagian museum memang tidak punya kategori koleksi atau daftar fasilitas, dan
+halaman menyesuaikan diri tanpa menyisakan bagian kosong.
 
 ## Cara kerja pencarian
 
@@ -151,6 +174,7 @@ Pada halaman museum, museum lain dipilih dari graf dengan bobot:
 | Relasi | Bobot |
 |---|---|
 | Tema yang sama | +3 per tema |
+| Relasi arsip eksplisit (`relatedMuseum`) | +4 |
 | Kota yang sama | +2 |
 | Era yang sama | +1 |
 | Bab bersebelahan | +1 |
