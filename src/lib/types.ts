@@ -54,6 +54,17 @@ export const VERIFICATION_STATUSES = ["terverifikasi", "perlu-verifikasi"] as co
 
 export type VerificationStatus = (typeof VERIFICATION_STATUSES)[number];
 
+/** Subklasifikasi ontologi museum; setiap museum minimal satu. */
+export const MUSEUM_TYPES = ["StateMuseum", "SiteMuseum", "PrivateMuseum"] as const;
+
+export type MuseumType = (typeof MUSEUM_TYPES)[number];
+
+export const MUSEUM_TYPE_LABELS: Record<MuseumType, string> = {
+  StateMuseum: "Museum Negeri",
+  SiteMuseum: "Museum Situs",
+  PrivateMuseum: "Museum Swasta",
+};
+
 /** Satu foto museum beserta kredit dan lisensinya. */
 export interface MuseumImage {
   /** Path lokal (mis. /images/museums/slug/1.jpg) atau URL absolut. */
@@ -108,6 +119,21 @@ export interface MuseumRecord {
   gallery?: MuseumImage[];
   /** Sumber yang dipakai untuk menyusun catatan museum. */
   sources?: SourceRef[];
+  /** Subklasifikasi ontologi; minimal satu. */
+  types?: MuseumType[];
+  /** Kategori koleksi — hanya bila sumber menyebut eksplisit. */
+  collections?: string[];
+  /** Fasilitas — hanya bila sumber menyebut eksplisit. */
+  facilities?: string[];
+  /** Nama pendiri/tokoh (string), atau null. */
+  founder?: string | null;
+  governingBody?: string | null;
+  openingHours?: string | null;
+  collectionSize?: number | null;
+  /** Status cagar budaya bila sumber menyebut; sering null. */
+  heritage?: string | null;
+  /** Slug museum terkait (relasi eksplisit); generator menulis dua arah. */
+  relatedSlugs?: string[];
 }
 
 /** Bentuk yang dipakai UI setelah query SPARQL. */
@@ -134,6 +160,15 @@ export interface MuseumDTO {
   exhibits: Exhibit[];
   gallery: MuseumImage[];
   sources: SourceRef[];
+  types?: string[];
+  collections?: string[];
+  facilities?: string[];
+  founder?: string | null;
+  governingBody?: string | null;
+  openingHours?: string | null;
+  collectionSize?: number | null;
+  heritage?: string | null;
+  relatedSlugs?: string[];
 }
 
 export interface ChapterDTO {
