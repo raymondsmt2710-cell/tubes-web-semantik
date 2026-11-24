@@ -3,13 +3,17 @@
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix geo:  <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix res:  <https://museumsumatera.id/resource/> .
 
 @prefix : <https://museumsumatera.id/ontology#> .
 
 <https://museumsumatera.id/ontology> a owl:Ontology ;
     rdfs:label "Ontologi Museum Sumatera"@id ;
-    rdfs:comment "Ontologi untuk data museum di Pulau Sumatera. Setiap properti punya satu arti; tidak ada properti bermakna ganda."@id .
+    rdfs:comment "Ontologi untuk data museum di Pulau Sumatera. Setiap properti punya satu arti; tidak ada properti bermakna ganda."@id ;
+    owl:versionInfo "1.1.0" ;
+    dcterms:created "2026-02-16"^^xsd:date ;
+    dcterms:modified "2026-02-17"^^xsd:date .
 
 # ---------------------------------------------------------------- Kelas
 
@@ -41,6 +45,65 @@ sdp:Collection a owl:Class ;
     rdfs:label "Koleksi"@id ;
     rdfs:comment "Klasifikasi koleksi yang dimiliki museum."@id .
 
+sdp:StateMuseum a owl:Class ;
+    rdfs:label "Museum Negeri"@id ;
+    rdfs:comment "Museum yang dikelola pemerintah."@id ;
+    rdfs:subClassOf sdp:Museum ;
+    owl:disjointWith sdp:PrivateMuseum .
+
+sdp:SiteMuseum a owl:Class ;
+    rdfs:label "Museum Situs"@id ;
+    rdfs:comment "Museum situs atau bangunan bersejarah."@id ;
+    rdfs:subClassOf sdp:Museum .
+
+sdp:PrivateMuseum a owl:Class ;
+    rdfs:label "Museum Swasta"@id ;
+    rdfs:comment "Museum milik yayasan atau perorangan."@id ;
+    rdfs:subClassOf sdp:Museum .
+
+sdp:Person a owl:Class ;
+    rdfs:label "Tokoh"@id ;
+    rdfs:comment "Orang yang terkait dengan museum."@id .
+
+sdp:Founder a owl:Class ;
+    rdfs:label "Pendiri"@id ;
+    rdfs:subClassOf sdp:Person .
+
+sdp:Curator a owl:Class ;
+    rdfs:label "Kurator"@id ;
+    rdfs:subClassOf sdp:Person .
+
+sdp:Facility a owl:Class ;
+    rdfs:label "Fasilitas"@id ;
+    rdfs:comment "Fasilitas yang tersedia di museum."@id .
+
+sdp:HeritageStatus a owl:Class ;
+    rdfs:label "Status Cagar Budaya"@id ;
+    rdfs:comment "Status penetapan cagar budaya."@id .
+
+# Restriction cardinality pada Museum
+sdp:Museum
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty sdp:locatedInProvince ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty sdp:chapter ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty sdp:hasTheme ;
+        owl:minCardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty sdp:locatedInCity ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+    ] .
+
 # ------------------------------------------------------- Object property
 
 sdp:locatedInProvince a owl:ObjectProperty ;
@@ -67,11 +130,6 @@ sdp:hasEra a owl:ObjectProperty ;
     rdfs:label "memiliki era"@id ;
     rdfs:domain sdp:Museum ;
     rdfs:range sdp:Era .
-
-sdp:hasCollection a owl:ObjectProperty ;
-    rdfs:label "memiliki koleksi"@id ;
-    rdfs:domain sdp:Museum ;
-    rdfs:range sdp:Collection .
 
 sdp:chapter a owl:ObjectProperty ;
     rdfs:label "berada di bab"@id ;
@@ -133,4 +191,90 @@ sdp:chapterIndex a owl:DatatypeProperty ;
 sdp:chapterTitle a owl:DatatypeProperty ;
     rdfs:label "judul bab"@id ;
     rdfs:domain sdp:Chapter ;
+    rdfs:range xsd:string .
+
+# ------------------------------------------------ Object property baru
+
+sdp:hasImage a owl:ObjectProperty ;
+    rdfs:label "memiliki foto"@id ;
+    owl:inverseOf sdp:imageOfMuseum .
+
+sdp:imageOfMuseum a owl:ObjectProperty ;
+    rdfs:label "foto milik museum"@id ;
+    owl:inverseOf sdp:hasImage .
+
+sdp:hasExhibit a owl:ObjectProperty ;
+    rdfs:label "memiliki isi pameran"@id ;
+    owl:inverseOf sdp:exhibitOfMuseum .
+
+sdp:hasSource a owl:ObjectProperty ;
+    rdfs:label "memiliki sumber acuan"@id ;
+    owl:inverseOf sdp:sourceOfMuseum .
+
+sdp:hasCollection a owl:ObjectProperty ;
+    rdfs:label "memiliki koleksi"@id ;
+    owl:inverseOf sdp:collectionOfMuseum .
+
+sdp:hasFacility a owl:ObjectProperty ;
+    rdfs:label "memiliki fasilitas"@id ;
+    owl:inverseOf sdp:facilityOfMuseum .
+
+sdp:hasFounder a owl:ObjectProperty ;
+    rdfs:label "memiliki pendiri"@id ;
+    owl:inverseOf sdp:founderOfMuseum .
+
+sdp:hasCurator a owl:ObjectProperty ;
+    rdfs:label "memiliki kurator"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:Person .
+
+sdp:namedAfter a owl:ObjectProperty ;
+    rdfs:label "dinamai menurut"@id ;
+    owl:inverseOf sdp:isNamesakeOfMuseum .
+
+sdp:heritageStatusOf a owl:ObjectProperty ;
+    rdfs:label "status cagar budaya"@id ;
+    owl:inverseOf sdp:isHeritageStatusOf ;
+    a owl:FunctionalProperty .
+
+sdp:relatedMuseum a owl:ObjectProperty , owl:SymmetricProperty ;
+    rdfs:label "museum terkait"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range sdp:Museum .
+
+# ---------------------------------------------- Datatype property baru
+
+sdp:collectionSize a owl:DatatypeProperty ;
+    rdfs:label "ukuran koleksi"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:integer .
+
+sdp:governingBody a owl:DatatypeProperty ;
+    rdfs:label "badan pengelola"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:string .
+
+sdp:openingHours a owl:DatatypeProperty ;
+    rdfs:label "jam buka"@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:string .
+
+sdp:collectionCategory a owl:DatatypeProperty ;
+    rdfs:label "kategori koleksi"@id ;
+    rdfs:domain sdp:Collection ;
+    rdfs:range xsd:string .
+
+sdp:facilityName a owl:DatatypeProperty ;
+    rdfs:label "nama fasilitas"@id ;
+    rdfs:domain sdp:Facility ;
+    rdfs:range xsd:string .
+
+sdp:personName a owl:DatatypeProperty ;
+    rdfs:label "nama tokoh"@id ;
+    rdfs:domain sdp:Person ;
+    rdfs:range xsd:string .
+
+sdp:heritageLabel a owl:DatatypeProperty ;
+    rdfs:label "label status cagar budaya"@id ;
+    rdfs:domain sdp:HeritageStatus ;
     rdfs:range xsd:string .
