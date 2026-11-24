@@ -5,9 +5,10 @@ import { cache } from "react";
 import MuseumGallery from "@/components/MuseumGallery";
 import ExhibitList from "@/components/ExhibitList";
 import SourceList from "@/components/SourceList";
-import MuseumImage from "@/components/MuseumImage";
+import SpecimenCard from "@/components/SpecimenCard";
+import KoleksiPanel from "@/components/KoleksiPanel";
+import FacilityList from "@/components/FacilityList";
 import ThreadOfRelation from "@/components/ThreadOfRelation";
-import VerificationBadge from "@/components/VerificationBadge";
 import { chapterByIndex } from "@/lib/chapters";
 import {
   attachMuseumDetail,
@@ -17,13 +18,7 @@ import {
 } from "@/lib/queries";
 import { pickRelated } from "@/lib/related";
 import { runSelect, FusekiError } from "@/lib/sparql";
-import {
-  eraLabel,
-  themeLabels,
-  yearLabel,
-  type MuseumDTO,
-  type RelatedDTO,
-} from "@/lib/types";
+import { type MuseumDTO, type RelatedDTO } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
@@ -85,15 +80,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function MetaRow({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div className="grid grid-cols-[7.5rem_1fr] gap-3 py-2.5 border-b border-[--rule] text-sm">
-      <dt className="label pt-0.5">{label}</dt>
-      <dd className="m-0 text-[--ink]">{value}</dd>
-    </div>
-  );
-}
-
 export default async function MuseumPage({ params }: PageProps) {
   const { slug } = await params;
   const result = await loadMuseum(slug);
@@ -132,7 +118,10 @@ export default async function MuseumPage({ params }: PageProps) {
   const { museum, related } = result;
   const chapter =
     museum.chapterIndex !== null ? chapterByIndex(museum.chapterIndex) : undefined;
-  const themes = themeLabels(museum.themes);
+  const archiveNumber =
+    museum.chapterIndex !== null
+      ? `${String(museum.chapterIndex).padStart(2, "0")}`
+      : undefined;
 
   return (
     <div className="min-h-screen paper-texture">
@@ -153,99 +142,32 @@ export default async function MuseumPage({ params }: PageProps) {
       </header>
 
       <main className="mx-auto max-w-4xl px-5 pt-10 pb-20">
-        <p className="label">
-          {[museum.city, museum.province].filter(Boolean).join(" · ") || "Lokasi tidak tercatat"}
-        </p>
-        <h1 className="mt-3 text-3xl sm:text-4xl max-w-2xl">{museum.name}</h1>
+        <SpecimenCard museum={museum} archiveNumber={archiveNumber} />
 
-        <div className="mt-6 flex flex-wrap items-center gap-2">
-          <VerificationBadge status={museum.verificationStatus} />
-          {themes.map((theme) => (
-            <span key={theme} className="chip">
-              {theme}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-[1.35fr_1fr]">
-          <div>
-            <MuseumImage src={museum.imageUrl} alt={`Museum ${museum.name}`} />
-
-            <section className="mt-8">
-              <h2 className="text-lg">Catatan koleksi</h2>
-              <p className="mt-3 text-[--ink-soft] leading-relaxed measure">
-                {museum.description ?? "Deskripsi museum ini belum tercatat."}
-              </p>
-            </section>
-
-            {museum.history.length > 0 && (
-              <section className="mt-10">
-                <h2 className="text-lg">Sejarah</h2>
-                <div className="mt-3 space-y-3 text-[--ink-soft] leading-relaxed measure">
-                  {museum.history.map((paragraph, index) => (
-                    <p key={index} className="m-0">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            <section className="mt-10">
-              <h2 className="text-lg">Isi pameran</h2>
-              <ExhibitList exhibits={museum.exhibits} />
-            </section>
-
-            {museum.officialUrl && (
-              <p className="mt-5 text-sm">
-                <a
-                  href={museum.officialUrl}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className="underline decoration-[--accent]"
-                >
-                  Situs resmi museum ↗
-                </a>
-              </p>
-            )}
+        {(museum.collections?.length || museum.facilities?.length) ? (
+          <div className="mt-12 grid gap-10 sm:grid-cols-2">
+            <KoleksiPanel collections={museum.collections} />
+            <FacilityList facilities={museum.facilities} />
           </div>
+        ) : null}
 
-          <aside className="sm:border-l sm:border-[--rule] sm:pl-8">
-            <h2 className="text-lg">Lembar data</h2>
-            <dl className="mt-3 border-t border-[--rule]">
-              <MetaRow label="Kota" value={museum.city ?? "Tidak tercatat"} />
-              <MetaRow label="Provinsi" value={museum.province ?? "Tidak tercatat"} />
-              <MetaRow label="Berdiri" value={yearLabel(museum.establishedYear)} />
-              <MetaRow
-                label="Tema"
-                value={themes.length > 0 ? themes.join(", ") : "Tidak tercatat"}
-              />
-              <MetaRow label="Era" value={eraLabel(museum.era)} />
-              <MetaRow label="Alamat" value={museum.address ?? "Tidak tercatat"} />
-              <MetaRow
-                label="Kunjungan"
-                value={museum.admissionNote ?? "Belum ada catatan kunjungan."}
-              />
-              {chapter && (
-                <MetaRow
-                  label="Bab"
-                  value={
-                    <Link
-                      href={`/jelajah/${chapter.index}`}
-                      className="underline decoration-[--rule]"
-                    >
-                      {chapter.label} · {chapter.title}
-                    </Link>
-                  }
-                />
-              )}
-            </dl>
-            <p className="mt-4 text-xs text-[--ink-faint] measure">
-              Data ini disusun untuk pembelajaran. Periksa jam buka dan koleksi
-              pada sumber resmi sebelum berkunjung.
-            </p>
-          </aside>
-        </div>
+        {museum.history.length > 0 && (
+          <section className="mt-12">
+            <h2 className="text-lg">Sejarah</h2>
+            <div className="mt-3 space-y-3 text-[--ink-soft] leading-relaxed measure">
+              {museum.history.map((paragraph, index) => (
+                <p key={index} className="m-0">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="mt-12">
+          <h2 className="text-lg">Isi pameran</h2>
+          <ExhibitList exhibits={museum.exhibits} />
+        </section>
 
         <MuseumGallery images={museum.gallery} museumName={museum.name} />
 

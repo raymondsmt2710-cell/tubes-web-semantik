@@ -10,6 +10,8 @@
   --rule: #d8cdb8;
   --accent: #0f766e;
   --accent-soft: #e0f2f1;
+  --gold: #a67c1f;
+  --gold-soft: #efe4c8;
 
   --font-serif: Georgia, "Times New Roman", "Noto Serif", serif;
   --font-sans: ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
@@ -29,7 +31,6 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
 }
-
 * {
   box-sizing: border-box;
 }
@@ -181,4 +182,95 @@ a:focus-visible {
   color: var(--ink-soft);
   border-radius: 999px;
   padding: 0.1rem 0.55rem;
+}
+
+/* ---------- Arsip digital museum ---------- */
+
+/* Nomor arsip besar, khas lemari katalog museum. */
+.archive-number {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 0.9;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* Lembar katalog (specimen card). */
+.specimen-card {
+  background: #fbf7ef;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03), 0 8px 24px -18px rgba(47, 42, 36, 0.5);
+}
+
+/* Bingkai foto museum; label plate. */
+.plate {
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  padding: 0.5rem;
+}
+
+.plate figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+
+/* Tabel metadata presisi. */
+.meta-table {
+  border-top: 1px solid var(--rule);
+  width: 100%;
+}
+
+.meta-table dt {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-top: 0.65rem;
+}
+
+.meta-table dd {
+  margin: 0;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.9375rem;
+}
+
+.meta-table .mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}
+
+/* Papan indeks (cover & bab). */
+.index-board {
+  border-top: 2px solid var(--ink);
+}
+
+.index-board-item {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto auto;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.05rem 0.5rem;
+  border-bottom: 1px solid var(--rule);
+  transition: background 160ms ease;
+}
+
+.index-board-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 560px) {
+  .index-board-item {
+    grid-template-columns: 3rem 1fr auto;
+    gap: 0.6rem;
+  }
+  .index-board-item .index-arrow {
+    display: none;
+  }
 }
