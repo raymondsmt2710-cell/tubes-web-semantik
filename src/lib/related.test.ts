@@ -31,7 +31,8 @@ function museum(overrides: Partial<MuseumDTO> = {}): MuseumDTO {
 }
 
 describe("scoreRelated", () => {
-  it("memberi +3 per tema yang sama", () => {    const candidate = museum({
+  it("memberi +3 per tema yang sama", () => {
+    const candidate = museum({
       slug: "x",
       themes: ["etnografi"],
       city: "Lhokseumawe",

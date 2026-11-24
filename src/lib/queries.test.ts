@@ -6,7 +6,9 @@ import {
   museumBySlugQuery,
   relatedCandidatesQuery,
   mapMuseumRow,
+  loadRowsOrNull,
 } from "./queries";
+import type { SparqlBinding } from "./sparql";
 
 describe("searchCatalogQuery", () => {
   it("menyaring provinsi di dalam SPARQL, bukan setelahnya", () => {
@@ -186,5 +188,22 @@ describe("query katalog: types via GROUP_CONCAT", () => {
     expect(q).toContain("?types");
     // tipe tidak boleh jadi pola OPTIONAL bebas di blok utama
     expect(q).not.toMatch(/\?museum\s+a\s+\?type\b/);
+  });
+});
+
+describe("loadRowsOrNull: membedakan error dari kosong", () => {
+  const map = (b: SparqlBinding) => b.x?.value ?? null;
+  it("mengembalikan array (boleh kosong) bila kueri berhasil", async () => {
+    await expect(loadRowsOrNull("q", map, () => [])).resolves.toEqual([]);
+    await expect(
+      loadRowsOrNull("q", map, () => [{ x: { type: "literal", value: "a" } }]),
+    ).resolves.toEqual(["a"]);
+  });
+  it("mengembalikan null bila kueri gagal", async () => {
+    await expect(
+      loadRowsOrNull("q", map, () => {
+        throw new Error("offline");
+      }),
+    ).resolves.toBeNull();
   });
 });

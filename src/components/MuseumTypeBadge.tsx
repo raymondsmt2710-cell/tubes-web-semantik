@@ -21,7 +21,7 @@ export default function MuseumTypeBadge({ types, className }: MuseumTypeBadgePro
         <span
           key={type}
           className="chip"
-          style={{ background: "var(--gold-soft)", borderColor: "var(--gold)", color: "#6b5010" }}
+          style={{ background: "var(--gold-soft)", borderColor: "var(--gold)", color: "var(--gold-ink)" }}
         >
           {MUSEUM_TYPE_LABELS[type]}
         </span>

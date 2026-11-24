@@ -470,6 +470,26 @@ export async function loadRows<T>(
 }
 
 /**
+ * Seperti loadRows, tetapi membedakan "kueri berhasil tapi kosong" (array) dari
+ * "kueri gagal" (null). Dipakai untuk rincian yang harus jujur terhadap graf:
+ * hasil kosong berarti data memang tidak ada, bukan alasan memakai nilai lama.
+ */
+export async function loadRowsOrNull<T>(
+  query: string,
+  map: (binding: SparqlBinding) => T | null,
+  rows?: (query: string) => SparqlBinding[],
+): Promise<T[] | null> {
+  try {
+    const bindings = rows ? rows(query) : await runSelect(query);
+    return bindings
+      .map(map)
+      .filter((item): item is T => item !== null && item !== undefined);
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Melengkapi museum dari kueri katalog dengan isi pameran, galeri, dan sumber.
  * Dipakai halaman detail; kueri katalog sendiri tidak menarik rincian ini.
  */
@@ -488,31 +508,41 @@ export async function attachMuseumDetail(
       rows,
     ),
     loadRows(museumSourcesQuery(museum.slug), mapSourceRow, rows),
-    loadRows(
+    loadRowsOrNull(
       museumCollectionsQuery(museum.slug),
       (row) => str(row, "category"),
       rows,
     ),
-    loadRows(
+    loadRowsOrNull(
       museumFacilitiesQuery(museum.slug),
       (row) => str(row, "name"),
       rows,
     ),
   ]);
 
+  // `null` = kueri gagal (mis. Fuseki mati): pakai nilai dari baris katalog.
+  // `[]` = graf memang tidak punya data: kosongkan agar penghapusan tercermin.
+  const resolveDetail = (
+    fromDetail: string[] | null,
+    fromCatalog: string[] | undefined,
+  ): string[] | undefined => {
+    if (fromDetail === null) return fromCatalog;
+    return fromDetail.length > 0 ? fromDetail : undefined;
+  };
+
   return {
     ...museum,
     exhibits,
     gallery,
     sources,
-    collections:
-      collections.filter((c): c is string => c !== null).length > 0
-        ? collections.filter((c): c is string => c !== null)
-        : museum.collections,
-    facilities:
-      facilities.filter((f): f is string => f !== null).length > 0
-        ? facilities.filter((f): f is string => f !== null)
-        : museum.facilities,
+    collections: resolveDetail(
+      collections === null ? null : collections.filter((c): c is string => c !== null),
+      museum.collections,
+    ),
+    facilities: resolveDetail(
+      facilities === null ? null : facilities.filter((f): f is string => f !== null),
+      museum.facilities,
+    ),
     imageUrl: museum.imageUrl ?? gallery[0]?.src ?? null,
   };
 }

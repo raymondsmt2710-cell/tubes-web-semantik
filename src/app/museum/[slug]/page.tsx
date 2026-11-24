@@ -9,7 +9,7 @@ import SpecimenCard from "@/components/SpecimenCard";
 import KoleksiPanel from "@/components/KoleksiPanel";
 import FacilityList from "@/components/FacilityList";
 import ThreadOfRelation from "@/components/ThreadOfRelation";
-import { chapterByIndex } from "@/lib/chapters";
+import { chapterByIndex, ROMAN } from "@/lib/chapters";
 import {
   attachMuseumDetail,
   mapMuseumRow,
@@ -118,10 +118,7 @@ export default async function MuseumPage({ params }: PageProps) {
   const { museum, related } = result;
   const chapter =
     museum.chapterIndex !== null ? chapterByIndex(museum.chapterIndex) : undefined;
-  const archiveNumber =
-    museum.chapterIndex !== null
-      ? `${String(museum.chapterIndex).padStart(2, "0")}`
-      : undefined;
+  const archiveNumber = chapter ? ROMAN[chapter.index - 1] ?? String(chapter.index) : undefined;
 
   return (
     <div className="min-h-screen paper-texture">
@@ -164,10 +161,12 @@ export default async function MuseumPage({ params }: PageProps) {
           </section>
         )}
 
-        <section className="mt-12">
-          <h2 className="text-lg">Isi pameran</h2>
-          <ExhibitList exhibits={museum.exhibits} />
-        </section>
+        {museum.exhibits.length > 0 && (
+          <section className="mt-12">
+            <h2 className="text-lg">Isi pameran</h2>
+            <ExhibitList exhibits={museum.exhibits} />
+          </section>
+        )}
 
         <MuseumGallery images={museum.gallery} museumName={museum.name} />
 

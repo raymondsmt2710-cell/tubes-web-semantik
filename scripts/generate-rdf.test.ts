@@ -256,6 +256,54 @@ describe("buildRdf: sejarah, pameran, galeri, dan sumber", () => {
   });
 });
 
+describe("buildRdf: konsistensi ontologi (aturan #1)", () => {
+  it("properti ber-owl:inverseOf tidak menyimpan rdfs:domain/range eksplisit", () => {
+    const xml = buildRdf([base]);
+    // Ambil tiap blok owl:ObjectProperty, pastikan yang punya owl:inverseOf
+    // tidak membawa rdfs:domain/rdfs:range.
+    const blocks = xml.split("<owl:ObjectProperty").slice(1);
+    for (const block of blocks) {
+      const body = block.split("</owl:ObjectProperty>")[0];
+      if (body.includes("owl:inverseOf")) {
+        expect(body, `blok inverse membawa domain/range: ${body.slice(0, 80)}`).not.toContain(
+          "rdfs:domain",
+        );
+        expect(body).not.toContain("rdfs:range");
+      }
+    }
+  });
+
+  it("tidak mendeklarasikan properti yang sama dua kali", () => {
+    const xml = buildRdf([base]);
+    const declared = [...xml.matchAll(/owl:ObjectProperty rdf:about="([^"]+)"/g)].map(
+      (m) => m[1],
+    );
+    const seen = new Set<string>();
+    for (const iri of declared) {
+      expect(seen.has(iri), `ganda: ${iri}`).toBe(false);
+      seen.add(iri);
+    }
+  });
+
+  it("setiap target owl:inverseOf dideklarasikan sebagai owl:ObjectProperty", () => {
+    const xml = buildRdf([base]);
+    const targets = [...xml.matchAll(/owl:inverseOf rdf:resource="([^"]+)"/g)].map(
+      (m) => m[1],
+    );
+    for (const target of targets) {
+      expect(xml, `target inverse tak dideklarasikan: ${target}`).toContain(
+        `owl:ObjectProperty rdf:about="${target}"`,
+      );
+    }
+  });
+
+  it("heritageStatusOf dideklarasikan Functional", () => {
+    const xml = buildRdf([base]);
+    const block = xml.split("<owl:ObjectProperty").find((b) => b.includes("heritageStatusOf"));
+    expect(block).toContain("FunctionalProperty");
+  });
+});
+
 describe("escapeXml", () => {
   it("meng-escape lima entitas XML", () => {
     expect(escapeXml(`& < > " '`)).toBe("&amp; &lt; &gt; &quot; &apos;");

@@ -42,11 +42,15 @@ function objectProperty(
   range: string,
   label: string,
   inverse?: string,
+  extraTypes: string[] = [],
 ): string[] {
   const lines = [
     `${INDENT}<owl:ObjectProperty rdf:about="${SDP}${name}">`,
     `${INDENT}    <rdfs:label xml:lang="id">${label}</rdfs:label>`,
   ];
+  for (const extra of extraTypes) {
+    lines.push(`${INDENT}    <rdf:type rdf:resource="${extra}"/>`);
+  }
   if (inverse) {
     // Properti yang punya owl:inverseOf tidak menyimpan domain/range eksplisit:
     // OWL 2 RL akan menyimpulkan kelas salah -> graf inconsistent.
@@ -244,20 +248,19 @@ export function buildRdf(records: MuseumRecord[]): string {
   // ---- Hierarki subClassOf ----
   lines.push("    <!-- Hierarki subkelas -->");
   lines.push("");
-  for (const [child, parent] of [
-    ["StateMuseum", "Museum"],
+  const subclasses: [string, string, string?][] = [
+    ["StateMuseum", "Museum", "PrivateMuseum"],
     ["SiteMuseum", "Museum"],
     ["PrivateMuseum", "Museum"],
     ["Founder", "Person"],
     ["Curator", "Person"],
-  ]) {
+  ];
+  for (const [child, parent, disjointWith] of subclasses) {
     lines.push(`${INDENT}<owl:Class rdf:about="${SDP}${child}">`);
     lines.push(`${INDENT}    <rdfs:subClassOf rdf:resource="${SDP}${parent}"/>`);
-    lines.push(
-      child === "StateMuseum"
-        ? `${INDENT}    <owl:disjointWith rdf:resource="${SDP}PrivateMuseum"/>`
-        : `${INDENT}    <!-- subkelas ${parent} -->`,
-    );
+    if (disjointWith) {
+      lines.push(`${INDENT}    <owl:disjointWith rdf:resource="${SDP}${disjointWith}"/>`);
+    }
     lines.push(`${INDENT}</owl:Class>`);
     lines.push("");
   }
@@ -292,9 +295,6 @@ export function buildRdf(records: MuseumRecord[]): string {
   );
   lines.push(...objectProperty("hasTheme", "Museum", "Theme", "memiliki tema"));
   lines.push(...objectProperty("hasEra", "Museum", "Era", "memiliki era"));
-  lines.push(
-    ...objectProperty("hasCollection", "Museum", "Collection", "memiliki koleksi"),
-  );
   lines.push(...objectProperty("hasExhibit", "Museum", "Exhibit", "memiliki isi pameran", "exhibitOfMuseum"));
   lines.push(...objectProperty("hasImage", "Museum", "Image", "memiliki foto", "imageOfMuseum"));
   lines.push(...objectProperty("hasSource", "Museum", "Source", "memiliki sumber acuan", "sourceOfMuseum"));
@@ -314,7 +314,7 @@ export function buildRdf(records: MuseumRecord[]): string {
   lines.push(
     ...objectProperty("namedAfter", "Museum", "Person", "dinamai menurut", "isNamesakeOfMuseum"),
   );
-  lines.push(...objectProperty("heritageStatusOf", "Museum", "HeritageStatus", "status cagar budaya", "isHeritageStatusOf"));
+  lines.push(...objectProperty("heritageStatusOf", "Museum", "HeritageStatus", "status cagar budaya", "isHeritageStatusOf", ["http://www.w3.org/2002/07/owl#FunctionalProperty"]));
   // relatedMuseum simetris: generator menulis dua arah.
   lines.push(`${INDENT}<owl:ObjectProperty rdf:about="${SDP}relatedMuseum">`);
   lines.push(`${INDENT}    <rdfs:label xml:lang="id">museum terkait</rdfs:label>`);
@@ -323,11 +323,25 @@ export function buildRdf(records: MuseumRecord[]): string {
   lines.push(`${INDENT}    <rdfs:range rdf:resource="${SDP}Museum"/>`);
   lines.push(`${INDENT}</owl:ObjectProperty>`);
   lines.push("");
-  // Properti inverse (tidak dipakai sebagai subjek, hanya deklarasi inverse).
-  lines.push(`${INDENT}<owl:ObjectProperty rdf:about="${SDP}imageOfMuseum">`);
-  lines.push(`${INDENT}    <rdfs:label xml:lang="id">foto milik museum</rdfs:label>`);
-  lines.push(`${INDENT}    <owl:inverseOf rdf:resource="${SDP}hasImage"/>`);
-  lines.push(`${INDENT}</owl:ObjectProperty>`, "");
+  // Deklarasi eksplisit setiap properti inverse (kebalikan has*), supaya
+  // owl:inverseOf menunjuk properti yang benar-benar bertipe ObjectProperty.
+  const inversePairs: [string, string][] = [
+    ["imageOfMuseum", "hasImage"],
+    ["exhibitOfMuseum", "hasExhibit"],
+    ["sourceOfMuseum", "hasSource"],
+    ["collectionOfMuseum", "hasCollection"],
+    ["facilityOfMuseum", "hasFacility"],
+    ["founderOfMuseum", "hasFounder"],
+    ["isNamesakeOfMuseum", "namedAfter"],
+    ["isHeritageStatusOf", "heritageStatusOf"],
+  ];
+  for (const [inverseName, forward] of inversePairs) {
+    lines.push(`${INDENT}<owl:ObjectProperty rdf:about="${SDP}${inverseName}">`);
+    lines.push(`${INDENT}    <rdfs:label xml:lang="id">kebalikan ${forward}</rdfs:label>`);
+    lines.push(`${INDENT}    <owl:inverseOf rdf:resource="${SDP}${forward}"/>`);
+    lines.push(`${INDENT}</owl:ObjectProperty>`);
+    lines.push("");
+  }
 
   lines.push("    <!-- Datatype property -->");
   lines.push("");
@@ -710,12 +724,12 @@ export function buildRdf(records: MuseumRecord[]): string {
 
     if (record.founder) {
       lines.push(
-        `${INDENT}<sdp:Person rdf:about="${RES}museum/${record.slug}/founder/1">`,
+        `${INDENT}<sdp:Founder rdf:about="${RES}museum/${record.slug}/founder/1">`,
       );
       lines.push(
         `${INDENT}    <sdp:personName xml:lang="id">${escapeXml(record.founder)}</sdp:personName>`,
       );
-      lines.push(`${INDENT}</sdp:Person>`);
+      lines.push(`${INDENT}</sdp:Founder>`);
       lines.push("");
     }
   }

@@ -109,22 +109,18 @@
 
     <owl:Class rdf:about="https://museumsumatera.id/ontology#SiteMuseum">
         <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Museum"/>
-        <!-- subkelas Museum -->
     </owl:Class>
 
     <owl:Class rdf:about="https://museumsumatera.id/ontology#PrivateMuseum">
         <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Museum"/>
-        <!-- subkelas Museum -->
     </owl:Class>
 
     <owl:Class rdf:about="https://museumsumatera.id/ontology#Founder">
         <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Person"/>
-        <!-- subkelas Person -->
     </owl:Class>
 
     <owl:Class rdf:about="https://museumsumatera.id/ontology#Curator">
         <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Person"/>
-        <!-- subkelas Person -->
     </owl:Class>
 
     <!-- Restriction cardinality pada Museum -->
@@ -188,12 +184,6 @@
         <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Era"/>
     </owl:ObjectProperty>
 
-    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasCollection">
-        <rdfs:label xml:lang="id">memiliki koleksi</rdfs:label>
-        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
-        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Collection"/>
-    </owl:ObjectProperty>
-
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasExhibit">
         <rdfs:label xml:lang="id">memiliki isi pameran</rdfs:label>
         <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#exhibitOfMuseum"/>
@@ -243,6 +233,7 @@
 
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#heritageStatusOf">
         <rdfs:label xml:lang="id">status cagar budaya</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#isHeritageStatusOf"/>
     </owl:ObjectProperty>
 
@@ -254,8 +245,43 @@
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#imageOfMuseum">
-        <rdfs:label xml:lang="id">foto milik museum</rdfs:label>
+        <rdfs:label xml:lang="id">kebalikan hasImage</rdfs:label>
         <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#hasImage"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#exhibitOfMuseum">
+        <rdfs:label xml:lang="id">kebalikan hasExhibit</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#hasExhibit"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#sourceOfMuseum">
+        <rdfs:label xml:lang="id">kebalikan hasSource</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#hasSource"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#collectionOfMuseum">
+        <rdfs:label xml:lang="id">kebalikan hasCollection</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#hasCollection"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#facilityOfMuseum">
+        <rdfs:label xml:lang="id">kebalikan hasFacility</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#hasFacility"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#founderOfMuseum">
+        <rdfs:label xml:lang="id">kebalikan hasFounder</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#hasFounder"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#isNamesakeOfMuseum">
+        <rdfs:label xml:lang="id">kebalikan namedAfter</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#namedAfter"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#isHeritageStatusOf">
+        <rdfs:label xml:lang="id">kebalikan heritageStatusOf</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#heritageStatusOf"/>
     </owl:ObjectProperty>
 
     <!-- Datatype property -->
