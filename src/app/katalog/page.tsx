@@ -27,7 +27,7 @@ export default function KatalogPage() {
       </header>
 
       <main className="mx-auto max-w-4xl px-5 pt-12 pb-20">
-        <p className="label">Katalog</p>
+        <p className="label">Indeks arsip · Katalog</p>
         <h1 className="display mt-3 text-3xl sm:text-4xl">
           Seluruh museum, satu arsip
         </h1>

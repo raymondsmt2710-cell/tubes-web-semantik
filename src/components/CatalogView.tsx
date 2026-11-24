@@ -201,6 +201,7 @@ export default function CatalogView() {
           <>
             <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[--rule] pb-2">
               <p className="text-sm">
+                <span className="label">Indeks arsip</span>{" "}
                 <span className="font-serif text-lg">{state.data.total}</span> museum
                 {params.q ? ` untuk “${params.q}”` : ""}
               </p>
