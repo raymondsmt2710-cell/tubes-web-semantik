@@ -36,15 +36,27 @@ function classBlock(name: string, label: string, comment: string): string[] {
   ];
 }
 
-function objectProperty(name: string, domain: string, range: string, label: string): string[] {
-  return [
+function objectProperty(
+  name: string,
+  domain: string,
+  range: string,
+  label: string,
+  inverse?: string,
+): string[] {
+  const lines = [
     `${INDENT}<owl:ObjectProperty rdf:about="${SDP}${name}">`,
     `${INDENT}    <rdfs:label xml:lang="id">${label}</rdfs:label>`,
-    `${INDENT}    <rdfs:domain rdf:resource="${SDP}${domain}"/>`,
-    `${INDENT}    <rdfs:range rdf:resource="${SDP}${range}"/>`,
-    `${INDENT}</owl:ObjectProperty>`,
-    "",
   ];
+  if (inverse) {
+    // Properti yang punya owl:inverseOf tidak menyimpan domain/range eksplisit:
+    // OWL 2 RL akan menyimpulkan kelas salah -> graf inconsistent.
+    lines.push(`${INDENT}    <owl:inverseOf rdf:resource="${SDP}${inverse}"/>`);
+  } else {
+    lines.push(`${INDENT}    <rdfs:domain rdf:resource="${SDP}${domain}"/>`);
+    lines.push(`${INDENT}    <rdfs:range rdf:resource="${SDP}${range}"/>`);
+  }
+  lines.push(`${INDENT}</owl:ObjectProperty>`, "");
+  return lines;
 }
 
 function datatypeProperty(
@@ -160,9 +172,26 @@ export function validateRecords(records: MuseumRecord[]): void {
   }
 }
 
+/**
+ * Mengumpulkan semua museum terkait untuk satu museum, DUA ARAH. Untuk setiap
+ * pasangan (A,B) di relatedSlugs, baik A maupun B mendapat relatedMuseum ke
+ * pasangannya, supaya grafnya simetris walau Fuseki tidak memakai reasoner.
+ */
+function allRelatedFor(
+  slug: string,
+  records: MuseumRecord[],
+  ownTargets: Set<string>,
+): Set<string> {
+  const result = new Set<string>(ownTargets);
+  for (const record of records) {
+    if (record.slug === slug) continue;
+    if ((record.relatedSlugs ?? []).includes(slug)) result.add(record.slug);
+  }
+  return result;
+}
+
 export function buildRdf(records: MuseumRecord[]): string {
   validateRecords(records);
-
   const lines: string[] = [];
   lines.push('<?xml version="1.0" encoding="UTF-8"?>');
   lines.push("<rdf:RDF");
@@ -195,6 +224,62 @@ export function buildRdf(records: MuseumRecord[]): string {
   lines.push(
     ...classBlock("Source", "Sumber", "Rujukan yang dipakai untuk menyusun catatan museum."),
   );
+  lines.push(
+    ...classBlock("StateMuseum", "Museum Negeri", "Museum yang dikelola pemerintah."),
+  );
+  lines.push(
+    ...classBlock("SiteMuseum", "Museum Situs", "Museum situs/cagar atau bangunan bersejarah."),
+  );
+  lines.push(
+    ...classBlock("PrivateMuseum", "Museum Swasta", "Museum milik yayasan atau perorangan."),
+  );
+  lines.push(...classBlock("Person", "Tokoh", "Orang yang terkait dengan museum."));
+  lines.push(...classBlock("Founder", "Pendiri", "Tokoh pendiri museum."));
+  lines.push(...classBlock("Curator", "Kurator", "Tokoh yang mengelola museum."));
+  lines.push(...classBlock("Facility", "Fasilitas", "Fasilitas yang tersedia di museum."));
+  lines.push(
+    ...classBlock("HeritageStatus", "Status Cagar Budaya", "Status penetapan cagar budaya."),
+  );
+
+  // ---- Hierarki subClassOf ----
+  lines.push("    <!-- Hierarki subkelas -->");
+  lines.push("");
+  for (const [child, parent] of [
+    ["StateMuseum", "Museum"],
+    ["SiteMuseum", "Museum"],
+    ["PrivateMuseum", "Museum"],
+    ["Founder", "Person"],
+    ["Curator", "Person"],
+  ]) {
+    lines.push(`${INDENT}<owl:Class rdf:about="${SDP}${child}">`);
+    lines.push(`${INDENT}    <rdfs:subClassOf rdf:resource="${SDP}${parent}"/>`);
+    lines.push(
+      child === "StateMuseum"
+        ? `${INDENT}    <owl:disjointWith rdf:resource="${SDP}PrivateMuseum"/>`
+        : `${INDENT}    <!-- subkelas ${parent} -->`,
+    );
+    lines.push(`${INDENT}</owl:Class>`);
+    lines.push("");
+  }
+
+  // ---- Restriction cardinality pada Museum ----
+  const restriction = (property: string, kind: string, n: number): string[] => [
+    `${INDENT}<rdfs:subClassOf>`,
+    `${INDENT}    <owl:Restriction>`,
+    `${INDENT}        <owl:onProperty rdf:resource="${SDP}${property}"/>`,
+    `${INDENT}        <owl:${kind} rdf:datatype="${XSD}nonNegativeInteger">${n}</owl:${kind}>`,
+    `${INDENT}    </owl:Restriction>`,
+    `${INDENT}</rdfs:subClassOf>`,
+  ];
+  lines.push("    <!-- Restriction cardinality pada Museum -->");
+  lines.push("");
+  lines.push(`${INDENT}<owl:Class rdf:about="${SDP}Museum">`);
+  lines.push(...restriction("locatedInProvince", "cardinality", 1));
+  lines.push(...restriction("chapter", "cardinality", 1));
+  lines.push(...restriction("hasTheme", "minCardinality", 1));
+  lines.push(...restriction("locatedInCity", "maxCardinality", 1));
+  lines.push(`${INDENT}</owl:Class>`);
+  lines.push("");
 
   lines.push("    <!-- Object property -->");
   lines.push("");
@@ -210,10 +295,39 @@ export function buildRdf(records: MuseumRecord[]): string {
   lines.push(
     ...objectProperty("hasCollection", "Museum", "Collection", "memiliki koleksi"),
   );
-  lines.push(...objectProperty("hasExhibit", "Museum", "Exhibit", "memiliki isi pameran"));
-  lines.push(...objectProperty("hasImage", "Museum", "Image", "memiliki foto"));
-  lines.push(...objectProperty("hasSource", "Museum", "Source", "memiliki sumber acuan"));
+  lines.push(...objectProperty("hasExhibit", "Museum", "Exhibit", "memiliki isi pameran", "exhibitOfMuseum"));
+  lines.push(...objectProperty("hasImage", "Museum", "Image", "memiliki foto", "imageOfMuseum"));
+  lines.push(...objectProperty("hasSource", "Museum", "Source", "memiliki sumber acuan", "sourceOfMuseum"));
   lines.push(...objectProperty("chapter", "Museum", "Chapter", "berada di bab"));
+  lines.push(
+    ...objectProperty("hasCollection", "Museum", "Collection", "memiliki koleksi", "collectionOfMuseum"),
+  );
+  lines.push(
+    ...objectProperty("hasFacility", "Museum", "Facility", "memiliki fasilitas", "facilityOfMuseum"),
+  );
+  lines.push(
+    ...objectProperty("hasFounder", "Museum", "Person", "memiliki pendiri", "founderOfMuseum"),
+  );
+  lines.push(
+    ...objectProperty("hasCurator", "Museum", "Person", "memiliki kurator"),
+  );
+  lines.push(
+    ...objectProperty("namedAfter", "Museum", "Person", "dinamai menurut", "isNamesakeOfMuseum"),
+  );
+  lines.push(...objectProperty("heritageStatusOf", "Museum", "HeritageStatus", "status cagar budaya", "isHeritageStatusOf"));
+  // relatedMuseum simetris: generator menulis dua arah.
+  lines.push(`${INDENT}<owl:ObjectProperty rdf:about="${SDP}relatedMuseum">`);
+  lines.push(`${INDENT}    <rdfs:label xml:lang="id">museum terkait</rdfs:label>`);
+  lines.push(`${INDENT}    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>`);
+  lines.push(`${INDENT}    <rdfs:domain rdf:resource="${SDP}Museum"/>`);
+  lines.push(`${INDENT}    <rdfs:range rdf:resource="${SDP}Museum"/>`);
+  lines.push(`${INDENT}</owl:ObjectProperty>`);
+  lines.push("");
+  // Properti inverse (tidak dipakai sebagai subjek, hanya deklarasi inverse).
+  lines.push(`${INDENT}<owl:ObjectProperty rdf:about="${SDP}imageOfMuseum">`);
+  lines.push(`${INDENT}    <rdfs:label xml:lang="id">foto milik museum</rdfs:label>`);
+  lines.push(`${INDENT}    <owl:inverseOf rdf:resource="${SDP}hasImage"/>`);
+  lines.push(`${INDENT}</owl:ObjectProperty>`, "");
 
   lines.push("    <!-- Datatype property -->");
   lines.push("");
@@ -286,6 +400,27 @@ export function buildRdf(records: MuseumRecord[]): string {
   );
   lines.push(
     ...datatypeProperty("chapterTitle", "Chapter", `${XSD}string`, "judul bab"),
+  );
+  lines.push(
+    ...datatypeProperty("collectionSize", "Museum", `${XSD}integer`, "ukuran koleksi"),
+  );
+  lines.push(
+    ...datatypeProperty("governingBody", "Museum", `${XSD}string`, "badan pengelola"),
+  );
+  lines.push(
+    ...datatypeProperty("openingHours", "Museum", `${XSD}string`, "jam buka"),
+  );
+  lines.push(
+    ...datatypeProperty("collectionCategory", "Collection", `${XSD}string`, "kategori koleksi"),
+  );
+  lines.push(
+    ...datatypeProperty("facilityName", "Facility", `${XSD}string`, "nama fasilitas"),
+  );
+  lines.push(
+    ...datatypeProperty("personName", "Person", `${XSD}string`, "nama tokoh"),
+  );
+  lines.push(
+    ...datatypeProperty("heritageLabel", "HeritageStatus", `${XSD}string`, "label status cagar budaya"),
   );
 
   // ---- Instance provinsi ----
@@ -421,6 +556,49 @@ export function buildRdf(records: MuseumRecord[]): string {
         `${INDENT}    <sdp:hasSource rdf:resource="${RES}museum/${record.slug}/source/${index + 1}"/>`,
       );
     }
+    // Tipe turunan (StateMuseum/SiteMuseum/PrivateMuseum)
+    for (const museumType of record.types ?? []) {
+      lines.push(`${INDENT}    <rdf:type rdf:resource="${SDP}${museumType}"/>`);
+    }
+    // Tautan entitas pendukung
+    for (const [index] of (record.collections ?? []).entries()) {
+      lines.push(
+        `${INDENT}    <sdp:hasCollection rdf:resource="${RES}museum/${record.slug}/collection/${index + 1}"/>`,
+      );
+    }
+    for (const [index] of (record.facilities ?? []).entries()) {
+      lines.push(
+        `${INDENT}    <sdp:hasFacility rdf:resource="${RES}museum/${record.slug}/facility/${index + 1}"/>`,
+      );
+    }
+    if (record.founder) {
+      lines.push(
+        `${INDENT}    <sdp:hasFounder rdf:resource="${RES}museum/${record.slug}/founder/1"/>`,
+      );
+    }
+    // relatedMuseum dua arah (simetris)
+    const relatedTargets = new Set<string>();
+    for (const targetSlug of record.relatedSlugs ?? []) {
+      if (targetSlug !== record.slug) relatedTargets.add(targetSlug);
+    }
+    for (const slug of allRelatedFor(record.slug, records, relatedTargets)) {
+      lines.push(`${INDENT}    <sdp:relatedMuseum rdf:resource="${RES}museum/${slug}"/>`);
+    }
+    if (record.collectionSize !== null && record.collectionSize !== undefined) {
+      lines.push(
+        `${INDENT}    <sdp:collectionSize rdf:datatype="${XSD}integer">${record.collectionSize}</sdp:collectionSize>`,
+      );
+    }
+    if (record.governingBody) {
+      lines.push(
+        `${INDENT}    <sdp:governingBody xml:lang="id">${escapeXml(record.governingBody)}</sdp:governingBody>`,
+      );
+    }
+    if (record.openingHours) {
+      lines.push(
+        `${INDENT}    <sdp:openingHours xml:lang="id">${escapeXml(record.openingHours)}</sdp:openingHours>`,
+      );
+    }
     const heroImage = record.imageUrl ?? gallery[0]?.src ?? null;
     if (heroImage) {
       lines.push(
@@ -505,6 +683,39 @@ export function buildRdf(records: MuseumRecord[]): string {
         `${INDENT}    <sdp:sourceUrl rdf:datatype="${XSD}anyURI">${escapeXml(source.url)}</sdp:sourceUrl>`,
       );
       lines.push(`${INDENT}</sdp:Source>`);
+      lines.push("");
+    }
+
+    for (const [index, category] of (record.collections ?? []).entries()) {
+      lines.push(
+        `${INDENT}<sdp:Collection rdf:about="${RES}museum/${record.slug}/collection/${index + 1}">`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:collectionCategory xml:lang="id">${escapeXml(category)}</sdp:collectionCategory>`,
+      );
+      lines.push(`${INDENT}</sdp:Collection>`);
+      lines.push("");
+    }
+
+    for (const [index, facility] of (record.facilities ?? []).entries()) {
+      lines.push(
+        `${INDENT}<sdp:Facility rdf:about="${RES}museum/${record.slug}/facility/${index + 1}">`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:facilityName xml:lang="id">${escapeXml(facility)}</sdp:facilityName>`,
+      );
+      lines.push(`${INDENT}</sdp:Facility>`);
+      lines.push("");
+    }
+
+    if (record.founder) {
+      lines.push(
+        `${INDENT}<sdp:Person rdf:about="${RES}museum/${record.slug}/founder/1">`,
+      );
+      lines.push(
+        `${INDENT}    <sdp:personName xml:lang="id">${escapeXml(record.founder)}</sdp:personName>`,
+      );
+      lines.push(`${INDENT}</sdp:Person>`);
       lines.push("");
     }
   }

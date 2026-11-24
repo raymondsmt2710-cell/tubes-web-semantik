@@ -261,3 +261,48 @@ describe("escapeXml", () => {
     expect(escapeXml(`& < > " '`)).toBe("&amp; &lt; &gt; &quot; &apos;");
   });
 });
+
+describe("buildRdf: ontologi mendalam", () => {
+  it("mendeklarasikan subkelas Museum & Person, inverse, dan restriction", () => {
+    const xml = buildRdf([base]);
+    expect(xml).toContain("#StateMuseum\">");
+    expect(xml).toContain("#SiteMuseum\">");
+    expect(xml).toContain("#PrivateMuseum\">");
+    expect(xml).toContain("rdfs:subClassOf");
+    expect(xml).toContain("owl:inverseOf");
+    expect(xml).toContain("owl:Restriction");
+    expect(xml).toContain("owl:onProperty");
+  });
+
+  it("menulis tipe turunan pada instance museum", () => {
+    const xml = buildRdf([{ ...base, types: ["StateMuseum", "SiteMuseum"] }]);
+    expect(xml).toContain(`/ontology#StateMuseum`);
+    expect(xml).toContain(`/ontology#SiteMuseum`);
+  });
+
+  it("menulis relatedMuseum dua arah dari relatedSlugs", () => {
+    const a: MuseumRecord = { ...base, slug: "museum-a", city: "Kota A", relatedSlugs: ["museum-b"] };
+    const b: MuseumRecord = { ...base, slug: "museum-b", city: "Kota B" };
+    const xml = buildRdf([a, b]);
+    // a→b dan b→a
+    expect(xml).toContain(`<sdp:relatedMuseum rdf:resource="${RES}museum/museum-b"/>`);
+    expect(xml).toContain(`<sdp:relatedMuseum rdf:resource="${RES}museum/museum-a"/>`);
+  });
+
+  it("menulis Collection hanya bila data menyebut koleksi", () => {
+    const withCol = buildRdf([{ ...base, collections: ["etnografika"] }]);
+    expect(withCol).toContain(`<sdp:Collection rdf:about="${RES}museum/museum-uji/collection/1">`);
+    expect(withCol).toContain("etnografika");
+
+    const withoutCol = buildRdf([base]);
+    expect(withoutCol).not.toContain("<sdp:Collection rdf:about=");
+  });
+
+  it("menulis collectionSize sebagai xsd:integer, bukan gYear", () => {
+    const xml = buildRdf([{ ...base, collectionSize: 6038 }]);
+    expect(xml).toContain(
+      'rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6038<',
+    );
+    expect(xml).not.toContain("#gYear\">6038");
+  });
+});

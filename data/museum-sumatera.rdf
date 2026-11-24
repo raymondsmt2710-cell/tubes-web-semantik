@@ -60,6 +60,102 @@
         <rdfs:comment xml:lang="id">Rujukan yang dipakai untuk menyusun catatan museum.</rdfs:comment>
     </owl:Class>
 
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#StateMuseum">
+        <rdfs:label xml:lang="id">Museum Negeri</rdfs:label>
+        <rdfs:comment xml:lang="id">Museum yang dikelola pemerintah.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#SiteMuseum">
+        <rdfs:label xml:lang="id">Museum Situs</rdfs:label>
+        <rdfs:comment xml:lang="id">Museum situs/cagar atau bangunan bersejarah.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#PrivateMuseum">
+        <rdfs:label xml:lang="id">Museum Swasta</rdfs:label>
+        <rdfs:comment xml:lang="id">Museum milik yayasan atau perorangan.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Person">
+        <rdfs:label xml:lang="id">Tokoh</rdfs:label>
+        <rdfs:comment xml:lang="id">Orang yang terkait dengan museum.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Founder">
+        <rdfs:label xml:lang="id">Pendiri</rdfs:label>
+        <rdfs:comment xml:lang="id">Tokoh pendiri museum.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Curator">
+        <rdfs:label xml:lang="id">Kurator</rdfs:label>
+        <rdfs:comment xml:lang="id">Tokoh yang mengelola museum.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Facility">
+        <rdfs:label xml:lang="id">Fasilitas</rdfs:label>
+        <rdfs:comment xml:lang="id">Fasilitas yang tersedia di museum.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#HeritageStatus">
+        <rdfs:label xml:lang="id">Status Cagar Budaya</rdfs:label>
+        <rdfs:comment xml:lang="id">Status penetapan cagar budaya.</rdfs:comment>
+    </owl:Class>
+
+    <!-- Hierarki subkelas -->
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#StateMuseum">
+        <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <owl:disjointWith rdf:resource="https://museumsumatera.id/ontology#PrivateMuseum"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#SiteMuseum">
+        <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <!-- subkelas Museum -->
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#PrivateMuseum">
+        <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <!-- subkelas Museum -->
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Founder">
+        <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Person"/>
+        <!-- subkelas Person -->
+    </owl:Class>
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Curator">
+        <rdfs:subClassOf rdf:resource="https://museumsumatera.id/ontology#Person"/>
+        <!-- subkelas Person -->
+    </owl:Class>
+
+    <!-- Restriction cardinality pada Museum -->
+
+    <owl:Class rdf:about="https://museumsumatera.id/ontology#Museum">
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty rdf:resource="https://museumsumatera.id/ontology#locatedInProvince"/>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty rdf:resource="https://museumsumatera.id/ontology#chapter"/>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty rdf:resource="https://museumsumatera.id/ontology#hasTheme"/>
+            <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minCardinality>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty rdf:resource="https://museumsumatera.id/ontology#locatedInCity"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    </owl:Class>
+
     <!-- Object property -->
 
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#locatedInProvince">
@@ -100,26 +196,66 @@
 
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasExhibit">
         <rdfs:label xml:lang="id">memiliki isi pameran</rdfs:label>
-        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
-        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Exhibit"/>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#exhibitOfMuseum"/>
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasImage">
         <rdfs:label xml:lang="id">memiliki foto</rdfs:label>
-        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
-        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Image"/>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#imageOfMuseum"/>
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasSource">
         <rdfs:label xml:lang="id">memiliki sumber acuan</rdfs:label>
-        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
-        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Source"/>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#sourceOfMuseum"/>
     </owl:ObjectProperty>
 
     <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#chapter">
         <rdfs:label xml:lang="id">berada di bab</rdfs:label>
         <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
         <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Chapter"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasCollection">
+        <rdfs:label xml:lang="id">memiliki koleksi</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#collectionOfMuseum"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasFacility">
+        <rdfs:label xml:lang="id">memiliki fasilitas</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#facilityOfMuseum"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasFounder">
+        <rdfs:label xml:lang="id">memiliki pendiri</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#founderOfMuseum"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#hasCurator">
+        <rdfs:label xml:lang="id">memiliki kurator</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Person"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#namedAfter">
+        <rdfs:label xml:lang="id">dinamai menurut</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#isNamesakeOfMuseum"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#heritageStatusOf">
+        <rdfs:label xml:lang="id">status cagar budaya</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#isHeritageStatusOf"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#relatedMuseum">
+        <rdfs:label xml:lang="id">museum terkait</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="https://museumsumatera.id/ontology#imageOfMuseum">
+        <rdfs:label xml:lang="id">foto milik museum</rdfs:label>
+        <owl:inverseOf rdf:resource="https://museumsumatera.id/ontology#hasImage"/>
     </owl:ObjectProperty>
 
     <!-- Datatype property -->
@@ -283,6 +419,48 @@
     <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#chapterTitle">
         <rdfs:label xml:lang="id">judul bab</rdfs:label>
         <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Chapter"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#collectionSize">
+        <rdfs:label xml:lang="id">ukuran koleksi</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#governingBody">
+        <rdfs:label xml:lang="id">badan pengelola</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#openingHours">
+        <rdfs:label xml:lang="id">jam buka</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Museum"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#collectionCategory">
+        <rdfs:label xml:lang="id">kategori koleksi</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Collection"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#facilityName">
+        <rdfs:label xml:lang="id">nama fasilitas</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Facility"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#personName">
+        <rdfs:label xml:lang="id">nama tokoh</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="https://museumsumatera.id/ontology#heritageLabel">
+        <rdfs:label xml:lang="id">label status cagar budaya</rdfs:label>
+        <rdfs:domain rdf:resource="https://museumsumatera.id/ontology#HeritageStatus"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
 
@@ -557,6 +735,10 @@ Pada 1969 museum dipindahkan ke Jalan Sultan Alaidin Mahmudsyah atas prakarsa T.
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-aceh/exhibit/4"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-aceh/exhibit/5"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-aceh/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
+        <sdp:hasCollection rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-aceh/collection/1"/>
+        <sdp:hasCollection rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-aceh/collection/2"/>
+        <sdp:collectionSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6038</sdp:collectionSize>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-aceh/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -636,6 +818,14 @@ Pada 1969 museum dipindahkan ke Jalan Sultan Alaidin Mahmudsyah atas prakarsa T.
         <sdp:sourceUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://id.wikipedia.org/wiki/Museum_Aceh</sdp:sourceUrl>
     </sdp:Source>
 
+    <sdp:Collection rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-aceh/collection/1">
+        <sdp:collectionCategory xml:lang="id">etnografika</sdp:collectionCategory>
+    </sdp:Collection>
+
+    <sdp:Collection rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-aceh/collection/2">
+        <sdp:collectionCategory xml:lang="id">filologika</sdp:collectionCategory>
+    </sdp:Collection>
+
     <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-tsunami-aceh">
         <rdfs:label xml:lang="id">Museum Tsunami Aceh</rdfs:label>
         <sdp:description xml:lang="id">Dibangun sebagai peringatan bencana tsunami 26 Desember 2004. Lorong masuknya berbentuk gelombang, dan ruang pamer berisi foto, benda peninggalan, serta kisah penyintas yang disusun sebagai ruang refleksi.</sdp:description>
@@ -660,6 +850,7 @@ Pembangunannya dimulai pada 2008 dengan dana bantuan negara-negara donor yang di
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-tsunami-aceh/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-tsunami-aceh/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-tsunami-aceh/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tsunami-aceh/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -756,6 +947,7 @@ Rumah aslinya dibakar Belanda pada 1896; yang tersisa hanya pondasi. Bangunan ya
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-cut-nyak-dhien/exhibit/4"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-cut-nyak-dhien/exhibit/5"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-cut-nyak-dhien/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-cut-nyak-dhien/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -857,6 +1049,7 @@ Koleksi di kawasan situs berpusat pada tinggalan Samudera Pasai: fragmen batu ni
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-malikussaleh/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-malikussaleh/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-malikussaleh/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-malikussaleh/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -946,6 +1139,11 @@ Bangunannya menempati lahan sekitar 10.468 m² dengan gedung induk dua lantai ya
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
+        <sdp:hasFacility rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/facility/1"/>
+        <sdp:hasFacility rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/facility/2"/>
+        <sdp:hasFacility rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/facility/3"/>
+        <sdp:collectionSize rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6799</sdp:collectionSize>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-utara/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1019,6 +1217,18 @@ Bangunannya menempati lahan sekitar 10.468 m² dengan gedung induk dua lantai ya
         <sdp:sourceUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://id.wikipedia.org/wiki/Museum_Sumatera_Utara</sdp:sourceUrl>
     </sdp:Source>
 
+    <sdp:Facility rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/facility/1">
+        <sdp:facilityName xml:lang="id">perpustakaan</sdp:facilityName>
+    </sdp:Facility>
+
+    <sdp:Facility rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/facility/2">
+        <sdp:facilityName xml:lang="id">ruang mikro film</sdp:facilityName>
+    </sdp:Facility>
+
+    <sdp:Facility rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-utara/facility/3">
+        <sdp:facilityName xml:lang="id">ruang audio visual</sdp:facilityName>
+    </sdp:Facility>
+
     <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo">
         <rdfs:label xml:lang="id">Museum Huta Bolon Simanindo</rdfs:label>
         <sdp:description xml:lang="id">Kompleks rumah adat Batak Toba di tepi Danau Toba yang difungsikan sebagai museum. Pengunjung dapat melihat rumah panggung, lumbung padi, dan pertunjukan tari Sigale-gale.</sdp:description>
@@ -1042,6 +1252,7 @@ Kompleks ini terdiri atas dua susun rumah adat yang saling berhadapan, masing-ma
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-huta-bolon-simanindo/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-huta-bolon-simanindo/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1138,6 +1349,8 @@ Museum ini dikenal juga sebagai Museum Batak. Selain ruang pameran, kawasannya m
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#PrivateMuseum"/>
+        <sdp:hasFacility rdf:resource="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/facility/1"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tb-silalahi-center/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1205,6 +1418,10 @@ Museum ini dikenal juga sebagai Museum Batak. Selain ruang pameran, kawasannya m
         <sdp:sourceUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File:Front_view_of_T.B._Silalahi_Building,_Batak_Cultural_Center.jpg</sdp:sourceUrl>
     </sdp:Source>
 
+    <sdp:Facility rdf:about="https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/facility/1">
+        <sdp:facilityName xml:lang="id">ruang audiovisual</sdp:facilityName>
+    </sdp:Facility>
+
     <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii">
         <rdfs:label xml:lang="id">Museum Sisingamangaraja XII</rdfs:label>
         <sdp:description xml:lang="id">Mengisahkan perlawanan Sisingamangaraja XII terhadap pemerintahan kolonial Belanda di Tanah Batak. Koleksinya mencakup senjata tradisional, foto sejarah, dan benda pribadi keluarga raja.</sdp:description>
@@ -1225,6 +1442,8 @@ Koleksinya mencakup senjata tradisional, foto, dan benda peninggalan yang berkai
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sisingamangaraja-xii/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1301,6 +1520,8 @@ Bangunannya memakai konsep “Itik Pulang Petang” dari filosofi Melayu, yang b
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
+        <sdp:hasCollection rdf:resource="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/collection/1"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-daerah-deli-serdang/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1374,6 +1595,10 @@ Bangunannya memakai konsep “Itik Pulang Petang” dari filosofi Melayu, yang b
         <sdp:sourceUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://id.wikipedia.org/wiki/Museum_Deli_Serdang</sdp:sourceUrl>
     </sdp:Source>
 
+    <sdp:Collection rdf:about="https://museumsumatera.id/resource/museum/museum-daerah-deli-serdang/collection/1">
+        <sdp:collectionCategory xml:lang="id">etnografi</sdp:collectionCategory>
+    </sdp:Collection>
+
     <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-sang-nila-utama">
         <rdfs:label xml:lang="id">Museum Sang Nila Utama</rdfs:label>
         <sdp:description xml:lang="id">Museum negeri Riau dengan arsitektur berlambang rumah adat Melayu. Koleksinya mencakup tenun songket, perahu tradisional, dan benda upacara masyarakat Melayu pesisir.</sdp:description>
@@ -1397,6 +1622,7 @@ Setelah kewenangan bidang pemerintahan dialihkan ke daerah lewat Undang-Undang N
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-sang-nila-utama/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sang-nila-utama/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1479,6 +1705,8 @@ Gedungnya dahulu adalah sekolah dasar pertama di Tanjungpinang, Holland Irlandsc
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/exhibit/4"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/exhibit/5"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-sulaiman-badrul-alamsyah/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1553,6 +1781,7 @@ Pendiriannya berawal dari upaya menyelamatkan benda bersejarah Lingga. Pembangun
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-linggam-cahaya/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-linggam-cahaya/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-linggam-cahaya/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-linggam-cahaya/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1621,6 +1850,7 @@ Sejumlah foto arsip dari awal abad ke-20 memperlihatkan potret Sultan Siak serta
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-istana-siak/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-istana-siak/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-istana-siak/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-istana-siak/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1711,6 +1941,7 @@ Museum ini berdiri di kompleks Lapangan Tugu, Jalan Diponegoro, Padang, di atas 
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-adityawarman/exhibit/4"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-adityawarman/exhibit/5"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-adityawarman/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-adityawarman/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1811,6 +2042,7 @@ Rumah milik nenek Hamka itu hampir hancur pada masa pendudukan Jepang. Pada 2000
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-rumah-kelahiran-buya-hamka/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1894,6 +2126,7 @@ Desain bangunannya mengikuti rumah gadang Minangkabau dengan atap bergonjong. Di
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-tuanku-imam-bonjol/exhibit/4"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-tuanku-imam-bonjol/exhibit/5"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-tuanku-imam-bonjol/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-tuanku-imam-bonjol/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -1994,6 +2227,8 @@ Museum ini adalah museum perkeretaapian kedua di Indonesia setelah Ambarawa. Sta
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-kereta-api-sawahlunto/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2063,6 +2298,8 @@ Koleksinya mencakup keramik, arca, dan benda upacara masyarakat Jambi. Sejak mus
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-jambi/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-jambi/source/1"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-jambi/source/2"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
+        <sdp:relatedMuseum rdf:resource="https://museumsumatera.id/resource/museum/museum-siginjai"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-jambi/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2135,6 +2372,8 @@ Namanya merujuk siginjai, ikat pinggang pusaka raja Jambi. Museum berdiri di Jal
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-siginjai/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-siginjai/source/1"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-siginjai/source/2"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
+        <sdp:relatedMuseum rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-jambi"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-siginjai/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2237,6 +2476,9 @@ Koleksinya banyak berupa benda etnografi, seperti peralatan memasak tradisional 
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
+        <sdp:hasCollection rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/collection/1"/>
+        <sdp:hasCollection rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/collection/2"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-bengkulu/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2302,6 +2544,14 @@ Koleksinya banyak berupa benda etnografi, seperti peralatan memasak tradisional 
         <sdp:sourceUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File:Traditional_Bengkulu_cooking_utensils,_Bengkulu_Museum_2015-04-19_01.jpg</sdp:sourceUrl>
     </sdp:Source>
 
+    <sdp:Collection rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/collection/1">
+        <sdp:collectionCategory xml:lang="id">etnografi</sdp:collectionCategory>
+    </sdp:Collection>
+
+    <sdp:Collection rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-bengkulu/collection/2">
+        <sdp:collectionCategory xml:lang="id">numismatika</sdp:collectionCategory>
+    </sdp:Collection>
+
     <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno">
         <rdfs:label xml:lang="id">Rumah Pengasingan Bung Karno</rdfs:label>
         <sdp:description xml:lang="id">Rumah tempat Soekarno diasingkan pada 1938–1942, kini dikelola sebagai museum. Ruangannya dipertahankan seperti masa itu, lengkap dengan barang pribadi dan dokumentasi pengasingan.</sdp:description>
@@ -2324,6 +2574,7 @@ Rumah ini kini menjadi museum yang menyimpan jejak masa pengasingan tersebut, te
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/rumah-pengasingan-bung-karno/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/rumah-pengasingan-bung-karno/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2414,6 +2665,7 @@ Museum ini menyimpan koleksi arca Hindu-Buddha, keramik, tekstil, serta tenun so
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-sumatera-selatan/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-sumatera-selatan/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2497,6 +2749,8 @@ Di atas reruntuhannya dibangun gedung baru yang selesai pada 1824 dan dikenal se
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-mahmud-badaruddin-ii/exhibit/3"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-mahmud-badaruddin-ii/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-sultan-mahmud-badaruddin-ii/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-sultan-mahmud-badaruddin-ii/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2591,6 +2845,7 @@ Kawasan ini menampilkan struktur bata kuno, temuan arkeologis, dan replika yang 
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-taman-purbakala-sriwijaya/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-taman-purbakala-sriwijaya/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-taman-purbakala-sriwijaya/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-taman-purbakala-sriwijaya/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2682,6 +2937,8 @@ PT Timah Tbk lalu melakukan konservasi bangunan bersejarah tersebut. Museum Tima
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-timah-indonesia/exhibit/4"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-timah-indonesia/source/1"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-timah-indonesia/source/2"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
+        <sdp:hasCollection rdf:resource="https://museumsumatera.id/resource/museum/museum-timah-indonesia/collection/1"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-timah-indonesia/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2748,6 +3005,10 @@ PT Timah Tbk lalu melakukan konservasi bangunan bersejarah tersebut. Museum Tima
         <sdp:sourceUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://commons.wikimedia.org/wiki/File:Museum_Timah_Pangkalpinang_Bangka_Island.jpg</sdp:sourceUrl>
     </sdp:Source>
 
+    <sdp:Collection rdf:about="https://museumsumatera.id/resource/museum/museum-timah-indonesia/collection/1">
+        <sdp:collectionCategory xml:lang="id">etnografi</sdp:collectionCategory>
+    </sdp:Collection>
+
     <sdp:Museum rdf:about="https://museumsumatera.id/resource/museum/museum-negeri-lampung">
         <rdfs:label xml:lang="id">Museum Negeri Lampung Ruwa Jurai</rdfs:label>
         <sdp:description xml:lang="id">Museum provinsi Lampung dengan koleksi budaya Saibatin dan Pepadun, termasuk kain tapis dan replika rumah adat. Bangunannya menjadi rujukan pembelajaran sejarah lokal.</sdp:description>
@@ -2769,6 +3030,7 @@ Nama “Ruwa Jurai” merujuk dua golongan adat Lampung tersebut, dan koleksinya
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-lampung/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-lampung/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-negeri-lampung/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-negeri-lampung/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2830,6 +3092,7 @@ Koleksinya mencakup foto, dokumen, dan peralatan rumah tangga yang dibawa serta 
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#StateMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-ketransmigrasian-lampung/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
@@ -2890,6 +3153,7 @@ Situsnya menjadi salah satu rujukan penting untuk memahami masa megalitik di Lam
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-purbakala-pugung-raharjo/exhibit/2"/>
         <sdp:hasExhibit rdf:resource="https://museumsumatera.id/resource/museum/museum-purbakala-pugung-raharjo/exhibit/3"/>
         <sdp:hasSource rdf:resource="https://museumsumatera.id/resource/museum/museum-purbakala-pugung-raharjo/source/1"/>
+        <rdf:type rdf:resource="https://museumsumatera.id/ontology#SiteMuseum"/>
         <sdp:imageUrl rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">/images/museums/museum-purbakala-pugung-raharjo/1.jpg</sdp:imageUrl>
         <sdp:verificationStatus>perlu-verifikasi</sdp:verificationStatus>
     </sdp:Museum>
