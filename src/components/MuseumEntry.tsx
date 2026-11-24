@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MuseumTypeBadge from "@/components/MuseumTypeBadge";
 import { FALLBACK_IMAGE, themeLabels, yearLabel, type MuseumDTO } from "@/lib/types";
 
 interface MuseumEntryProps {
@@ -29,7 +30,8 @@ export default function MuseumEntry({ museum, index }: MuseumEntryProps) {
         <div className="flex-1 min-w-0">
           <h3 className="font-serif text-lg sm:text-xl leading-snug">{museum.name}</h3>
           <p className="text-xs text-[--ink-soft] mt-1">{meta}</p>
-          <div className="mt-2 flex flex-wrap gap-1.5">
+          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+            <MuseumTypeBadge types={museum.types} />
             {themeLabels(museum.themes).map((theme) => (
               <span key={theme} className="chip">
                 {theme}

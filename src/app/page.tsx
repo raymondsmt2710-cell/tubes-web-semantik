@@ -1,8 +1,9 @@
 import Link from "next/link";
-import ChapterList from "@/components/ChapterList";
+import IndexBoard from "@/components/IndexBoard";
 import SearchBox from "@/components/SearchBox";
 import { runSelect } from "@/lib/sparql";
 import { chaptersQuery } from "@/lib/queries";
+import { CHAPTERS } from "@/lib/chapters";
 
 export const dynamic = "force-dynamic";
 
@@ -67,7 +68,17 @@ export default async function Home() {
             </Link>
           </div>
 
-          <ChapterList counts={counts} />
+          <IndexBoard
+            variant="cover"
+            items={CHAPTERS.map((chapter) => ({
+              index: chapter.index,
+              label: chapter.label,
+              title: chapter.title,
+              subtitle: chapter.provinces.join(" · "),
+              count: counts?.get(chapter.index) ?? null,
+              href: `/jelajah/${chapter.index}`,
+            }))}
+          />
 
           {counts === null && (
             <p className="mt-4 text-sm border border-[--rule] bg-[--paper-2] px-4 py-3 rounded-sm">
