@@ -86,7 +86,15 @@
         "title": "Gerbang Museum Aceh",
         "background": "Gerbang kayu beratap sirap ini memakai ukiran dan bentuk atap rumah tradisional Aceh. Di belakangnya sudah tampak Rumoh Aceh berwarna gelap dan gedung pameran modern — dua wajah museum yang sama: rumah adat dari Pameran Kolonial 1914 dan bangunan baru hasil proyek Pelita era 1970-an."
       }
-    ]
+    ],
+    "types": [
+      "StateMuseum"
+    ],
+    "collections": [
+      "etnografika",
+      "filologika"
+    ],
+    "collectionSize": 6038
   },
   {
     "slug": "museum-tsunami-aceh",
@@ -170,6 +178,9 @@
         "title": "Plakat Museum Tsunami Aceh",
         "background": "Plakat logam ini dipasang di dinding pintu masuk utama, dengan relief garis pantai Aceh sebagai latar. Museum dibangun pada 2008 dengan dana donor yang dikoordinasikan BRR, diresmikan Presiden Susilo Bambang Yudhoyono pada 2009, lalu dibuka untuk publik pada 2011."
       }
+    ],
+    "types": [
+      "StateMuseum"
     ]
   },
   {
@@ -257,6 +268,9 @@
         "title": "Patung Cut Nyak Dhien",
         "background": "Patung ini berdiri di Museum Mandala Bhakti Wanitatama, Yogyakarta — bukan di Lampisang. Foto ini dipakai sebagai rujukan visual sosok Cut Nyak Dhien dalam busana dan sikap yang lazim digambarkan, karena museum di Lampisang tidak memiliki patung serupa di halamannya."
       }
+    ],
+    "types": [
+      "StateMuseum"
     ]
   },
   {
@@ -337,6 +351,9 @@
         "title": "Koin emas Samudera Pasai",
         "background": "Koin emas bertulisan Arab ini adalah mata uang kesultanan Samudera Pasai. Keberadaan mata uang sendiri menunjukkan kerajaan ini sudah memiliki sistem ekonomi dan administrasi yang mapan pada abad ke-13 hingga ke-14, sezaman dengan masa kejayaan jalur dagang Selat Malaka."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -421,6 +438,15 @@
         "title": "Tenun di lemari kaca",
         "background": "Kain tenun dipajang tergantung di dalam lemari kaca, dengan label kecil di atas setiap helai. Koleksi tekstil semacam ini mewakili keragaman suku di Sumatera Utara — Batak, Melayu, Nias, dan lainnya — yang menjadi kekuatan utama museum ini. Hingga 2005 museum mencatat 6.799 koleksi."
       }
+    ],
+    "types": [
+      "StateMuseum"
+    ],
+    "collectionSize": 6799,
+    "facilities": [
+      "perpustakaan",
+      "ruang mikro film",
+      "ruang audio visual"
     ]
   },
   {
@@ -505,6 +531,9 @@
         "title": "Patung batu penjaga",
         "background": "Dua patung batu berwujud sosok duduk ini diletakkan di bawah naungan atap rumbia di area museum. Patung semacam ini dalam tradisi Batak berfungsi sebagai penjaga kampung dan penanda leluhur; gayanya yang sederhana menunjukkan tradisi megalitik yang lebih tua daripada arsitektur rumah adatnya."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -585,6 +614,12 @@
         "title": "Lanskap sekitar museum",
         "background": "Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige. Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian, danau, dan kehidupan kampung."
       }
+    ],
+    "types": [
+      "PrivateMuseum"
+    ],
+    "facilities": [
+      "ruang audiovisual"
     ]
   },
   {
@@ -653,6 +688,10 @@
         "title": "Potret Sisingamangaraja XII",
         "background": "Foto ini berasal dari arsip kolonial dan sudah menjadi domain publik. Sosok Sisingamangaraja XII digambarkan dalam busana kebesaran; potret semacam ini dipakai sebagai rujukan visual untuk patung, prangko, dan lukisan yang dibuat kemudian."
       }
+    ],
+    "types": [
+      "SiteMuseum",
+      "StateMuseum"
     ]
   },
   {
@@ -737,6 +776,12 @@
         "title": "Daftar kecamatan Deli Serdang",
         "background": "Daftar 22 kecamatan ini menjadi penanda bahwa museum adalah museum kabupaten: wilayah yang diceritakan bukan hanya kesultanan, tetapi juga kecamatan-kecamatan yang kini menopang Kabupaten Deli Serdang. Museum menempati gedung berkonsep “Itik Pulang Petang”, filosofi Melayu tentang keteraturan."
       }
+    ],
+    "types": [
+      "StateMuseum"
+    ],
+    "collections": [
+      "etnografi"
     ]
   },
   {
@@ -810,6 +855,9 @@
         "title": "Gedung Museum Sang Nila Utama",
         "background": "Gedung inilah Museum Negeri Provinsi Riau yang didirikan 9 Januari 1991. Nama Sang Nila Utama mulai dipakai pada 13 Oktober 1993, merujuk raja Bintan abad ke-13. Setelah kewenangan daerah berubah pada 1999, statusnya menjadi museum daerah di bawah Dinas Kebudayaan Riau."
       }
+    ],
+    "types": [
+      "StateMuseum"
     ]
   },
   {
@@ -876,6 +924,10 @@
         "title": "Bekas Holland Irlandsch School",
         "background": "Bangunan beratap limas ini dahulu sekolah dasar pertama di Tanjungpinang, Holland Irlandsch School (HIS), pada masa kolonial Belanda. Pada masa pendudukan Jepang namanya berubah menjadi Futsuko Gakka I, lalu menjadi Sekolah Rakyat setelah kemerdekaan. Sejak 31 Januari 2009 tempat ini menjadi museum."
       }
+    ],
+    "types": [
+      "SiteMuseum",
+      "StateMuseum"
     ]
   },
   {
@@ -938,6 +990,9 @@
         "title": "Mushaf Al-Qur'an Riau-Lingga",
         "background": "Mushaf abad ke-19 ini berasal dari Kesultanan Riau-Lingga dan beriluminasi khas Pantai Timur Semenanjung. Selain sebagai kitab, mushaf seperti ini adalah benda seni: pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -1018,6 +1073,9 @@
         "title": "Kursi singgasana Kerajaan Siak Sri Indrapura",
         "background": "Kursi berlapis emas ini dipajang di dalam lemari kaca dengan label “Kursi Singgasana Kerajaan Siak Sri Indrapura”. Singgasana adalah pusat upacara kerajaan: di sinilah sultan menerima pembesar dan tamu, sehingga posisinya dalam tata ruang istana menandai hierarki kekuasaan."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -1106,6 +1164,9 @@
         "title": "Rumah gadang dan rangkiang",
         "background": "Di halaman museum berdiri rumah gadang lengkap dengan rangkiang, lumbung padi beratap gonjong. Kehadirannya membuat museum dijuluki “Taman Mini ala Sumatera Barat”: pengunjung bisa melihat bangunan adat secara utuh, bukan hanya foto atau maketnya."
       }
+    ],
+    "types": [
+      "StateMuseum"
     ]
   },
   {
@@ -1178,6 +1239,9 @@
         "title": "Serambi rumah museum",
         "background": "Serambi beratap ini menjadi ruang masuk museum, dengan ukiran Minang pada bagian atap dan dinding. Di dalamnya tersimpan sekitar 200 judul buku, lima rak kaca karya Hamka, serta benda pribadi seperti koper haji pertama, delapan tongkat, dan baju wisuda lengkap dengan toga."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -1265,6 +1329,9 @@
         "title": "Halaman dan bangunan museum",
         "background": "Dari sisi lain terlihat proporsi bangunan 42 × 16,50 meter dengan gonjong di kedua ujungnya. Sejak 1998 museum ini dikelola Pemerintah Kabupaten Pasaman, dan sebagian koleksinya berupa replika karena benda asli Tuanku Imam Bonjol banyak yang hilang atau dicuri."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -1327,6 +1394,10 @@
         "title": "Stasiun Sawahlunto dan lokomotif",
         "background": "Foto ini memperlihatkan peron beratap dengan papan nama SAWAHLUNTO, lokomotif uap kecil di jalur, gerbong ketel biru, dan roda kereta yang diletakkan di tanah berbatu. Stasiun ini berhenti beroperasi pada 2003 setelah tambang batu bara habis, lalu dijadikan museum pada 2005 — museum perkeretaapian kedua di Indonesia setelah Ambarawa."
       }
+    ],
+    "types": [
+      "SiteMuseum",
+      "StateMuseum"
     ]
   },
   {
@@ -1389,6 +1460,12 @@
         "title": "Museum Siginjei dari arah Danau Sipin",
         "background": "Museum Siginjei — dulu bernama Museum Negeri Provinsi Jambi — berdiri di Jalan Urip Sumoharjo, kawasan Sungai Putri, Telanaipura. Gedungnya diresmikan 6 Juni 1988 oleh Menteri Pendidikan dan Kebudayaan Fuad Hassan setelah dibangun sejak 18 Februari 1981."
       }
+    ],
+    "types": [
+      "StateMuseum"
+    ],
+    "relatedSlugs": [
+      "museum-siginjai"
     ]
   },
   {
@@ -1477,6 +1554,12 @@
         "title": "Stempel Dewan Patih Kesultanan Jambi",
         "background": "Stempel ini pernah dipakai Said Idrus bin Hasan Al Jupri bergelar Pangeran Wiro Kusumo. Cap semacam ini menjadi bukti tertulis berjalannya administrasi kesultanan Jambi, sekaligus menunjukkan bagaimana kekuasaan didelegasikan kepada pejabat di bawah sultan."
       }
+    ],
+    "types": [
+      "StateMuseum"
+    ],
+    "relatedSlugs": [
+      "museum-negeri-jambi"
     ]
   },
   {
@@ -1557,6 +1640,13 @@
         "title": "Perkakas masak dari tempurung",
         "background": "Alat ini dibuat dari tempurung kelapa dan bilah kayu, dipakai sebagai sendok atau pengaduk dalam masakan tradisional Bengkulu. Koleksi rumah tangga seperti ini tampak sederhana, tetapi justru menunjukkan teknologi sehari-hari masyarakat yang tidak meninggalkan prasasti atau arsip tertulis."
       }
+    ],
+    "types": [
+      "StateMuseum"
+    ],
+    "collections": [
+      "etnografi",
+      "numismatika"
     ]
   },
   {
@@ -1636,6 +1726,9 @@
         "title": "Rumah pengasingan dari sisi jalan",
         "background": "Dari arah jalan terlihat ubun-ubun bangunan dan pagar halaman. Arsip-arsip kolonial mencatat penangkapan Soekarno pada 1933 sebelum pengasingan berantai ke Flores lalu Bengkulu, sehingga rumah ini menandai babak politik tertentu dalam biografinya."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -1709,6 +1802,9 @@
         "title": "Replika Rumah Limas",
         "background": "Replika rumah limas ini dibangun di halaman museum sebagai contoh rumah adat Sumatera Selatan. Rumah limas bertingkat dan berundak, mencerminkan struktur sosial masyarakat Palembang yang berlapis; replikanya memudahkan pengunjung memahami bentuk aslinya tanpa harus berkunjung ke permukiman."
       }
+    ],
+    "types": [
+      "StateMuseum"
     ]
   },
   {
@@ -1793,6 +1889,10 @@
         "title": "Potret Sultan Mahmud Badaruddin II",
         "background": "Potret ini bernuansa romantis, dengan sorban, jubah biru, dan kumis tebal. Sultan Mahmud Badaruddin II (memerintah 1803–1813 dan 1818–1821) dikenal memimpin perlawanan terhadap Belanda dan Inggris; namanya diabadikan sebagai nama museum sejak gedung ini dialihfungsikan pada 1984."
       }
+    ],
+    "types": [
+      "SiteMuseum",
+      "StateMuseum"
     ]
   },
   {
@@ -1872,6 +1972,9 @@
         "title": "Arca Buddha dari masa Sriwijaya",
         "background": "Arca Buddha yang sudah rusak ini ditemukan di kawasan Sriwijaya dan kini dipajang di halaman salah satu museum Palembang. Temuan arca menjadi bukti bahwa Sriwijaya adalah pusat kajian agama Buddha yang penting: banyak pelajar dari Cina dan India datang ke sini untuk menyalin kitab."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   },
   {
@@ -1949,6 +2052,12 @@
         "title": "Museum Timah Indonesia Muntok",
         "background": "Bangunan inilah bekas kantor pusat Pertambangan Timah Bangka (Bankatinwinning) yang dibangun 1915 dan sempat menjadi pusat pemerintahan Belanda di Bangka. Setelah diambil alih tentara Jepang dan terbengkalai, gedung dikonservasi PT Timah Tbk, lalu diresmikan menjadi museum pada 7 November 2013. Museum ini memiliki galeri tentang Kapal Vyner Brooke dan perawat Vivian Bullwinkel."
       }
+    ],
+    "types": [
+      "StateMuseum"
+    ],
+    "collections": [
+      "etnografi"
     ]
   },
   {
@@ -2007,6 +2116,9 @@
         "title": "Museum Lampung Ruwa Jurai",
         "background": "Foto ini memperlihatkan pengunjung di area Museum Negeri Lampung Ruwa Jurai, Bandar Lampung. Nama “Ruwa Jurai” merujuk dua golongan adat Lampung — Saibatin di pesisir dan Pepadun di pedalaman — yang menjadi kerangka penyusunan koleksinya."
       }
+    ],
+    "types": [
+      "StateMuseum"
     ]
   },
   {
@@ -2065,6 +2177,9 @@
         "title": "Anjungan Museum Ketransmigrasian",
         "background": "Bangunan berbentuk anjungan ini adalah bagian dari museum yang mengisahkan program transmigrasi di Lampung. Lampung menjadi salah satu daerah tujuan terbesar sejak awal abad ke-20, sehingga museumnya dibangun di provinsi ini dan memamerkan rumah tinggal awal, perkakas, serta arsip perpindahan penduduk."
       }
+    ],
+    "types": [
+      "StateMuseum"
     ]
   },
   {
@@ -2133,6 +2248,9 @@
         "title": "Gundukan berundak di tengah perkebunan",
         "background": "Dari permukaan, struktur tadi tampak sebagai gundukan berundak yang dikelilingi kebun kelapa dan pematang. Situs ini juga dikaitkan dengan benteng tanah dan arca megalitik, sehingga menjadi salah satu rujukan utama untuk memahami masa prasejarah di Lampung."
       }
+    ],
+    "types": [
+      "SiteMuseum"
     ]
   }
 ]
