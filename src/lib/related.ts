@@ -5,6 +5,7 @@ const THEME_WEIGHT = 3;
 const CITY_WEIGHT = 2;
 const ERA_WEIGHT = 1;
 const CHAPTER_WEIGHT = 1;
+const EXPLICIT_WEIGHT = 4;
 
 function themeLabel(theme: string): string {
   return THEME_LABELS[theme as Theme] ?? theme;
@@ -47,6 +48,11 @@ export function scoreRelated(base: MuseumDTO, candidate: MuseumDTO): RelationSco
   ) {
     score += CHAPTER_WEIGHT;
     reasons.push("bab yang bersebelahan dalam alur");
+  }
+
+  if ((base.relatedSlugs ?? []).includes(candidate.slug)) {
+    score += EXPLICIT_WEIGHT;
+    reasons.push("relasi arsip eksplisit");
   }
 
   return { score, reason: reasons.join("; ") };

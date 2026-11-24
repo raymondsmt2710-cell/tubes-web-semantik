@@ -31,8 +31,7 @@ function museum(overrides: Partial<MuseumDTO> = {}): MuseumDTO {
 }
 
 describe("scoreRelated", () => {
-  it("memberi +3 per tema yang sama", () => {
-    const candidate = museum({
+  it("memberi +3 per tema yang sama", () => {    const candidate = museum({
       slug: "x",
       themes: ["etnografi"],
       city: "Lhokseumawe",
@@ -111,6 +110,26 @@ describe("scoreRelated", () => {
       chapterIndex: 7,
     });
     expect(scoreRelated(museum(), candidate).score).toBe(0);
+  });
+
+  it("memberi +4 untuk relasi arsip eksplisit", () => {
+    const base = museum({
+      slug: "a",
+      relatedSlugs: ["b"],
+      themes: ["etnografi"],
+      city: "Banda Aceh",
+      era: "kolonial",
+      chapterIndex: 1,
+    });
+    const cand = museum({
+      slug: "b",
+      themes: ["arkeologi"],
+      city: "Medan",
+      era: "modern",
+      chapterIndex: 5,
+    });
+    expect(scoreRelated(base, cand).score).toBe(4);
+    expect(scoreRelated(base, cand).reason).toMatch(/arsip/i);
   });
 });
 
