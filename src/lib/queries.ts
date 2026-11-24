@@ -49,6 +49,13 @@ const MUSEUM_PROJECTION = `
   ?chapterIndex
   ?chapterTitle
   ?themes
+  ?types
+  ?collections
+  ?collectionSize
+  ?governingBody
+  ?openingHours
+  ?founder
+  ?heritage
 `;
 
 const MUSEUM_PATTERNS = `
@@ -56,13 +63,41 @@ const MUSEUM_PATTERNS = `
           rdfs:label ?name .
   BIND(REPLACE(STR(?museum), "^.*/museum/", "") AS ?slug)
 
-  {
+  OPTIONAL {
     SELECT ?museum (GROUP_CONCAT(DISTINCT ?themeLabel; separator="|") AS ?themes)
     WHERE {
       ?museum sdp:hasTheme ?themeResource .
       ?themeResource rdfs:label ?themeLabel .
     }
     GROUP BY ?museum
+  }
+
+  OPTIONAL {
+    SELECT ?museum (GROUP_CONCAT(DISTINCT ?typeLocal; separator="|") AS ?types)
+    WHERE {
+      ?museum a ?typeResource .
+      BIND(STRAFTER(STR(?typeResource), "#") AS ?typeLocal)
+      FILTER(?typeLocal IN ("StateMuseum", "SiteMuseum", "PrivateMuseum"))
+    }
+    GROUP BY ?museum
+  }
+
+  OPTIONAL {
+    SELECT ?museum (GROUP_CONCAT(DISTINCT ?collCat; separator="|") AS ?collections)
+    WHERE {
+      ?museum sdp:hasCollection ?collNode .
+      ?collNode sdp:collectionCategory ?collCat .
+    }
+    GROUP BY ?museum
+  }
+
+  OPTIONAL { ?museum sdp:collectionSize ?collectionSize . }
+  OPTIONAL { ?museum sdp:governingBody ?governingBody . }
+  OPTIONAL { ?museum sdp:openingHours ?openingHours . }
+  OPTIONAL { ?museum sdp:heritage ?heritage . }
+  OPTIONAL {
+    ?museum sdp:hasFounder ?founderNode .
+    ?founderNode sdp:personName ?founder .
   }
 
   OPTIONAL { ?museum sdp:description ?description . }
@@ -278,6 +313,28 @@ ORDER BY ?index
 `;
 }
 
+export function museumCollectionsQuery(slug: string): string {
+  return `${PREFIXES}
+SELECT ?category
+WHERE {
+  ${museumIri(slug)} sdp:hasCollection ?node .
+  ?node sdp:collectionCategory ?category .
+}
+ORDER BY ?category
+`;
+}
+
+export function museumFacilitiesQuery(slug: string): string {
+  return `${PREFIXES}
+SELECT ?name
+WHERE {
+  ${museumIri(slug)} sdp:hasFacility ?node .
+  ?node sdp:facilityName ?name .
+}
+ORDER BY ?name
+`;
+}
+
 /**
  * IRI museum ditulis penuh, bukan prefixed name. Sebagian mesin SPARQL
  * (termasuk Oxigraph yang dipakai uji integrasi) menolak prefixed name di
@@ -327,7 +384,20 @@ export function mapMuseumRow(binding: SparqlBinding): MuseumDTO {
     exhibits: [],
     gallery: [],
     sources: [],
+    types: splitPipe(str(binding, "types")),
+    collections: splitPipe(str(binding, "collections")),
+    collectionSize: num(binding, "collectionSize"),
+    governingBody: str(binding, "governingBody"),
+    openingHours: str(binding, "openingHours"),
+    founder: str(binding, "founder"),
+    heritage: str(binding, "heritage"),
   };
+}
+
+function splitPipe(value: string | null): string[] | undefined {
+  if (!value) return undefined;
+  const parts = value.split("|").filter(Boolean);
+  return parts.length > 0 ? parts : undefined;
 }
 
 /** Sejarah disimpan sebagai satu literal dengan paragraf dipisah baris kosong. */
@@ -395,7 +465,7 @@ export async function attachMuseumDetail(
   museum: MuseumDTO,
   rows?: (query: string) => SparqlBinding[],
 ): Promise<MuseumDTO> {
-  const [exhibits, gallery, sources] = await Promise.all([
+  const [exhibits, gallery, sources, collections, facilities] = await Promise.all([
     loadRows(museumExhibitsQuery(museum.slug), mapExhibitRow, rows),
     loadRows(
       museumImagesQuery(museum.slug),
@@ -406,6 +476,16 @@ export async function attachMuseumDetail(
       rows,
     ),
     loadRows(museumSourcesQuery(museum.slug), mapSourceRow, rows),
+    loadRows(
+      museumCollectionsQuery(museum.slug),
+      (row) => str(row, "category"),
+      rows,
+    ),
+    loadRows(
+      museumFacilitiesQuery(museum.slug),
+      (row) => str(row, "name"),
+      rows,
+    ),
   ]);
 
   return {
@@ -413,6 +493,14 @@ export async function attachMuseumDetail(
     exhibits,
     gallery,
     sources,
+    collections:
+      collections.filter((c): c is string => c !== null).length > 0
+        ? collections.filter((c): c is string => c !== null)
+        : museum.collections,
+    facilities:
+      facilities.filter((f): f is string => f !== null).length > 0
+        ? facilities.filter((f): f is string => f !== null)
+        : museum.facilities,
     imageUrl: museum.imageUrl ?? gallery[0]?.src ?? null,
   };
 }

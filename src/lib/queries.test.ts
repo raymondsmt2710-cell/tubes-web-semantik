@@ -158,4 +158,27 @@ describe("mapMuseumRow", () => {
     expect(dto.themes).toEqual([]);
     expect(dto.establishedYear).not.toBe(0);
   });
+
+  it("memetakan types, collections, dan collectionSize", () => {
+    const dto = mapMuseumRow({
+      museum: { type: "uri", value: "https://museumsumatera.id/resource/museum/x" },
+      name: { type: "literal", value: "Museum X" },
+      types: { type: "literal", value: "StateMuseum|SiteMuseum" },
+      collections: { type: "literal", value: "etnografika|filologika" },
+      collectionSize: { type: "literal", value: "6038" },
+    });
+    expect(dto.types).toEqual(["StateMuseum", "SiteMuseum"]);
+    expect(dto.collections).toEqual(["etnografika", "filologika"]);
+    expect(dto.collectionSize).toBe(6038);
+  });
+});
+
+describe("query katalog: types via GROUP_CONCAT", () => {
+  it("mengumpulkan types tanpa menggandakan baris", () => {
+    const q = searchCatalogQuery({});
+    expect(q).toContain("GROUP_CONCAT");
+    expect(q).toContain("?types");
+    // tipe tidak boleh jadi pola OPTIONAL bebas di blok utama
+    expect(q).not.toMatch(/\?museum\s+a\s+\?type\b/);
+  });
 });
