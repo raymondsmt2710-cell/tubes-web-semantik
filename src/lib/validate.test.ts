@@ -77,3 +77,34 @@ describe("validateMuseums", () => {
     expect(issues.some((i) => i.field === "description" && i.level === "error")).toBe(true);
   });
 });
+
+describe("validasi entitas baru", () => {
+  it("menolak tipe yang tidak dikenal", () => {
+    const issues = validateMuseums([{ ...ok, types: ["Bogus" as never] }]);
+    expect(issues.some((i) => i.field === "types" && i.level === "error")).toBe(true);
+  });
+
+  it("menerima tipe sah", () => {
+    const issues = validateMuseums([{ ...ok, types: ["StateMuseum", "SiteMuseum"] }]);
+    expect(issues.some((i) => i.field === "types" && i.level === "error")).toBe(false);
+  });
+
+  it("menolak StateMuseum + PrivateMuseum sekaligus", () => {
+    const issues = validateMuseums([{ ...ok, types: ["StateMuseum", "PrivateMuseum"] }]);
+    expect(issues.some((i) => i.field === "types" && i.level === "error")).toBe(true);
+  });
+
+  it("menolak collectionSize negatif / bukan integer", () => {
+    const neg = validateMuseums([{ ...ok, collectionSize: -1 }]);
+    expect(neg.some((i) => i.field === "collectionSize" && i.level === "error")).toBe(true);
+    const frac = validateMuseums([{ ...ok, collectionSize: 1.5 }]);
+    expect(frac.some((i) => i.field === "collectionSize" && i.level === "error")).toBe(true);
+  });
+
+  it("menolak relatedSlugs yang menunjuk dirinya sendiri atau slug tak ada", () => {
+    const self = validateMuseums([{ ...ok, relatedSlugs: ["museum-ok"] }]);
+    expect(self.some((i) => i.field === "relatedSlugs" && i.level === "error")).toBe(true);
+    const missing = validateMuseums([{ ...ok, relatedSlugs: ["tidak-ada"] }]);
+    expect(missing.some((i) => i.field === "relatedSlugs" && i.level === "error")).toBe(true);
+  });
+});

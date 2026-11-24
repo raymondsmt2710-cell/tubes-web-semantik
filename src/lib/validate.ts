@@ -1,5 +1,6 @@
 import {
   ERAS,
+  MUSEUM_TYPES,
   PROVINCES,
   THEMES,
   type MuseumRecord,
@@ -128,6 +129,50 @@ export function validateMuseums(records: MuseumRecord[]): ValidationIssue[] {
         "warning",
         "Data belum diverifikasi; periksa nama, alamat, dan tahun berdiri.",
       );
+    }
+
+    if (record.types !== undefined) {
+      if (record.types.length === 0) {
+        add("types", "error", "Museum harus punya minimal satu tipe.");
+      } else {
+        for (const t of record.types) {
+          if (!(MUSEUM_TYPES as readonly string[]).includes(t)) {
+            add("types", "error", `Tipe tidak dikenal: "${t}".`);
+          }
+        }
+        if (record.types.includes("StateMuseum") && record.types.includes("PrivateMuseum")) {
+          add("types", "error", "StateMuseum dan PrivateMuseum tidak boleh bersamaan.");
+        }
+      }
+    }
+
+    if (
+      record.collectionSize !== null &&
+      record.collectionSize !== undefined &&
+      (!Number.isInteger(record.collectionSize) || record.collectionSize < 0)
+    ) {
+      add("collectionSize", "error", `Ukuran koleksi tidak sah: ${record.collectionSize}.`);
+    }
+  }
+
+  const allSlugs = new Set(records.map((r) => r.slug));
+  for (const record of records) {
+    for (const target of record.relatedSlugs ?? []) {
+      if (target === record.slug) {
+        issues.push({
+          slug: record.slug,
+          field: "relatedSlugs",
+          level: "error",
+          message: "Museum tidak boleh menautkan dirinya sendiri.",
+        });
+      } else if (!allSlugs.has(target)) {
+        issues.push({
+          slug: record.slug,
+          field: "relatedSlugs",
+          level: "error",
+          message: `Museum terkait tidak ditemukan: "${target}".`,
+        });
+      }
     }
   }
 
