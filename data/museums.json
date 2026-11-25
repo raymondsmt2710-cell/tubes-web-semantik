@@ -2420,19 +2420,40 @@
     "exhibits": [
       {
         "title": "Replika Rumah Limas",
-        "description": "Rumah adat Sumatera Selatan yang dibangun sebagai pameran di halaman museum."
+        "description": "Rumah Limas adalah rumah adat Sumatera Selatan yang dibangun sebagai pameran di halaman museum. Namanya berasal dari atapnya yang bertingkat seperti limas, dan luas bangunannya menandai kedudukan pemiliknya. Rumah ini ditinggikan di atas tiang, dengan ruang utama di bagian tengah dan ruang terbuka di depan. Karena yang berdiri di sini adalah replika, pengunjung memperoleh gambaran bentuk keseluruhan rumah tanpa harus mengunjungi kampung asalnya.",
+        "period": "arsitektur tradisional Palembang",
+        "origin": "Sumatera Selatan",
+        "material": "kayu dan atap genteng",
+        "highlight": true
       },
       {
         "title": "Arca Hindu-Buddha",
-        "description": "Arca dari masa Sriwijaya dan periode klasik Sumatera bagian selatan."
+        "description": "Ruang ini memuat arca dari masa Sriwijaya dan periode klasik Sumatera bagian selatan. Palembang dan sekitarnya pernah menjadi pusat Sriwijaya, kerajaan maritim yang pengaruhnya terasa sampai Semenanjung Melayu. Banyak arca ditemukan tidak lengkap, sebagian mungkin pernah dipindahkan atau rusak jauh sebelum ditemukan kembali. Bagi museum, penjelasan mengenai lokasi penemuan sama pentingnya dengan bentuk arcanya, karena dari situ bisa diperkirakan bagaimana kawasan ini dihuni pada masa lampau.",
+        "period": "masa Sriwijaya dan periode klasik",
+        "origin": "Sumatera bagian selatan",
+        "material": "batu"
       },
       {
         "title": "Tenun songket Palembang",
-        "description": "Koleksi tekstil songket dengan motif khas Palembang."
+        "description": "Songket adalah kain tenun bermotif yang dibuat dengan menyelipkan benang emas atau perak ke dalam kain. Di Palembang, songket dipakai pada upacara pernikahan dan acara adat, dan motifnya sering diberi nama seperti bungo pacik atau tampak maco. Karena pembuatannya memakan waktu lama, satu kain bisa menjadi barang warisan keluarga. Museum menampilkan beragam motif agar pengunjung melihat bahwa keragaman songket tidak hanya soal warna, tetapi juga nama dan makna tiap pola.",
+        "period": "tradisi tenun Melayu Palembang",
+        "origin": "Palembang",
+        "material": "kain sutra dan benang emas",
+        "highlight": true
       },
       {
         "title": "Materai Kesultanan Palembang",
-        "description": "Materai Kesultanan Palembang Darussalam yang dipamerkan sebagai koleksi sejarah."
+        "description": "Materai ini berasal dari Kesultanan Palembang Darussalam dan dipamerkan sebagai koleksi sejarah. Materai dipakai untuk mengesahkan surat dan perjanjian, sehingga keberadaannya menandai bahwa sebuah dokumen benar berasal dari kesultanan. Palembang pada masa itu adalah pusat perdagangan sungai yang penting, dan banyak kesepakatan dagang memerlukan pengesahan semacam ini. Bagi peneliti, bentuk dan tulisan pada materai membantu menentukan masa pemakaiannya.",
+        "period": "masa Kesultanan Palembang Darussalam",
+        "origin": "Kesultanan Palembang Darussalam",
+        "material": "logam"
+      },
+      {
+        "title": "Koleksi tekstil dan kerajinan",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Sumatera Selatan",
+        "material": "kain, rotan, dan kayu",
+        "description": "Selain songket, museum menyimpan tekstil dan kerajinan lain dari Sumatera Selatan. Kerajinan seperti anyaman dan ukiran biasanya dikerjakan di rumah sebagai pekerjaan sampingan, menggunakan bahan yang tersedia di sekitar. Coraknya berbeda antara daerah rawa, pesisir, dan dataran tinggi, mengikuti bahan dan keperluan setempat. Koleksi semacam ini jarang menjadi pusat perhatian pengunjung, tetapi memberi gambaran paling dekat tentang kehidupan sehari-hari masyarakat."
       }
     ],
     "sources": [
@@ -2443,7 +2464,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-negeri-sumatera-selatan/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Negeri Sumatera Selatan Balaputra Dewa — foto dari Wikimedia Commons",
         "caption": "Also known as Burgemeesterhuis in de Gemeente Palembang (Palembang Municipality Mayor House) during Dutch colonial era, this is textile museum located in Talang Semut, Bukit Kecil,",
         "credit": "Firzafp",
@@ -2451,10 +2472,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATextile_Museum_of_South_Sumatra_-_Bukit_Kecil%2C_Palembang%2C_SS.jpg",
         "title": "Bangunan museum dan halaman",
-        "background": "Gedung ini dikenal sebagai Burgemeesterhuis — rumah wali kota Palembang pada masa kolonial — sebelum menjadi Museum Negeri Sumatera Selatan Balaputra Dewa. Namanya diambil dari Balaputra Dewa, raja Sriwijaya, dan koleksinya mencakup arca Hindu-Buddha, keramik, serta tenun songket Palembang."
+        "background": "Gedung ini dikenal sebagai Burgemeesterhuis — rumah wali kota Palembang pada masa kolonial — sebelum menjadi Museum Negeri Sumatera Selatan Balaputra Dewa. Namanya diambil dari Balaputra Dewa, raja Sriwijaya, dan koleksinya mencakup arca Hindu-Buddha, keramik, serta tenun songket Palembang.",
+        "period": "bangunan museum provinsi",
+        "detail": [
+          "Gedung ini adalah Museum Negeri Sumatera Selatan di kawasan Sekayu, Palembang.",
+          "Bangunannya bergaya rumah limas agar tampil sebagai bagian kebudayaan setempat.",
+          "Halaman luas memuat replika rumah adat dan benda berukuran besar.",
+          "Fungsinya sebagai museum provinsi sekaligus pusat penelitian kebudayaan daerah."
+        ]
       },
       {
-        "src": "/images/museums/museum-negeri-sumatera-selatan/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Negeri Sumatera Selatan Balaputra Dewa — foto dari Wikimedia Commons",
         "caption": "The replica of Limas house, a South Sumatran traditional house that showed up in Balaputra Dewa Museum (South Sumatra Museum). Notably had to be appeared in IDR 10.000 from 2005 to",
         "credit": "Firzafp",
@@ -2462,7 +2490,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AReplica_of_Rumah_Limas%2C_South_Sumatra_(Balaputra_Dewa)_Museum_-_Sukarame%2C_Palembang%2C_SS_(18_January_2024).jpg",
         "title": "Replika Rumah Limas",
-        "background": "Replika rumah limas ini dibangun di halaman museum sebagai contoh rumah adat Sumatera Selatan. Rumah limas bertingkat dan berundak, mencerminkan struktur sosial masyarakat Palembang yang berlapis; replikanya memudahkan pengunjung memahami bentuk aslinya tanpa harus berkunjung ke permukiman."
+        "background": "Replika rumah limas ini dibangun di halaman museum sebagai contoh rumah adat Sumatera Selatan. Rumah limas bertingkat dan berundak, mencerminkan struktur sosial masyarakat Palembang yang berlapis; replikanya memudahkan pengunjung memahami bentuk aslinya tanpa harus berkunjung ke permukiman.",
+        "period": "replika arsitektur",
+        "detail": [
+          "Replika Rumah Limas ini berdiri di halaman museum sebagai pameran arsitektur.",
+          "Atapnya bertingkat seperti limas, dan jumlah tingkatnya menandai kedudukan pemilik rumah.",
+          "Bangunannya ditinggikan di atas tiang dengan ruang terbuka di bagian depan.",
+          "Rumah limas menjadi simbol Sumatera Selatan dan dipakai pada lambang daerah."
+        ]
       }
     ],
     "types": [
@@ -2496,19 +2531,33 @@
     "exhibits": [
       {
         "title": "Lukisan dan potret Sultan Mahmud Badaruddin II",
-        "description": "Potret serta lukisan pengasingan sultan yang menjadi koleksi utama museum."
+        "description": "Potret serta lukisan pengasingan sultan ini menjadi koleksi utama museum. Sultan Mahmud Badaruddin II memimpin perlawanan terhadap Belanda dan dikenal karena menolak tunduk pada kekuasaan kolonial, sehingga namanya dipakai untuk museum ini dan juga Bandar Udara Palembang. Setelah dikalahkan, ia diasingkan ke Ternate dan meninggal di sana. Lukisan pengasingan penting karena memperlihatkan sisi lain dari seorang tokoh perang: kehidupan jauh dari negerinya sendiri.",
+        "period": "masa perlawanan terhadap Belanda, 1819–1821",
+        "origin": "Kesultanan Palembang Darussalam",
+        "material": "lukisan dan foto arsip",
+        "highlight": true
       },
       {
         "title": "Tekstil dan pakaian tradisional",
-        "description": "Koleksi kain, pakaian adat, dan kerajinan Sumatera Selatan."
+        "description": "Ruang ini memuat kain, pakaian adat, dan kerajinan Sumatera Selatan. Palembang dikenal sebagai pusat kain songket, dan sebagian koleksi di sini menunjukkan bagaimana busana adat dipakai pada upacara kesultanan maupun pernikahan rakyat biasa. Perbedaan bahan menandai tingkat kemampuan pemakainya, misalnya antara sutra bermotif benang emas dan kain tenun sederhana. Dengan memajang keduanya, museum memperlihatkan bahwa busana tradisional tidak tunggal, melainkan berlapis menurut kedudukan sosial.",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Sumatera Selatan",
+        "material": "kain tenun dan sulaman"
       },
       {
         "title": "Koleksi senjata dan koin",
-        "description": "Senjata tradisional serta mata uang lama yang menunjukkan aktivitas perdagangan Palembang."
+        "description": "Senjata tradisional serta mata uang lama di ruang ini menunjukkan aktivitas perdagangan Palembang. Sungai Musi menjadi jalur utama yang menghubungkan pedalaman dengan pesisir, sehingga koin asing bisa sampai ke kawasan ini. Senjata mengingatkan bahwa Palembang pernah menjadi kota yang diperebutkan, termasuk dalam pertempuran melawan Belanda pada awal abad ke-19. Bersama-sama, benda di ruang ini menjelaskan kota pelabuhan yang kaya sekaligus sering dilanda konflik.",
+        "period": "masa kesultanan",
+        "origin": "Palembang dan jalur dagang Musi",
+        "material": "logam dan kayu"
       },
       {
         "title": "Taman arca Sriwijaya",
-        "description": "Halaman museum yang dipenuhi artefak masa Sriwijaya, antara lain patung Ganesha dan Buddha."
+        "description": "Halaman museum dipenuhi artefak masa Sriwijaya, antara lain patung Ganesha dan Buddha. Menempatkan arca di taman, bukan di dalam ruang tertutup, mengikuti kebiasaan museum arkeologi di Asia Tenggara dan memungkinkan benda berukuran besar dipajang. Sriwijaya berpusat di kawasan ini dan pengaruhnya meluas lewat perdagangan maritim. Karena banyak arca ditemukan dalam keadaan tidak lengkap, taman ini juga berfungsi sebagai tempat penyimpanan terbuka yang bisa diteliti.",
+        "period": "masa Sriwijaya",
+        "origin": "Sumatera bagian selatan",
+        "material": "batu",
+        "highlight": true
       }
     ],
     "sources": [
@@ -2519,7 +2568,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-sultan-mahmud-badaruddin-ii/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Sultan Mahmud Badaruddin II — foto dari Wikimedia Commons",
         "caption": "Sultan Mahmud Badaruddin II Museum at BKB Plaza Palembang",
         "credit": "fitri agung from Pekanbaru, Riau, Indonesia, Indonesia",
@@ -2527,10 +2576,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ASultan_Mahmud_Badaruddin_II_Museum%2C_Palembang.jpg",
         "title": "Museum Sultan Mahmud Badaruddin II",
-        "background": "Bangunan batu dua lantai ini memadukan gaya Eropa dengan arsitektur tropis Hindia. Lokasinya bekas Kuta Lama, istana Sultan Mahmud Badaruddin I yang dihancurkan kolonial Inggris pada 7 Oktober 1823; gedung baru selesai 1824 dan pada 1825 dipakai sebagai kantor residen kolonial."
+        "background": "Bangunan batu dua lantai ini memadukan gaya Eropa dengan arsitektur tropis Hindia. Lokasinya bekas Kuta Lama, istana Sultan Mahmud Badaruddin I yang dihancurkan kolonial Inggris pada 7 Oktober 1823; gedung baru selesai 1824 dan pada 1825 dipakai sebagai kantor residen kolonial.",
+        "period": "bangunan kolonial, menjadi museum",
+        "detail": [
+          "Gedung ini menampung koleksi tentang Sultan Mahmud Badaruddin II dan Palembang.",
+          "Letaknya dekat kawasan Benteng Kuto Besak, sisa pusat kekuasaan kesultanan.",
+          "Bangunan bergaya kolonial menunjukkan lapisan sejarah kota setelah kesultanan berakhir.",
+          "Nama museum diambil dari sultan yang memimpin perlawanan terhadap Belanda."
+        ]
       },
       {
-        "src": "/images/museums/museum-sultan-mahmud-badaruddin-ii/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Sultan Mahmud Badaruddin II — foto dari Wikimedia Commons",
         "caption": "Lukisan Pengasingan Sultan Mahmud Badaruddin II",
         "credit": "Losstreak",
@@ -2538,10 +2594,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ALukisan_Pengasingan_Sultan_Mahmud_Badaruddin_II.jpg",
         "title": "Lukisan pengasingan Sultan Mahmud Badaruddin II",
-        "background": "Lukisan ini menggambarkan pengasingan Sultan Mahmud Badaruddin II setelah Palembang jatuh ke tangan Belanda pada 1821. Peristiwa itu mengakhiri kedaulatan Kesultanan Palembang Darussalam, dan sejak itu wilayahnya diperintah sebagai koloni."
+        "background": "Lukisan ini menggambarkan pengasingan Sultan Mahmud Badaruddin II setelah Palembang jatuh ke tangan Belanda pada 1821. Peristiwa itu mengakhiri kedaulatan Kesultanan Palembang Darussalam, dan sejak itu wilayahnya diperintah sebagai koloni.",
+        "period": "masa pengasingan",
+        "detail": [
+          "Lukisan ini menggambarkan Sultan Mahmud Badaruddin II semasa diasingkan.",
+          "Setelah dikalahkan Belanda, ia diasingkan ke Ternate.",
+          "Ia meninggal di pengasingan dan tidak pernah kembali ke Palembang.",
+          "Lukisan seperti ini memperlihatkan sisi lain tokoh perang, yaitu kehidupan jauh dari negerinya."
+        ]
       },
       {
-        "src": "/images/museums/museum-sultan-mahmud-badaruddin-ii/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Sultan Mahmud Badaruddin II — foto dari Wikimedia Commons",
         "caption": "Potrer Lukisan Sultan Mahmud Badaruddin II",
         "credit": "Cendy00",
@@ -2549,7 +2612,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ALukisan_Sultan_Mahmud_Badaruddin_II.jpg",
         "title": "Potret Sultan Mahmud Badaruddin II",
-        "background": "Potret ini bernuansa romantis, dengan sorban, jubah biru, dan kumis tebal. Sultan Mahmud Badaruddin II (memerintah 1803–1813 dan 1818–1821) dikenal memimpin perlawanan terhadap Belanda dan Inggris; namanya diabadikan sebagai nama museum sejak gedung ini dialihfungsikan pada 1984."
+        "background": "Potret ini bernuansa romantis, dengan sorban, jubah biru, dan kumis tebal. Sultan Mahmud Badaruddin II (memerintah 1803–1813 dan 1818–1821) dikenal memimpin perlawanan terhadap Belanda dan Inggris; namanya diabadikan sebagai nama museum sejak gedung ini dialihfungsikan pada 1984.",
+        "period": "awal abad ke-19",
+        "detail": [
+          "Potret ini menjadi salah satu koleksi utama museum.",
+          "Sultan Mahmud Badaruddin II dikenal karena menolak tunduk pada kekuasaan kolonial.",
+          "Namanya kini dipakai untuk museum dan Bandar Udara Palembang.",
+          "Tidak ada foto dibuat semasa hidupnya, sehingga potret disusun dari penggambaran kemudian."
+        ]
       }
     ],
     "types": [
@@ -2583,15 +2653,32 @@
     "exhibits": [
       {
         "title": "Museum Sriwijaya",
-        "description": "Bangunan museum di dalam taman yang memuat temuan dan penjelasan situs."
+        "description": "Bangunan museum ini berdiri di dalam taman yang memuat temuan dan penjelasan situs. Kawasan Karanganyar dipercaya sebagai salah satu pusat permukiman masa Sriwijaya, dan penelitian arkeologi di sini menemukan sisa bangunan serta benda dari masa itu. Museum sengaja dibangun dekat situs agar pengunjung bisa melihat temuan dan lokasi asalnya dalam satu kunjungan. Karena itu koleksinya berbeda dari museum umum: isinya berpusat pada satu kawasan dan satu masa.",
+        "period": "situs masa Sriwijaya",
+        "origin": "Kawasan Karanganyar, tepi Sungai Musi",
+        "material": "bangunan modern di atas situs"
       },
       {
         "title": "Pendopo utama Limasan",
-        "description": "Pendopo beratap Limasan yang menjadi pusat kegiatan di taman purbakala."
+        "description": "Pendopo beratap limasan ini menjadi pusat kegiatan di taman purbakala. Bentuk limasan dipilih karena lazim dipakai pada bangunan pertemuan di Sumatera Selatan. Fungsinya bukan untuk memamerkan benda, melainkan untuk kegiatan seperti ceramah, pertunjukan, dan penerimaan tamu. Kehadirannya membuat taman purbakala tidak hanya menjadi tempat melihat reruntuhan, tetapi juga ruang yang dipakai masyarakat sampai sekarang.",
+        "period": "bangunan pendukung",
+        "origin": "Taman purbakala",
+        "material": "kayu dan atap limasan"
       },
       {
         "title": "Struktur bata kuno",
-        "description": "Sisa bangunan dari masa Sriwijaya yang dapat dilihat langsung di area situs."
+        "description": "Sisa bangunan dari masa Sriwijaya ini dapat dilihat langsung di area situs. Struktur bata menunjukkan bahwa kawasan ini pernah memiliki bangunan permanen, kemungkinan tempat ibadah atau bangunan keagamaan. Berbeda dari benda yang dipajang di lemari kaca, struktur ini tidak dapat dipindahkan, sehingga dilestarikan di tempatnya. Bagi pengunjung, melihatnya langsung memberi pemahaman tentang skala dan tata letak kawasan yang jauh lebih baik daripada melihat foto.",
+        "period": "masa Sriwijaya",
+        "origin": "Situs Karanganyar",
+        "material": "bata"
+      },
+      {
+        "title": "Arca Buddha dari masa Sriwijaya",
+        "period": "masa Sriwijaya",
+        "origin": "Kawasan situs Karanganyar",
+        "material": "batu",
+        "highlight": true,
+        "description": "Arca Buddha ini menjadi salah satu temuan yang paling sering ditampilkan dari kawasan situs. Sriwijaya dikenal sebagai pusat pembelajaran Buddhisme, dan catatan dari Tiongkok menyebut adanya hubungan antara kawasan ini dengan pusat pendidikan agama di India. Arca semacam ini menjadi bukti bahwa pengaruh Buddha tidak hanya ada di istana, tetapi menyebar ke permukiman. Bentuk dan gaya pahatannya membantu menentukan masa pembuatannya."
       }
     ],
     "sources": [
@@ -2602,7 +2689,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-taman-purbakala-sriwijaya/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Taman Purbakala Kerajaan Sriwijaya — foto dari Wikimedia Commons",
         "caption": "The Sriwijaya Museum in Srivijaya Archaeological Park, Palembang, South Sumatra, Indonesia.",
         "credit": "Gunawan Kartapranata",
@@ -2610,10 +2697,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATaman_Purbakala_Kerajaan_Sriwijaya_-_Museum_Sriwijaya.jpg",
         "title": "Museum Sriwijaya",
-        "background": "Bangunan beratap limasan ini adalah museum di dalam Taman Purbakala Kerajaan Sriwijaya, kawasan bekas permukiman masa Sriwijaya di tepi Sungai Musi. Museum menyimpan temuan dari situs dan menjelaskan kehidupan masyarakat Sriwijaya."
+        "background": "Bangunan beratap limasan ini adalah museum di dalam Taman Purbakala Kerajaan Sriwijaya, kawasan bekas permukiman masa Sriwijaya di tepi Sungai Musi. Museum menyimpan temuan dari situs dan menjelaskan kehidupan masyarakat Sriwijaya.",
+        "period": "kawasan situs Sriwijaya",
+        "detail": [
+          "Bangunan museum ini berdiri di dalam taman purbakala Karanganyar.",
+          "Kawasan ini dipercaya sebagai salah satu pusat permukiman masa Sriwijaya.",
+          "Museum dibangun dekat situs agar temuan dan lokasi asalnya bisa dilihat bersama.",
+          "Koleksinya berpusat pada satu kawasan dan satu masa, berbeda dari museum umum."
+        ]
       },
       {
-        "src": "/images/museums/museum-taman-purbakala-sriwijaya/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Taman Purbakala Kerajaan Sriwijaya — foto dari Wikimedia Commons",
         "caption": "Main pavilion in Limasan house traditional architecture. Srivijaya Archaeological Park, Palembang, South Sumatra, Indonesia. The main pavilion host the replica of Kedukan Bukit ins",
         "credit": "Gunawan Kartapranata",
@@ -2621,10 +2715,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATaman_Purbakala_Kerajaan_Sriwijaya_-_Pendopo_Utama.jpg",
         "title": "Pendopo utama",
-        "background": "Pendopo Beratap limasan ini menjadi pusat kegiatan di taman purbakala, dipakai untuk pertemuan dan pameran. Kehadirannya menjadikan kawasan ini museum terbuka: pengunjung belajar dari struktur bata kuno yang dibiarkan di tempatnya, bukan hanya dari benda di dalam lemari kaca."
+        "background": "Pendopo Beratap limasan ini menjadi pusat kegiatan di taman purbakala, dipakai untuk pertemuan dan pameran. Kehadirannya menjadikan kawasan ini museum terbuka: pengunjung belajar dari struktur bata kuno yang dibiarkan di tempatnya, bukan hanya dari benda di dalam lemari kaca.",
+        "period": "bangunan pendukung",
+        "detail": [
+          "Pendopo beratap limasan ini menjadi pusat kegiatan di taman purbakala.",
+          "Bentuk limasan lazim dipakai pada bangunan pertemuan di Sumatera Selatan.",
+          "Fungsinya untuk kegiatan seperti ceramah dan pertunjukan, bukan memamerkan benda.",
+          "Kehadirannya membuat taman purbakala juga menjadi ruang yang dipakai masyarakat."
+        ]
       },
       {
-        "src": "/images/museums/museum-taman-purbakala-sriwijaya/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Taman Purbakala Kerajaan Sriwijaya — foto dari Wikimedia Commons",
         "caption": "A fragmented Buddha statue was displayed at the yard of Sultan Mahmud Badaruddin II Museum in Palembang, then moved to Taman Purbakala Kerajaan Sriwijaya. The statue was discovered",
         "credit": "Gunawan Kartapranata. Anon",
@@ -2632,7 +2733,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ABuddha_Seguntang_Palembang_(grayscale).jpg",
         "title": "Arca Buddha dari masa Sriwijaya",
-        "background": "Arca Buddha yang sudah rusak ini ditemukan di kawasan Sriwijaya dan kini dipajang di halaman salah satu museum Palembang. Temuan arca menjadi bukti bahwa Sriwijaya adalah pusat kajian agama Buddha yang penting: banyak pelajar dari Cina dan India datang ke sini untuk menyalin kitab."
+        "background": "Arca Buddha yang sudah rusak ini ditemukan di kawasan Sriwijaya dan kini dipajang di halaman salah satu museum Palembang. Temuan arca menjadi bukti bahwa Sriwijaya adalah pusat kajian agama Buddha yang penting: banyak pelajar dari Cina dan India datang ke sini untuk menyalin kitab.",
+        "period": "masa Sriwijaya",
+        "detail": [
+          "Arca Buddha ini berasal dari masa Sriwijaya.",
+          "Sriwijaya dikenal sebagai pusat pembelajaran Buddhisme di Asia Tenggara.",
+          "Catatan Tiongkok menyebut hubungan kawasan ini dengan pusat pendidikan agama di India.",
+          "Gaya pahatannya membantu menentukan masa pembuatan arca."
+        ]
       }
     ],
     "types": [
@@ -2666,19 +2774,32 @@
     "exhibits": [
       {
         "title": "Peralatan penambangan timah",
-        "description": "Artefak tambang yang menunjukkan cara timah dieksplorasi dan diolah sejak masa kolonial."
+        "description": "Artefak tambang ini menunjukkan cara timah dieksplorasi dan diolah sejak masa kolonial. Penambangan timah di Bangka dimulai jauh sebelum kemerdekaan dan menjadi salah satu alasan kawasan ini terhubung erat dengan pemerintah Hindia Belanda. Peralatan sederhana pada masa awal berbeda jauh dari mesin yang dipakai kemudian, dan perbedaan itu menunjukkan perubahan skala penambangan. Bagi pengunjung, benda semacam ini menjelaskan bahwa timah bukan hanya hasil tambang, tetapi bagian dari sejarah kerja banyak orang.",
+        "period": "masa kolonial hingga abad ke-20",
+        "origin": "Pulau Bangka dan Belitung",
+        "material": "logam, kayu, dan besi",
+        "highlight": true
       },
       {
         "title": "Galeri tambang darat dan laut",
-        "description": "Pameran tentang penambangan timah di darat, di lepas pantai, hingga proses peleburannya."
+        "description": "Galeri ini membahas penambangan timah di darat, di lepas pantai, hingga proses peleburannya. Penambangan lepas pantai memerlukan cara yang berbeda dari tambang darat, termasuk kapal keruk dan penyaringan pasir. Peleburan juga menjadi bagian penting, karena timah baru bernilai setelah dipisahkan dari bahan lain. Dengan menjelaskan ketiga tahap itu, galeri memperlihatkan bahwa industri timah adalah rangkaian pekerjaan panjang, bukan hanya penggalian.",
+        "period": "abad ke-20",
+        "origin": "Bangka Belitung",
+        "material": "panel, alat, dan model"
       },
       {
         "title": "Miniatur lingkungan tambang",
-        "description": "Miniatur tiga dimensi yang menggambarkan lingkungan pertambangan dan permukiman pekerja."
+        "description": "Miniatur tiga dimensi ini menggambarkan lingkungan pertambangan dan permukiman pekerja. Yang ditampilkan bukan hanya lubang tambang, tetapi juga rumah pekerja, jalan, dan bangunan pendukung, karena pertambangan membentuk permukiman di sekitarnya. Maket dipilih karena pengunjung tidak dapat melihat kawasan tambang secara utuh dari dekat. Melalui miniatur, hubungan antara tambang, permukiman, dan pelabuhan bisa dipahami dalam sekali pandang.",
+        "period": "abad ke-20",
+        "origin": "Kawasan pertambangan Bangka",
+        "material": "maket tiga dimensi"
       },
       {
         "title": "Koleksi etnografi Bangka",
-        "description": "Pakaian tradisional dan peralatan sehari-hari masyarakat Bangka Belitung."
+        "description": "Ruang ini memuat pakaian tradisional dan peralatan sehari-hari masyarakat Bangka Belitung. Penduduk Bangka terbentuk dari campuran Melayu, Tionghoa, dan pendatang dari berbagai daerah yang datang untuk bekerja di tambang, sehingga budayanya bercampur. Peralatan rumah tangga menunjukkan bagaimana kehidupan diatur di kawasan yang dahulu sulit dijangkau. Bagian ini penting karena melengkapi kisah tambang dengan kisah orang-orang yang tinggal di sekitarnya.",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Masyarakat Bangka Belitung",
+        "material": "kain dan peralatan rumah tangga"
       }
     ],
     "sources": [
@@ -2693,7 +2814,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-timah-indonesia/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Timah Indonesia — foto dari Wikimedia Commons",
         "caption": "Museum Timah (Tin Museum) of Pangkalpinang, Bangka Island.",
         "credit": "Cun Cun",
@@ -2701,10 +2822,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Timah_Pangkalpinang_Bangka_Island.jpg",
         "title": "Museum Timah Pangkalpinang",
-        "background": "Gedung bergaya kolonial ini menjadi museum timah di Pangkalpinang, ibu kota Bangka Belitung. Timah adalah komoditas yang membentuk wajah pulau ini sejak masa Hindia Belanda, sehingga museumnya menyimpan peralatan tambang, foto, dan maket pertambangan."
+        "background": "Gedung bergaya kolonial ini menjadi museum timah di Pangkalpinang, ibu kota Bangka Belitung. Timah adalah komoditas yang membentuk wajah pulau ini sejak masa Hindia Belanda, sehingga museumnya menyimpan peralatan tambang, foto, dan maket pertambangan.",
+        "period": "bangunan masa kolonial",
+        "detail": [
+          "Gedung ini adalah Museum Timah Indonesia di Pangkalpinang.",
+          "Bangunannya berasal dari masa kolonial, ketika timah menjadi komoditas utama kawasan ini.",
+          "Koleksinya mencakup peralatan tambang, model, dan dokumen perusahaan.",
+          "Museum menempati bangunan yang dahulu berkaitan langsung dengan kegiatan penambangan."
+        ]
       },
       {
-        "src": "/images/museums/museum-timah-indonesia/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Timah Indonesia — foto dari Wikimedia Commons",
         "caption": "Museum Timah Indonesia Muntok",
         "credit": "Cun Cun",
@@ -2712,7 +2840,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Timah_Indonesia_Muntok.jpg",
         "title": "Museum Timah Indonesia Muntok",
-        "background": "Bangunan inilah bekas kantor pusat Pertambangan Timah Bangka (Bankatinwinning) yang dibangun 1915 dan sempat menjadi pusat pemerintahan Belanda di Bangka. Setelah diambil alih tentara Jepang dan terbengkalai, gedung dikonservasi PT Timah Tbk, lalu diresmikan menjadi museum pada 7 November 2013. Museum ini memiliki galeri tentang Kapal Vyner Brooke dan perawat Vivian Bullwinkel."
+        "background": "Bangunan inilah bekas kantor pusat Pertambangan Timah Bangka (Bankatinwinning) yang dibangun 1915 dan sempat menjadi pusat pemerintahan Belanda di Bangka. Setelah diambil alih tentara Jepang dan terbengkalai, gedung dikonservasi PT Timah Tbk, lalu diresmikan menjadi museum pada 7 November 2013. Museum ini memiliki galeri tentang Kapal Vyner Brooke dan perawat Vivian Bullwinkel.",
+        "period": "bangunan masa kolonial",
+        "detail": [
+          "Bangunan ini adalah Museum Timah Indonesia di Muntok.",
+          "Muntok pernah menjadi pusat pemerintahan dan pelabuhan penting di Bangka bagian barat.",
+          "Museum ini melengkapi koleksi serupa di Pangkalpinang.",
+          "Keberadaan dua museum menunjukkan luasnya kawasan penambangan timah."
+        ]
       }
     ],
     "types": [
