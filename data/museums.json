@@ -1115,19 +1115,32 @@
     "exhibits": [
       {
         "title": "Pakaian adat pernikahan Melayu",
-        "description": "Busana pernikahan tradisional Riau beserta perlengkapannya."
+        "description": "Busana pernikahan tradisional Riau ini dipamerkan lengkap dengan perlengkapannya. Dalam adat Melayu, pakaian pernikahan bukan sekadar kostum, melainkan penanda status dan urutan upacara, sehingga setiap lapisan kain dan hiasan kepala punya nama serta aturan pemakaiannya. Warna dan coraknya berbeda menurut daerah, misalnya antara pesisir dan pedalaman. Karena itu satu set busana bisa menjelaskan banyak hal tentang adat setempat dalam sekali pandang.",
+        "period": "tradisi Melayu Riau",
+        "origin": "Masyarakat Melayu Riau",
+        "material": "kain tenun, sulaman, dan perhiasan",
+        "highlight": true
       },
       {
         "title": "Alat musik dan permainan tradisional",
-        "description": "Koleksi alat musik Melayu Riau serta permainan rakyat yang kini jarang dimainkan."
+        "description": "Ruang ini memuat koleksi alat musik Melayu Riau serta permainan rakyat yang kini jarang dimainkan. Alat musik seperti gambus dan rebana berkaitan dengan kesenian yang biasa tampil pada acara adat dan keagamaan. Permainan rakyat ditempatkan berdekatan karena keduanya sama-sama bertahan lewat kebiasaan, bukan benda pameran. Bagi museum, menampilkan keduanya adalah cara mendokumentasikan kegiatan yang sulit direkam hanya dengan foto, yaitu bunyi dan aturan main.",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Riau daratan dan pesisir",
+        "material": "kayu, kulit, dan logam"
       },
       {
         "title": "Fosil, miniatur candi, dan mata uang",
-        "description": "Fosil batu siput, miniatur candi dan masjid, serta mata uang lama yang menunjukkan jejak sejarah kawasan."
+        "description": "Koleksi ini berisi fosil batu siput, miniatur candi dan masjid, serta mata uang lama yang menunjukkan jejak sejarah kawasan. Fosil siput memberi petunjuk bahwa sebagian wilayah Riau pernah berada di bawah laut, sedangkan miniatur candi dan masjid menandai peralihan masa keagamaan. Mata uang lama menunjukkan kawasan ini terhubung jaringan dagang maritim yang luas. Karena benda-bendanya berasal dari masa yang sangat berbeda, ruang ini disusun sebagai potongan-potongan sejarah yang saling melengkapi.",
+        "period": "prasejarah hingga masa klasik",
+        "origin": "Kawasan Riau dan sekitarnya",
+        "material": "fosil batu, keramik, dan logam"
       },
       {
         "title": "Keramik dan sepeda zaman dahulu",
-        "description": "Keramik, batik, dan sepeda kuno yang menggambarkan kehidupan sehari-hari masyarakat Riau."
+        "description": "Keramik, batik, dan sepeda kuno di ruang ini menggambarkan kehidupan sehari-hari masyarakat Riau. Keramik Tiongkok dan Eropa menjadi barang penting rumah tangga sekaligus penanda kemampuan ekonomi pemiliknya pada masa lalu. Batik menunjukkan hubungan dagang dengan Jawa, sedangkan sepeda menggambarkan masuknya kendaraan pribadi pada awal abad ke-20. Museum menempatkan benda rumah tangga seperti ini agar pengunjung melihat sisi keseharian, bukan hanya upacara dan kebesaran.",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Rumah tangga masyarakat Riau",
+        "material": "keramik, batik, dan logam"
       }
     ],
     "sources": [
@@ -1138,7 +1151,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-sang-nila-utama/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Sang Nila Utama — foto dari Wikimedia Commons",
         "caption": "Interior of Sang Nila Utama Museum in Pekanbaru",
         "credit": "Harditaher",
@@ -1146,10 +1159,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Sang_Nila_Utama_interior.jpg",
         "title": "Ruang pamer dua lantai",
-        "background": "Interior ini memperlihatkan ruang pamer dengan deretan tiang jingga dan lemari kaca di sepanjang balkon. Museum menempati bangunan dua lantai di kompleks Dinas Kebudayaan Provinsi Riau dan menyimpan sekitar 4.195 koleksi pada 2005, dari fosil, keramik, pakaian adat, sampai sepeda kuno."
+        "background": "Interior ini memperlihatkan ruang pamer dengan deretan tiang jingga dan lemari kaca di sepanjang balkon. Museum menempati bangunan dua lantai di kompleks Dinas Kebudayaan Provinsi Riau dan menyimpan sekitar 4.195 koleksi pada 2005, dari fosil, keramik, pakaian adat, sampai sepeda kuno.",
+        "period": "sekitar 4.195 koleksi pada 2005",
+        "detail": [
+          "Interior ini memperlihatkan ruang pamer dengan deretan tiang jingga dan lemari kaca di sepanjang balkon.",
+          "Museum menempati bangunan dua lantai di kompleks Dinas Kebudayaan Provinsi Riau.",
+          "Pada 2005 tercatat sekitar 4.195 koleksi.",
+          "Isinya beragam, dari fosil, keramik, pakaian adat, sampai sepeda kuno."
+        ]
       },
       {
-        "src": "/images/museums/museum-sang-nila-utama/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Sang Nila Utama — foto dari Wikimedia Commons",
         "caption": "Museum of Pekanbaru",
         "credit": "Harditaher",
@@ -1157,7 +1177,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Sang_Nila_Utama.jpg",
         "title": "Gedung Museum Sang Nila Utama",
-        "background": "Gedung inilah Museum Negeri Provinsi Riau yang didirikan 9 Januari 1991. Nama Sang Nila Utama mulai dipakai pada 13 Oktober 1993, merujuk raja Bintan abad ke-13. Setelah kewenangan daerah berubah pada 1999, statusnya menjadi museum daerah di bawah Dinas Kebudayaan Riau."
+        "background": "Gedung inilah Museum Negeri Provinsi Riau yang didirikan 9 Januari 1991. Nama Sang Nila Utama mulai dipakai pada 13 Oktober 1993, merujuk raja Bintan abad ke-13. Setelah kewenangan daerah berubah pada 1999, statusnya menjadi museum daerah di bawah Dinas Kebudayaan Riau.",
+        "period": "didirikan 9 Januari 1991",
+        "detail": [
+          "Gedung ini adalah Museum Negeri Provinsi Riau yang didirikan 9 Januari 1991.",
+          "Nama Sang Nila Utama mulai dipakai pada 13 Oktober 1993.",
+          "Nama itu merujuk raja Bintan abad ke-13.",
+          "Setelah kewenangan daerah berubah pada 1999, statusnya menjadi museum daerah di bawah Dinas Kebudayaan Riau."
+        ]
       }
     ],
     "types": [
@@ -1191,23 +1218,39 @@
     "exhibits": [
       {
         "title": "Duplikat cogan Johor–Riau–Lingga",
-        "description": "Duplikat alat kebesaran kerajaan dari emas dan perak bertahtakan permata mirah, dengan lempengan emas berbentuk daun sirih berinskiripsi Arab Melayu."
+        "description": "Cogan adalah alat kebesaran kerajaan yang dalam upacara berfungsi sebagai penanda kekuasaan sultan. Duplikat di museum ini dibuat dari emas dan perak bertahtakan permata mirah, dengan lempengan emas berbentuk daun sirih berinsikripsi Arab Melayu. Tulisan Arab Melayu itu menunjukkan bahwa kebudayaan Melayu dan tradisi Islam menyatu dalam simbol kerajaan. Karena yang dipamerkan adalah duplikat, benda ini menjelaskan bahwa cogan asli sering tidak lagi berada di tempat asalnya.",
+        "period": "masa Kesultanan Johor–Riau–Lingga",
+        "origin": "Kesultanan Johor–Riau–Lingga",
+        "material": "emas, perak, dan permata mirah",
+        "highlight": true
       },
       {
         "title": "Ruang Tanjungpinang Kota Bermula",
-        "description": "Ruang yang mengisahkan awal terbentuknya kota pelabuhan Tanjungpinang."
+        "description": "Ruang ini mengisahkan awal terbentuknya Tanjungpinang sebagai kota pelabuhan. Letaknya di Pulau Bintan menjadikannya titik persinggahan kapal yang berlayar antara Selat Malaka dan Laut Cina Selatan, sehingga kota tumbuh dari perdagangan dan administrasi, bukan dari pertanian. Kisahnya berkaitan langsung dengan Kesultanan Johor–Riau–Lingga yang berpusat di kawasan ini pada beberapa periode. Bagi pengunjung, ruang ini menjelaskan mengapa Tanjungpinang punya bangunan kolonial dan tata kota pesisir seperti sekarang.",
+        "period": "abad ke-18 hingga ke-20",
+        "origin": "Tanjungpinang, Pulau Bintan",
+        "material": "panel, peta, dan foto lama"
       },
       {
         "title": "Ruang Budaya Bahari dan Keramik",
-        "description": "Keramik, kendi, piring, dan guci yang mencerminkan jalur perdagangan maritim Kepulauan Riau."
+        "description": "Keramik, kendi, piring, dan guci di ruang ini mencerminkan jalur perdagangan maritim Kepulauan Riau. Barang-barang itu berasal dari Tiongkok, Asia Tenggara, dan Eropa, sehingga warnanya berbeda menurut asal dan masa pembuatannya. Bagi penduduk pesisir, keramik bukan hanya perkakas tetapi juga barang simpanan yang diwariskan. Karena Kepulauan Riau berada di tengah jalur pelayaran, temuan keramik di sini bisa dipakai untuk menelusuri ramainya perdagangan beberapa abad silam.",
+        "period": "abad ke-14 hingga ke-19",
+        "origin": "Jalur perdagangan maritim Kepulauan Riau",
+        "material": "keramik, kendi, piring, dan guci"
       },
       {
         "title": "Ruang Alam Perkawinan Melayu",
-        "description": "Benda dan tata cara perkawinan adat Melayu yang ditampilkan sebagai satu ruang khusus."
+        "description": "Ruang ini menampilkan benda dan tata cara perkawinan adat Melayu sebagai satu kesatuan. Yang dipamerkan bukan hanya busana, tetapi juga urutan upacara seperti tepuk tepung tawar dan pemberian gelar, yang berbeda antara satu daerah dan daerah lain. Tata cara ini biasanya dijelaskan lewat gambar dan panel karena berlangsung dalam waktu tertentu. Menempatkannya sebagai ruang khusus menunjukkan bahwa pernikahan Melayu dipandang sebagai peristiwa adat yang melibatkan keluarga besar, bukan urusan pribadi semata.",
+        "period": "tradisi Melayu Kepulauan Riau",
+        "origin": "Masyarakat Melayu Tanjungpinang",
+        "material": "busana, perlengkapan upacara, dan panel"
       },
       {
         "title": "Temuan neolitikum",
-        "description": "Kapak genggam, kapak batu, dan beliung persegi berbahan andesit dari koleksi prasejarah."
+        "description": "Ruang ini memuat kapak genggam, kapak batu, dan beliung persegi berbahan andesit dari koleksi prasejarah. Beliung persegi adalah penanda penting masa neolitikum karena dipakai untuk mengolah kayu dan membuka lahan, tidak sekadar berburu. Temuan seperti ini menunjukkan bahwa pulau-pulau kecil di Kepulauan Riau sudah dihuni jauh sebelum munculnya kerajaan maritim. Bagi museum, benda batu sederhana ini menjadi titik awal alur sejarah sebelum masuk ke masa kesultanan dan kolonial.",
+        "period": "masa neolitikum",
+        "origin": "Kawasan Kepulauan Riau",
+        "material": "batu andesit"
       }
     ],
     "sources": [
@@ -1218,7 +1261,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-sultan-sulaiman-badrul-alamsyah/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Sultan Sulaiman Badrul Alamsyah — foto dari Wikimedia Commons",
         "caption": "Museum Sultan Sulaiman Badrul Alamsyah in Kota Tanjung Pinang, Kepulauan Riau 35132, Indonesië",
         "credit": "MuhammadAditya",
@@ -1226,7 +1269,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseumtanjungpinang.jpg",
         "title": "Bekas Holland Irlandsch School",
-        "background": "Bangunan beratap limas ini dahulu sekolah dasar pertama di Tanjungpinang, Holland Irlandsch School (HIS), pada masa kolonial Belanda. Pada masa pendudukan Jepang namanya berubah menjadi Futsuko Gakka I, lalu menjadi Sekolah Rakyat setelah kemerdekaan. Sejak 31 Januari 2009 tempat ini menjadi museum."
+        "background": "Bangunan beratap limas ini dahulu sekolah dasar pertama di Tanjungpinang, Holland Irlandsch School (HIS), pada masa kolonial Belanda. Pada masa pendudukan Jepang namanya berubah menjadi Futsuko Gakka I, lalu menjadi Sekolah Rakyat setelah kemerdekaan. Sejak 31 Januari 2009 tempat ini menjadi museum.",
+        "period": "menjadi museum 31 Januari 2009",
+        "detail": [
+          "Bangunan beratap limas ini dahulu Holland Irlandsch School (HIS), sekolah dasar pertama di Tanjungpinang.",
+          "Pada masa pendudukan Jepang namanya berubah menjadi Futsuko Gakka I.",
+          "Setelah kemerdekaan bangunan dipakai sebagai Sekolah Rakyat.",
+          "Sejak 31 Januari 2009 tempat ini menjadi museum."
+        ]
       }
     ],
     "types": [
@@ -1261,19 +1311,32 @@
     "exhibits": [
       {
         "title": "Al-Qur'an tulisan tangan",
-        "description": "Mushaf kuno yang ditulis tangan, sebagian pada dedaunan dan kulit hewan, menunjukkan tradisi Islam di Lingga."
+        "description": "Mushaf kuno ini ditulis tangan, sebagian pada dedaunan dan kulit hewan, menunjukkan tradisi Islam di Lingga. Mushaf abad ke-19 dari Kesultanan Riau-Lingga ini beriluminasi khas Pantai Timur Semenanjung. Selain sebagai kitab, mushaf seperti ini adalah benda seni: pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India. Karena ditulis tangan, setiap mushaf berbeda, dan gaya tulisnya bisa menjadi petunjuk tempat pembuatannya.",
+        "period": "abad ke-19",
+        "origin": "Kesultanan Riau-Lingga",
+        "material": "kertas, sebagian dedaunan dan kulit hewan",
+        "highlight": true
       },
       {
         "title": "Perhiasan adat Melayu",
-        "description": "Aneka perhiasan serta tudung manto yang menjadi ciri busana Melayu Lingga."
+        "description": "Ruang ini memuat aneka perhiasan serta tudung manto yang menjadi ciri busana Melayu Lingga. Tudung manto adalah penutup kepala bersulam yang dikenakan pada acara adat, dan bentuknya berbeda dari busana Melayu di daerah lain. Perhiasan menunjukkan tingkat kemampuan ekonomi pemakainya, sehingga benda seperti ini juga menandai kedudukan sosial. Karena Lingga pernah menjadi pusat kesultanan, gaya busananya dipengaruhi oleh istana dan menyebar ke masyarakat sekitarnya.",
+        "period": "masa Kesultanan Lingga",
+        "origin": "Masyarakat Melayu Lingga",
+        "material": "logam dan kain sulaman"
       },
       {
         "title": "Alat tangkap ikan tradisional",
-        "description": "Peralatan menangkap hasil laut yang mencerminkan kedekatan masyarakat Lingga dengan perairan."
+        "description": "Peralatan menangkap hasil laut ini mencerminkan kedekatan masyarakat Lingga dengan perairan. Lingga terdiri atas pulau-pulau kecil yang dikelilingi laut, sehingga sebagian besar penduduknya bergantung pada tangkapan harian. Bentuk alat tangkap berbeda menurut jenis ikan dan kedalaman air, dan pengetahuan semacam ini diwariskan secara lisan. Bagi museum, peralatan seperti ini merekam pengetahuan praktis yang mudah hilang ketika pekerjaan berubah, bukan hanya benda yang indah dipandang.",
+        "period": "kehidupan pesisir Lingga",
+        "origin": "Perairan Lingga",
+        "material": "rotan, bambu, dan jaring"
       },
       {
         "title": "Porselen dan buli-buli",
-        "description": "Perkakas rumah tangga berbahan porselen dengan motif khas Melayu."
+        "description": "Perkakas rumah tangga berbahan porselen ini bermotif khas Melayu dan dipakai dalam kehidupan sehari-hari. Buli-buli, wadah kecil bertutup, biasanya dipakai untuk menyimpan minyak atau obat, dan bentuknya mudah dikenali di ruang pamer. Motif pada porselen menunjukkan perpaduan selera lokal dengan barang impor dari Tiongkok dan Eropa. Karena Lingga berada di jalur pelayaran, keberadaan porselen seperti ini sekaligus bukti bahwa kawasan ini terhubung dengan perdagangan jarak jauh.",
+        "period": "abad ke-18 hingga ke-19",
+        "origin": "Jalur dagang Tiongkok dan Eropa",
+        "material": "porselen"
       }
     ],
     "sources": [
@@ -1284,7 +1347,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-linggam-cahaya/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Linggam Cahaya — foto dari Wikimedia Commons",
         "caption": "A volume of the Quran dated from 19th century from the Riau-Lingga Sultanate.",
         "credit": "Unknown author Unknown author",
@@ -1292,7 +1355,14 @@
         "licenseUrl": null,
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3A2_Mushaf-Kerejaan-Riau-Lingga-dengan-iluminasi-gata-Pantai-Timur-Semenanjun-koleksi-Museum-Linggam-Cahaya-Daik-Lingga.jpg",
         "title": "Mushaf Al-Qur'an Riau-Lingga",
-        "background": "Mushaf abad ke-19 ini berasal dari Kesultanan Riau-Lingga dan beriluminasi khas Pantai Timur Semenanjung. Selain sebagai kitab, mushaf seperti ini adalah benda seni: pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India."
+        "background": "Mushaf abad ke-19 ini berasal dari Kesultanan Riau-Lingga dan beriluminasi khas Pantai Timur Semenanjung. Selain sebagai kitab, mushaf seperti ini adalah benda seni: pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India.",
+        "period": "abad ke-19",
+        "detail": [
+          "Mushaf abad ke-19 ini berasal dari Kesultanan Riau-Lingga.",
+          "Iluminasinya khas Pantai Timur Semenanjung.",
+          "Selain sebagai kitab, mushaf seperti ini adalah benda seni.",
+          "Pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India."
+        ]
       }
     ],
     "types": [
@@ -1326,15 +1396,25 @@
     "exhibits": [
       {
         "title": "Bangunan Istana Siak",
-        "description": "Istana itu sendiri adalah pameran utama: arsitektur Melayu dengan ornamen dan tata ruang kerajaan."
+        "description": "Istana itu sendiri adalah pameran utama: arsitektur Melayu dengan ornamen dan tata ruang kerajaan. Fasadnya berwarna krem dan memadukan bentuk Eropa seperti menara, jendela lengkung runcing, dan pintu melengkung dengan tata ruang istana Melayu. Perpaduan itu bukan kebetulan, karena istana dibangun pada masa Sultan Assyaidis Syarif Hasyim, ketika hubungan Siak dengan pemerintah Hindia Belanda cukup dekat. Karena itu bangunan ini bisa dibaca sebagai pernyataan politik lewat arsitektur, bukan hanya sebagai tempat tinggal sultan.",
+        "period": "dibangun masa Sultan Assyaidis Syarif Hasyim",
+        "origin": "Siak Sri Indrapura",
+        "material": "batu, kaca, dan kayu",
+        "highlight": true
       },
       {
         "title": "Koleksi kebesaran kesultanan",
-        "description": "Benda-benda dan perlengkapan istana yang dipamerkan di dalam ruang-ruang istana."
+        "description": "Ruang-ruang istana dipakai memamerkan benda dan perlengkapan kebesaran kesultanan. Salah satu yang paling menonjol adalah kursi singgasana berlapis emas, yang dipajang dalam lemari kaca dengan label namanya. Singgasana adalah pusat upacara kerajaan: di sinilah sultan menerima pembesar dan tamu, sehingga posisinya dalam tata ruang istana menandai hierarki kekuasaan. Dengan mempertahankan benda di ruang aslinya, museum membuat pengunjung bisa membaca arti sebuah benda dari letaknya, bukan hanya dari keterangannya.",
+        "period": "masa Kesultanan Siak",
+        "origin": "Istana Siak Sri Indrapura",
+        "material": "logam berlapis emas, kain, dan kayu"
       },
       {
         "title": "Arsip foto Sultan Siak",
-        "description": "Foto studio Sultan Siak dari koleksi arsip kolonial yang tersedia di Wikimedia Commons."
+        "description": "Foto studio Sultan Siak dalam busana kebesaran berasal dari arsip kolonial awal abad ke-20. Potret semacam ini biasanya dibuat untuk kepentingan administrasi kolonial sekaligus sebagai penanda hubungan antara kesultanan dan pemerintah Hindia Belanda. Posisi duduk, pakaian, dan latar foto semuanya dipilih untuk menyampaikan wibawa. Bagi museum, arsip ini penting karena banyak bangunan dan upacara istana tidak lagi dapat disaksikan, sehingga foto menjadi satu-satunya gambaran yang tersisa.",
+        "period": "awal abad ke-20",
+        "origin": "Koleksi arsip kolonial",
+        "material": "foto studio"
       }
     ],
     "sources": [
@@ -1345,7 +1425,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-istana-siak/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Istana Siak Sri Indrapura — foto dari Wikimedia Commons",
         "caption": "Studio portrait of the Sultan of Siak",
         "credit": "Unknown author Unknown author",
@@ -1353,10 +1433,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ACOLLECTIE_TROPENMUSEUM_Studioportret_van_de_Sultan_van_Siak_TMnr_60038054.jpg",
         "title": "Potret Sultan Siak",
-        "background": "Foto studio ini berasal dari arsip kolonial awal abad ke-20 dan memperlihatkan Sultan Siak dalam busana kebesaran. Potret semacam ini biasanya dibuat untuk kepentingan administrasi kolonial sekaligus sebagai penanda hubungan antara kesultanan dan pemerintah Hindia Belanda."
+        "background": "Foto studio ini berasal dari arsip kolonial awal abad ke-20 dan memperlihatkan Sultan Siak dalam busana kebesaran. Potret semacam ini biasanya dibuat untuk kepentingan administrasi kolonial sekaligus sebagai penanda hubungan antara kesultanan dan pemerintah Hindia Belanda.",
+        "period": "awal abad ke-20",
+        "detail": [
+          "Foto studio ini berasal dari arsip kolonial awal abad ke-20.",
+          "Sultan Siak digambarkan dalam busana kebesaran.",
+          "Potret semacam ini dibuat untuk kepentingan administrasi kolonial.",
+          "Sekaligus menjadi penanda hubungan antara kesultanan dan pemerintah Hindia Belanda."
+        ]
       },
       {
-        "src": "/images/museums/museum-istana-siak/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Istana Siak Sri Indrapura — foto dari Wikimedia Commons",
         "caption": "Bangunan Istana Siak",
         "credit": "Unknown author Unknown author",
@@ -1364,10 +1451,17 @@
         "licenseUrl": null,
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_siak_01.jpg",
         "title": "Fasad Istana Siak",
-        "background": "Istana berwarna krem ini memadukan bentuk Eropa — menara, jendela lengkung runcing, dan pintu melengkung — dengan tata ruang istana Melayu. Istana Siak Sri Indrapura dibangun pada masa Sultan Assyaidis Syarif Hasyim Abdul Jalil Syaifuddin dan kini menjadi museum yang menyimpan regalia kesultanan."
+        "background": "Istana berwarna krem ini memadukan bentuk Eropa — menara, jendela lengkung runcing, dan pintu melengkung — dengan tata ruang istana Melayu. Istana Siak Sri Indrapura dibangun pada masa Sultan Assyaidis Syarif Hasyim Abdul Jalil Syaifuddin dan kini menjadi museum yang menyimpan regalia kesultanan.",
+        "period": "masa Sultan Assyaidis Syarif Hasyim",
+        "detail": [
+          "Istana berwarna krem ini memadukan bentuk Eropa dengan tata ruang istana Melayu.",
+          "Unsur Eropa tampak pada menara, jendela lengkung runcing, dan pintu melengkung.",
+          "Istana Siak Sri Indrapura dibangun pada masa Sultan Assyaidis Syarif Hasyim Abdul Jalil Syaifuddin.",
+          "Kini menjadi museum yang menyimpan regalia kesultanan."
+        ]
       },
       {
-        "src": "/images/museums/museum-istana-siak/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Istana Siak Sri Indrapura — foto dari Wikimedia Commons",
         "caption": "Koleksi Istana",
         "credit": "Unknown author Unknown author",
@@ -1375,7 +1469,14 @@
         "licenseUrl": null,
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_siak_02.jpg",
         "title": "Kursi singgasana Kerajaan Siak Sri Indrapura",
-        "background": "Kursi berlapis emas ini dipajang di dalam lemari kaca dengan label “Kursi Singgasana Kerajaan Siak Sri Indrapura”. Singgasana adalah pusat upacara kerajaan: di sinilah sultan menerima pembesar dan tamu, sehingga posisinya dalam tata ruang istana menandai hierarki kekuasaan."
+        "background": "Kursi berlapis emas ini dipajang di dalam lemari kaca dengan label “Kursi Singgasana Kerajaan Siak Sri Indrapura”. Singgasana adalah pusat upacara kerajaan: di sinilah sultan menerima pembesar dan tamu, sehingga posisinya dalam tata ruang istana menandai hierarki kekuasaan.",
+        "period": "masa Kesultanan Siak",
+        "detail": [
+          "Kursi berlapis emas ini dipajang dalam lemari kaca.",
+          "Labelnya berbunyi “Kursi Singgasana Kerajaan Siak Sri Indrapura”.",
+          "Singgasana adalah pusat upacara kerajaan tempat sultan menerima pembesar dan tamu.",
+          "Posisinya dalam tata ruang istana menandai hierarki kekuasaan."
+        ]
       }
     ],
     "types": [
