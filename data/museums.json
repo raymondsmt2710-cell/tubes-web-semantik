@@ -529,19 +529,32 @@
     "exhibits": [
       {
         "title": "Ruang Masa Prasejarah",
-        "description": "Ruang pertama yang menampilkan sejarah geologi, pergeseran benua, migrasi manusia, serta replika hewan khas Sumatera dan fosil manusia purba."
+        "description": "Ruang pertama ini menampilkan sejarah geologi, pergeseran benua, migrasi manusia, serta replika hewan khas Sumatera dan fosil manusia purba. Alurnya dimulai dari terbentuknya Pulau Sumatera, sehingga pengunjung memahami bahwa daratan ini pernah menyatu dan bergeser sebelum dihuni manusia. Replika hewan dipakai karena fosil utuh jarang ditemukan, sedangkan fosil manusia purba memberi petunjuk kapan manusia pertama tiba di kawasan ini. Menempatkan ruang ini di awal menjadikan geologi sebagai dasar sebelum museum bercerita tentang kerajaan dan kolonialisme.",
+        "period": "prasejarah hingga masa migrasi",
+        "origin": "Ruang pamer tetap, lantai koleksi geologi",
+        "material": "fosil, replika hewan, dan panel geologi",
+        "highlight": true
       },
       {
         "title": "Arca Hindu-Buddha",
-        "description": "Arca peninggalan masa Hindu-Buddha yang menjadi bagian koleksi sejarah kuno Sumatera Utara."
+        "description": "Arca ini peninggalan masa Hindu-Buddha dan menjadi bagian koleksi sejarah kuno Sumatera Utara. Keberadaannya menunjukkan bahwa pengaruh India masuk ke pedalaman Sumatera, bukan hanya ke pesisir dan kerajaan besar di Jawa. Arca semacam ini biasanya ditemukan tidak lengkap, sehingga penjelasan museum mengenai bagian yang hilang sama pentingnya dengan yang tersisa. Bagi pengunjung, benda ini adalah bukti bahwa sebelum kesultanan Islam berdiri, kawasan ini sudah melewati masa keagamaan lain.",
+        "period": "masa Hindu-Buddha",
+        "origin": "Temuan di wilayah Sumatera Utara",
+        "material": "batu"
       },
       {
         "title": "Replika Masjid Azizi",
-        "description": "Replika masjid ikonik di Tanjung Pura, Langkat, yang mewakili masuknya Islam di pesisir timur Sumatera Utara."
+        "description": "Replika ini mewakili Masjid Azizi di Tanjung Pura, Langkat, yang menjadi penanda masuknya Islam di pesisir timur Sumatera Utara. Memilih masjid sebagai objek pameran menunjukkan bahwa Islam di kawasan ini berkembang lewat kesultanan dan jaringan dagang pesisir, bukan lewat penaklukan. Bentuk masjidnya yang berlapis dan berkubah menjadi ciri arsitektur Melayu pesisir. Karena berupa replika, pengunjung memperoleh gambaran bentuk keseluruhan tanpa harus membawa bangunan aslinya ke ruang pamer.",
+        "period": "masa masuknya Islam di pesisir timur",
+        "origin": "Tanjung Pura, Langkat",
+        "material": "replika"
       },
       {
         "title": "Ruang kolonial dan kepahlawanan",
-        "description": "Perkakas masa Kolonial Belanda, model figur kolonial, poster propaganda perang, serta lukisan dan foto para pahlawan serta gubernur Sumatera Utara."
+        "description": "Ruang ini memuat perkakas masa Kolonial Belanda, model figur kolonial, poster propaganda perang, serta lukisan dan foto para pahlawan serta gubernur Sumatera Utara. Poster propaganda menarik diperhatikan karena menunjukkan bagaimana kedua pihak membentuk opini publik lewat gambar dan slogan. Lukisan gubernur menandai peralihan kekuasaan dari kolonial ke pemerintahan republik. Dengan menempatkan keduanya dalam satu ruang, museum memperlihatkan masa kolonial dan masa kepahlawanan sebagai dua sisi dari periode yang sama.",
+        "period": "abad ke-19 hingga kemerdekaan",
+        "origin": "Masa Kolonial Belanda dan perang kemerdekaan",
+        "material": "perkakas, model figur, poster, lukisan, dan foto"
       }
     ],
     "sources": [
@@ -552,7 +565,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-negeri-sumatera-utara/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Negeri Provinsi Sumatera Utara — foto dari Wikimedia Commons",
         "caption": "Museum Negeri Sumatera Utara Building",
         "credit": "Harditaher",
@@ -560,10 +573,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Negeri_Sumatera_Utara_Medan.jpg",
         "title": "Gedung induk museum",
-        "background": "Bangunan dua lantai ini berdiri di lahan sekitar 10.468 m² di Jalan H.M. Jhoni, Medan. Peletakan batu pertama berupa sepasang makara dilakukan Presiden Soekarno pada 1954, tetapi museum baru diresmikan pada 19 April 1982 oleh Menteri Pendidikan dan Kebudayaan Daoed Joesoef. Di gedung ini terdapat ruang pameran tetap, ruang pameran temporer, ruang audio visual, dan perpustakaan."
+        "background": "Bangunan dua lantai ini berdiri di lahan sekitar 10.468 m² di Jalan H.M. Jhoni, Medan. Peletakan batu pertama berupa sepasang makara dilakukan Presiden Soekarno pada 1954, tetapi museum baru diresmikan pada 19 April 1982 oleh Menteri Pendidikan dan Kebudayaan Daoed Joesoef. Di gedung ini terdapat ruang pameran tetap, ruang pameran temporer, ruang audio visual, dan perpustakaan.",
+        "period": "diresmikan 1982",
+        "detail": [
+          "Bangunan dua lantai ini berdiri di lahan sekitar 10.468 m² di Jalan H.M. Jhoni, Medan.",
+          "Peletakan batu pertama berupa sepasang makara dilakukan Presiden Soekarno pada 1954.",
+          "Museum baru diresmikan 19 April 1982 oleh Menteri Pendidikan dan Kebudayaan Daoed Joesoef.",
+          "Di dalamnya ada ruang pameran tetap, ruang pameran temporer, ruang audio visual, dan perpustakaan."
+        ]
       },
       {
-        "src": "/images/museums/museum-negeri-sumatera-utara/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Negeri Provinsi Sumatera Utara — foto dari Wikimedia Commons",
         "caption": "Museum Negeri Sumatera Utara adalah salah satu museum terbesar di Sumatera Utara yang berbagai peninggalan sejarah budaya bangsa, hasil seni dan kerajinan dari berbagai suku di Sum",
         "credit": "Najla Khairani Siregar",
@@ -571,10 +591,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ASejarah_Provinsi_Sumatera_Utara_di_Museum_Negeri_Sumatera_Utara.jpg",
         "title": "Panel sejarah Provinsi Sumatera Utara",
-        "background": "Panel di ruang pamer ini mencatat bahwa Provinsi Sumatera Utara dibentuk lewat Undang-Undang Nomor 10 Tahun 1948, yang membagi Pulau Sumatera menjadi tiga provinsi. Isi panel menjadi contoh bagaimana museum tidak hanya memamerkan benda, tetapi juga menyusun kronologi pemerintahan sebagai bagian dari narasi sejarah daerah."
+        "background": "Panel di ruang pamer ini mencatat bahwa Provinsi Sumatera Utara dibentuk lewat Undang-Undang Nomor 10 Tahun 1948, yang membagi Pulau Sumatera menjadi tiga provinsi. Isi panel menjadi contoh bagaimana museum tidak hanya memamerkan benda, tetapi juga menyusun kronologi pemerintahan sebagai bagian dari narasi sejarah daerah.",
+        "period": "Undang-Undang Nomor 10 Tahun 1948",
+        "detail": [
+          "Panel ini mencatat bahwa Provinsi Sumatera Utara dibentuk lewat Undang-Undang Nomor 10 Tahun 1948.",
+          "Undang-undang itu membagi Pulau Sumatera menjadi tiga provinsi.",
+          "Isi panel menjadi contoh bagaimana museum menyusun kronologi pemerintahan sebagai bagian narasi sejarah daerah.",
+          "Museum di sini berfungsi tidak hanya memamerkan benda, tetapi juga menjelaskan pembentukan wilayah."
+        ]
       },
       {
-        "src": "/images/museums/museum-negeri-sumatera-utara/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Negeri Provinsi Sumatera Utara — foto dari Wikimedia Commons",
         "caption": "Museum Negeri Sumatera Utara merupakan Museum terbesar di Sumatera Utara yang berbagai peninggalan sejarah budaya bangsa, hasil seni dan kerajinan dari berbagai suku di Sumatera Ut",
         "credit": "Najla Khairani Siregar",
@@ -582,7 +609,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATenun_di_Museum_Negeri_Sumatera_Utara_3.jpg",
         "title": "Tenun di lemari kaca",
-        "background": "Kain tenun dipajang tergantung di dalam lemari kaca, dengan label kecil di atas setiap helai. Koleksi tekstil semacam ini mewakili keragaman suku di Sumatera Utara — Batak, Melayu, Nias, dan lainnya — yang menjadi kekuatan utama museum ini. Hingga 2005 museum mencatat 6.799 koleksi."
+        "background": "Kain tenun dipajang tergantung di dalam lemari kaca, dengan label kecil di atas setiap helai. Koleksi tekstil semacam ini mewakili keragaman suku di Sumatera Utara — Batak, Melayu, Nias, dan lainnya — yang menjadi kekuatan utama museum ini. Hingga 2005 museum mencatat 6.799 koleksi.",
+        "period": "hingga 2005 tercatat 6.799 koleksi",
+        "detail": [
+          "Kain tenun dipajang tergantung di dalam lemari kaca dengan label kecil di atas setiap helai.",
+          "Koleksi tekstil ini mewakili keragaman suku di Sumatera Utara: Batak, Melayu, Nias, dan lainnya.",
+          "Tenun menjadi kekuatan utama museum ini karena setiap kelompok punya corak dan teknik berbeda.",
+          "Hingga 2005 museum mencatat 6.799 koleksi, sehingga hanya sebagian yang bisa dipamerkan."
+        ]
       }
     ],
     "types": [
@@ -622,19 +656,33 @@
     "exhibits": [
       {
         "title": "Pustaha laklak",
-        "description": "Naskah Batak berbahan kulit kayu yang memuat ilmu tradisional dan ramalan."
+        "description": "Pustaha laklak adalah naskah Batak berbahan kulit kayu yang memuat ilmu tradisional dan ramalan. Isinya ditulis dengan aksara Batak dan dilipat seperti akordeon, sehingga bisa dibuka panjang saat dibaca. Naskah semacam ini biasanya dipegang oleh dukun atau ahli adat, bukan bacaan umum, karena berkaitan dengan pengobatan dan penentuan hari baik. Bagi museum, pustaha menunjukkan bahwa masyarakat Batak punya tradisi tulis sendiri, bukan hanya tradisi lisan yang lebih sering diceritakan.",
+        "period": "tradisi tulis Batak pra-kolonial",
+        "origin": "Kawasan Danau Toba, Samosir",
+        "material": "kulit kayu dan tali",
+        "highlight": true
       },
       {
         "title": "Tunggal panaluan",
-        "description": "Tongkat pusaka berukir yang dipakai dalam upacara masyarakat Batak."
+        "description": "Tunggal panaluan adalah tongkat pusaka berukir yang dipakai dalam upacara masyarakat Batak. Ukirannya biasanya berupa sosok-sosok bertumpuk, dan tongkat ini dianggap memiliki kekuatan yang hanya bisa dipakai oleh orang tertentu. Dalam upacara, benda seperti ini berfungsi sebagai penanda otoritas sekaligus perlengkapan ritual. Karena itu tunggal panaluan termasuk benda yang paling sering dibicarakan dalam penjelasan tentang kebudayaan Batak, dan kehadirannya di museum membantu pengunjung memahami sisi spiritual masyarakat Danau Toba.",
+        "period": "tradisi adat Batak",
+        "origin": "Kawasan Samosir",
+        "material": "kayu berukir",
+        "highlight": true
       },
       {
         "title": "Solu bolon",
-        "description": "Perahu kayu besar khas Batak yang dipamerkan di kompleks huta."
+        "description": "Solu bolon adalah perahu kayu besar khas Batak yang dipamerkan di kompleks huta. Danau Toba menjadi jalur penghubung antarkampung, sehingga perahu bukan hanya alat transportasi tetapi juga bagian dari kehidupan sehari-hari. Ukurannya yang besar menunjukkan bahwa perjalanan air bisa melibatkan banyak orang dan barang sekaligus. Menempatkannya di kompleks rumah adat membantu pengunjung melihat hubungan antara kampung di tepi danau dan wilayah seberang.",
+        "period": "perahu tradisional Danau Toba",
+        "origin": "Tepi Danau Toba",
+        "material": "kayu"
       },
       {
         "title": "Parhalaan",
-        "description": "Kalender tradisional Batak yang menjadi salah satu koleksi andalan museum."
+        "description": "Parhalaan adalah kalender tradisional Batak dan menjadi salah satu koleksi andalan museum. Isinya mencatat penanggalan dan penanda waktu yang dipakai untuk menentukan kapan bercocok tanam atau menggelar upacara. Keberadaan kalender seperti ini menunjukkan bahwa masyarakat Batak mengamati musim dan peredaran bulan secara cermat sebelum ada kalender modern. Bagi pengunjung, parhalaan menjelaskan bagaimana kegiatan pertanian dan adat di kawasan Danau Toba diatur oleh waktu yang disepakati bersama.",
+        "period": "kalender tradisional Batak",
+        "origin": "Kawasan Samosir",
+        "material": "kayu atau tulang bertulis"
       }
     ],
     "sources": [
@@ -645,7 +693,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-huta-bolon-simanindo/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Huta Bolon Simanindo — foto dari Wikimedia Commons",
         "caption": "Tampak bagian sebelah kiri",
         "credit": "Nafisathallah",
@@ -653,10 +701,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ARumah_adat_bolon_di_Museum_Huta_Bolon_Simanindo_3.jpg",
         "title": "Rumah adat Bolon dari samping",
-        "background": "Rumah adat Batak berbentuk rumah panggung dengan atap melengkung ini adalah inti kompleks Huta Bolon Simanindo, warisan Raja Sidauruk sejak 1969. Kompleksnya terdiri atas dua susun rumah adat yang saling berhadapan, masing-masing lima rumah, di tepi Danau Toba."
+        "background": "Rumah adat Batak berbentuk rumah panggung dengan atap melengkung ini adalah inti kompleks Huta Bolon Simanindo, warisan Raja Sidauruk sejak 1969. Kompleksnya terdiri atas dua susun rumah adat yang saling berhadapan, masing-masing lima rumah, di tepi Danau Toba.",
+        "period": "kompleks warisan sejak 1969",
+        "detail": [
+          "Rumah adat Batak berbentuk rumah panggung dengan atap melengkung ini adalah inti kompleks Huta Bolon Simanindo.",
+          "Kompleks ini adalah warisan Raja Sidauruk sejak 1969.",
+          "Terdiri atas dua susun rumah adat yang saling berhadapan, masing-masing lima rumah.",
+          "Letaknya di tepi Danau Toba, sehingga latar air menjadi bagian dari pandangan kawasan."
+        ]
       },
       {
-        "src": "/images/museums/museum-huta-bolon-simanindo/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Huta Bolon Simanindo — foto dari Wikimedia Commons",
         "caption": "Tampak bangunan dari depan",
         "credit": "Nafisathallah",
@@ -664,10 +719,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ARumah_adat_bolon_di_Museum_Huta_Bolon_Simanindo_2.jpg",
         "title": "Tampak depan rumah adat",
-        "background": "Dari depan terlihat struktur rumah panggung dengan tiang penyangga dan ukiran pada bagian atap. Susunan huta (kampung) seperti ini sengaja dipertahankan agar pengunjung memahami rumah adat sebagai bagian dari tata ruang kampung, bukan bangunan tunggal yang berdiri sendiri."
+        "background": "Dari depan terlihat struktur rumah panggung dengan tiang penyangga dan ukiran pada bagian atap. Susunan huta (kampung) seperti ini sengaja dipertahankan agar pengunjung memahami rumah adat sebagai bagian dari tata ruang kampung, bukan bangunan tunggal yang berdiri sendiri.",
+        "period": "tata ruang kampung tradisional",
+        "detail": [
+          "Dari depan terlihat struktur rumah panggung dengan tiang penyangga dan ukiran pada bagian atap.",
+          "Susunan huta (kampung) sengaja dipertahankan seperti aslinya.",
+          "Tujuannya agar pengunjung memahami rumah adat sebagai bagian tata ruang kampung, bukan bangunan tunggal.",
+          "Rumah-rumah saling berhadapan membentuk ruang bersama di tengahnya."
+        ]
       },
       {
-        "src": "/images/museums/museum-huta-bolon-simanindo/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Huta Bolon Simanindo — foto dari Wikimedia Commons",
         "caption": "Koleksi museum di Kabupaten Samosir",
         "credit": "Nafisathallah",
@@ -675,7 +737,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AKoleksi_Patung_Museum_Huta_Bolon_Simanindo_1.jpg",
         "title": "Patung batu penjaga",
-        "background": "Dua patung batu berwujud sosok duduk ini diletakkan di bawah naungan atap rumbia di area museum. Patung semacam ini dalam tradisi Batak berfungsi sebagai penjaga kampung dan penanda leluhur; gayanya yang sederhana menunjukkan tradisi megalitik yang lebih tua daripada arsitektur rumah adatnya."
+        "background": "Dua patung batu berwujud sosok duduk ini diletakkan di bawah naungan atap rumbia di area museum. Patung semacam ini dalam tradisi Batak berfungsi sebagai penjaga kampung dan penanda leluhur; gayanya yang sederhana menunjukkan tradisi megalitik yang lebih tua daripada arsitektur rumah adatnya.",
+        "period": "tradisi megalitik",
+        "detail": [
+          "Dua patung batu berwujud sosok duduk ini diletakkan di bawah naungan atap rumbia.",
+          "Dalam tradisi Batak, patung semacam ini berfungsi sebagai penjaga kampung dan penanda leluhur.",
+          "Gayanya yang sederhana menunjukkan tradisi megalitik yang lebih tua daripada arsitektur rumah adatnya.",
+          "Karena itu patung batu ini memberi petunjuk bahwa kawasan ini dihuni jauh sebelum rumah panggung dibangun."
+        ]
       }
     ],
     "types": [
@@ -709,15 +778,25 @@
     "exhibits": [
       {
         "title": "Gedung T.B. Silalahi",
-        "description": "Bangunan utama museum yang menjadi wajah kompleks pusat budaya Batak."
+        "description": "Bangunan utama ini adalah wajah kompleks T.B. Silalahi Center, pusat budaya Batak di Balige. Selain sebagai museum, tempat ini dipakai sebagai ruang kegiatan budaya, sehingga fungsinya lebih luas daripada museum pada umumnya. Artinya, pengunjung bisa menemukan pameran tetap sekaligus acara seperti pertunjukan atau pertemuan adat pada waktu tertentu. Posisinya di tepi Danau Toba menjadikan Balige titik yang mudah dicapai dari banyak kampung di sekitar danau.",
+        "period": "pusat budaya modern",
+        "origin": "Balige, tepi Danau Toba",
+        "material": "beton dan kaca"
       },
       {
         "title": "Rumah adat Karo",
-        "description": "Rumah tradisional Karo yang berdiri di area museum sebagai pameran arsitektur."
+        "description": "Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur. Kehadirannya menunjukkan bahwa kawasan Toba dihuni beberapa sub-etnis Batak dengan bentuk rumah yang berbeda: Karo di utara, Toba di sekitar danau. Atap ijuk yang menjulang adalah ciri yang mudah dibedakan dari rumah adat Toba. Dengan menempatkannya di sini, museum menjelaskan bahwa kebudayaan Batak tidak seragam, melainkan terdiri atas beberapa tradisi yang berdampingan.",
+        "period": "arsitektur tradisional Karo",
+        "origin": "Kawasan Karo, Sumatera Utara bagian utara",
+        "material": "kayu dan atap ijuk",
+        "highlight": true
       },
       {
         "title": "Koleksi budaya Batak",
-        "description": "Benda-benda budaya yang mengisahkan sejarah dan kehidupan masyarakat Batak di sekitar Danau Toba."
+        "description": "Koleksi ini berisi benda-benda budaya yang mengisahkan sejarah dan kehidupan masyarakat Batak di sekitar Danau Toba. Isinya mencakup perlengkapan rumah tangga, alat kerja, dan benda adat yang dipakai dalam kehidupan sehari-hari. Berbeda dari museum yang menonjolkan benda pusaka, koleksi semacam ini memperlihatkan sisi keseharian: bagaimana orang memasak, bertani, dan berpakaian. Karena kawasan Toba erat dengan pertanian dan danau, banyak benda di sini berkaitan dengan kedua hal itu.",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Berbagai daerah Batak",
+        "material": "kain, kayu, dan logam"
       }
     ],
     "sources": [
@@ -728,7 +807,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-tb-silalahi-center/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum TB Silalahi Center — foto dari Wikimedia Commons",
         "caption": "Front view of T.B. Silalahi Building, Batak Cultural Center",
         "credit": "Sam Hidayat",
@@ -736,10 +815,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AFront_view_of_T.B._Silalahi_Building%2C_Batak_Cultural_Center.jpg",
         "title": "Gedung T.B. Silalahi",
-        "background": "Bangunan utama ini adalah wajah kompleks T.B. Silalahi Center, pusat budaya Batak di Balige. Selain sebagai museum, tempat ini dipakai sebagai ruang kegiatan budaya, sehingga fungsinya lebih luas daripada museum pada umumnya."
+        "background": "Bangunan utama ini adalah wajah kompleks T.B. Silalahi Center, pusat budaya Batak di Balige. Selain sebagai museum, tempat ini dipakai sebagai ruang kegiatan budaya, sehingga fungsinya lebih luas daripada museum pada umumnya.",
+        "period": "kompleks budaya modern",
+        "detail": [
+          "Bangunan utama ini adalah wajah kompleks T.B. Silalahi Center, pusat budaya Batak di Balige.",
+          "Selain museum, tempat ini dipakai sebagai ruang kegiatan budaya.",
+          "Karena itu fungsinya lebih luas daripada museum pada umumnya.",
+          "Posisinya di tepi Danau Toba menjadikannya mudah dicapai dari banyak kampung sekitar danau."
+        ]
       },
       {
-        "src": "/images/museums/museum-tb-silalahi-center/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum TB Silalahi Center — foto dari Wikimedia Commons",
         "caption": "Portrait of a traditional Karo house in the T.B. Silalahi Center area",
         "credit": "Sam Hidayat",
@@ -747,10 +833,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3APortrait_of_a_traditional_Karo_house_in_the_T.B._Silalahi_Center_area.jpg",
         "title": "Rumah adat Karo di area museum",
-        "background": "Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur. Kehadirannya menunjukkan bahwa kawasan Toba dihuni beberapa sub-etnis Batak dengan bentuk rumah yang berbeda — Karo di utara, Toba di sekitar danau."
+        "background": "Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur. Kehadirannya menunjukkan bahwa kawasan Toba dihuni beberapa sub-etnis Batak dengan bentuk rumah yang berbeda — Karo di utara, Toba di sekitar danau.",
+        "period": "arsitektur Karo",
+        "detail": [
+          "Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur.",
+          "Bentuknya berbeda dari rumah adat Toba di sekitar danau.",
+          "Kehadirannya menunjukkan kawasan Toba dihuni beberapa sub-etnis Batak.",
+          "Karo mendiami bagian utara, sementara Toba berada di sekitar danau."
+        ]
       },
       {
-        "src": "/images/museums/museum-tb-silalahi-center/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum TB Silalahi Center — foto dari Wikimedia Commons",
         "caption": "Natural scenery around T.B. Silalahi Center",
         "credit": "Sam Hidayat",
@@ -758,7 +851,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ANatural_scenery_around_T.B._Silalahi_Center.jpg",
         "title": "Lanskap sekitar museum",
-        "background": "Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige. Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian, danau, dan kehidupan kampung."
+        "background": "Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige. Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian, danau, dan kehidupan kampung.",
+        "period": "lanskap Balige",
+        "detail": [
+          "Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige.",
+          "Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian.",
+          "Danau dan kehidupan kampung menjadi bagian yang tidak terpisahkan dari kebudayaan setempat.",
+          "Lanskapnya juga memperlihatkan bahwa museum ini berada di kawasan pertanian, bukan pusat kota."
+        ]
       }
     ],
     "types": [
@@ -794,15 +894,25 @@
     "exhibits": [
       {
         "title": "Benda peninggalan Sisingamangaraja XII",
-        "description": "Pusaka dan perlengkapan yang dikaitkan dengan perjuangan raja Batak terakhir."
+        "description": "Ruang ini memuat pusaka dan perlengkapan yang dikaitkan dengan perjuangan raja Batak terakhir. Sisingamangaraja XII memimpin perlawanan terhadap Belanda sampai gugur pada 1907, dan benda-benda peninggalannya menjadi penghubung langsung dengan masa itu. Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja dan kini menjadi kawasan makam raja-raja Batak. Karena itu kunjungan ke museum ini biasanya menyatu dengan ziarah ke kompleks makam di dekatnya.",
+        "period": "abad ke-19",
+        "origin": "Kawasan Bakkara, tepi Danau Toba",
+        "material": "pusaka dan perlengkapan",
+        "highlight": true
       },
       {
         "title": "Senjata tradisional Batak",
-        "description": "Senjata yang dipakai dalam perlawanan terhadap Belanda di kawasan Toba."
+        "description": "Senjata ini dipakai dalam perlawanan terhadap Belanda di kawasan Toba. Perang Batak berlangsung lama dan berpindah-pindah, mengikuti gerak pasukan raja yang bergerilya di perbukitan sekitar danau. Senjata tradisional menghadapi senjata api menjelaskan mengapa perlawanan itu berlangsung gigih tetapi akhirnya berakhir dengan gugurnya raja. Bagi pengunjung, benda seperti ini memperlihatkan bahwa perlawanan di Sumatera Utara tidak hanya terjadi di pesisir, tetapi juga di pedalaman danau.",
+        "period": "Perang Batak, 1878–1907",
+        "origin": "Kawasan Toba",
+        "material": "logam dan kayu"
       },
       {
         "title": "Dokumentasi Perang Batak",
-        "description": "Foto dan catatan yang menguraikan jalannya perlawanan di Tanah Batak."
+        "description": "Foto dan catatan di ruang ini menguraikan jalannya perlawanan di Tanah Batak. Sebagian besar dokumentasi berasal dari pihak kolonial, sehingga cara pandangnya perlu dibaca dengan hati-hati: foto dibuat untuk keperluan administrasi dan laporan militer. Meski begitu, arsip semacam ini tetap menjadi sumber penting karena pihak Batak sendiri jarang meninggalkan catatan tertulis tentang perang tersebut. Museum menempatkannya bersama benda peninggalan agar kedua sisi bisa dibandingkan.",
+        "period": "1878–1907",
+        "origin": "Arsip kolonial dan catatan setempat",
+        "material": "foto dan catatan"
       }
     ],
     "sources": [
@@ -813,7 +923,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-sisingamangaraja-xii/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Sisingamangaraja XII — foto dari Wikimedia Commons",
         "caption": "Grave and en:Flag of King Sisingamangaraja",
         "credit": "Kontributor Wikimedia Commons",
@@ -821,10 +931,17 @@
         "licenseUrl": "http://www.gnu.org/copyleft/fdl.html",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMakam_di_bakkara.jpg",
         "title": "Makam di Bakkara",
-        "background": "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja dan kini menjadi kawasan makam raja-raja Batak. Kompleks makam ini berada di dekat museum yang mengisahkan perlawanan Sisingamangaraja XII terhadap Belanda, yang berakhir dengan gugurnya raja pada 1907."
+        "background": "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja dan kini menjadi kawasan makam raja-raja Batak. Kompleks makam ini berada di dekat museum yang mengisahkan perlawanan Sisingamangaraja XII terhadap Belanda, yang berakhir dengan gugurnya raja pada 1907.",
+        "period": "kawasan makam raja-raja Batak",
+        "detail": [
+          "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja.",
+          "Kawasan ini kini menjadi kompleks makam raja-raja Batak.",
+          "Makamnya berada dekat museum yang mengisahkan perlawanan terhadap Belanda.",
+          "Perlawanan itu berakhir dengan gugurnya raja pada 1907."
+        ]
       },
       {
-        "src": "/images/museums/museum-sisingamangaraja-xii/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Sisingamangaraja XII — foto dari Wikimedia Commons",
         "caption": "Portrait of Sisingamangaraja XII , painted by Augustin Sibarani, from the obverse of the 1,000 rupiah banknote (1987 series)",
         "credit": "Bank of Indonesia",
@@ -832,7 +949,14 @@
         "licenseUrl": null,
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ASisingamangaraja_XII.jpg",
         "title": "Potret Sisingamangaraja XII",
-        "background": "Foto ini berasal dari arsip kolonial dan sudah menjadi domain publik. Sosok Sisingamangaraja XII digambarkan dalam busana kebesaran; potret semacam ini dipakai sebagai rujukan visual untuk patung, prangko, dan lukisan yang dibuat kemudian."
+        "background": "Foto ini berasal dari arsip kolonial dan sudah menjadi domain publik. Sosok Sisingamangaraja XII digambarkan dalam busana kebesaran; potret semacam ini dipakai sebagai rujukan visual untuk patung, prangko, dan lukisan yang dibuat kemudian.",
+        "period": "arsip kolonial, domain publik",
+        "detail": [
+          "Foto ini berasal dari arsip kolonial dan sudah menjadi domain publik.",
+          "Sisingamangaraja XII digambarkan dalam busana kebesaran.",
+          "Potret semacam ini dipakai sebagai rujukan visual untuk patung, prangko, dan lukisan yang dibuat kemudian.",
+          "Karena berasal dari pihak kolonial, konteks pembuatannya perlu diperhatikan."
+        ]
       }
     ],
     "types": [
@@ -867,19 +991,32 @@
     "exhibits": [
       {
         "title": "Lantai 1: prasejarah dan kesultanan",
-        "description": "Sejarah Deli Serdang, Kesultanan Deli, dan Kesultanan Serdang, termasuk kisah perjuangan di Deli Serdang."
+        "description": "Lantai pertama memuat sejarah Deli Serdang, Kesultanan Deli, dan Kesultanan Serdang, termasuk kisah perjuangan di Deli Serdang. Alurnya disusun dari masa prasejarah menuju berdirinya kesultanan, sehingga pengunjung memahami bahwa dua kesultanan itu muncul dalam lanskap yang sudah lama dihuni. Letak Deli Serdang yang dekat dengan pelabuhan membuat kawasan ini tumbuh cepat pada masa kolonial. Karena itu lantai ini menjadi dasar sebelum pengunjung naik ke koleksi kesultanan di lantai berikutnya.",
+        "period": "prasejarah hingga Kesultanan Deli dan Serdang",
+        "origin": "Lantai satu gedung museum",
+        "material": "panel, replika, dan benda koleksi",
+        "highlight": true
       },
       {
         "title": "Kisah Putri Hijau",
-        "description": "Kisah legenda Melayu yang dipaparkan di tangga antara lantai satu dan dua."
+        "description": "Kisah Putri Hijau dipaparkan di tangga antara lantai satu dan dua. Legenda ini dikenal luas dalam tradisi Melayu dan dikaitkan dengan asal-usul Kesultanan Deli, sehingga berfungsi sebagai penghubung antara bagian prasejarah dan bagian kesultanan. Menempatkannya di tangga adalah pilihan tata pamer yang menarik: pengunjung membaca kisah sambil berpindah lantai, seperti berpindah dari mitos ke sejarah. Karena berupa legenda, isinya tidak dipakai sebagai bukti sejarah, melainkan sebagai cara masyarakat mengingat asal-usulnya.",
+        "period": "legenda Melayu",
+        "origin": "Tradisi lisan Deli dan Serdang",
+        "material": "panel naratif"
       },
       {
         "title": "Lantai 2: koleksi Kesultanan Serdang",
-        "description": "Pakaian, alat musik, perlengkapan rumah tangga, hingga prasasti dari masa kesultanan."
+        "description": "Lantai dua memuat pakaian, alat musik, perlengkapan rumah tangga, hingga prasasti dari masa kesultanan. Koleksi semacam ini memperlihatkan kehidupan istana dari sisi yang jarang dibayangkan: bukan hanya upacara besar, tetapi juga peralatan sehari-hari dan cara orang berpakaian. Alat musik menunjukkan bahwa kesultanan menjadi pusat kegiatan seni, sementara prasasti memberi bukti tertulis tentang pemerintahan. Bersama-sama, benda di lantai ini menggambarkan kesultanan sebagai pusat kebudayaan, bukan hanya kekuasaan.",
+        "period": "masa Kesultanan Serdang",
+        "origin": "Kesultanan Serdang",
+        "material": "kain, alat musik, perlengkapan rumah tangga, prasasti"
       },
       {
         "title": "Lantai 3: pasca kemerdekaan",
-        "description": "Koleksi yang mengingatkan masa-masa setelah Indonesia merdeka."
+        "description": "Lantai tiga memuat koleksi yang mengingatkan masa-masa setelah Indonesia merdeka. Bagian ini melengkapi dua lantai sebelumnya dengan menunjukkan apa yang berubah setelah kesultanan tidak lagi berkuasa. Bagi Deli Serdang, masa itu ditandai oleh peralihan pemerintahan, perubahan tata guna tanah, dan pertumbuhan kota di sekitar Medan. Dengan menutup alur di lantai ini, museum menyusun perjalanan dari masa prasejarah sampai pemerintahan republik dalam satu bangunan.",
+        "period": "setelah 1945",
+        "origin": "Masa kemerdekaan Indonesia",
+        "material": "dokumen, foto, dan benda koleksi"
       }
     ],
     "sources": [
@@ -890,7 +1027,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-daerah-deli-serdang/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Daerah Deli Serdang — foto dari Wikimedia Commons",
         "caption": "Museum of Deli Serdang site visit by GLAM Indonesia team of Wikimedia Indonesia.",
         "credit": "Rachmat04",
@@ -898,10 +1035,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_of_Deli_Serdang_site_visit_by_Wikimedia_Indonesia%3B_January_2020_(13).jpg",
         "title": "Bidang tanah museum",
-        "background": "Halaman berumput dan deretan pohon ini adalah area museum baru Deli Serdang di Lubuk Pakam, yang dibangun di lahan eks Dinas Pertanian dan diresmikan 8 September 2018. Museum sebelumnya, dibuka 12 Agustus 2003, berada di kompleks perkantoran Tanjung Garbus."
+        "background": "Halaman berumput dan deretan pohon ini adalah area museum baru Deli Serdang di Lubuk Pakam, yang dibangun di lahan eks Dinas Pertanian dan diresmikan 8 September 2018. Museum sebelumnya, dibuka 12 Agustus 2003, berada di kompleks perkantoran Tanjung Garbus.",
+        "period": "diresmikan 8 September 2018",
+        "detail": [
+          "Halaman berumput dan deretan pohon ini adalah area museum baru Deli Serdang di Lubuk Pakam.",
+          "Museum dibangun di lahan eks Dinas Pertanian.",
+          "Diresmikan 8 September 2018.",
+          "Museum sebelumnya, dibuka 12 Agustus 2003, berada di kompleks perkantoran Tanjung Garbus."
+        ]
       },
       {
-        "src": "/images/museums/museum-daerah-deli-serdang/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Daerah Deli Serdang — foto dari Wikimedia Commons",
         "caption": "Kunjungan ke Museum Deli Serdang tahun 2022.",
         "credit": "Bennylin",
@@ -909,10 +1053,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Deli_Serdang_2022_Bennylin_06.jpg",
         "title": "Panel profil Provinsi Sumatera Utara",
-        "background": "Panel kaca ini memuat data luas, jumlah penduduk, daftar kabupaten/kota, dan fisiografi Sumatera Utara. Letaknya di awal alur pameran, berfungsi memberi konteks geografis sebelum pengunjung masuk ke sejarah Kesultanan Deli dan Serdang."
+        "background": "Panel kaca ini memuat data luas, jumlah penduduk, daftar kabupaten/kota, dan fisiografi Sumatera Utara. Letaknya di awal alur pameran, berfungsi memberi konteks geografis sebelum pengunjung masuk ke sejarah Kesultanan Deli dan Serdang.",
+        "period": "panel pengantar",
+        "detail": [
+          "Panel kaca ini memuat data luas, jumlah penduduk, dan daftar kabupaten/kota Sumatera Utara.",
+          "Isinya juga mencakup fisiografi, yaitu gambaran bentuk permukaan wilayah.",
+          "Letaknya di awal alur pameran, sebelum bagian sejarah kesultanan.",
+          "Fungsinya memberi konteks geografis sebelum pengunjung masuk ke sejarah Kesultanan Deli dan Serdang."
+        ]
       },
       {
-        "src": "/images/museums/museum-daerah-deli-serdang/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Daerah Deli Serdang — foto dari Wikimedia Commons",
         "caption": "Kunjungan ke Museum Deli Serdang tahun 2022.",
         "credit": "Bennylin",
@@ -920,7 +1071,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Deli_Serdang_2022_Bennylin_14.jpg",
         "title": "Daftar kecamatan Deli Serdang",
-        "background": "Daftar 22 kecamatan ini menjadi penanda bahwa museum adalah museum kabupaten: wilayah yang diceritakan bukan hanya kesultanan, tetapi juga kecamatan-kecamatan yang kini menopang Kabupaten Deli Serdang. Museum menempati gedung berkonsep “Itik Pulang Petang”, filosofi Melayu tentang keteraturan."
+        "background": "Daftar 22 kecamatan ini menjadi penanda bahwa museum adalah museum kabupaten: wilayah yang diceritakan bukan hanya kesultanan, tetapi juga kecamatan-kecamatan yang kini menopang Kabupaten Deli Serdang. Museum menempati gedung berkonsep “Itik Pulang Petang”, filosofi Melayu tentang keteraturan.",
+        "period": "data pemerintahan",
+        "detail": [
+          "Panel ini memuat daftar kecamatan yang termasuk wilayah Deli Serdang.",
+          "Daftar semacam ini membantu pengunjung memahami batas wilayah kabupaten saat ini.",
+          "Penempatannya di ruang pamer menunjukkan museum juga mendokumentasikan pemerintahan, bukan hanya benda lama.",
+          "Bagi pengunjung lokal, panel ini biasanya menjadi tempat mencari nama kampungnya sendiri."
+        ]
       }
     ],
     "types": [
