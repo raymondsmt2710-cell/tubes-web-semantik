@@ -4,7 +4,7 @@ import type { MuseumRecord, Exhibit, MuseumImage } from "../src/lib/types.ts";
 const path = "data/museums.json";
 const records = JSON.parse(readFileSync(path, "utf-8")) as MuseumRecord[];
 
-type ExhibitPatch = Partial<Exhibit> & { title: string };
+type ExhibitPatch = Partial<Exhibit> & { title: string; _new?: boolean };
 type GalleryPatch = { src: string } & Partial<MuseumImage>;
 
 const patches: Record<
@@ -22,11 +22,18 @@ function apply() {
     }
 
     for (const ex of patch.exhibits ?? []) {
-      const target = museum.exhibits?.find((e) => e.title === ex.title);
+      const { _new, ...fields } = ex;
+      const existing = museum.exhibits ?? [];
+      const target = existing.find((e) => e.title === ex.title);
       if (!target) {
-        throw new Error(`${slug}: pameran "${ex.title}" tidak ada.`);
+        if (!_new) {
+          throw new Error(`${slug}: pameran "${ex.title}" tidak ada.`);
+        }
+        museum.exhibits = [...existing, fields as Exhibit];
+        exhibitCount++;
+        continue;
       }
-      Object.assign(target, ex);
+      Object.assign(target, fields);
       exhibitCount++;
     }
 

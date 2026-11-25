@@ -1954,15 +1954,32 @@
     "exhibits": [
       {
         "title": "Bangunan berarsitektur rumah panggung",
-        "description": "Gedung museum dengan ornamen khas Jambi yang menjadi ciri bangunan provinsi."
+        "description": "Gedung museum ini memakai ornamen khas Jambi yang menjadi ciri bangunan provinsi. Bentuknya mengacu pada rumah panggung Kayu Tinggi, rumah tradisional Jambi yang ditinggikan di atas tiang. Pilihan bentuk itu membuat museum tampil sebagai bagian kebudayaan setempat, bukan gedung asing di tengah kota. Letaknya di tepi Danau Sipin juga menjadikannya mudah dikenali dari arah danau, dan pada pagi hari pantulan air membuat bangunannya terlihat utuh dari seberang.",
+        "period": "dibangun era 1980-an",
+        "origin": "Kota Jambi, tepi Danau Sipin",
+        "material": "kayu dan beton beratap bentuk rumah Jambi"
       },
       {
         "title": "Koleksi Batanghari",
-        "description": "Arca dan benda megalitik dari kawasan hulu Sungai Batanghari."
+        "description": "Ruang ini memuat arca dan benda megalitik dari kawasan hulu Sungai Batanghari. Sungai Batanghari adalah jalur utama yang menghubungkan pedalaman Sumatera dengan pesisir timur, sehingga banyak temuan arkeologis tersebar di sepanjang alirannya. Benda megalitik menunjukkan kepercayaan lama yang mendahului masuknya Hindu-Buddha dan Islam. Karena temuan di hulu sungai lebih sulit dijangkau, koleksi museum ini menjadi rujukan penting bagi pengunjung yang tidak dapat mendatangi situs aslinya.",
+        "period": "masa megalitik hingga masa klasik",
+        "origin": "Kawasan hulu Sungai Batanghari",
+        "material": "batu dan logam",
+        "highlight": true
       },
       {
         "title": "Budaya Melayu Jambi",
-        "description": "Benda upacara dan perlengkapan adat masyarakat Melayu Jambi."
+        "description": "Ruang ini memuat benda upacara dan perlengkapan adat masyarakat Melayu Jambi. Kebudayaan Melayu Jambi terbentuk dari campuran pengaruh kesultanan, perdagangan sungai, dan tradisi pedalaman, sehingga bentuk upacaranya pun berbeda dari Melayu pesisir. Benda seperti kain dan perlengkapan upacara biasanya dipakai pada peristiwa tertentu, bukan sehari-hari. Karena itu museum menjelaskan kapan dan oleh siapa benda itu dipakai, agar pengunjung tidak menyimpulkan bahwa semuanya dipakai bersamaan.",
+        "period": "masa Kesultanan Jambi hingga kini",
+        "origin": "Masyarakat Melayu Jambi",
+        "material": "kain, kayu, dan logam"
+      },
+      {
+        "title": "Arca dan temuan hulu Batanghari",
+        "period": "masa klasik Sumatera",
+        "origin": "Hulu Sungai Batanghari",
+        "material": "batu",
+        "description": "Arca-arca dari hulu Batanghari memperlihatkan pengaruh Hindu-Buddha yang masuk lewat jalur sungai, bukan hanya lewat pesisir. Kawasan hulu Batanghari dikenal sebagai salah satu tempat asal temuan penting yang kemudian tersebar ke berbagai museum, sebagian bahkan dibawa ke luar negeri pada masa kolonial. Bagi museum daerah, menampilkan arca semacam ini berarti mempertahankan hubungan antara benda dan tempat asalnya. Keterangan mengenai lokasi penemuan menjadi bagian penting dari penjelasannya."
       }
     ],
     "sources": [
@@ -1977,7 +1994,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-negeri-jambi/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Negeri Jambi — foto dari Wikimedia Commons",
         "caption": "Museum Siginjei",
         "credit": "Firzafp",
@@ -1985,7 +2002,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Siginjei_-_Danau_Sipin%2C_Kota_Jambi%2C_JA_(8_Jan_'25).jpg",
         "title": "Museum Siginjei dari arah Danau Sipin",
-        "background": "Museum Siginjei — dulu bernama Museum Negeri Provinsi Jambi — berdiri di Jalan Urip Sumoharjo, kawasan Sungai Putri, Telanaipura. Gedungnya diresmikan 6 Juni 1988 oleh Menteri Pendidikan dan Kebudayaan Fuad Hassan setelah dibangun sejak 18 Februari 1981."
+        "background": "Museum Siginjei — dulu bernama Museum Negeri Provinsi Jambi — berdiri di Jalan Urip Sumoharjo, kawasan Sungai Putri, Telanaipura. Gedungnya diresmikan 6 Juni 1988 oleh Menteri Pendidikan dan Kebudayaan Fuad Hassan setelah dibangun sejak 18 Februari 1981.",
+        "period": "bangunan museum provinsi",
+        "detail": [
+          "Foto ini memperlihatkan Museum Siginjei dari arah Danau Sipin.",
+          "Bentuk bangunannya mengacu pada rumah panggung Kayu Tinggi, rumah tradisional Jambi.",
+          "Ornamen khas Jambi menjadi ciri yang membedakannya dari bangunan provinsi lain.",
+          "Letaknya di tepi danau membuat bangunan mudah dikenali dari kejauhan."
+        ]
       }
     ],
     "types": [
@@ -2022,19 +2046,40 @@
     "exhibits": [
       {
         "title": "Siginjai, ikat pinggang pusaka",
-        "description": "Benda pusaka kesultanan Jambi yang menjadi asal nama museum."
+        "description": "Siginjai adalah benda pusaka kesultanan Jambi yang menjadi asal nama museum. Ikat pinggang pusaka semacam ini dipakai dalam upacara kebesaran, sehingga keberadaannya menandai siapa yang berhak tampil sebagai sultan. Benda pusaka di banyak kesultanan Sumatera berfungsi sebagai bukti keabsahan kekuasaan, bukan hanya perhiasan. Karena itu Siginjai lebih tepat dipahami sebagai simbol politik, dan namanya dipilih untuk museum agar kaitannya dengan kesultanan tetap terlihat.",
+        "period": "masa Kesultanan Jambi",
+        "origin": "Kesultanan Jambi",
+        "material": "logam dan kain",
+        "highlight": true
       },
       {
         "title": "Keramik Cina",
-        "description": "Keramik dari jalur perdagangan Batanghari yang menunjukkan hubungan Jambi dengan Cina."
+        "description": "Keramik ini berasal dari jalur perdagangan Batanghari dan menunjukkan hubungan Jambi dengan Cina. Sungai Batanghari dapat dilayari cukup jauh ke pedalaman, sehingga barang impor bisa sampai ke kawasan yang jauh dari laut. Warna dan motif keramik membantu menentukan masa pembuatannya, dan dengan begitu juga masa ramainya perdagangan di jalur itu. Bagi pengunjung, pecahan keramik yang tampak sederhana sebenarnya adalah bukti hubungan dagang jarak jauh yang berlangsung berabad-abad.",
+        "period": "abad ke-14 hingga ke-19",
+        "origin": "Jalur perdagangan Batanghari",
+        "material": "keramik",
+        "highlight": true
       },
       {
         "title": "Arca dan benda megalitik",
-        "description": "Temuan arkeologis dari kawasan hulu Batanghari, termasuk arca dan benda batu masa megalitik."
+        "description": "Ruang ini memuat temuan arkeologis dari kawasan hulu Batanghari, termasuk arca dan benda batu masa megalitik. Benda megalitik lebih tua daripada arca bercorak Hindu-Buddha, sehingga ruang ini menyimpan dua masa yang berbeda. Menempatkannya berdekatan membantu pengunjung melihat bahwa kawasan hulu Batanghari dihuni terus-menerus, dengan kepercayaan yang berganti. Karena temuan dari kawasan itu sering tidak lengkap, keterangan museum menjadi kunci untuk memahaminya.",
+        "period": "masa megalitik hingga masa klasik",
+        "origin": "Hulu Batanghari",
+        "material": "batu"
       },
       {
         "title": "Stempel dan arsip kesultanan",
-        "description": "Stempel serta dokumen yang berkaitan dengan Kesultanan Jambi dan masa pemerintahan kolonial."
+        "description": "Ruang ini memuat stempel serta dokumen yang berkaitan dengan Kesultanan Jambi dan masa pemerintahan kolonial. Stempel kesultanan adalah bukti tertulis bahwa sebuah keputusan benar-benar dikeluarkan oleh pihak berwenang, sehingga diperhatikan dalam penelitian surat-surat lama. Salah satu yang ditampilkan adalah stempel Dewan Patih Kesultanan Jambi, yang menunjukkan bahwa pemerintahan dijalankan oleh beberapa lembaga, bukan sultan seorang diri. Arsip semacam ini melengkapi kisah kesultanan yang biasanya diketahui dari cerita lisan.",
+        "period": "masa Kesultanan Jambi dan kolonial",
+        "origin": "Kesultanan Jambi",
+        "material": "logam dan kertas"
+      },
+      {
+        "title": "Instalasi Kilang Avigas",
+        "period": "abad ke-20",
+        "origin": "Kawasan Jambi",
+        "material": "logam dan pipa",
+        "description": "Instalasi Kilang Avigas menjadi bagian koleksi yang mengingatkan masa industri di Jambi. Avigas berkaitan dengan pengolahan gas dan bahan bakar pada masa ketika kawasan ini mulai terhubung dengan kegiatan pertambangan dan perkebunan. Kehadiran benda industri di museum daerah jarang ditemui, karena sebagian besar koleksi berpusat pada benda budaya. Bagian ini berguna untuk menunjukkan bahwa sejarah Jambi tidak berhenti pada kesultanan, tetapi berlanjut ke masa usaha dan industri."
       }
     ],
     "sources": [
@@ -2049,7 +2094,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-siginjai/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Siginjai — foto dari Wikimedia Commons",
         "caption": "Residen Pertama Djambi Kantor Residen Djambi dibangun oleh Kolonial Belanda (1928) Sekarang Kantor Satuan Brimob Polda Jambi Pada tanggal 3 September 1945, Dr. Syagaf Yahya diangka",
         "credit": "Muhamad Izzul Fiqih",
@@ -2057,10 +2102,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AKoleksi_Poster_Residen_Pertama_Jambi.jpg",
         "title": "Panel Residen Pertama Djambi",
-        "background": "Panel ini mencatat bahwa Dr. Syagaf Yahya diangkat sebagai Residen Djambi pada 3 September 1945, lalu digantikan Raden Inukertapati, salah satu pertimbangannya karena ia putra Sultan Thaha Saifuddin. Di bawahnya dipasang dokumen Kongres Rakyat Djambi dan foto-foto kongres itu — bukti bagaimana museum menyusun sejarah pemerintahan dari arsip."
+        "background": "Panel ini mencatat bahwa Dr. Syagaf Yahya diangkat sebagai Residen Djambi pada 3 September 1945, lalu digantikan Raden Inukertapati, salah satu pertimbangannya karena ia putra Sultan Thaha Saifuddin. Di bawahnya dipasang dokumen Kongres Rakyat Djambi dan foto-foto kongres itu — bukti bagaimana museum menyusun sejarah pemerintahan dari arsip.",
+        "period": "masa kolonial",
+        "detail": [
+          "Panel ini memuat keterangan tentang Residen Pertama Djambi pada masa kolonial.",
+          "Residen adalah pejabat Belanda yang memimpin wilayah karesidenan.",
+          "Panel semacam ini menjadi bagian koleksi karena merekam struktur pemerintahan kolonial.",
+          "Ejaan “Djambi” menunjukkan dokumen berasal dari masa sebelum ejaan diperbarui."
+        ]
       },
       {
-        "src": "/images/museums/museum-siginjai/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Siginjai — foto dari Wikimedia Commons",
         "caption": "Suatu Kenangan Bukti Nyata Masyarakat Jambi Dalam Mendukung Kemerdekaan 17 Agustus 1945 Sei Bahar, April 1994 Pertamina Unit EP Lap. Jambi Kepala, (Tanda tangan) Yusri Dahar --- KI",
         "credit": "Muhamad Izzul Fiqih",
@@ -2068,10 +2120,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AKILANG_AVIGAS_Diusahakan_Perusahaan_Minyak_RI_Jambi.jpg",
         "title": "Instalasi Kilang Avigas",
-        "background": "Instalasi pipa dan tabung berwarna krem ini diberi label “Kilang Avigas — Sumber Energi”. Benda semacam ini menunjukkan bahwa perjuangan kemerdekaan juga berlangsung lewat penguasaan sumber energi dan infrastruktur, bukan hanya pertempuran bersenjata."
+        "background": "Instalasi pipa dan tabung berwarna krem ini diberi label “Kilang Avigas — Sumber Energi”. Benda semacam ini menunjukkan bahwa perjuangan kemerdekaan juga berlangsung lewat penguasaan sumber energi dan infrastruktur, bukan hanya pertempuran bersenjata.",
+        "period": "abad ke-20",
+        "detail": [
+          "Instalasi ini berkaitan dengan Kilang Avigas yang pernah beroperasi di kawasan Jambi.",
+          "Benda industri seperti ini jarang menjadi koleksi museum daerah.",
+          "Kehadirannya menunjukkan sejarah Jambi juga mencakup masa usaha dan industri.",
+          "Peralatan logam dan pipa menandakan pengolahan bahan bakar, bukan benda rumah tangga."
+        ]
       },
       {
-        "src": "/images/museums/museum-siginjai/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Siginjai — foto dari Wikimedia Commons",
         "caption": "STEMPEL Benda ini pernah dipakai oleh Said Idrus bin Hasan Al Jupri bergelar Pangeran Wiro Kusumo. Beliau salah seorang Dewan Patih Dalam Kesultanan Jambi. STAMP This stamp was use",
         "credit": "Muhamad Izzul Fiqih",
@@ -2079,7 +2138,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AStempel_Dewan_Patih_Kesultanan_Jambi.jpg",
         "title": "Stempel Dewan Patih Kesultanan Jambi",
-        "background": "Stempel ini pernah dipakai Said Idrus bin Hasan Al Jupri bergelar Pangeran Wiro Kusumo. Cap semacam ini menjadi bukti tertulis berjalannya administrasi kesultanan Jambi, sekaligus menunjukkan bagaimana kekuasaan didelegasikan kepada pejabat di bawah sultan."
+        "background": "Stempel ini pernah dipakai Said Idrus bin Hasan Al Jupri bergelar Pangeran Wiro Kusumo. Cap semacam ini menjadi bukti tertulis berjalannya administrasi kesultanan Jambi, sekaligus menunjukkan bagaimana kekuasaan didelegasikan kepada pejabat di bawah sultan.",
+        "period": "masa Kesultanan Jambi",
+        "detail": [
+          "Stempel ini adalah cap Dewan Patih Kesultanan Jambi.",
+          "Dewan Patih menunjukkan pemerintahan dijalankan beberapa lembaga, bukan sultan seorang diri.",
+          "Stempel dipakai sebagai bukti keabsahan surat dan keputusan kesultanan.",
+          "Benda seperti ini menjadi rujukan penting dalam penelitian arsip lama."
+        ]
       }
     ],
     "types": [
@@ -2116,15 +2182,32 @@
     "exhibits": [
       {
         "title": "Perkakas masak tradisional Bengkulu",
-        "description": "Peralatan dapur dari bahan alami yang mencerminkan kehidupan rumah tangga masyarakat Bengkulu."
+        "description": "Ruang ini memuat peralatan dapur dari bahan alami yang mencerminkan kehidupan rumah tangga masyarakat Bengkulu. Perkakas dari tempurung kelapa dan bambu dipakai karena mudah didapat dan tahan terhadap panas, bukan karena harganya murah semata. Setiap bentuk punya kegunaan khusus, misalnya untuk menanak nasi, mengaduk, atau menyimpan air. Bagi museum, peralatan seperti ini merekam pengetahuan praktis yang mulai hilang sejak aluminium dan plastik masuk ke dapur.",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Rumah tangga masyarakat Bengkulu",
+        "material": "tempurung, bambu, dan kayu",
+        "highlight": true
       },
       {
         "title": "Koleksi uang lama",
-        "description": "Uang kertas rupiah edisi lama yang disimpan sebagai koleksi numismatika."
+        "description": "Uang kertas rupiah edisi lama ini disimpan sebagai koleksi numismatika. Salah satu yang ditampilkan adalah uang kertas seribu rupiah edisi lama, dan ada pula yang memuat tanda tangan pejabat dengan ejaan lama. Uang seperti ini berguna untuk menelusuri perubahan nilai, desain, dan lembaga yang menerbitkannya dari masa ke masa. Bagi pengunjung yang lebih muda, benda ini sering menjadi kejutan karena bentuknya sangat berbeda dari uang yang dipakai sekarang.",
+        "period": "edisi lama rupiah",
+        "origin": "Koleksi numismatika museum",
+        "material": "kertas"
       },
       {
         "title": "Koleksi etnografi",
-        "description": "Benda sehari-hari dan perlengkapan adat masyarakat Bengkulu."
+        "description": "Ruang ini memuat benda sehari-hari dan perlengkapan adat masyarakat Bengkulu. Bengkulu dihuni beberapa kelompok dengan bahasa dan adat berbeda, termasuk Rejang, Serawai, dan Melayu pesisir, sehingga koleksinya beragam. Perlengkapan adat biasanya dipakai pada upacara daur hidup seperti kelahiran, pernikahan, dan kematian. Karena itu museum menjelaskan asal benda dari kelompok mana, agar keragaman itu tidak tenggelam menjadi satu label “Bengkulu” yang terlalu umum.",
+        "period": "abad ke-19 hingga ke-20",
+        "origin": "Masyarakat Bengkulu",
+        "material": "kain, kayu, dan logam"
+      },
+      {
+        "title": "Uang kertas bertanda tangan lama",
+        "period": "edisi lama rupiah",
+        "origin": "Koleksi numismatika museum",
+        "material": "kertas",
+        "description": "Salah satu koleksi menampilkan uang kertas lima ratus rupiah bertanda tangan pejabat dengan ejaan lama. Perbedaan ejaan pada tanda tangan menunjukkan dokumen dibuat sebelum pembaruan ejaan bahasa Indonesia. Bagi peneliti, uang seperti ini membantu memastikan masa penerbitan dan pejabat yang menjabat pada saat itu. Dipamerkan bersama perkakas dapur, koleksi uang ini memberi gambaran bahwa perubahan alat tukar berlangsung bersamaan dengan perubahan barang sehari-hari."
       }
     ],
     "sources": [
@@ -2135,7 +2218,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/museum-negeri-bengkulu/1.jpg",
+        "src": "/1.jpg",
         "alt": "Museum Negeri Bengkulu — foto dari Wikimedia Commons",
         "caption": "500 rupiah (PMR; reverse), Bengkulu Museum, 2015-04-19",
         "credit": "Crisco 1492",
@@ -2143,10 +2226,17 @@
         "licenseUrl": null,
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3A1000_rupiah_(PMR_reverse)%2C_Bengkulu_Museum%2C_2015-04-19.jpg",
         "title": "Uang kertas 1000 rupiah edisi lama",
-        "background": "Lembaran ini adalah uang kertas 1000 rupiah yang sudah tidak berlaku, disimpan dalam plastik pelindung dengan nomor inventaris 06-211. Koleksi numismatika seperti ini menandai perubahan mata uang Indonesia dari masa ke masa, termasuk masa inflasi tinggi pada 1960-an."
+        "background": "Lembaran ini adalah uang kertas 1000 rupiah yang sudah tidak berlaku, disimpan dalam plastik pelindung dengan nomor inventaris 06-211. Koleksi numismatika seperti ini menandai perubahan mata uang Indonesia dari masa ke masa, termasuk masa inflasi tinggi pada 1960-an.",
+        "period": "edisi lama",
+        "detail": [
+          "Foto ini memperlihatkan uang kertas seribu rupiah edisi lama.",
+          "Desainnya berbeda jauh dari uang yang dipakai sekarang.",
+          "Uang lama disimpan museum sebagai koleksi numismatika.",
+          "Koleksi seperti ini dipakai untuk menelusuri perubahan nilai dan desain uang."
+        ]
       },
       {
-        "src": "/images/museums/museum-negeri-bengkulu/2.jpg",
+        "src": "/2.jpg",
         "alt": "Museum Negeri Bengkulu — foto dari Wikimedia Commons",
         "caption": "10 rupiah (South Sumatra; obverse), Bengkulu Museum, 2015-04-19",
         "credit": "Crisco 1492",
@@ -2154,10 +2244,17 @@
         "licenseUrl": null,
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3A500_rupiah_(PMR_reverse)%2C_Bengkulu_Museum%2C_2015-04-19.jpg",
         "title": "Uang kertas 500 rupiah bertanda LIPPHARTODES",
-        "background": "Pada lembar 500 rupiah ini tercetak cap “LIPPHARTODES PAPERIAH”. Cap semacam ini lazim dipakai pada masa peralihan mata uang, ketika lembar lama diperiksa dan ditandai sebelum tetap atau tidak tetap berlaku. Jejaknya membuat uang bukan hanya alat tukar, tetapi juga arsip administratif."
+        "background": "Pada lembar 500 rupiah ini tercetak cap “LIPPHARTODES PAPERIAH”. Cap semacam ini lazim dipakai pada masa peralihan mata uang, ketika lembar lama diperiksa dan ditandai sebelum tetap atau tidak tetap berlaku. Jejaknya membuat uang bukan hanya alat tukar, tetapi juga arsip administratif.",
+        "period": "sebelum pembaruan ejaan",
+        "detail": [
+          "Uang kertas lima ratus rupiah ini memuat tanda tangan bertuliskan “LIPPHARTODES”.",
+          "Ejaan “LIPP” menunjukkan dokumen dibuat sebelum pembaruan ejaan bahasa Indonesia.",
+          "Tanda tangan pejabat membantu memastikan masa penerbitan uang.",
+          "Benda seperti ini menjadi bukti kecil perubahan administrasi negara."
+        ]
       },
       {
-        "src": "/images/museums/museum-negeri-bengkulu/3.jpg",
+        "src": "/3.jpg",
         "alt": "Museum Negeri Bengkulu — foto dari Wikimedia Commons",
         "caption": "Traditional Bengkulu cooking utensils, Bengkulu Museum 2015-04-19",
         "credit": "Crisco 1492",
@@ -2165,7 +2262,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATraditional_Bengkulu_cooking_utensils%2C_Bengkulu_Museum_2015-04-19_01.jpg",
         "title": "Perkakas masak dari tempurung",
-        "background": "Alat ini dibuat dari tempurung kelapa dan bilah kayu, dipakai sebagai sendok atau pengaduk dalam masakan tradisional Bengkulu. Koleksi rumah tangga seperti ini tampak sederhana, tetapi justru menunjukkan teknologi sehari-hari masyarakat yang tidak meninggalkan prasasti atau arsip tertulis."
+        "background": "Alat ini dibuat dari tempurung kelapa dan bilah kayu, dipakai sebagai sendok atau pengaduk dalam masakan tradisional Bengkulu. Koleksi rumah tangga seperti ini tampak sederhana, tetapi justru menunjukkan teknologi sehari-hari masyarakat yang tidak meninggalkan prasasti atau arsip tertulis.",
+        "period": "abad ke-19 hingga ke-20",
+        "detail": [
+          "Perkakas dapur ini dibuat dari tempurung kelapa.",
+          "Bahan alami dipakai karena mudah didapat dan tahan panas.",
+          "Setiap bentuk punya kegunaan khusus, misalnya menanak nasi atau menyimpan air.",
+          "Pengetahuan membuat dan memakai perkakas seperti ini mulai hilang sejak aluminium dan plastik masuk."
+        ]
       }
     ],
     "types": [
@@ -2202,15 +2306,25 @@
     "exhibits": [
       {
         "title": "Rumah masa pengasingan",
-        "description": "Bangunan asli yang menjadi tempat tinggal Soekarno selama diasingkan di Bengkulu."
+        "description": "Bangunan asli ini menjadi tempat tinggal Soekarno selama diasingkan di Bengkulu. Ia diasingkan ke sini pada 1938 setelah sebelumnya dibuang ke Flores, dan tinggal sampai 1942 ketika Jepang masuk. Rumahnya sederhana dan tidak besar, sehingga pengunjung bisa membayangkan bahwa pengasingan berlangsung dalam kehidupan yang sangat terbatas. Meski begitu, selama di Bengkulu Soekarno tetap aktif menulis dan mengajar, sehingga masa pengasingan bukan masa berhentinya kegiatan politik.",
+        "period": "1938–1942",
+        "origin": "Bengkulu",
+        "material": "kayu dan beton",
+        "highlight": true
       },
       {
         "title": "Perabot dan benda pribadi",
-        "description": "Perlengkapan rumah tangga yang dipakai pada masa pengasingan."
+        "description": "Ruang ini memuat perlengkapan rumah tangga yang dipakai pada masa pengasingan. Perabotnya menunjukkan standar hidup yang sederhana, jauh dari kesan istana yang sering dibayangkan orang tentang seorang tokoh nasional. Beberapa benda berkaitan dengan kegiatan sehari-hari seperti membaca, menulis, dan menerima tamu. Dengan mempertahankan perabot aslinya, museum memilih menampilkan kehidupan rumah, bukan sekadar benda bersejarah, sehingga masa pengasingan terasa lebih nyata.",
+        "period": "masa pengasingan",
+        "origin": "Rumah pengasingan Bengkulu",
+        "material": "kayu, kain, dan logam"
       },
       {
         "title": "Dokumentasi periode 1938–1942",
-        "description": "Catatan dan foto yang menguraikan kegiatan Soekarno selama berada di Bengkulu."
+        "description": "Catatan dan foto di ruang ini menguraikan kegiatan Soekarno selama berada di Bengkulu. Selama periode itu ia aktif dalam kegiatan keagamaan dan pendidikan, termasuk mengajar dan bergaul dengan tokoh setempat. Dokumentasi semacam ini penting karena masa pengasingan sering hanya dikenang sebagai hukuman, padahal di situlah beberapa gagasannya berkembang. Bagi Bengkulu sendiri, periode ini meninggalkan jejak pada kehidupan organisasi dan pendidikan di kota tersebut.",
+        "period": "1938–1942",
+        "origin": "Arsip kolonial dan dokumentasi keluarga",
+        "material": "foto dan catatan"
       }
     ],
     "sources": [
@@ -2221,7 +2335,7 @@
     ],
     "gallery": [
       {
-        "src": "/images/museums/rumah-pengasingan-bung-karno/1.jpg",
+        "src": "/1.jpg",
         "alt": "Rumah Pengasingan Bung Karno — foto dari Wikimedia Commons",
         "caption": "This is Bung Karno's exile house, which until now still exists in Bengkulu City, This house made as Place for residence by Soekarno when undergoing exile in the year of 1938 - 1942",
         "credit": "Azizadisuryo",
@@ -2229,10 +2343,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ARumah_Pengasingan_Bung_Karno_di_Kota_Bengkulu.jpg",
         "title": "Papan nama rumah pengasingan",
-        "background": "Papan ini menandai rumah tempat Soekarno diasingkan di Bengkulu setelah empat tahun di Ende, Flores (1934–1938). Rumah ini kemudian dijadikan museum dan dipelihara sebagai bagian dari perjalanan politik Soekarno sebelum proklamasi."
+        "background": "Papan ini menandai rumah tempat Soekarno diasingkan di Bengkulu setelah empat tahun di Ende, Flores (1934–1938). Rumah ini kemudian dijadikan museum dan dipelihara sebagai bagian dari perjalanan politik Soekarno sebelum proklamasi.",
+        "period": "museum sejak era 1980-an",
+        "detail": [
+          "Papan nama ini menandai rumah yang kini menjadi museum.",
+          "Bangunan aslinya dipakai Soekarno sebagai tempat tinggal selama diasingkan.",
+          "Statusnya sebagai cagar budaya membuat bentuk bangunannya tidak banyak berubah.",
+          "Papan ini juga menandai alamat rumah yang biasa dicari pengunjung."
+        ]
       },
       {
-        "src": "/images/museums/rumah-pengasingan-bung-karno/2.jpg",
+        "src": "/2.jpg",
         "alt": "Rumah Pengasingan Bung Karno — foto dari Wikimedia Commons",
         "caption": "In 1933 Soekarno was arrested on charges of carrying out movements and gathering the natives to fight the Dutch, then exiled to Ende, East Nusa Tenggara. After being exiled to Ende",
         "credit": "Herusutimbul",
@@ -2240,10 +2361,17 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ARumah_Pengasingan_Bung_Karno.jpg",
         "title": "Halaman dan rumah pengasingan",
-        "background": "Rumah beratap limas dengan serambi lebar ini berdiri di atas halaman berpaving, dengan tiang bendera di depannya. Selama di Bengkulu, Soekarno aktif mengajar dan menulis; rumah ini menjadi saksi masa pengasingan yang relatif lebih longgar dibandingkan di Ende."
+        "background": "Rumah beratap limas dengan serambi lebar ini berdiri di atas halaman berpaving, dengan tiang bendera di depannya. Selama di Bengkulu, Soekarno aktif mengajar dan menulis; rumah ini menjadi saksi masa pengasingan yang relatif lebih longgar dibandingkan di Ende.",
+        "period": "1938–1942",
+        "detail": [
+          "Halaman ini adalah bagian dari rumah pengasingan Soekarno di Bengkulu.",
+          "Bangunannya sederhana, menunjukkan kehidupan yang terbatas semasa pengasingan.",
+          "Soekarno diasingkan ke sini pada 1938 dan tinggal sampai 1942.",
+          "Di halaman ini pula ia biasa menerima tamu dan berdiskusi."
+        ]
       },
       {
-        "src": "/images/museums/rumah-pengasingan-bung-karno/3.jpg",
+        "src": "/3.jpg",
         "alt": "Rumah Pengasingan Bung Karno — foto dari Wikimedia Commons",
         "caption": "Rumah kediaman Bung Karno pada waktu pengasingan di Bengkulu",
         "credit": "Penikmat Senja",
@@ -2251,7 +2379,14 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ARumah_Bung_Karno_di_Bengkulu.jpg",
         "title": "Rumah pengasingan dari sisi jalan",
-        "background": "Dari arah jalan terlihat ubun-ubun bangunan dan pagar halaman. Arsip-arsip kolonial mencatat penangkapan Soekarno pada 1933 sebelum pengasingan berantai ke Flores lalu Bengkulu, sehingga rumah ini menandai babak politik tertentu dalam biografinya."
+        "background": "Dari arah jalan terlihat ubun-ubun bangunan dan pagar halaman. Arsip-arsip kolonial mencatat penangkapan Soekarno pada 1933 sebelum pengasingan berantai ke Flores lalu Bengkulu, sehingga rumah ini menandai babak politik tertentu dalam biografinya.",
+        "period": "arsitektur rumah kolonial",
+        "detail": [
+          "Rumah pengasingan ini terlihat dari sisi jalan, memakai gaya rumah kolonial sederhana.",
+          "Jendela dan pintunya besar agar udara masuk, ciri bangunan di daerah panas.",
+          "Posisinya di jalan utama memudahkan pengawasan pada masa pengasingan.",
+          "Dari sisi ini pengunjung biasanya masuk sebelum melihat perabot di dalam."
+        ]
       }
     ],
     "types": [
