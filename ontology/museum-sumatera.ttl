@@ -278,3 +278,96 @@ sdp:heritageLabel a owl:DatatypeProperty ;
     rdfs:label "label status cagar budaya"@id ;
     rdfs:domain sdp:HeritageStatus ;
     rdfs:range xsd:string .
+
+# ------------------------------------- Properti isi pameran dan foto galeri
+
+sdp:exhibitIndex a owl:DatatypeProperty ;
+    rdfs:label "urutan isi pameran"@id ;
+    rdfs:domain sdp:Exhibit ;
+    rdfs:range xsd:integer .
+
+sdp:exhibitTitle a owl:DatatypeProperty ;
+    rdfs:label "judul isi pameran"@id ;
+    rdfs:domain sdp:Exhibit ;
+    rdfs:range xsd:string .
+
+sdp:exhibitDescription a owl:DatatypeProperty ;
+    rdfs:label "penjelasan isi pameran"@id ;
+    rdfs:domain sdp:Exhibit ;
+    rdfs:range xsd:string .
+
+sdp:exhibitPeriod a owl:DatatypeProperty ;
+    rdfs:label "masa atau tarikh benda"@id ;
+    rdfs:domain sdp:Exhibit ;
+    rdfs:range xsd:string .
+
+sdp:exhibitOrigin a owl:DatatypeProperty ;
+    rdfs:label "asal benda"@id ;
+    rdfs:domain sdp:Exhibit ;
+    rdfs:range xsd:string .
+
+sdp:exhibitMaterial a owl:DatatypeProperty ;
+    rdfs:label "bahan benda"@id ;
+    rdfs:domain sdp:Exhibit ;
+    rdfs:range xsd:string .
+
+sdp:exhibitHighlight a owl:DatatypeProperty ;
+    rdfs:label "benda andalan"@id ;
+    rdfs:domain sdp:Exhibit ;
+    rdfs:range xsd:boolean .
+
+sdp:imageIndex a owl:DatatypeProperty ;
+    rdfs:label "urutan foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:integer .
+
+sdp:imageTitle a owl:DatatypeProperty ;
+    rdfs:label "judul foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imageBackground a owl:DatatypeProperty ;
+    rdfs:label "latar belakang foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imagePeriod a owl:DatatypeProperty ;
+    rdfs:label "masa atau tarikh foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imageDetail a owl:DatatypeProperty ;
+    rdfs:label "poin pengamatan foto"@id ;
+    rdfs:comment "Satu foto boleh punya beberapa poin; setiap poin satu triple."@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imageAlt a owl:DatatypeProperty ;
+    rdfs:label "teks alternatif foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imageCaption a owl:DatatypeProperty ;
+    rdfs:label "keterangan foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imageCredit a owl:DatatypeProperty ;
+    rdfs:label "kredit fotografer"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imageLicense a owl:DatatypeProperty ;
+    rdfs:label "lisensi foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:string .
+
+sdp:imageLicenseUrl a owl:DatatypeProperty ;
+    rdfs:label "tautan lisensi"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:anyURI .
+
+sdp:imageSource a owl:DatatypeProperty ;
+    rdfs:label "tautan sumber foto"@id ;
+    rdfs:domain sdp:Image ;
+    rdfs:range xsd:anyURI .

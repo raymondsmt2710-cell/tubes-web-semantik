@@ -108,6 +108,12 @@ Namespace aplikasi: `sdp:` = `https://museumsumatera.id/ontology#`,
   `verificationStatus`, `chapterIndex`, `chapterTitle`, `collectionSize`
   (`xsd:integer`), `governingBody`, `openingHours`, `collectionCategory`,
   `facilityName`, `personName`.
+- **Isi pameran dan foto:** `exhibitIndex` (`xsd:integer`), `exhibitTitle`,
+  `exhibitDescription`, `exhibitPeriod`, `exhibitOrigin`, `exhibitMaterial`,
+  `exhibitHighlight` (`xsd:boolean`), `imageIndex` (`xsd:integer`), `imageTitle`,
+  `imageBackground`, `imagePeriod`, `imageDetail`, `imageAlt`, `imageCaption`,
+  `imageCredit`, `imageLicense`, `imageLicenseUrl` (`xsd:anyURI`), `imageSource`
+  (`xsd:anyURI`), `sourceIndex`, `sourceLabel`, `sourceUrl`.
 
 Setiap museum menunjuk langsung ke babnya (`sdp:chapter`). Keanggotaan bab
 sengaja tidak diturunkan dari provinsi supaya alur cerita bisa tetap utuh bila
@@ -150,6 +156,22 @@ Selain data dasar, setiap museum punya isi naratif yang disimpan di
 | Galeri foto | `sdp:hasImage` → `sdp:Image` | bagian **Galeri** |
 | Sumber acuan | `sdp:hasSource` → `sdp:Source` | bagian **Sumber catatan** |
 
+**Kedalaman isi pameran.** Setiap entri `sdp:Exhibit` membawa metadata di luar
+prosa, sehingga informasinya ikut masuk graf dan bukan hanya tampil sebagai teks:
+
+| Properti | Arti |
+|---|---|
+| `sdp:exhibitPeriod` | masa atau tarikh benda, mis. "abad ke-15" |
+| `sdp:exhibitOrigin` | asal perolehan atau daerah benda |
+| `sdp:exhibitMaterial` | bahan utama, mis. "perunggu" |
+| `sdp:exhibitHighlight` (`xsd:boolean`) | penanda benda andalan |
+
+**Kedalaman galeri.** Setiap `sdp:Image` punya `sdp:imagePeriod` (masa yang tampak
+pada foto) dan `sdp:imageDetail` — satu triple per poin pengamatan, sehingga satu
+foto boleh punya beberapa poin. Di halaman museum, poin-poin itu tampil sebagai
+daftar di bawah latar belakang foto.
+
+
 **Gambar.** Foto diambil hanya dari Wikimedia Commons yang lisensinya jelas
 (CC0, CC BY, CC BY-SA, atau domain publik). Setiap foto disimpan lengkap dengan
 pencipta, nama lisensi, tautan lisensi, dan tautan halaman asalnya. Foto
@@ -159,8 +181,12 @@ situs resmi museum tidak dipakai karena hak ciptanya tidak jelas.
 
 **Pemeriksaan data.** `npm run check:rdf` menolak foto tanpa `src`,
 `license`, atau `sourceUrl`, serta menolak sumber yang bukan URL `http(s)`.
-Generator RDF juga berhenti dengan pesan yang menyebut museum dan nomor foto
-bila aturan itu dilanggar.
+Pemeriksa juga menjaga kedalaman isi: deskripsi isi pameran minimal **180
+karakter**, latar belakang foto minimal **220 karakter**, setiap foto wajib punya
+`detail`, dan setiap pameran wajib punya judul. Pelanggaran aturan ini muncul
+sebagai peringatan (bukan error) supaya data lama tidak memblokir build, tetapi
+kondisi sehat adalah nol peringatan kedalaman. Generator RDF juga berhenti dengan
+pesan yang menyebut museum dan nomor foto bila aturan lisensi dilanggar.
 
 **Status data.** Semua museum tetap berstatus `perlu-verifikasi`. Catatan
 sejarah disusun ulang dari sumber yang tercantum di setiap halaman, bukan
