@@ -75,6 +75,10 @@ export interface MuseumImage {
   title?: string | null;
   /** 2–3 kalimat tentang apa yang terlihat dan kaitannya dengan sejarah museum. */
   background?: string | null;
+  /** Masa atau tarikh yang tampak pada foto, mis. "1915", "era 1970-an". */
+  period?: string | null;
+  /** 2–4 poin ringkas tentang apa yang layak diamati pada foto. */
+  detail?: string[] | null;
   credit: string;
   license: string;
   licenseUrl: string | null;
@@ -85,6 +89,14 @@ export interface MuseumImage {
 export interface Exhibit {
   title: string;
   description: string;
+  /** Masa atau tarikh benda, mis. "abad ke-15", "1915". */
+  period?: string | null;
+  /** Asal perolehan atau daerah benda berasal. */
+  origin?: string | null;
+  /** Bahan utama, mis. "perunggu", "kayu kemuning". */
+  material?: string | null;
+  /** Tandai bila benda termasuk andalan museum. */
+  highlight?: boolean | null;
 }
 
 /** Sumber acuan yang dipakai untuk menulis catatan museum. */
