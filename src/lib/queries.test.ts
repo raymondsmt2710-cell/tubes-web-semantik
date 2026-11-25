@@ -7,6 +7,10 @@ import {
   relatedCandidatesQuery,
   mapMuseumRow,
   loadRowsOrNull,
+  museumExhibitsQuery,
+  museumImagesQuery,
+  mapExhibitRow,
+  mapGalleryRows,
 } from "./queries";
 import type { SparqlBinding } from "./sparql";
 
@@ -188,6 +192,69 @@ describe("query katalog: types via GROUP_CONCAT", () => {
     expect(q).toContain("?types");
     // tipe tidak boleh jadi pola OPTIONAL bebas di blok utama
     expect(q).not.toMatch(/\?museum\s+a\s+\?type\b/);
+  });
+});
+
+describe("properti kedalaman pameran dan galeri", () => {
+  it("menarik properti kedalaman pada kueri pameran", () => {
+    const q = museumExhibitsQuery("museum-uji");
+    expect(q).toContain("sdp:exhibitPeriod");
+    expect(q).toContain("sdp:exhibitOrigin");
+    expect(q).toContain("sdp:exhibitMaterial");
+    expect(q).toContain("sdp:exhibitHighlight");
+  });
+
+  it("menarik properti kedalaman pada kueri galeri", () => {
+    const q = museumImagesQuery("museum-uji");
+    expect(q).toContain("sdp:imagePeriod");
+    expect(q).toContain("sdp:imageDetail");
+  });
+
+  it("memetakan metadata pameran dari baris SPARQL", () => {
+    const exhibit = mapExhibitRow({
+      title: { type: "literal", value: "Lonceng" },
+      description: { type: "literal", value: "Deskripsi." },
+      period: { type: "literal", value: "abad ke-15" },
+      origin: { type: "literal", value: "Pasai" },
+      material: { type: "literal", value: "perunggu" },
+      highlight: { type: "literal", value: "true" },
+    });
+    expect(exhibit.period).toBe("abad ke-15");
+    expect(exhibit.origin).toBe("Pasai");
+    expect(exhibit.material).toBe("perunggu");
+    expect(exhibit.highlight).toBe(true);
+  });
+
+  it("memetakan highlight dari boolean asli maupun string kosong", () => {
+    const dariBoolean = mapExhibitRow({
+      title: { type: "literal", value: "A" },
+      highlight: { type: "literal", datatype: "xsd:boolean", value: "true" },
+    });
+    expect(dariBoolean.highlight).toBe(true);
+
+    const tanpaHighlight = mapExhibitRow({ title: { type: "literal", value: "A" } });
+    expect(tanpaHighlight.highlight).toBe(false);
+  });
+
+  it("mengumpulkan poin detail per foto menjadi array", () => {
+    const images = mapGalleryRows([
+      {
+        index: { type: "literal", value: "1" },
+        src: { type: "literal", value: "/a.jpg" },
+        detail: { type: "literal", value: "Poin pertama" },
+        period: { type: "literal", value: "1915" },
+        sourceUrl: { type: "literal", value: "https://x" },
+      },
+      {
+        index: { type: "literal", value: "1" },
+        src: { type: "literal", value: "/a.jpg" },
+        detail: { type: "literal", value: "Poin kedua" },
+        sourceUrl: { type: "literal", value: "https://x" },
+      },
+    ]);
+    expect(images).toHaveLength(1);
+    expect(images[0].detail).toEqual(["Poin pertama", "Poin kedua"]);
+    expect(images[0].period).toBe("1915");
   });
 });
 

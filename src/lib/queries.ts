@@ -281,12 +281,16 @@ LIMIT ${Math.trunc(limit)}
  */
 export function museumExhibitsQuery(slug: string): string {
   return `${PREFIXES}
-SELECT ?index ?title ?description
+SELECT ?index ?title ?description ?period ?origin ?material ?highlight
 WHERE {
   ${museumIri(slug)} sdp:hasExhibit ?node .
   ?node sdp:exhibitIndex ?index ;
         sdp:exhibitTitle ?title .
   OPTIONAL { ?node sdp:exhibitDescription ?description . }
+  OPTIONAL { ?node sdp:exhibitPeriod ?period . }
+  OPTIONAL { ?node sdp:exhibitOrigin ?origin . }
+  OPTIONAL { ?node sdp:exhibitMaterial ?material . }
+  OPTIONAL { ?node sdp:exhibitHighlight ?highlight . }
 }
 ORDER BY ?index
 `;
@@ -294,7 +298,7 @@ ORDER BY ?index
 
 export function museumImagesQuery(slug: string): string {
   return `${PREFIXES}
-SELECT ?index ?src ?title ?background ?alt ?caption ?credit ?license ?licenseUrl ?sourceUrl
+SELECT ?index ?src ?title ?background ?detail ?period ?alt ?caption ?credit ?license ?licenseUrl ?sourceUrl
 WHERE {
   ${museumIri(slug)} sdp:hasImage ?node .
   ?node sdp:imageIndex ?index ;
@@ -302,6 +306,8 @@ WHERE {
   OPTIONAL { ?node sdp:imageUrl ?src . }
   OPTIONAL { ?node sdp:imageTitle ?title . }
   OPTIONAL { ?node sdp:imageBackground ?background . }
+  OPTIONAL { ?node sdp:imageDetail ?detail . }
+  OPTIONAL { ?node sdp:imagePeriod ?period . }
   OPTIONAL { ?node sdp:imageAlt ?alt . }
   OPTIONAL { ?node sdp:imageCaption ?caption . }
   OPTIONAL { ?node sdp:imageCredit ?credit . }
@@ -425,6 +431,10 @@ export function mapExhibitRow(binding: SparqlBinding): Exhibit {
   return {
     title: str(binding, "title") ?? "Tanpa judul",
     description: str(binding, "description") ?? "",
+    period: str(binding, "period"),
+    origin: str(binding, "origin"),
+    material: str(binding, "material"),
+    highlight: str(binding, "highlight") === "true",
   };
 }
 
@@ -435,11 +445,43 @@ export function mapGalleryRow(binding: SparqlBinding): MuseumImage {
     caption: str(binding, "caption") ?? "",
     title: str(binding, "title"),
     background: str(binding, "background"),
+    period: str(binding, "period"),
+    detail: [],
     credit: str(binding, "credit") ?? "Tidak dicatat",
     license: str(binding, "license") ?? "Tidak dicatat",
     licenseUrl: str(binding, "licenseUrl"),
     sourceUrl: str(binding, "sourceUrl") ?? "",
   };
+}
+
+/**
+ * `sdp:imageDetail` bisa muncul beberapa kali untuk satu foto, jadi satu foto
+ * menghasilkan beberapa baris SPARQL. Baris digabung per `index` agar setiap
+ * foto tetap menjadi satu entri galeri dengan daftar poinnya.
+ */
+export function mapGalleryRows(bindings: SparqlBinding[]): MuseumImage[] {
+  const detailByIndex = new Map<string, string[]>();
+  for (const binding of bindings) {
+    const point = str(binding, "detail");
+    if (!point) continue;
+    const key = str(binding, "index") ?? "";
+    const daftar = detailByIndex.get(key) ?? [];
+    if (!daftar.includes(point)) daftar.push(point);
+    detailByIndex.set(key, daftar);
+  }
+
+  const seen = new Set<string>();
+  const images: MuseumImage[] = [];
+  for (const binding of bindings) {
+    const key = str(binding, "index") ?? "";
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const image = mapGalleryRow(binding);
+    if (!image.src) continue;
+    image.detail = detailByIndex.get(key) ?? [];
+    images.push(image);
+  }
+  return images;
 }
 
 export function mapSourceRow(binding: SparqlBinding): SourceRef {
@@ -464,6 +506,22 @@ export async function loadRows<T>(
     return bindings
       .map(map)
       .filter((item): item is T => item !== null && item !== undefined);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Galeri dimuat terpisah dari `loadRows` karena satu foto menghasilkan beberapa
+ * baris (satu per poin `imageDetail`) dan harus digabung sebelum dipetakan.
+ */
+async function loadGalleryRows(
+  query: string,
+  rows?: (query: string) => SparqlBinding[],
+): Promise<MuseumImage[]> {
+  try {
+    const bindings = rows ? rows(query) : await runSelect(query);
+    return mapGalleryRows(bindings);
   } catch {
     return [];
   }
@@ -499,14 +557,7 @@ export async function attachMuseumDetail(
 ): Promise<MuseumDTO> {
   const [exhibits, gallery, sources, collections, facilities] = await Promise.all([
     loadRows(museumExhibitsQuery(museum.slug), mapExhibitRow, rows),
-    loadRows(
-      museumImagesQuery(museum.slug),
-      (row) => {
-        const image = mapGalleryRow(row);
-        return image.src ? image : null;
-      },
-      rows,
-    ),
+    loadGalleryRows(museumImagesQuery(museum.slug), rows),
     loadRows(museumSourcesQuery(museum.slug), mapSourceRow, rows),
     loadRowsOrNull(
       museumCollectionsQuery(museum.slug),
