@@ -38,11 +38,12 @@ function apply() {
     }
 
     for (const g of patch.gallery ?? []) {
-      const target = museum.gallery?.find((i) => i.src.endsWith(g.src));
+      const { src, ...fields } = g;
+      const target = museum.gallery?.find((i) => i.src.endsWith(src));
       if (!target) {
-        throw new Error(`${slug}: foto "${g.src}" tidak ada.`);
+        throw new Error(`${slug}: foto "${src}" tidak ada.`);
       }
-      Object.assign(target, g);
+      Object.assign(target, fields);
       galleryCount++;
     }
 
