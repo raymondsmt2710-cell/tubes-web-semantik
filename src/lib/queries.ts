@@ -298,7 +298,7 @@ ORDER BY ?index
 
 export function museumImagesQuery(slug: string): string {
   return `${PREFIXES}
-SELECT ?index ?src ?title ?background ?detail ?period ?alt ?caption ?credit ?license ?licenseUrl ?sourceUrl
+SELECT ?node ?index ?src ?title ?background ?detail ?detailIndex ?period ?alt ?caption ?credit ?license ?licenseUrl ?sourceUrl
 WHERE {
   ${museumIri(slug)} sdp:hasImage ?node .
   ?node sdp:imageIndex ?index ;
@@ -306,7 +306,11 @@ WHERE {
   OPTIONAL { ?node sdp:imageUrl ?src . }
   OPTIONAL { ?node sdp:imageTitle ?title . }
   OPTIONAL { ?node sdp:imageBackground ?background . }
-  OPTIONAL { ?node sdp:imageDetail ?detail . }
+  OPTIONAL {
+    ?node sdp:imageDetail ?poin .
+    ?poin sdp:detailText ?detail .
+    OPTIONAL { ?poin sdp:detailIndex ?detailIndex . }
+  }
   OPTIONAL { ?node sdp:imagePeriod ?period . }
   OPTIONAL { ?node sdp:imageAlt ?alt . }
   OPTIONAL { ?node sdp:imageCaption ?caption . }
@@ -314,7 +318,7 @@ WHERE {
   OPTIONAL { ?node sdp:imageLicense ?license . }
   OPTIONAL { ?node sdp:imageLicenseUrl ?licenseUrl . }
 }
-ORDER BY ?index
+ORDER BY ?index ?detailIndex
 `;
 }
 
@@ -456,29 +460,46 @@ export function mapGalleryRow(binding: SparqlBinding): MuseumImage {
 
 /**
  * `sdp:imageDetail` bisa muncul beberapa kali untuk satu foto, jadi satu foto
- * menghasilkan beberapa baris SPARQL. Baris digabung per `index` agar setiap
- * foto tetap menjadi satu entri galeri dengan daftar poinnya.
+ * menghasilkan beberapa baris SPARQL. Baris digabung per kunci foto (`?node`
+ * bila tersedia, selain itu `?index`) agar setiap foto tetap menjadi satu entri
+ * galeri dengan daftar poinnya. Foto tanpa index tidak digabung dengan foto lain.
  */
 export function mapGalleryRows(bindings: SparqlBinding[]): MuseumImage[] {
-  const detailByIndex = new Map<string, string[]>();
+  const kunci = (binding: SparqlBinding): string => {
+    const node = str(binding, "node");
+    if (node) return node;
+    const index = str(binding, "index");
+    if (index) return `index:${index}`;
+    // Tanpa node maupun index, tiap baris dianggap foto tersendiri.
+    return `baris:${str(binding, "src") ?? ""}:${str(binding, "sourceUrl") ?? ""}`;
+  };
+
+  const detailByKey = new Map<string, { index: number; teks: string }[]>();
   for (const binding of bindings) {
     const point = str(binding, "detail");
     if (!point) continue;
-    const key = str(binding, "index") ?? "";
-    const daftar = detailByIndex.get(key) ?? [];
-    if (!daftar.includes(point)) daftar.push(point);
-    detailByIndex.set(key, daftar);
+    const key = kunci(binding);
+    const daftar = detailByKey.get(key) ?? [];
+    if (!daftar.some((d) => d.teks === point)) {
+      const index = Number(str(binding, "detailIndex") ?? "");
+      daftar.push({ index: Number.isFinite(index) ? index : daftar.length + 1, teks: point });
+    }
+    detailByKey.set(key, daftar);
   }
 
   const seen = new Set<string>();
   const images: MuseumImage[] = [];
   for (const binding of bindings) {
-    const key = str(binding, "index") ?? "";
+    const key = kunci(binding);
     if (seen.has(key)) continue;
     seen.add(key);
     const image = mapGalleryRow(binding);
     if (!image.src) continue;
-    image.detail = detailByIndex.get(key) ?? [];
+    // Urutan poin dijamin oleh imageDetailIndex, bukan oleh urutan baris SPARQL.
+    image.detail = (detailByKey.get(key) ?? [])
+      .slice()
+      .sort((a, b) => a.index - b.index)
+      .map((d) => d.teks);
     images.push(image);
   }
   return images;

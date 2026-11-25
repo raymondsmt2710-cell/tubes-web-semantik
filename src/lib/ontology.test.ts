@@ -62,10 +62,28 @@ describe("buildRdf — kedalaman isi pameran dan foto", () => {
     expect(xml).toContain('<sdp:imagePeriod xml:lang="id">1915</sdp:imagePeriod>');
   });
 
-  it("menulis satu triple imageDetail per poin", () => {
+  it("menulis setiap poin detail sebagai node tersendiri dengan indeks urutnya", () => {
     const xml = buildRdf([record]);
-    const matches = xml.match(/<sdp:imageDetail xml:lang="id">/g) ?? [];
-    expect(matches).toHaveLength(2);
+    const poin = xml.match(/<sdp:ImageDetail rdf:about="[^"]+">/g) ?? [];
+    expect(poin).toHaveLength(2);
+    expect(xml).toContain(
+      '<sdp:detailIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</sdp:detailIndex>',
+    );
+    expect(xml).toContain(
+      '<sdp:detailIndex rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</sdp:detailIndex>',
+    );
+    expect(xml).toContain('<sdp:detailText xml:lang="id">Poin pertama</sdp:detailText>');
+    expect(xml).toContain('<sdp:detailText xml:lang="id">Poin kedua</sdp:detailText>');
+  });
+
+  it("menautkan setiap poin ke fotonya lewat imageDetail", () => {
+    const xml = buildRdf([record]);
+    expect(xml).toContain(
+      '<sdp:imageDetail rdf:resource="https://museumsumatera.id/resource/museum/museum-uji/image/1/detail/1"/>',
+    );
+    expect(xml).toContain(
+      '<sdp:imageDetail rdf:resource="https://museumsumatera.id/resource/museum/museum-uji/image/1/detail/2"/>',
+    );
   });
 
   it("tidak menulis properti kedalaman bila bidang kosong", () => {

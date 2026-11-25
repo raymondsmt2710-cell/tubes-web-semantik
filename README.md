@@ -111,7 +111,8 @@ Namespace aplikasi: `sdp:` = `https://museumsumatera.id/ontology#`,
 - **Isi pameran dan foto:** `exhibitIndex` (`xsd:integer`), `exhibitTitle`,
   `exhibitDescription`, `exhibitPeriod`, `exhibitOrigin`, `exhibitMaterial`,
   `exhibitHighlight` (`xsd:boolean`), `imageIndex` (`xsd:integer`), `imageTitle`,
-  `imageBackground`, `imagePeriod`, `imageDetail`, `imageAlt`, `imageCaption`,
+  `imageBackground`, `imagePeriod`, `imageDetail` (→ `sdp:ImageDetail`), `detailIndex`
+  (`xsd:integer`), `detailText`, `imageAlt`, `imageCaption`,
   `imageCredit`, `imageLicense`, `imageLicenseUrl` (`xsd:anyURI`), `imageSource`
   (`xsd:anyURI`), `sourceIndex`, `sourceLabel`, `sourceUrl`.
 
@@ -167,9 +168,16 @@ prosa, sehingga informasinya ikut masuk graf dan bukan hanya tampil sebagai teks
 | `sdp:exhibitHighlight` (`xsd:boolean`) | penanda benda andalan |
 
 **Kedalaman galeri.** Setiap `sdp:Image` punya `sdp:imagePeriod` (masa yang tampak
-pada foto) dan `sdp:imageDetail` — satu triple per poin pengamatan, sehingga satu
-foto boleh punya beberapa poin. Di halaman museum, poin-poin itu tampil sebagai
-daftar di bawah latar belakang foto.
+pada foto) dan menautkan poin pengamatan lewat `sdp:imageDetail` ke node
+`sdp:ImageDetail`. Setiap node poin menyimpan `sdp:detailIndex` (urutan) dan
+`sdp:detailText` (teks). Bentuk ini dipilih supaya urutan poin terjamin — bila
+indeks disimpan sebagai properti terpisah pada foto, kueri SPARQL akan
+menghasilkan perkalian silang dan urutan poin menjadi acak.
+
+**Arti `period`.** `exhibitPeriod` dan `imagePeriod` hanya boleh berisi tarikh atau
+masa ("1915", "abad ke-15", "era 1970-an", "masa kolonial"). Topik atau subjek foto
+tempatnya di `title`/`caption`, bukan di `period` — `npm run check:rdf` memberi
+peringatan bila `period` tidak memuat penanda tarikh.
 
 
 **Gambar.** Foto diambil hanya dari Wikimedia Commons yang lisensinya jelas

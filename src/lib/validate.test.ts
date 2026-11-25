@@ -205,4 +205,71 @@ describe("ambang kedalaman isi pameran dan galeri", () => {
     ]);
     expect(issues.filter((i) => i.field === "gallery")).toHaveLength(0);
   });
+
+  it("menandai period foto yang tidak memuat penanda tarikh", () => {
+    const issues = validateMuseums([
+      {
+        ...ok,
+        gallery: [
+          {
+            src: "/images/museums/museum-ok/1.jpg",
+            alt: "Foto",
+            caption: "Keterangan",
+            background: panjang(240),
+            detail: ["Poin"],
+            period: "bangunan museum provinsi",
+            credit: "Seseorang",
+            license: "CC BY-SA 4.0",
+            licenseUrl: null,
+            sourceUrl: "https://commons.wikimedia.org/wiki/File:X.jpg",
+          },
+        ],
+      },
+    ]);
+    expect(issues).toContainEqual(
+      expect.objectContaining({ field: "gallery", level: "warning" }),
+    );
+  });
+
+  it("meloloskan period foto yang berupa tarikh", () => {
+    for (const period of ["1915", "abad ke-19", "era 1970-an", "masa kolonial", "sebelum 1905"]) {
+      const issues = validateMuseums([
+        {
+          ...ok,
+          gallery: [
+            {
+              src: "/images/museums/museum-ok/1.jpg",
+              alt: "Foto",
+              caption: "Keterangan",
+              background: panjang(240),
+              detail: ["Poin"],
+              period,
+              credit: "Seseorang",
+              license: "CC BY-SA 4.0",
+              licenseUrl: null,
+              sourceUrl: "https://commons.wikimedia.org/wiki/File:X.jpg",
+            },
+          ],
+        },
+      ]);
+      expect(
+        issues.filter((i) => i.field === "gallery" && i.message.includes("period")),
+        `period "${period}" seharusnya diterima`,
+      ).toHaveLength(0);
+    }
+  });
+
+  it("menandai period pameran yang tidak memuat penanda tarikh", () => {
+    const issues = validateMuseums([
+      {
+        ...ok,
+        exhibits: [
+          { title: "Lonceng", description: panjang(200), period: "benda andalan museum" },
+        ],
+      },
+    ]);
+    expect(issues).toContainEqual(
+      expect.objectContaining({ field: "exhibits", level: "warning" }),
+    );
+  });
 });

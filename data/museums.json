@@ -210,7 +210,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AAceh_Tsunami_Museum_site_visit%3B_February_2020_(25).jpg",
         "title": "Ruang pamer dengan diorama dan panel foto",
         "background": "Lantai berlantai karpet biru, panel berdinding bersudut, dan diorama bertutup kaca adalah wajah ruang pamer tetap museum. Diorama pemukiman tampak di kiri, sedangkan di kanan ada danau panorama dan boneka kecil yang menirukan situasi darurat. Pameran ini dirancang sebagai ruang belajar bencana, bukan sekadar galeri foto korban.",
-        "period": "ruang pamer tetap",
+        "period": null,
         "detail": [
           "Lantai berkarpet biru dan panel berdinding bersudut membentuk alur kunjungan yang berkelok.",
           "Diorama bertutup kaca menampilkan pemukiman pesisir sebelum dan sesudah gelombang.",
@@ -665,7 +665,7 @@
       {
         "title": "Tunggal panaluan",
         "description": "Tunggal panaluan adalah tongkat pusaka berukir yang dipakai dalam upacara masyarakat Batak. Ukirannya biasanya berupa sosok-sosok bertumpuk, dan tongkat ini dianggap memiliki kekuatan yang hanya bisa dipakai oleh orang tertentu. Dalam upacara, benda seperti ini berfungsi sebagai penanda otoritas sekaligus perlengkapan ritual. Karena itu tunggal panaluan termasuk benda yang paling sering dibicarakan dalam penjelasan tentang kebudayaan Batak, dan kehadirannya di museum membantu pengunjung memahami sisi spiritual masyarakat Danau Toba.",
-        "period": "tradisi adat Batak",
+        "period": null,
         "origin": "Kawasan Samosir",
         "material": "kayu berukir",
         "highlight": true
@@ -680,7 +680,7 @@
       {
         "title": "Parhalaan",
         "description": "Parhalaan adalah kalender tradisional Batak dan menjadi salah satu koleksi andalan museum. Isinya mencatat penanggalan dan penanda waktu yang dipakai untuk menentukan kapan bercocok tanam atau menggelar upacara. Keberadaan kalender seperti ini menunjukkan bahwa masyarakat Batak mengamati musim dan peredaran bulan secara cermat sebelum ada kalender modern. Bagi pengunjung, parhalaan menjelaskan bagaimana kegiatan pertanian dan adat di kawasan Danau Toba diatur oleh waktu yang disepakati bersama.",
-        "period": "kalender tradisional Batak",
+        "period": null,
         "origin": "Kawasan Samosir",
         "material": "kayu atau tulang bertulis"
       }
@@ -720,7 +720,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ARumah_adat_bolon_di_Museum_Huta_Bolon_Simanindo_2.jpg",
         "title": "Tampak depan rumah adat",
         "background": "Dari depan terlihat struktur rumah panggung dengan tiang penyangga dan ukiran pada bagian atap. Susunan huta (kampung) seperti ini sengaja dipertahankan agar pengunjung memahami rumah adat sebagai bagian dari tata ruang kampung, bukan bangunan tunggal yang berdiri sendiri.",
-        "period": "tata ruang kampung tradisional",
+        "period": null,
         "detail": [
           "Dari depan terlihat struktur rumah panggung dengan tiang penyangga dan ukiran pada bagian atap.",
           "Susunan huta (kampung) sengaja dipertahankan seperti aslinya.",
@@ -786,7 +786,7 @@
       {
         "title": "Rumah adat Karo",
         "description": "Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur. Kehadirannya menunjukkan bahwa kawasan Toba dihuni beberapa sub-etnis Batak dengan bentuk rumah yang berbeda: Karo di utara, Toba di sekitar danau. Atap ijuk yang menjulang adalah ciri yang mudah dibedakan dari rumah adat Toba. Dengan menempatkannya di sini, museum menjelaskan bahwa kebudayaan Batak tidak seragam, melainkan terdiri atas beberapa tradisi yang berdampingan.",
-        "period": "arsitektur tradisional Karo",
+        "period": null,
         "origin": "Kawasan Karo, Sumatera Utara bagian utara",
         "material": "kayu dan atap ijuk",
         "highlight": true
@@ -834,7 +834,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3APortrait_of_a_traditional_Karo_house_in_the_T.B._Silalahi_Center_area.jpg",
         "title": "Rumah adat Karo di area museum",
         "background": "Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur. Kehadirannya menunjukkan bahwa kawasan Toba dihuni beberapa sub-etnis Batak dengan bentuk rumah yang berbeda — Karo di utara, Toba di sekitar danau.",
-        "period": "arsitektur Karo",
+        "period": null,
         "detail": [
           "Rumah adat Karo beratap ijuk tinggi ini berdiri di kompleks museum sebagai pameran arsitektur.",
           "Bentuknya berbeda dari rumah adat Toba di sekitar danau.",
@@ -852,7 +852,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ANatural_scenery_around_T.B._Silalahi_Center.jpg",
         "title": "Lanskap sekitar museum",
         "background": "Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige. Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian, danau, dan kehidupan kampung. Lahan pertanian di sekitar Balige dikerjakan turun-temurun, dan hasilnya menjadi bagian dari kehidupan rumah tangga masyarakat Batak. Museum sengaja mempertahankan pandangan terbuka ini agar pengunjung melihat koleksi budaya dalam konteks tempat asalnya.",
-        "period": "lanskap Balige",
+        "period": null,
         "detail": [
           "Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige.",
           "Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian, danau, dan kehidupan kampung.",
@@ -933,7 +933,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMakam_di_bakkara.jpg",
         "title": "Makam di Bakkara",
         "background": "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja dan kini menjadi kawasan makam raja-raja Batak. Kompleks makam ini berada di dekat museum yang mengisahkan perlawanan Sisingamangaraja XII terhadap Belanda, yang berakhir dengan gugurnya raja pada 1907.",
-        "period": "kawasan makam raja-raja Batak",
+        "period": null,
         "detail": [
           "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja.",
           "Kawasan ini kini menjadi kompleks makam raja-raja Batak.",
@@ -1001,7 +1001,7 @@
       {
         "title": "Kisah Putri Hijau",
         "description": "Kisah Putri Hijau dipaparkan di tangga antara lantai satu dan dua. Legenda ini dikenal luas dalam tradisi Melayu dan dikaitkan dengan asal-usul Kesultanan Deli, sehingga berfungsi sebagai penghubung antara bagian prasejarah dan bagian kesultanan. Menempatkannya di tangga adalah pilihan tata pamer yang menarik: pengunjung membaca kisah sambil berpindah lantai, seperti berpindah dari mitos ke sejarah. Karena berupa legenda, isinya tidak dipakai sebagai bukti sejarah, melainkan sebagai cara masyarakat mengingat asal-usulnya.",
-        "period": "legenda Melayu",
+        "period": null,
         "origin": "Tradisi lisan Deli dan Serdang",
         "material": "panel naratif"
       },
@@ -1055,7 +1055,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Deli_Serdang_2022_Bennylin_06.jpg",
         "title": "Panel profil Provinsi Sumatera Utara",
         "background": "Panel kaca ini memuat data luas, jumlah penduduk, daftar kabupaten/kota, dan fisiografi Sumatera Utara. Letaknya di awal alur pameran, berfungsi memberi konteks geografis sebelum pengunjung masuk ke sejarah Kesultanan Deli dan Serdang.",
-        "period": "panel pengantar",
+        "period": null,
         "detail": [
           "Panel kaca ini memuat data luas, jumlah penduduk, dan daftar kabupaten/kota Sumatera Utara.",
           "Isinya juga mencakup fisiografi, yaitu gambaran bentuk permukaan wilayah.",
@@ -1073,7 +1073,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Deli_Serdang_2022_Bennylin_14.jpg",
         "title": "Daftar kecamatan Deli Serdang",
         "background": "Daftar 22 kecamatan ini menjadi penanda bahwa museum adalah museum kabupaten: wilayah yang diceritakan bukan hanya kesultanan, tetapi juga kecamatan-kecamatan yang kini menopang Kabupaten Deli Serdang. Museum menempati gedung berkonsep “Itik Pulang Petang”, filosofi Melayu tentang keteraturan.",
-        "period": "data pemerintahan",
+        "period": null,
         "detail": [
           "Panel ini memuat daftar kecamatan yang termasuk wilayah Deli Serdang.",
           "Daftar semacam ini membantu pengunjung memahami batas wilayah kabupaten saat ini.",
@@ -1117,7 +1117,7 @@
       {
         "title": "Pakaian adat pernikahan Melayu",
         "description": "Busana pernikahan tradisional Riau ini dipamerkan lengkap dengan perlengkapannya. Dalam adat Melayu, pakaian pernikahan bukan sekadar kostum, melainkan penanda status dan urutan upacara, sehingga setiap lapisan kain dan hiasan kepala punya nama serta aturan pemakaiannya. Warna dan coraknya berbeda menurut daerah, misalnya antara pesisir dan pedalaman. Karena itu satu set busana bisa menjelaskan banyak hal tentang adat setempat dalam sekali pandang.",
-        "period": "tradisi Melayu Riau",
+        "period": null,
         "origin": "Masyarakat Melayu Riau",
         "material": "kain tenun, sulaman, dan perhiasan",
         "highlight": true
@@ -1242,7 +1242,7 @@
       {
         "title": "Ruang Alam Perkawinan Melayu",
         "description": "Ruang ini menampilkan benda dan tata cara perkawinan adat Melayu sebagai satu kesatuan. Yang dipamerkan bukan hanya busana, tetapi juga urutan upacara seperti tepuk tepung tawar dan pemberian gelar, yang berbeda antara satu daerah dan daerah lain. Tata cara ini biasanya dijelaskan lewat gambar dan panel karena berlangsung dalam waktu tertentu. Menempatkannya sebagai ruang khusus menunjukkan bahwa pernikahan Melayu dipandang sebagai peristiwa adat yang melibatkan keluarga besar, bukan urusan pribadi semata.",
-        "period": "tradisi Melayu Kepulauan Riau",
+        "period": null,
         "origin": "Masyarakat Melayu Tanjungpinang",
         "material": "busana, perlengkapan upacara, dan panel"
       },
@@ -1328,7 +1328,7 @@
       {
         "title": "Alat tangkap ikan tradisional",
         "description": "Peralatan menangkap hasil laut ini mencerminkan kedekatan masyarakat Lingga dengan perairan. Lingga terdiri atas pulau-pulau kecil yang dikelilingi laut, sehingga sebagian besar penduduknya bergantung pada tangkapan harian. Bentuk alat tangkap berbeda menurut jenis ikan dan kedalaman air, dan pengetahuan semacam ini diwariskan secara lisan. Bagi museum, peralatan seperti ini merekam pengetahuan praktis yang mudah hilang ketika pekerjaan berubah, bukan hanya benda yang indah dipandang.",
-        "period": "kehidupan pesisir Lingga",
+        "period": null,
         "origin": "Perairan Lingga",
         "material": "rotan, bambu, dan jaring"
       },
@@ -1520,7 +1520,7 @@
       {
         "title": "Rumah gadang dan rangkiang",
         "description": "Bangunan berarsitektur Minang ini berdiri di halaman museum dan menjadikan kompleksnya semacam taman mini Sumatera Barat. Rumah gadang beratap melengkung seperti tanduk kerbau adalah rumah keluarga besar matrilineal, sedangkan rangkiang adalah lumbung padi yang berdiri di depannya. Letak rangkiang di halaman bukan sekadar penyimpanan, melainkan penanda bahwa rumah itu terhubung dengan pertanian. Dengan menghadirkan keduanya di halaman, museum menjelaskan hubungan antara bentuk rumah dan cara hidup masyarakatnya.",
-        "period": "arsitektur tradisional Minangkabau",
+        "period": null,
         "origin": "Sumatera Barat",
         "material": "kayu, bambu, dan atap ijuk",
         "highlight": true
@@ -1528,21 +1528,21 @@
       {
         "title": "Diorama adat matrilineal Minangkabau",
         "description": "Ruang utama ini menjelaskan sistem kekerabatan Minangkabau, peran perempuan, sampai tradisi pantun. Minangkabau menganut garis keturunan ibu, sehingga rumah, tanah, dan gelar adat diwariskan lewat perempuan. Diorama dipakai karena sistem seperti ini tidak bisa dijelaskan hanya dengan satu benda: yang ditampilkan adalah hubungan antarpihak dalam keluarga. Tradisi pantun juga mendapat tempat karena banyak aturan adat disampaikan lewat tutur, bukan dokumen tertulis.",
-        "period": "tradisi Minangkabau",
+        "period": null,
         "origin": "Sumatera Barat",
         "material": "diorama, panel, dan benda adat"
       },
       {
         "title": "Ruang peragaan pelaminan",
         "description": "Pelaminan pernikahan adat Minang ini menjadi salah satu ruang paling diminati pengunjung. Susunannya menampilkan kursi pengantin berhias, kain sulaman, dan ukiran yang dipakai pada acara pernikahan. Dalam adat Minang, pelaminan menandai perpindahan status pengantin dan menjadi titik upacara, bukan hanya latar foto. Karena warna dan hiasannya beragam menurut daerah, satu pelaminan bisa menjelaskan banyak tentang adat suatu nagari.",
-        "period": "tradisi pernikahan Minang",
+        "period": null,
         "origin": "Sumatera Barat",
         "material": "kain sulaman, ukiran, dan perlengkapan upacara"
       },
       {
         "title": "Koleksi Suku Mentawai",
         "description": "Benda budaya Mentawai ini ditampilkan berdampingan dengan koleksi Minangkabau. Kepulauan Mentawai berada di lepas pantai Sumatera Barat, tetapi kebudayaannya berbeda jauh dari Minangkabau: bahasanya berbeda, sistem kekerabatannya tidak matrilineal, dan banyak tradisinya berasal dari tradisi kepulauan yang lebih tua. Menempatkan keduanya dalam satu museum menunjukkan bahwa Sumatera Barat tidak tunggal. Karena itu ruang ini penting untuk memperlihatkan keragaman, bukan hanya kebudayaan mayoritas.",
-        "period": "budaya Mentawai",
+        "period": null,
         "origin": "Kepulauan Mentawai",
         "material": "kayu, rotan, dan bahan alam"
       }
@@ -1564,7 +1564,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Adityawarman.jpg",
         "title": "Gedung utama museum",
         "background": "Atap bergonjong berjumlah banyak ini mengadaptasi bentuk rumah gadang Minangkabau ke skala bangunan pameran. Museum Adityawarman dibangun sejak tahun anggaran 1974/1975 dan diresmikan 16 Maret 1977 oleh Menteri Pendidikan dan Kebudayaan Syarif Thayeb, di atas tanah 2,5 hektar bekas Taman Melati.",
-        "period": "bangunan museum negeri",
+        "period": null,
         "detail": [
           "Gedung utama ini menampung koleksi Sumatera Barat di Jalan Diponegoro, Padang.",
           "Museum mengambil nama Adityawarman, raja Malayapura pada abad ke-14.",
@@ -1582,7 +1582,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Adityawarman_20211213.jpg",
         "title": "Sudut bangunan museum",
         "background": "Detail gonjong dan dinding berukir ini memperlihatkan bahwa museum bukan hanya tempat menyimpan koleksi, tetapi juga contoh arsitektur. Nama Adityawarman sendiri diambil dari raja Malayapura abad ke-14, masa ketika pengaruh Minangkabau dan Majapahit bertemu di Sumatera bagian tengah.",
-        "period": "arsitektur panggung Minang",
+        "period": null,
         "detail": [
           "Sudut bangunan memperlihatkan atap dan dinding yang memakai bentuk rumah adat Minangkabau.",
           "Atap melengkung seperti tanduk kerbau adalah ciri yang membedakannya dari rumah adat lain.",
@@ -1600,7 +1600,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ARangkiang_Rumah_Gadang_di_Museum_Adityawarman_Kota_Padang.jpg",
         "title": "Rumah gadang dan rangkiang",
         "background": "Di halaman museum berdiri rumah gadang lengkap dengan rangkiang, lumbung padi beratap gonjong. Kehadirannya membuat museum dijuluki “Taman Mini ala Sumatera Barat”: pengunjung bisa melihat bangunan adat secara utuh, bukan hanya foto atau maketnya.",
-        "period": "arsitektur tradisional",
+        "period": null,
         "detail": [
           "Rumah gadang berdiri di halaman museum dengan rangkiang atau lumbung padi di depannya.",
           "Atapnya melengkung dan biasanya bertingkat menurut jumlah ruang di dalamnya.",
@@ -1793,7 +1793,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Tuanku_Imam_Bonjol_02.jpg",
         "title": "Gedung museum berarsitektur rumah gadang",
         "background": "Bangunan ini mengikuti bentuk rumah gadang dengan atap bergonjong, dibangun Oktober 1987 dan selesai 1990 di areal sekitar 2 hektar di Bonjol, Pasaman. Dindingnya memuat catatan Perang Padri dan silsilah Muhammad Shahab, yang lahir di Bonjol pada 1 Januari 1772.",
-        "period": "bangunan museum",
+        "period": null,
         "detail": [
           "Gedung museum ini memakai bentuk rumah gadang dengan atap melengkung.",
           "Letaknya di Bonjol, kawasan yang menjadi pusat perlawanan kaum Padri.",
@@ -1811,7 +1811,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Tuanku_Imam_Bonjol_04.jpg",
         "title": "Patung Tuanku Imam Bonjol",
         "background": "Patung putih penunggang kuda ini berdiri di halaman museum, menggambarkan Imam Bonjol sebagai pemimpin perang. Sosoknyalah yang memimpin kaum Padri dalam Perang Padri (1803–1838) melawan Belanda dan kaum adat, hingga akhirnya ditangkap dan diasingkan.",
-        "period": "monumen peringatan",
+        "period": null,
         "detail": [
           "Patung ini menggambarkan Tuanku Imam Bonjol sebagai pemimpin Perang Padri.",
           "Tidak ada potret dibuat semasa hidupnya, sehingga wajahnya disusun dari deskripsi.",
@@ -1829,7 +1829,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Tuanku_Imam_Bonjol_09.jpg",
         "title": "Halaman dan bangunan museum",
         "background": "Dari sisi lain terlihat proporsi bangunan 42 × 16,50 meter dengan gonjong di kedua ujungnya. Sejak 1998 museum ini dikelola Pemerintah Kabupaten Pasaman, dan sebagian koleksinya berupa replika karena benda asli Tuanku Imam Bonjol banyak yang hilang atau dicuri.",
-        "period": "kompleks museum",
+        "period": null,
         "detail": [
           "Halaman ini mempertemukan bangunan museum dan rumah adat dalam satu kompleks.",
           "Rumah gadang di sekitarnya menunjukkan bahwa museum berada di kawasan permukiman.",
@@ -2004,7 +2004,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Siginjei_-_Danau_Sipin%2C_Kota_Jambi%2C_JA_(8_Jan_'25).jpg",
         "title": "Museum Siginjei dari arah Danau Sipin",
         "background": "Museum Siginjei — dulu bernama Museum Negeri Provinsi Jambi — berdiri di Jalan Urip Sumoharjo, kawasan Sungai Putri, Telanaipura. Gedungnya diresmikan 6 Juni 1988 oleh Menteri Pendidikan dan Kebudayaan Fuad Hassan setelah dibangun sejak 18 Februari 1981.",
-        "period": "bangunan museum provinsi",
+        "period": null,
         "detail": [
           "Foto ini memperlihatkan Museum Siginjei dari arah Danau Sipin.",
           "Bentuk bangunannya mengacu pada rumah panggung Kayu Tinggi, rumah tradisional Jambi.",
@@ -2192,7 +2192,7 @@
       {
         "title": "Koleksi uang lama",
         "description": "Uang kertas rupiah edisi lama ini disimpan sebagai koleksi numismatika. Salah satu yang ditampilkan adalah uang kertas seribu rupiah edisi lama, dan ada pula yang memuat tanda tangan pejabat dengan ejaan lama. Uang seperti ini berguna untuk menelusuri perubahan nilai, desain, dan lembaga yang menerbitkannya dari masa ke masa. Bagi pengunjung yang lebih muda, benda ini sering menjadi kejutan karena bentuknya sangat berbeda dari uang yang dipakai sekarang.",
-        "period": "edisi lama rupiah",
+        "period": null,
         "origin": "Koleksi numismatika museum",
         "material": "kertas"
       },
@@ -2205,7 +2205,7 @@
       },
       {
         "title": "Uang kertas bertanda tangan lama",
-        "period": "edisi lama rupiah",
+        "period": null,
         "origin": "Koleksi numismatika museum",
         "material": "kertas",
         "description": "Salah satu koleksi menampilkan uang kertas lima ratus rupiah bertanda tangan pejabat dengan ejaan lama. Perbedaan ejaan pada tanda tangan menunjukkan dokumen dibuat sebelum pembaruan ejaan bahasa Indonesia. Bagi peneliti, uang seperti ini membantu memastikan masa penerbitan dan pejabat yang menjabat pada saat itu. Dipamerkan bersama perkakas dapur, koleksi uang ini memberi gambaran bahwa perubahan alat tukar berlangsung bersamaan dengan perubahan barang sehari-hari."
@@ -2228,7 +2228,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3A1000_rupiah_(PMR_reverse)%2C_Bengkulu_Museum%2C_2015-04-19.jpg",
         "title": "Uang kertas 1000 rupiah edisi lama",
         "background": "Lembaran ini adalah uang kertas 1000 rupiah yang sudah tidak berlaku, disimpan dalam plastik pelindung dengan nomor inventaris 06-211. Koleksi numismatika seperti ini menandai perubahan mata uang Indonesia dari masa ke masa, termasuk masa inflasi tinggi pada 1960-an.",
-        "period": "edisi lama",
+        "period": null,
         "detail": [
           "Foto ini memperlihatkan uang kertas seribu rupiah edisi lama.",
           "Desainnya berbeda jauh dari uang yang dipakai sekarang.",
@@ -2422,7 +2422,7 @@
       {
         "title": "Replika Rumah Limas",
         "description": "Rumah Limas adalah rumah adat Sumatera Selatan yang dibangun sebagai pameran di halaman museum. Namanya berasal dari atapnya yang bertingkat seperti limas, dan luas bangunannya menandai kedudukan pemiliknya. Rumah ini ditinggikan di atas tiang, dengan ruang utama di bagian tengah dan ruang terbuka di depan. Karena yang berdiri di sini adalah replika, pengunjung memperoleh gambaran bentuk keseluruhan rumah tanpa harus mengunjungi kampung asalnya.",
-        "period": "arsitektur tradisional Palembang",
+        "period": null,
         "origin": "Sumatera Selatan",
         "material": "kayu dan atap genteng",
         "highlight": true
@@ -2437,7 +2437,7 @@
       {
         "title": "Tenun songket Palembang",
         "description": "Songket adalah kain tenun bermotif yang dibuat dengan menyelipkan benang emas atau perak ke dalam kain. Di Palembang, songket dipakai pada upacara pernikahan dan acara adat, dan motifnya sering diberi nama seperti bungo pacik atau tampak maco. Karena pembuatannya memakan waktu lama, satu kain bisa menjadi barang warisan keluarga. Museum menampilkan beragam motif agar pengunjung melihat bahwa keragaman songket tidak hanya soal warna, tetapi juga nama dan makna tiap pola.",
-        "period": "tradisi tenun Melayu Palembang",
+        "period": null,
         "origin": "Palembang",
         "material": "kain sutra dan benang emas",
         "highlight": true
@@ -2474,7 +2474,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATextile_Museum_of_South_Sumatra_-_Bukit_Kecil%2C_Palembang%2C_SS.jpg",
         "title": "Bangunan museum dan halaman",
         "background": "Gedung ini dikenal sebagai Burgemeesterhuis — rumah wali kota Palembang pada masa kolonial — sebelum menjadi Museum Negeri Sumatera Selatan Balaputra Dewa. Namanya diambil dari Balaputra Dewa, raja Sriwijaya, dan koleksinya mencakup arca Hindu-Buddha, keramik, serta tenun songket Palembang.",
-        "period": "bangunan museum provinsi",
+        "period": null,
         "detail": [
           "Gedung ini adalah Museum Negeri Sumatera Selatan di kawasan Sekayu, Palembang.",
           "Bangunannya bergaya rumah limas agar tampil sebagai bagian kebudayaan setempat.",
@@ -2492,7 +2492,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AReplica_of_Rumah_Limas%2C_South_Sumatra_(Balaputra_Dewa)_Museum_-_Sukarame%2C_Palembang%2C_SS_(18_January_2024).jpg",
         "title": "Replika Rumah Limas",
         "background": "Replika rumah limas ini dibangun di halaman museum sebagai contoh rumah adat Sumatera Selatan. Rumah limas bertingkat dan berundak, mencerminkan struktur sosial masyarakat Palembang yang berlapis; replikanya memudahkan pengunjung memahami bentuk aslinya tanpa harus berkunjung ke permukiman.",
-        "period": "replika arsitektur",
+        "period": null,
         "detail": [
           "Replika Rumah Limas ini berdiri di halaman museum sebagai pameran arsitektur.",
           "Atapnya bertingkat seperti limas, dan jumlah tingkatnya menandai kedudukan pemilik rumah.",
@@ -2662,7 +2662,7 @@
       {
         "title": "Pendopo utama Limasan",
         "description": "Pendopo beratap limasan ini menjadi pusat kegiatan di taman purbakala. Bentuk limasan dipilih karena lazim dipakai pada bangunan pertemuan di Sumatera Selatan. Fungsinya bukan untuk memamerkan benda, melainkan untuk kegiatan seperti ceramah, pertunjukan, dan penerimaan tamu. Kehadirannya membuat taman purbakala tidak hanya menjadi tempat melihat reruntuhan, tetapi juga ruang yang dipakai masyarakat sampai sekarang.",
-        "period": "bangunan pendukung",
+        "period": null,
         "origin": "Taman purbakala",
         "material": "kayu dan atap limasan"
       },
@@ -2699,7 +2699,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATaman_Purbakala_Kerajaan_Sriwijaya_-_Museum_Sriwijaya.jpg",
         "title": "Museum Sriwijaya",
         "background": "Bangunan beratap limasan ini adalah museum di dalam Taman Purbakala Kerajaan Sriwijaya, kawasan bekas permukiman masa Sriwijaya di tepi Sungai Musi. Museum menyimpan temuan dari situs dan menjelaskan kehidupan masyarakat Sriwijaya.",
-        "period": "kawasan situs Sriwijaya",
+        "period": null,
         "detail": [
           "Bangunan museum ini berdiri di dalam taman purbakala Karanganyar.",
           "Kawasan ini dipercaya sebagai salah satu pusat permukiman masa Sriwijaya.",
@@ -2717,7 +2717,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ATaman_Purbakala_Kerajaan_Sriwijaya_-_Pendopo_Utama.jpg",
         "title": "Pendopo utama",
         "background": "Pendopo Beratap limasan ini menjadi pusat kegiatan di taman purbakala, dipakai untuk pertemuan dan pameran. Kehadirannya menjadikan kawasan ini museum terbuka: pengunjung belajar dari struktur bata kuno yang dibiarkan di tempatnya, bukan hanya dari benda di dalam lemari kaca.",
-        "period": "bangunan pendukung",
+        "period": null,
         "detail": [
           "Pendopo beratap limasan ini menjadi pusat kegiatan di taman purbakala.",
           "Bentuk limasan lazim dipakai pada bangunan pertemuan di Sumatera Selatan.",
@@ -2886,7 +2886,7 @@
       {
         "title": "Koleksi adat Saibatin dan Pepadun",
         "description": "Ruang ini memuat benda budaya dari dua golongan adat Lampung yang menjadi nama museum, yaitu Saibatin dan Pepadun. Saibatin adalah masyarakat pesisir dengan sistem kekerabatan yang lebih longgar dan gelar kebangsawanan turun-temurun, sedangkan Pepadun mendiami pedalaman dengan sistem gelar yang dapat diperoleh melalui upacara. Perbedaan itulah yang membuat nama “Ruwa Jurai” dipakai, karena berarti dua golongan. Benda di ruang ini menunjukkan bahwa Lampung tidak memiliki satu adat tunggal.",
-        "period": "tradisi adat Lampung",
+        "period": null,
         "origin": "Masyarakat Lampung",
         "material": "kain, logam, dan kayu",
         "highlight": true
@@ -2894,7 +2894,7 @@
       {
         "title": "Tenun dan pakaian adat",
         "description": "Ruang ini memuat kain tenun serta busana tradisional Lampung. Kain tapis adalah tenun khas Lampung yang dihiasi sulaman benang emas, dan pembuatannya memakan waktu berbulan-bulan. Motifnya berbeda antara golongan Saibatin dan Pepadun, sehingga sebuah kain bisa menunjukkan bukan hanya asal daerah, tetapi juga kedudukan pemakainya. Bagi museum, kain seperti ini adalah rekaman sekaligus identitas, karena pengetahuan membuat motifnya diwariskan secara terbatas.",
-        "period": "tradisi tenun Lampung",
+        "period": null,
         "origin": "Saibatin dan Pepadun",
         "material": "kain tenun dan sulaman",
         "highlight": true
@@ -2902,7 +2902,7 @@
       {
         "title": "Perlengkapan upacara",
         "description": "Ruang ini memuat benda yang dipakai dalam upacara adat masyarakat Lampung. Upacara seperti pernikahan dan pemberian gelar memerlukan perlengkapan tertentu yang disiapkan bersama oleh keluarga besar. Pada masyarakat Pepadun, upacara pemberian gelar berlangsung besar-besaran dan melibatkan banyak keluarga. Karena itu perlengkapan di ruang ini bukan benda tunggal, melainkan bagian dari tata cara yang panjang, dan museum menjelaskan urutan pemakaiannya.",
-        "period": "tradisi adat Lampung",
+        "period": null,
         "origin": "Masyarakat Lampung",
         "material": "rotan, kain, dan logam"
       },
@@ -2931,7 +2931,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3ABERKUNJUNG_DI_MUSEUM_LAMPUNG.jpg",
         "title": "Museum Lampung Ruwa Jurai",
         "background": "Foto ini memperlihatkan pengunjung di area Museum Negeri Lampung Ruwa Jurai, Bandar Lampung. Nama “Ruwa Jurai” merujuk dua golongan adat Lampung — Saibatin di pesisir dan Pepadun di pedalaman — yang menjadi kerangka penyusunan koleksinya.",
-        "period": "museum provinsi",
+        "period": null,
         "detail": [
           "Bangunan ini adalah Museum Negeri Lampung Ruwa Jurai di Bandar Lampung.",
           "Nama “Ruwa Jurai” merujuk dua golongan adat Lampung, Saibatin dan Pepadun.",
@@ -3016,7 +3016,7 @@
         "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_ketransmigrasian_lampung_01.jpg",
         "title": "Anjungan Museum Ketransmigrasian",
         "background": "Bangunan berbentuk anjungan ini adalah bagian dari museum yang mengisahkan program transmigrasi di Lampung. Lampung menjadi salah satu daerah tujuan terbesar sejak awal abad ke-20, sehingga museumnya dibangun di provinsi ini dan memamerkan rumah tinggal awal, perkakas, serta arsip perpindahan penduduk.",
-        "period": "museum program transmigrasi",
+        "period": null,
         "detail": [
           "Anjungan ini memuat rumah contoh yang menggambarkan tempat tinggal awal transmigran.",
           "Rumah awal biasanya sederhana karena lahan di sekitarnya belum dibuka.",

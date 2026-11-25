@@ -226,6 +226,13 @@ export function buildRdf(records: MuseumRecord[]): string {
     ...classBlock("Image", "Gambar", "Foto museum atau koleksi beserta kredit dan lisensinya."),
   );
   lines.push(
+    ...classBlock(
+      "ImageDetail",
+      "Poin Pengamatan Foto",
+      "Satu butir pengamatan pada foto; beberapa butir membentuk daftar berurut.",
+    ),
+  );
+  lines.push(
     ...classBlock("Source", "Sumber", "Rujukan yang dipakai untuk menyusun catatan museum."),
   );
   lines.push(
@@ -399,6 +406,17 @@ export function buildRdf(records: MuseumRecord[]): string {
   );
   lines.push(
     ...datatypeProperty("imageDetail", "Image", `${XSD}string`, "poin pengamatan foto"),
+  );
+  lines.push(
+    ...datatypeProperty(
+      "detailIndex",
+      "ImageDetail",
+      `${XSD}integer`,
+      "urutan poin pengamatan foto",
+    ),
+  );
+  lines.push(
+    ...datatypeProperty("detailText", "ImageDetail", `${XSD}string`, "teks poin pengamatan foto"),
   );
   lines.push(...datatypeProperty("imageAlt", "Image", `${XSD}string`, "teks alternatif foto"));
   lines.push(...datatypeProperty("imageCaption", "Image", `${XSD}string`, "keterangan foto"));
@@ -675,13 +693,25 @@ export function buildRdf(records: MuseumRecord[]): string {
           `${INDENT}    <sdp:${key}${attr}>${escapeXml(value)}</sdp:${key}>`,
         );
       }
-      for (const point of image.detail ?? []) {
-        lines.push(
-          `${INDENT}    <sdp:imageDetail xml:lang="id">${escapeXml(point)}</sdp:imageDetail>`,
-        );
+      for (const [pointIndex, point] of (image.detail ?? []).entries()) {
+        const poinIri = `${RES}museum/${record.slug}/image/${index + 1}/detail/${pointIndex + 1}`;
+        lines.push(`${INDENT}    <sdp:imageDetail rdf:resource="${poinIri}"/>`);
       }
       lines.push(`${INDENT}</sdp:Image>`);
       lines.push("");
+
+      // Node poin ditulis setelah </sdp:Image>: mereka subjek tersendiri,
+      // bukan isi elemen gambar.
+      for (const [pointIndex, point] of (image.detail ?? []).entries()) {
+        const poinIri = `${RES}museum/${record.slug}/image/${index + 1}/detail/${pointIndex + 1}`;
+        lines.push(`${INDENT}<sdp:ImageDetail rdf:about="${poinIri}">`);
+        lines.push(
+          `${INDENT}    <sdp:detailIndex rdf:datatype="${XSD}integer">${pointIndex + 1}</sdp:detailIndex>`,
+        );
+        lines.push(`${INDENT}    <sdp:detailText xml:lang="id">${escapeXml(point)}</sdp:detailText>`);
+        lines.push(`${INDENT}</sdp:ImageDetail>`);
+        lines.push("");
+      }
     }
 
     for (const [index, exhibit] of (record.exhibits ?? []).entries()) {

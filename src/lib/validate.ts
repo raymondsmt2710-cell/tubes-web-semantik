@@ -26,6 +26,18 @@ export const SUMATRA_BOUNDS = {
 export const MIN_EXHIBIT_DESCRIPTION_CHARS = 180;
 export const MIN_IMAGE_BACKGROUND_CHARS = 220;
 
+/**
+ * `period` haruslah tarikh atau masa, bukan topik. Bidang ini tampil di UI
+ * sebagai label kecil yang dibaca pengunjung sebagai penanda waktu, sehingga
+ * isinya perlu memuat penanda tarikh agar tidak menyesatkan.
+ */
+const PENANDA_TARIKH =
+  /[0-9]|abad|era|masa|zaman|sebelum|sesudah|kini|modern|kolonial|prasejarah|megalitik|neolitik|paleolitik|klasik|perunggu|besi|kuno|purba/i;
+
+export function periodBerupaTarikh(period: string): boolean {
+  return PENANDA_TARIKH.test(period);
+}
+
 export function validateMuseums(records: MuseumRecord[]): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const seen = new Set<string>();
@@ -135,6 +147,13 @@ export function validateMuseums(records: MuseumRecord[]): ValidationIssue[] {
         if (!image.detail?.length) {
           add("gallery", "warning", `Foto ke-${index + 1} belum punya poin pengamatan (detail).`);
         }
+        if (image.period && !periodBerupaTarikh(image.period)) {
+          add(
+            "gallery",
+            "warning",
+            `Foto ke-${index + 1} period "${image.period}" bukan tarikh; pindahkan topiknya ke title/detail.`,
+          );
+        }
       }
       for (const [index, exhibit] of (record.exhibits ?? []).entries()) {
         if (!exhibit.title?.trim()) {
@@ -146,6 +165,13 @@ export function validateMuseums(records: MuseumRecord[]): ValidationIssue[] {
             "exhibits",
             "warning",
             `Pameran ke-${index + 1} ("${exhibit.title}") baru ${panjangDeskripsi} karakter; minimal ${MIN_EXHIBIT_DESCRIPTION_CHARS}.`,
+          );
+        }
+        if (exhibit.period && !periodBerupaTarikh(exhibit.period)) {
+          add(
+            "exhibits",
+            "warning",
+            `Pameran ke-${index + 1} ("${exhibit.title}") period "${exhibit.period}" bukan tarikh.`,
           );
         }
       }

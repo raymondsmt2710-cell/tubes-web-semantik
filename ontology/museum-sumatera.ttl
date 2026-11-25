@@ -336,10 +336,24 @@ sdp:imagePeriod a owl:DatatypeProperty ;
     rdfs:domain sdp:Image ;
     rdfs:range xsd:string .
 
-sdp:imageDetail a owl:DatatypeProperty ;
-    rdfs:label "poin pengamatan foto"@id ;
-    rdfs:comment "Satu foto boleh punya beberapa poin; setiap poin satu triple."@id ;
+sdp:ImageDetail a owl:Class ;
+    rdfs:label "Poin Pengamatan Foto"@id ;
+    rdfs:comment "Satu butir pengamatan pada foto; beberapa butir membentuk daftar berurut."@id .
+
+sdp:imageDetail a owl:ObjectProperty ;
+    rdfs:label "memiliki poin pengamatan"@id ;
     rdfs:domain sdp:Image ;
+    rdfs:range sdp:ImageDetail .
+
+sdp:detailIndex a owl:DatatypeProperty ;
+    rdfs:label "urutan poin pengamatan foto"@id ;
+    rdfs:comment "Menjamin urutan poin tampil sama seperti saat ditulis."@id ;
+    rdfs:domain sdp:ImageDetail ;
+    rdfs:range xsd:integer .
+
+sdp:detailText a owl:DatatypeProperty ;
+    rdfs:label "teks poin pengamatan foto"@id ;
+    rdfs:domain sdp:ImageDetail ;
     rdfs:range xsd:string .
 
 sdp:imageAlt a owl:DatatypeProperty ;

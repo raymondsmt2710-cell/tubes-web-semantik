@@ -256,6 +256,32 @@ describe("properti kedalaman pameran dan galeri", () => {
     expect(images[0].detail).toEqual(["Poin pertama", "Poin kedua"]);
     expect(images[0].period).toBe("1915");
   });
+  it("memisahkan foto yang tidak punya index alih-alih menggabungkannya", () => {
+    const images = mapGalleryRows([
+      { src: { type: "literal", value: "/a.jpg" }, sourceUrl: { type: "literal", value: "https://a" } },
+      { src: { type: "literal", value: "/b.jpg" }, sourceUrl: { type: "literal", value: "https://b" } },
+    ]);
+    expect(images.map((i) => i.src)).toEqual(["/a.jpg", "/b.jpg"]);
+  });
+
+  it("menggabungkan foto dengan index sama menjadi satu entri", () => {
+    const images = mapGalleryRows([
+      {
+        index: { type: "literal", value: "1" },
+        src: { type: "literal", value: "/a.jpg" },
+        detail: { type: "literal", value: "Poin A" },
+        sourceUrl: { type: "literal", value: "https://a" },
+      },
+      {
+        index: { type: "literal", value: "1" },
+        src: { type: "literal", value: "/a.jpg" },
+        detail: { type: "literal", value: "Poin B" },
+        sourceUrl: { type: "literal", value: "https://a" },
+      },
+    ]);
+    expect(images).toHaveLength(1);
+    expect(images[0].detail).toEqual(["Poin A", "Poin B"]);
+  });
 });
 
 describe("loadRowsOrNull: membedakan error dari kosong", () => {
