@@ -22,6 +22,10 @@ export const SUMATRA_BOUNDS = {
   maxLon: 107.5,
 };
 
+/** Ambang kedalaman teks; di bawah ini isi dianggap masih terlalu tipis. */
+export const MIN_EXHIBIT_DESCRIPTION_CHARS = 180;
+export const MIN_IMAGE_BACKGROUND_CHARS = 220;
+
 export function validateMuseums(records: MuseumRecord[]): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const seen = new Set<string>();
@@ -119,6 +123,30 @@ export function validateMuseums(records: MuseumRecord[]): ValidationIssue[] {
         }
         if (!image.sourceUrl) {
           add("gallery", "warning", `Foto ke-${index + 1} tidak mencantumkan tautan sumber.`);
+        }
+        const panjangLatar = image.background?.trim().length ?? 0;
+        if (panjangLatar < MIN_IMAGE_BACKGROUND_CHARS) {
+          add(
+            "gallery",
+            "warning",
+            `Foto ke-${index + 1} latar belakangnya ${panjangLatar} karakter; minimal ${MIN_IMAGE_BACKGROUND_CHARS}.`,
+          );
+        }
+        if (!image.detail?.length) {
+          add("gallery", "warning", `Foto ke-${index + 1} belum punya poin pengamatan (detail).`);
+        }
+      }
+      for (const [index, exhibit] of (record.exhibits ?? []).entries()) {
+        if (!exhibit.title?.trim()) {
+          add("exhibits", "error", `Pameran ke-${index + 1} tidak punya judul.`);
+        }
+        const panjangDeskripsi = exhibit.description?.trim().length ?? 0;
+        if (panjangDeskripsi < MIN_EXHIBIT_DESCRIPTION_CHARS) {
+          add(
+            "exhibits",
+            "warning",
+            `Pameran ke-${index + 1} ("${exhibit.title}") baru ${panjangDeskripsi} karakter; minimal ${MIN_EXHIBIT_DESCRIPTION_CHARS}.`,
+          );
         }
       }
     }

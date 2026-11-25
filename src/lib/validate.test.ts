@@ -108,3 +108,101 @@ describe("validasi entitas baru", () => {
     expect(missing.some((i) => i.field === "relatedSlugs" && i.level === "error")).toBe(true);
   });
 });
+
+describe("ambang kedalaman isi pameran dan galeri", () => {
+  const panjang = (n: number) => "K".repeat(n);
+
+  it("menandai deskripsi pameran yang terlalu pendek", () => {
+    const issues = validateMuseums([
+      { ...ok, exhibits: [{ title: "Lonceng", description: "Terlalu singkat." }] },
+    ]);
+    expect(issues).toContainEqual(
+      expect.objectContaining({ field: "exhibits", level: "warning" }),
+    );
+  });
+
+  it("meloloskan deskripsi pameran yang memenuhi ambang", () => {
+    const issues = validateMuseums([
+      { ...ok, exhibits: [{ title: "Lonceng", description: panjang(180) }] },
+    ]);
+    expect(issues.filter((i) => i.field === "exhibits")).toHaveLength(0);
+  });
+
+  it("menolak pameran tanpa judul", () => {
+    const issues = validateMuseums([
+      { ...ok, exhibits: [{ title: "  ", description: panjang(200) }] },
+    ]);
+    expect(issues).toContainEqual(
+      expect.objectContaining({ field: "exhibits", level: "error" }),
+    );
+  });
+
+  it("menandai latar belakang foto yang terlalu pendek", () => {
+    const issues = validateMuseums([
+      {
+        ...ok,
+        gallery: [
+          {
+            src: "/images/museums/museum-ok/1.jpg",
+            alt: "Foto",
+            caption: "Keterangan",
+            background: "Pendek.",
+            detail: ["Poin"],
+            credit: "Seseorang",
+            license: "CC BY-SA 4.0",
+            licenseUrl: null,
+            sourceUrl: "https://commons.wikimedia.org/wiki/File:X.jpg",
+          },
+        ],
+      },
+    ]);
+    expect(issues).toContainEqual(
+      expect.objectContaining({ field: "gallery", level: "warning" }),
+    );
+  });
+
+  it("menandai foto tanpa bidang detail", () => {
+    const issues = validateMuseums([
+      {
+        ...ok,
+        gallery: [
+          {
+            src: "/images/museums/museum-ok/1.jpg",
+            alt: "Foto",
+            caption: "Keterangan",
+            background: panjang(240),
+            credit: "Seseorang",
+            license: "CC BY-SA 4.0",
+            licenseUrl: null,
+            sourceUrl: "https://commons.wikimedia.org/wiki/File:X.jpg",
+          },
+        ],
+      },
+    ]);
+    expect(issues).toContainEqual(
+      expect.objectContaining({ field: "gallery", level: "warning" }),
+    );
+  });
+
+  it("meloloskan foto yang latar dan detailnya lengkap", () => {
+    const issues = validateMuseums([
+      {
+        ...ok,
+        gallery: [
+          {
+            src: "/images/museums/museum-ok/1.jpg",
+            alt: "Foto",
+            caption: "Keterangan",
+            background: panjang(240),
+            detail: ["Poin pertama", "Poin kedua"],
+            credit: "Seseorang",
+            license: "CC BY-SA 4.0",
+            licenseUrl: null,
+            sourceUrl: "https://commons.wikimedia.org/wiki/File:X.jpg",
+          },
+        ],
+      },
+    ]);
+    expect(issues.filter((i) => i.field === "gallery")).toHaveLength(0);
+  });
+});
