@@ -381,10 +381,24 @@ export function buildRdf(records: MuseumRecord[]): string {
       "penjelasan isi pameran",
     ),
   );
+  lines.push(
+    ...datatypeProperty("exhibitPeriod", "Exhibit", `${XSD}string`, "masa atau tarikh benda"),
+  );
+  lines.push(...datatypeProperty("exhibitOrigin", "Exhibit", `${XSD}string`, "asal benda"));
+  lines.push(...datatypeProperty("exhibitMaterial", "Exhibit", `${XSD}string`, "bahan benda"));
+  lines.push(
+    ...datatypeProperty("exhibitHighlight", "Exhibit", `${XSD}boolean`, "benda andalan"),
+  );
   lines.push(...datatypeProperty("imageIndex", "Image", `${XSD}integer`, "urutan foto"));
   lines.push(...datatypeProperty("imageTitle", "Image", `${XSD}string`, "judul foto"));
   lines.push(
     ...datatypeProperty("imageBackground", "Image", `${XSD}string`, "latar belakang foto"),
+  );
+  lines.push(
+    ...datatypeProperty("imagePeriod", "Image", `${XSD}string`, "masa atau tarikh foto"),
+  );
+  lines.push(
+    ...datatypeProperty("imageDetail", "Image", `${XSD}string`, "poin pengamatan foto"),
   );
   lines.push(...datatypeProperty("imageAlt", "Image", `${XSD}string`, "teks alternatif foto"));
   lines.push(...datatypeProperty("imageCaption", "Image", `${XSD}string`, "keterangan foto"));
@@ -646,6 +660,7 @@ export function buildRdf(records: MuseumRecord[]): string {
         ["imageUrl", image.src, `${XSD}anyURI`],
         ["imageTitle", image.title ?? null, null],
         ["imageBackground", image.background ?? null, null],
+        ["imagePeriod", image.period ?? null, null],
         ["imageAlt", image.alt, null],
         ["imageCaption", image.caption, null],
         ["imageCredit", image.credit, null],
@@ -658,6 +673,11 @@ export function buildRdf(records: MuseumRecord[]): string {
         const attr = datatype ? ` rdf:datatype="${datatype}"` : ' xml:lang="id"';
         lines.push(
           `${INDENT}    <sdp:${key}${attr}>${escapeXml(value)}</sdp:${key}>`,
+        );
+      }
+      for (const point of image.detail ?? []) {
+        lines.push(
+          `${INDENT}    <sdp:imageDetail xml:lang="id">${escapeXml(point)}</sdp:imageDetail>`,
         );
       }
       lines.push(`${INDENT}</sdp:Image>`);
@@ -677,6 +697,20 @@ export function buildRdf(records: MuseumRecord[]): string {
       if (exhibit.description) {
         lines.push(
           `${INDENT}    <sdp:exhibitDescription xml:lang="id">${escapeXml(exhibit.description)}</sdp:exhibitDescription>`,
+        );
+      }
+      const exhibitFields: [string, string | null][] = [
+        ["exhibitPeriod", exhibit.period ?? null],
+        ["exhibitOrigin", exhibit.origin ?? null],
+        ["exhibitMaterial", exhibit.material ?? null],
+      ];
+      for (const [key, value] of exhibitFields) {
+        if (!value) continue;
+        lines.push(`${INDENT}    <sdp:${key} xml:lang="id">${escapeXml(value)}</sdp:${key}>`);
+      }
+      if (exhibit.highlight) {
+        lines.push(
+          `${INDENT}    <sdp:exhibitHighlight rdf:datatype="${XSD}boolean">true</sdp:exhibitHighlight>`,
         );
       }
       lines.push(`${INDENT}</sdp:Exhibit>`);
