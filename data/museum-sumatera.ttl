@@ -145,7 +145,9 @@ sdp:Facility a owl:Class ;
         <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/exhibit/2>,
         <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/exhibit/3>,
         <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/exhibit/4> ;
-    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/1> ;
+    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/1>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3> ;
     sdp:hasSource <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/source/1> ;
     sdp:hasTheme <https://museumsumatera.id/resource/theme/sains-teknologi>,
         <https://museumsumatera.id/resource/theme/sejarah-alam> ;
@@ -168,7 +170,8 @@ sdp:Facility a owl:Class ;
         <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/2>,
         <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/3>,
         <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/exhibit/4> ;
-    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/1> ;
+    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/1>,
+        <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2> ;
     sdp:hasSource <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/source/1> ;
     sdp:hasTheme <https://museumsumatera.id/resource/theme/sains-teknologi>,
         <https://museumsumatera.id/resource/theme/seni-budaya> ;
@@ -191,7 +194,9 @@ sdp:Facility a owl:Class ;
         <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/exhibit/2>,
         <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/exhibit/3>,
         <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/exhibit/4> ;
-    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/1> ;
+    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/1>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3> ;
     sdp:hasSource <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/source/1> ;
     sdp:hasTheme <https://museumsumatera.id/resource/theme/arkeologi>,
         <https://museumsumatera.id/resource/theme/etnografi> ;
@@ -299,7 +304,8 @@ sdp:Facility a owl:Class ;
         <https://museumsumatera.id/resource/museum/museum-negeri-jambi/exhibit/2>,
         <https://museumsumatera.id/resource/museum/museum-negeri-jambi/exhibit/3>,
         <https://museumsumatera.id/resource/museum/museum-negeri-jambi/exhibit/4> ;
-    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/1> ;
+    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/1>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2> ;
     sdp:hasSource <https://museumsumatera.id/resource/museum/museum-negeri-jambi/source/1>,
         <https://museumsumatera.id/resource/museum/museum-negeri-jambi/source/2> ;
     sdp:hasTheme <https://museumsumatera.id/resource/theme/arkeologi>,
@@ -324,7 +330,9 @@ sdp:Facility a owl:Class ;
         <https://museumsumatera.id/resource/museum/museum-negeri-lampung/exhibit/2>,
         <https://museumsumatera.id/resource/museum/museum-negeri-lampung/exhibit/3>,
         <https://museumsumatera.id/resource/museum/museum-negeri-lampung/exhibit/4> ;
-    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/1> ;
+    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/1>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3> ;
     sdp:hasSource <https://museumsumatera.id/resource/museum/museum-negeri-lampung/source/1> ;
     sdp:hasTheme <https://museumsumatera.id/resource/theme/etnografi>,
         <https://museumsumatera.id/resource/theme/seni-budaya> ;
@@ -550,7 +558,8 @@ sdp:Facility a owl:Class ;
         <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/exhibit/3>,
         <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/exhibit/4>,
         <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/exhibit/5> ;
-    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/1> ;
+    sdp:hasImage <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/1>,
+        <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2> ;
     sdp:hasSource <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/source/1> ;
     sdp:hasTheme <https://museumsumatera.id/resource/theme/arkeologi>,
         <https://museumsumatera.id/resource/theme/etnografi> ;
@@ -1553,6 +1562,71 @@ sdp:PrivateMuseum a owl:Class ;
     sdp:detailIndex 4 ;
     sdp:detailText "Jalurnya melewati perbukitan sehingga sebagian lokomotif dirancang bergerigi."@id .
 
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2> a sdp:Image ;
+    sdp:imageAlt "Lokomotif uap hitam bernomor E 10 60 di Museum Kereta Api Sawahlunto"@id ;
+    sdp:imageBackground "Lokomotif uap berwarna hitam berdiri di atas rel di halaman museum, dengan nomor E 10 60 terpasang pada sisi kabinnya. Bentuknya ringkas dengan kabin terbuka, ciri lokomotif yang dipakai di jalur pegunungan Sumatera Barat. Di belakangnya menjulang bukit hijau dengan tulisan SAWAHLUNTO di lerengnya, sementara sebuah lampu jalan berglobe bulat berdiri di sisi kiri. Lokomotif ini adalah bagian dari koleksi sarana perkeretaapian yang menjadi inti museum."@id ;
+    sdp:imageCaption "Lokomotif uap E 10 60 di halaman Museum Kereta Api Sawahlunto."@id ;
+    sdp:imageCredit "Hynftrl"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/4> ;
+    sdp:imageIndex 2 ;
+    sdp:imageLicense "CC0"@id ;
+    sdp:imageLicenseUrl "http://creativecommons.org/publicdomain/zero/1.0/deed.en"^^xsd:anyURI ;
+    sdp:imagePeriod "lokomotif uap era kolonial"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Lokomotif_yang_ada_di_Museum_Kereta_Api_Sawahlunto.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Lokomotif uap E 10 60"@id ;
+    sdp:imageUrl "/images/museums/museum-kereta-api-sawahlunto/2.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Lokomotif hitam bernomor E 10 60 terpasang pada sisi kabinnya."@id .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Kabin terbuka, ciri lokomotif untuk jalur pegunungan Sumatera Barat."@id .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Bukit hijau di belakang memperlihatkan tulisan SAWAHLUNTO di lerengnya."@id .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/2/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Lampu jalan berglobe bulat berdiri di sisi kiri rel."@id .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3> a sdp:Image ;
+    sdp:imageAlt "Peron Stasiun Sawahlunto dengan gerbong hijau dan papan nama stasiun"@id ;
+    sdp:imageBackground "Peron beratap rangka baja ini masih memakai papan nama STASIUN SAWAHLUNTO dengan keterangan ketinggian +262 M. Di jalur kiri berderet gerbong berwarna hijau, sementara bangunan stasiun bercat putih dan hitam berdiri di sisi kanan. Stasiun ini sudah tidak melayani angkutan penumpang reguler dan difungsikan sebagai museum, tetapi rel, peron, dan gerbongnya dipertahankan seperti keadaan aslinya. Deretan tiang baja dan lampu di langit-langit memberi kesan bangunan peninggalan masa kolonial."@id ;
+    sdp:imageCaption "Peron Stasiun Sawahlunto, kini bagian dari museum."@id ;
+    sdp:imageCredit "Pemerintah Kota Sawahlunto"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/4> ;
+    sdp:imageIndex 3 ;
+    sdp:imageLicense "Public domain"@id ;
+    sdp:imagePeriod "stasiun era kolonial, +262 m"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:MUSEUM-KERETA-API-2019.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Peron Stasiun Sawahlunto"@id ;
+    sdp:imageUrl "/images/museums/museum-kereta-api-sawahlunto/3.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Papan nama STASIUN SAWAHLUNTO masih terpasang, lengkap dengan +262 M."@id .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Gerbong hijau berderet di jalur kiri peron."@id .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Bangunan stasiun bercat putih dan hitam berdiri di sisi kanan."@id .
+
+<https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/image/3/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Rel dan peron dipertahankan meski stasiun sudah difungsikan sebagai museum."@id .
+
 <https://museumsumatera.id/resource/museum/museum-kereta-api-sawahlunto/source/1> a sdp:Source ;
     sdp:sourceIndex 1 ;
     sdp:sourceLabel "Wikipedia: Museum Kereta Api Sawahlunto"@id ;
@@ -1622,6 +1696,37 @@ sdp:PrivateMuseum a owl:Class ;
     sdp:detailIndex 4 ;
     sdp:detailText "Lampung menjadi salah satu tujuan utama program pemindahan penduduk pada abad ke-20."@id .
 
+<https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2> a sdp:Image ;
+    sdp:imageAlt "Anjungan Lampung berupa rumah panggung kayu dengan papan nama hijau"@id ;
+    sdp:imageBackground "Sebuah rumah panggung kayu beratap sirap berdiri di atas lahan berumput, dengan papan hijau bertulisan ANJUNGAN LAMPUNG di depannya. Bangunan ini adalah salah satu anjungan daerah di kompleks Museum Ketransmigrasian, tempat tiap daerah asal transmigran menampilkan bentuk rumah adatnya. Kolong rumah dibiarkan terbuka, sementara tangga kayu berukir mengarah ke pintu masuk. Pepohonan muda dan jalan paving memperlihatkan kawasan itu ditata sebagai taman."@id ;
+    sdp:imageCaption "Anjungan Lampung di kompleks Museum Ketransmigrasian."@id ;
+    sdp:imageCredit "Tidak diketahui (unggahan Wiki Jelajah Museum Indonesia)"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/4> ;
+    sdp:imageIndex 2 ;
+    sdp:imageLicense "Public domain"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Museum_ketransamigrasian_lampung_02.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Anjungan Lampung"@id ;
+    sdp:imageUrl "/images/museums/museum-ketransmigrasian-lampung/2.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Rumah panggung kayu beratap sirap berdiri di atas lahan berumput."@id .
+
+<https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Papan hijau bertulisan ANJUNGAN LAMPUNG menandai identitas bangunan."@id .
+
+<https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Kolong rumah dibiarkan terbuka, dengan tangga kayu berukir menuju pintu."@id .
+
+<https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/image/2/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Anjungan daerah menampilkan bentuk rumah adat dari daerah asal transmigran."@id .
+
 <https://museumsumatera.id/resource/museum/museum-ketransmigrasian-lampung/source/1> a sdp:Source ;
     sdp:sourceIndex 1 ;
     sdp:sourceLabel "Wikimedia Commons: Museum Ketransmigrasian Lampung"@id ;
@@ -1690,6 +1795,70 @@ sdp:PrivateMuseum a owl:Class ;
 <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/1/detail/4> a sdp:ImageDetail ;
     sdp:detailIndex 4 ;
     sdp:detailText "Pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2> a sdp:Image ;
+    sdp:imageAlt "Masjid Jami Sultan Lingga beratap seng hijau dengan tiang kuning"@id ;
+    sdp:imageBackground "Masjid Jami Sultan Lingga berdiri di Desa Daik, sekitar 1,6 kilometer dari Museum Linggam Cahaya, dan bukan bagian dari kompleks museum. Masjid ini peninggalan Kesultanan Melayu Riau-Lingga yang dibangun pada masa Sultan Mahmud Syah III, memerintah sekitar 1770-1811. Inskripsi pada mimbarnya bertanggal 12 Rabiul Awal 1212 H, sekitar 1792, sementara sumber lain menyebut pembangunan dimulai sekitar 1803. Bangunan dan makam sultan di belakangnya ditetapkan sebagai cagar budaya pada 2007."@id ;
+    sdp:imageCaption "Masjid Jami Sultan Lingga, 1,6 km dari Museum Linggam Cahaya."@id ;
+    sdp:imageCredit "Situs resmi Kementerian Pendidikan dan Kebudayaan"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/4> ;
+    sdp:imageIndex 2 ;
+    sdp:imageLicense "Public domain"@id ;
+    sdp:imagePeriod "dibangun awal abad ke-19"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Masjid_Jami_Sultan_Lingga_depan.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Masjid Jami Sultan Lingga"@id ;
+    sdp:imageUrl "/images/museums/museum-linggam-cahaya/2.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Masjid beratap seng hijau dengan tiang kuning dan beranda berpagar kayu."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Berada di Desa Daik, sekitar 1,6 kilometer dari Museum Linggam Cahaya."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Inskripsi pada mimbar bertanggal 12 Rabiul Awal 1212 H, sekitar tahun 1792."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/2/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Bangunan dan makam Sultan Mahmud Syah III ditetapkan cagar budaya pada 2007."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3> a sdp:Image ;
+    sdp:imageAlt "Pintu kayu hijau berukir motif bunga pada bangunan masjid di Lingga"@id ;
+    sdp:imageBackground "Pintu kayu berwarna hijau ini dihiasi panel-panel berukir motif bunga dan sulur yang simetris, dipasang pada dinding kuning dengan lis hijau. Di sebelahnya terdapat pintu lain berdaun ganda dengan ventilasi berbentuk kipas di atasnya. Ukiran semacam ini lazim pada bangunan peninggalan Kesultanan Riau-Lingga, tempat motif tumbuhan dipakai sebagai hiasan tanpa figur makhluk hidup. Lantai keramik dan tikar anyaman memperlihatkan bangunan yang tetap dipakai sampai sekarang."@id ;
+    sdp:imageCaption "Pintu berukir pada bangunan Masjid Jami Sultan Lingga."@id ;
+    sdp:imageCredit "Situs resmi Kementerian Pendidikan dan Kebudayaan"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/4> ;
+    sdp:imageIndex 3 ;
+    sdp:imageLicense "Public domain"@id ;
+    sdp:imagePeriod "abad ke-19"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Masjid_Jami_Sultan_Lingga_pintu.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Pintu berukir masjid"@id ;
+    sdp:imageUrl "/images/museums/museum-linggam-cahaya/3.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Pintu kayu hijau dihiasi panel berukir motif bunga dan sulur yang simetris."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Dinding kuning dengan lis hijau menjadi latar pintu berukir itu."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Pintu lain berdaun ganda memakai ventilasi berbentuk kipas di atasnya."@id .
+
+<https://museumsumatera.id/resource/museum/museum-linggam-cahaya/image/3/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Motif tumbuhan dipakai sebagai hiasan, tanpa figur makhluk hidup."@id .
 
 <https://museumsumatera.id/resource/museum/museum-linggam-cahaya/source/1> a sdp:Source ;
     sdp:sourceIndex 1 ;
@@ -2172,6 +2341,38 @@ sdp:PrivateMuseum a owl:Class ;
     sdp:detailIndex 4 ;
     sdp:detailText "Letaknya di tepi danau membuat bangunan mudah dikenali dari kejauhan."@id .
 
+<https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2> a sdp:Image ;
+    sdp:imageAlt "Gedung Museum Siginjei Jambi dengan papan nama di atas pintu masuk"@id ;
+    sdp:imageBackground "Gedung berlantai dua ini memasang papan MUSEUM SIGINJEI di atas pintu masuknya, nama yang dipakai sejak 2012 untuk museum yang sebelumnya bernama Museum Negeri Jambi. Atapnya lebar berwarna gelap dengan bentuk bertingkat, sementara di atas pintu masuk terdapat hiasan segitiga berukir. Halaman depan berupa lapangan luas dengan beberapa pohon palem dan tiang bendera di tengahnya. Di kejauhan tampak menara telekomunikasi, penanda bahwa museum ini berada di dalam kota."@id ;
+    sdp:imageCaption "Gedung Museum Siginjei, nama lain Museum Negeri Jambi."@id ;
+    sdp:imageCredit "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/4> ;
+    sdp:imageIndex 2 ;
+    sdp:imageLicense "Public domain"@id ;
+    sdp:imagePeriod "gedung dibangun 1981, diresmikan 1988"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Museum_Siginjei.png"^^xsd:anyURI ;
+    sdp:imageTitle "Gedung Museum Siginjei"@id ;
+    sdp:imageUrl "/images/museums/museum-negeri-jambi/2.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Papan MUSEUM SIGINJEI terpasang di atas pintu masuk gedung."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Nama Siginjei dipakai sejak 2012, menggantikan Museum Negeri Jambi."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Atap lebar berwarna gelap dengan hiasan segitiga berukir di atas pintu."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-jambi/image/2/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Halaman depan berupa lapangan luas dengan pohon palem dan tiang bendera."@id .
+
 <https://museumsumatera.id/resource/museum/museum-negeri-jambi/source/1> a sdp:Source ;
     sdp:sourceIndex 1 ;
     sdp:sourceLabel "Wikimedia Commons: Museum Siginjei"@id ;
@@ -2244,6 +2445,71 @@ sdp:PrivateMuseum a owl:Class ;
 <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/1/detail/4> a sdp:ImageDetail ;
     sdp:detailIndex 4 ;
     sdp:detailText "Museum ini dipertahankan sebagai rujukan utama kebudayaan Lampung."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2> a sdp:Image ;
+    sdp:imageAlt "Dua bongkahan batu gelap di dalam vitrin Museum Negeri Lampung Ruwa Jurai"@id ;
+    sdp:imageBackground "Dua bongkahan batu berwarna gelap dipajang berdampingan di atas alas putih di dalam vitrin kaca. Di belakangnya terpasang mural hutan tropis sebagai latar, menandakan bagian geologika museum yang menghubungkan batuan dengan bentang alam Lampung. Pengunjung tampak di sisi kiri, memperlihatkan skala benda yang dipamerkan. Ruang geologika seperti ini biasanya menjelaskan bahan pembentuk tanah dan gunung di wilayah Lampung."@id ;
+    sdp:imageCaption "Dua contoh batuan dalam vitrin geologika Museum Lampung."@id ;
+    sdp:imageCredit "Pandamark"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/4> ;
+    sdp:imageIndex 2 ;
+    sdp:imageLicense "CC BY-SA 4.0"@id ;
+    sdp:imageLicenseUrl "https://creativecommons.org/licenses/by-sa/4.0"^^xsd:anyURI ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Geologika_Museum_Lampung_(1).jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Batuan koleksi geologika"@id ;
+    sdp:imageUrl "/images/museums/museum-negeri-lampung/2.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Dua bongkahan batu gelap dipajang berdampingan di atas alas putih."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Vitrin diberi latar mural hutan tropis, bukan dinding polos."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Pengunjung di sisi kiri memperlihatkan skala benda pameran."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/2/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Bagian geologika menghubungkan koleksi batuan dengan bentang alam Lampung."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3> a sdp:Image ;
+    sdp:imageAlt "Teropong kuningan panjang yang dipamerkan di atas penyangga kaca"@id ;
+    sdp:imageBackground "Sebuah teropong kuningan berukuran panjang dipamerkan mendatar di atas dua penyangga kaca bening. Tabungnya terdiri atas beberapa bagian yang disambung, dengan cincin penguat di sekitar ujung yang lebih besar. Benda seperti ini masuk kategori teknografika: alat yang menunjukkan tingkat teknologi dan keterampilan logam pada masanya. Latar ruang yang polos membuat bentuk tabung dan warna kuningan menonjol."@id ;
+    sdp:imageCaption "Teropong kuningan dalam koleksi teknografika Museum Lampung."@id ;
+    sdp:imageCredit "Bakteriyakult"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/4> ;
+    sdp:imageIndex 3 ;
+    sdp:imageLicense "CC BY-SA 4.0"@id ;
+    sdp:imageLicenseUrl "https://creativecommons.org/licenses/by-sa/4.0"^^xsd:anyURI ;
+    sdp:imagePeriod "alat optik masa kolonial"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Teknografika_Museum_Lampung_(16).jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Teropong kuningan"@id ;
+    sdp:imageUrl "/images/museums/museum-negeri-lampung/3.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Teropong dipamerkan mendatar di atas dua penyangga kaca bening."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Tabung kuningan tersusun dari beberapa bagian yang disambung."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Cincin penguat tampak di sekitar ujung tabung yang lebih besar."@id .
+
+<https://museumsumatera.id/resource/museum/museum-negeri-lampung/image/3/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Benda ini termasuk teknografika, yaitu alat yang menunjukkan keterampilan teknologi."@id .
 
 <https://museumsumatera.id/resource/museum/museum-negeri-lampung/source/1> a sdp:Source ;
     sdp:sourceIndex 1 ;
@@ -2633,37 +2899,36 @@ sdp:PrivateMuseum a owl:Class ;
     sdp:exhibitTitle "Benda pribadi keluarga"@id .
 
 <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1> a sdp:Image ;
-    sdp:imageAlt "Museum Rumah Kelahiran Buya Hamka — foto dari Wikimedia Commons"@id ;
-    sdp:imageBackground "Rumah kayu beratap gonjong ini adalah rumah tempat Hamka lahir dan tinggal sebelum pindah ke Padang Panjang. Rumah milik neneknya hampir hancur pada masa pendudukan Jepang, lalu dibangun kembali dan diresmikan sebagai museum pada 11 November 2001 oleh Gubernur Zainal Bakar. Lokasinya di tepi Danau Maninjau."@id ;
-    sdp:imageCaption "Museum Rumah Kelahiran Buya Hamka."@id ;
-    sdp:imageCredit "Malekhanif at ms.wikipedia"@id ;
+    sdp:imageAlt "Interior kayu museum dengan foto-foto Buya Hamka dan sebuah mesin tik"@id ;
+    sdp:imageBackground "Ruang berlapis dinding dan lantai kayu ini dipenuhi foto dan lukisan Buya Hamka, termasuk sebuah potret besar berbingkai gelap di sisi kanan. Di tengah ruangan berdiri sebuah mesin tik tua di atas meja kayu, diapit tali pembatas agar tidak disentuh pengunjung. Lampu gantung bergaya lama dan jam dinding menggantung di langit-langit, sementara cahaya matahari masuk dari jendela di sisi kiri. Penataan ini memperlihatkan rumah kelahiran Hamka pada 1908 di Maninjau yang kini difungsikan sebagai museum."@id ;
+    sdp:imageCaption "Ruang dalam Rumah Kelahiran Buya Hamka."@id ;
+    sdp:imageCredit "Situs resmi Kementerian Pendidikan dan Kebudayaan"@id ;
     sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/1>,
         <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/2>,
         <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/3>,
         <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/4> ;
     sdp:imageIndex 1 ;
-    sdp:imageLicense "GFDL"@id ;
-    sdp:imageLicenseUrl "http://www.gnu.org/copyleft/fdl.html"^^xsd:anyURI ;
-    sdp:imagePeriod "kelahiran 1908"@id ;
-    sdp:imageSource "https://commons.wikimedia.org/wiki/File%3AMuseum_Rumah_Kelahiran_Buya_Hamka.jpg"^^xsd:anyURI ;
-    sdp:imageTitle "Rumah kelahiran Buya Hamka"@id ;
+    sdp:imageLicense "Public domain"@id ;
+    sdp:imagePeriod "rumah kelahiran 1908"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Museum_Kelahiran_Buya_Hamka_9.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Ruang dalam rumah kelahiran"@id ;
     sdp:imageUrl "/images/museums/museum-rumah-kelahiran-buya-hamka/1.jpg"^^xsd:anyURI .
 
 <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/1> a sdp:ImageDetail ;
     sdp:detailIndex 1 ;
-    sdp:detailText "Rumah ini adalah tempat kelahiran Buya Hamka pada 1908 di Maninjau."@id .
+    sdp:detailText "Dinding dan lantai ruangan seluruhnya berbahan kayu."@id .
 
 <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/2> a sdp:ImageDetail ;
     sdp:detailIndex 2 ;
-    sdp:detailText "Bentuknya rumah panggung dengan atap bergonjong khas Minangkabau."@id .
+    sdp:detailText "Foto dan lukisan Buya Hamka memenuhi dinding, termasuk satu potret besar."@id .
 
 <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/3> a sdp:ImageDetail ;
     sdp:detailIndex 3 ;
-    sdp:detailText "Kini dipertahankan sebagai museum dengan perabot dan benda pribadi keluarga."@id .
+    sdp:detailText "Sebuah mesin tik tua dipajang di tengah ruangan dengan tali pembatas."@id .
 
 <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/1/detail/4> a sdp:ImageDetail ;
     sdp:detailIndex 4 ;
-    sdp:detailText "Letaknya di tepi Danau Maninjau, kawasan yang banyak disebut dalam karya Hamka."@id .
+    sdp:detailText "Rumah ini adalah tempat Hamka lahir pada 1908 di Maninjau."@id .
 
 <https://museumsumatera.id/resource/museum/museum-rumah-kelahiran-buya-hamka/image/2> a sdp:Image ;
     sdp:imageAlt "Museum Rumah Kelahiran Buya Hamka — foto dari Wikimedia Commons"@id ;
@@ -2983,36 +3248,37 @@ sdp:PrivateMuseum a owl:Class ;
     sdp:exhibitTitle "Dokumentasi Perang Batak"@id .
 
 <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1> a sdp:Image ;
-    sdp:imageAlt "Museum Sisingamangaraja XII — foto dari Wikimedia Commons"@id ;
-    sdp:imageBackground "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja dan kini menjadi kawasan makam raja-raja Batak. Kompleks makam ini berada di dekat museum yang mengisahkan perlawanan Sisingamangaraja XII terhadap Belanda, yang berakhir dengan gugurnya raja pada 1907."@id ;
-    sdp:imageCaption "Grave and en:Flag of King Sisingamangaraja"@id ;
-    sdp:imageCredit "Kontributor Wikimedia Commons"@id ;
+    sdp:imageAlt "Lembah Bakkara saat matahari terbit dengan Danau Toba di kejauhan"@id ;
+    sdp:imageBackground "Foto ini memperlihatkan Lembah Bakkara dari ketinggian saat matahari terbit, dengan sawah bertingkat di bawah dan Danau Toba membentang di kejauhan. Bakkara adalah kampung asal Sisingamangaraja XII dan menjadi latar peristiwa perlawanan terhadap Belanda yang berakhir dengan gugurnya raja pada 1907. Siluet pohon pinus di sisi kanan menutup sebagian pandangan, sementara cahaya matahari menembus celahnya. Pemandangan inilah yang menjadi konteks geografis museum yang mengisahkan riwayat sang raja."@id ;
+    sdp:imageCaption "Lembah Bakkara, kampung asal Sisingamangaraja XII."@id ;
+    sdp:imageCredit "EmicoS"@id ;
     sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/1>,
         <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/2>,
         <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/3>,
         <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/4> ;
     sdp:imageIndex 1 ;
-    sdp:imageLicense "GFDL"@id ;
-    sdp:imageLicenseUrl "http://www.gnu.org/copyleft/fdl.html"^^xsd:anyURI ;
-    sdp:imageSource "https://commons.wikimedia.org/wiki/File%3AMakam_di_bakkara.jpg"^^xsd:anyURI ;
-    sdp:imageTitle "Makam di Bakkara"@id ;
+    sdp:imageLicense "CC BY-SA 4.0"@id ;
+    sdp:imageLicenseUrl "https://creativecommons.org/licenses/by-sa/4.0"^^xsd:anyURI ;
+    sdp:imagePeriod "lanskap Danau Toba masa kolonial"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Bakkara_Village,_North_Sumatra,_Indonesia.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Lembah Bakkara dari atas"@id ;
     sdp:imageUrl "/images/museums/museum-sisingamangaraja-xii/1.jpg"^^xsd:anyURI .
 
 <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/1> a sdp:ImageDetail ;
     sdp:detailIndex 1 ;
-    sdp:detailText "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja."@id .
+    sdp:detailText "Lembah Bakkara dilihat dari ketinggian saat matahari terbit."@id .
 
 <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/2> a sdp:ImageDetail ;
     sdp:detailIndex 2 ;
-    sdp:detailText "Kawasan ini kini menjadi kompleks makam raja-raja Batak."@id .
+    sdp:detailText "Sawah bertingkat mengisi dasar lembah, dengan Danau Toba di kejauhan."@id .
 
 <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/3> a sdp:ImageDetail ;
     sdp:detailIndex 3 ;
-    sdp:detailText "Makamnya berada dekat museum yang mengisahkan perlawanan terhadap Belanda."@id .
+    sdp:detailText "Bakkara adalah kampung asal Sisingamangaraja XII."@id .
 
 <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/1/detail/4> a sdp:ImageDetail ;
     sdp:detailIndex 4 ;
-    sdp:detailText "Perlawanan itu berakhir dengan gugurnya raja pada 1907."@id .
+    sdp:detailText "Perlawanan raja terhadap Belanda berakhir dengan gugurnya pada 1907."@id .
 
 <https://museumsumatera.id/resource/museum/museum-sisingamangaraja-xii/image/2> a sdp:Image ;
     sdp:imageAlt "Museum Sisingamangaraja XII — foto dari Wikimedia Commons"@id ;
@@ -3262,6 +3528,39 @@ sdp:PrivateMuseum a owl:Class ;
     sdp:detailIndex 4 ;
     sdp:detailText "Sejak 31 Januari 2009 tempat ini menjadi museum."@id .
 
+<https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2> a sdp:Image ;
+    sdp:imageAlt "Panel Khazanah Arsip tentang Rusydiyah Club dengan vitrin naskah di bawahnya"@id ;
+    sdp:imageBackground "Panel dinding bertajuk Khazanah Arsip ini mengisahkan Rusydiyah Club atau Roesidijah (Club) Riouw P. Penjengat, organisasi yang disebut berlangsung pada 1890-1913. Menurut teks panelnya, organisasi ini berawal dari Jam'iyah ar-Rusydiyah lalu menjadi perkumpulan kaum cendekia yang menumbuhkan rasa kebangsaan melalui tulisan, pemikiran politik, dan ilmu pengetahuan, terutama soal Islam. Di bawah panel dipajang beberapa naskah terbuka dalam vitrin beralas merah. Panel semacam ini memperlihatkan bagaimana museum menghubungkan koleksi naskah dengan sejarah gerakan kebangsaan di Kepulauan Riau."@id ;
+    sdp:imageCaption "Panel Khazanah Arsip tentang Rusydiyah Club di Museum Tanjungpinang."@id ;
+    sdp:imageCredit "Rahmaziz"@id ;
+    sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/1>,
+        <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/2>,
+        <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/3>,
+        <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/4> ;
+    sdp:imageIndex 2 ;
+    sdp:imageLicense "CC BY-SA 4.0"@id ;
+    sdp:imageLicenseUrl "https://creativecommons.org/licenses/by-sa/4.0"^^xsd:anyURI ;
+    sdp:imagePeriod "organisasi 1890-1913"@id ;
+    sdp:imageSource "https://commons.wikimedia.org/wiki/File:Rusydiyah_Club.jpg"^^xsd:anyURI ;
+    sdp:imageTitle "Panel Khazanah Arsip: Rusydiyah Club"@id ;
+    sdp:imageUrl "/images/museums/museum-sultan-sulaiman-badrul-alamsyah/2.jpg"^^xsd:anyURI .
+
+<https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/1> a sdp:ImageDetail ;
+    sdp:detailIndex 1 ;
+    sdp:detailText "Panel bertajuk Khazanah Arsip memuat teks dan salinan dokumen Rusydiyah Club."@id .
+
+<https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/2> a sdp:ImageDetail ;
+    sdp:detailIndex 2 ;
+    sdp:detailText "Rusydiyah Club disebut berlangsung pada 1890-1913 di Pulau Penyengat."@id .
+
+<https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/3> a sdp:ImageDetail ;
+    sdp:detailIndex 3 ;
+    sdp:detailText "Organisasi ini menumbuhkan rasa kebangsaan lewat tulisan dan pemikiran politik."@id .
+
+<https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/image/2/detail/4> a sdp:ImageDetail ;
+    sdp:detailIndex 4 ;
+    sdp:detailText "Di bawah panel dipajang naskah terbuka dalam vitrin beralas merah."@id .
+
 <https://museumsumatera.id/resource/museum/museum-sultan-sulaiman-badrul-alamsyah/source/1> a sdp:Source ;
     sdp:sourceIndex 1 ;
     sdp:sourceLabel "Wikipedia: Museum Sultan Sulaiman Badrul Alamsyah"@id ;
@@ -3498,8 +3797,7 @@ sdp:PrivateMuseum a owl:Class ;
     sdp:imageDetail <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/1>,
         <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/2>,
         <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/3>,
-        <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/4>,
-        <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/5> ;
+        <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/4> ;
     sdp:imageIndex 3 ;
     sdp:imageLicense "CC BY-SA 4.0"@id ;
     sdp:imageLicenseUrl "https://creativecommons.org/licenses/by-sa/4.0"^^xsd:anyURI ;
@@ -3522,10 +3820,6 @@ sdp:PrivateMuseum a owl:Class ;
 <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/4> a sdp:ImageDetail ;
     sdp:detailIndex 4 ;
     sdp:detailText "Lanskapnya juga memperlihatkan bahwa museum ini berada di kawasan pertanian, bukan pusat kota."@id .
-
-<https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/image/3/detail/5> a sdp:ImageDetail ;
-    sdp:detailIndex 5 ;
-    sdp:detailText "Hamparan sawah ini sekaligus menjadi latar yang menyambungkan museum dengan kehidupan petani di sekitarnya."@id .
 
 <https://museumsumatera.id/resource/museum/museum-tb-silalahi-center/source/1> a sdp:Source ;
     sdp:sourceIndex 1 ;

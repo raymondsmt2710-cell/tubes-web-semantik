@@ -857,8 +857,7 @@
           "Hamparan sawah dan pepohonan ini adalah latar keseharian kompleks museum di Balige.",
           "Pemandangan seperti ini menjelaskan mengapa koleksi budaya di kawasan Danau Toba erat dengan pertanian, danau, dan kehidupan kampung.",
           "Danau dan kehidupan kampung menjadi bagian yang tidak terpisahkan dari kebudayaan setempat.",
-          "Lanskapnya juga memperlihatkan bahwa museum ini berada di kawasan pertanian, bukan pusat kota.",
-          "Hamparan sawah ini sekaligus menjadi latar yang menyambungkan museum dengan kehidupan petani di sekitarnya."
+          "Lanskapnya juga memperlihatkan bahwa museum ini berada di kawasan pertanian, bukan pusat kota."
         ]
       }
     ],
@@ -925,20 +924,20 @@
     "gallery": [
       {
         "src": "/images/museums/museum-sisingamangaraja-xii/1.jpg",
-        "alt": "Museum Sisingamangaraja XII — foto dari Wikimedia Commons",
-        "caption": "Grave and en:Flag of King Sisingamangaraja",
-        "credit": "Kontributor Wikimedia Commons",
-        "license": "GFDL",
-        "licenseUrl": "http://www.gnu.org/copyleft/fdl.html",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMakam_di_bakkara.jpg",
-        "title": "Makam di Bakkara",
-        "background": "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja dan kini menjadi kawasan makam raja-raja Batak. Kompleks makam ini berada di dekat museum yang mengisahkan perlawanan Sisingamangaraja XII terhadap Belanda, yang berakhir dengan gugurnya raja pada 1907.",
-        "period": null,
+        "alt": "Lembah Bakkara saat matahari terbit dengan Danau Toba di kejauhan",
+        "caption": "Lembah Bakkara, kampung asal Sisingamangaraja XII.",
+        "credit": "EmicoS",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bakkara_Village,_North_Sumatra,_Indonesia.jpg",
+        "title": "Lembah Bakkara dari atas",
+        "background": "Foto ini memperlihatkan Lembah Bakkara dari ketinggian saat matahari terbit, dengan sawah bertingkat di bawah dan Danau Toba membentang di kejauhan. Bakkara adalah kampung asal Sisingamangaraja XII dan menjadi latar peristiwa perlawanan terhadap Belanda yang berakhir dengan gugurnya raja pada 1907. Siluet pohon pinus di sisi kanan menutup sebagian pandangan, sementara cahaya matahari menembus celahnya. Pemandangan inilah yang menjadi konteks geografis museum yang mengisahkan riwayat sang raja.",
+        "period": "lanskap Danau Toba masa kolonial",
         "detail": [
-          "Bakkara, di tepi Danau Toba, adalah kampung asal Sisingamangaraja.",
-          "Kawasan ini kini menjadi kompleks makam raja-raja Batak.",
-          "Makamnya berada dekat museum yang mengisahkan perlawanan terhadap Belanda.",
-          "Perlawanan itu berakhir dengan gugurnya raja pada 1907."
+          "Lembah Bakkara dilihat dari ketinggian saat matahari terbit.",
+          "Sawah bertingkat mengisi dasar lembah, dengan Danau Toba di kejauhan.",
+          "Bakkara adalah kampung asal Sisingamangaraja XII.",
+          "Perlawanan raja terhadap Belanda berakhir dengan gugurnya pada 1907."
         ]
       },
       {
@@ -1278,6 +1277,24 @@
           "Setelah kemerdekaan bangunan dipakai sebagai Sekolah Rakyat.",
           "Sejak 31 Januari 2009 tempat ini menjadi museum."
         ]
+      },
+      {
+        "src": "/images/museums/museum-sultan-sulaiman-badrul-alamsyah/2.jpg",
+        "alt": "Panel Khazanah Arsip tentang Rusydiyah Club dengan vitrin naskah di bawahnya",
+        "caption": "Panel Khazanah Arsip tentang Rusydiyah Club di Museum Tanjungpinang.",
+        "credit": "Rahmaziz",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rusydiyah_Club.jpg",
+        "title": "Panel Khazanah Arsip: Rusydiyah Club",
+        "background": "Panel dinding bertajuk Khazanah Arsip ini mengisahkan Rusydiyah Club atau Roesidijah (Club) Riouw P. Penjengat, organisasi yang disebut berlangsung pada 1890-1913. Menurut teks panelnya, organisasi ini berawal dari Jam'iyah ar-Rusydiyah lalu menjadi perkumpulan kaum cendekia yang menumbuhkan rasa kebangsaan melalui tulisan, pemikiran politik, dan ilmu pengetahuan, terutama soal Islam. Di bawah panel dipajang beberapa naskah terbuka dalam vitrin beralas merah. Panel semacam ini memperlihatkan bagaimana museum menghubungkan koleksi naskah dengan sejarah gerakan kebangsaan di Kepulauan Riau.",
+        "period": "organisasi 1890-1913",
+        "detail": [
+          "Panel bertajuk Khazanah Arsip memuat teks dan salinan dokumen Rusydiyah Club.",
+          "Rusydiyah Club disebut berlangsung pada 1890-1913 di Pulau Penyengat.",
+          "Organisasi ini menumbuhkan rasa kebangsaan lewat tulisan dan pemikiran politik.",
+          "Di bawah panel dipajang naskah terbuka dalam vitrin beralas merah."
+        ]
       }
     ],
     "types": [
@@ -1363,6 +1380,42 @@
           "Iluminasinya khas Pantai Timur Semenanjung.",
           "Selain sebagai kitab, mushaf seperti ini adalah benda seni.",
           "Pola hiasnya menunjukkan percampuran tradisi Melayu dengan pengaruh Islam dari Timur Tengah dan India."
+        ]
+      },
+      {
+        "src": "/images/museums/museum-linggam-cahaya/2.jpg",
+        "alt": "Masjid Jami Sultan Lingga beratap seng hijau dengan tiang kuning",
+        "caption": "Masjid Jami Sultan Lingga, 1,6 km dari Museum Linggam Cahaya.",
+        "credit": "Situs resmi Kementerian Pendidikan dan Kebudayaan",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masjid_Jami_Sultan_Lingga_depan.jpg",
+        "title": "Masjid Jami Sultan Lingga",
+        "background": "Masjid Jami Sultan Lingga berdiri di Desa Daik, sekitar 1,6 kilometer dari Museum Linggam Cahaya, dan bukan bagian dari kompleks museum. Masjid ini peninggalan Kesultanan Melayu Riau-Lingga yang dibangun pada masa Sultan Mahmud Syah III, memerintah sekitar 1770-1811. Inskripsi pada mimbarnya bertanggal 12 Rabiul Awal 1212 H, sekitar 1792, sementara sumber lain menyebut pembangunan dimulai sekitar 1803. Bangunan dan makam sultan di belakangnya ditetapkan sebagai cagar budaya pada 2007.",
+        "period": "dibangun awal abad ke-19",
+        "detail": [
+          "Masjid beratap seng hijau dengan tiang kuning dan beranda berpagar kayu.",
+          "Berada di Desa Daik, sekitar 1,6 kilometer dari Museum Linggam Cahaya.",
+          "Inskripsi pada mimbar bertanggal 12 Rabiul Awal 1212 H, sekitar tahun 1792.",
+          "Bangunan dan makam Sultan Mahmud Syah III ditetapkan cagar budaya pada 2007."
+        ]
+      },
+      {
+        "src": "/images/museums/museum-linggam-cahaya/3.jpg",
+        "alt": "Pintu kayu hijau berukir motif bunga pada bangunan masjid di Lingga",
+        "caption": "Pintu berukir pada bangunan Masjid Jami Sultan Lingga.",
+        "credit": "Situs resmi Kementerian Pendidikan dan Kebudayaan",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Masjid_Jami_Sultan_Lingga_pintu.jpg",
+        "title": "Pintu berukir masjid",
+        "background": "Pintu kayu berwarna hijau ini dihiasi panel-panel berukir motif bunga dan sulur yang simetris, dipasang pada dinding kuning dengan lis hijau. Di sebelahnya terdapat pintu lain berdaun ganda dengan ventilasi berbentuk kipas di atasnya. Ukiran semacam ini lazim pada bangunan peninggalan Kesultanan Riau-Lingga, tempat motif tumbuhan dipakai sebagai hiasan tanpa figur makhluk hidup. Lantai keramik dan tikar anyaman memperlihatkan bangunan yang tetap dipakai sampai sekarang.",
+        "period": "abad ke-19",
+        "detail": [
+          "Pintu kayu hijau dihiasi panel berukir motif bunga dan sulur yang simetris.",
+          "Dinding kuning dengan lis hijau menjadi latar pintu berukir itu.",
+          "Pintu lain berdaun ganda memakai ventilasi berbentuk kipas di atasnya.",
+          "Motif tumbuhan dipakai sebagai hiasan, tanpa figur makhluk hidup."
         ]
       }
     ],
@@ -1676,20 +1729,20 @@
     "gallery": [
       {
         "src": "/images/museums/museum-rumah-kelahiran-buya-hamka/1.jpg",
-        "alt": "Museum Rumah Kelahiran Buya Hamka — foto dari Wikimedia Commons",
-        "caption": "Museum Rumah Kelahiran Buya Hamka.",
-        "credit": "Malekhanif at ms.wikipedia",
-        "license": "GFDL",
-        "licenseUrl": "http://www.gnu.org/copyleft/fdl.html",
-        "sourceUrl": "https://commons.wikimedia.org/wiki/File%3AMuseum_Rumah_Kelahiran_Buya_Hamka.jpg",
-        "title": "Rumah kelahiran Buya Hamka",
-        "background": "Rumah kayu beratap gonjong ini adalah rumah tempat Hamka lahir dan tinggal sebelum pindah ke Padang Panjang. Rumah milik neneknya hampir hancur pada masa pendudukan Jepang, lalu dibangun kembali dan diresmikan sebagai museum pada 11 November 2001 oleh Gubernur Zainal Bakar. Lokasinya di tepi Danau Maninjau.",
-        "period": "kelahiran 1908",
+        "alt": "Interior kayu museum dengan foto-foto Buya Hamka dan sebuah mesin tik",
+        "caption": "Ruang dalam Rumah Kelahiran Buya Hamka.",
+        "credit": "Situs resmi Kementerian Pendidikan dan Kebudayaan",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Museum_Kelahiran_Buya_Hamka_9.jpg",
+        "title": "Ruang dalam rumah kelahiran",
+        "background": "Ruang berlapis dinding dan lantai kayu ini dipenuhi foto dan lukisan Buya Hamka, termasuk sebuah potret besar berbingkai gelap di sisi kanan. Di tengah ruangan berdiri sebuah mesin tik tua di atas meja kayu, diapit tali pembatas agar tidak disentuh pengunjung. Lampu gantung bergaya lama dan jam dinding menggantung di langit-langit, sementara cahaya matahari masuk dari jendela di sisi kiri. Penataan ini memperlihatkan rumah kelahiran Hamka pada 1908 di Maninjau yang kini difungsikan sebagai museum.",
+        "period": "rumah kelahiran 1908",
         "detail": [
-          "Rumah ini adalah tempat kelahiran Buya Hamka pada 1908 di Maninjau.",
-          "Bentuknya rumah panggung dengan atap bergonjong khas Minangkabau.",
-          "Kini dipertahankan sebagai museum dengan perabot dan benda pribadi keluarga.",
-          "Letaknya di tepi Danau Maninjau, kawasan yang banyak disebut dalam karya Hamka."
+          "Dinding dan lantai ruangan seluruhnya berbahan kayu.",
+          "Foto dan lukisan Buya Hamka memenuhi dinding, termasuk satu potret besar.",
+          "Sebuah mesin tik tua dipajang di tengah ruangan dengan tali pembatas.",
+          "Rumah ini adalah tempat Hamka lahir pada 1908 di Maninjau."
         ]
       },
       {
@@ -1921,6 +1974,42 @@
           "Arsitektur stasiun mengikuti gaya bangunan kolonial dengan atap tinggi.",
           "Jalurnya melewati perbukitan sehingga sebagian lokomotif dirancang bergerigi."
         ]
+      },
+      {
+        "src": "/images/museums/museum-kereta-api-sawahlunto/2.jpg",
+        "alt": "Lokomotif uap hitam bernomor E 10 60 di Museum Kereta Api Sawahlunto",
+        "caption": "Lokomotif uap E 10 60 di halaman Museum Kereta Api Sawahlunto.",
+        "credit": "Hynftrl",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lokomotif_yang_ada_di_Museum_Kereta_Api_Sawahlunto.jpg",
+        "title": "Lokomotif uap E 10 60",
+        "background": "Lokomotif uap berwarna hitam berdiri di atas rel di halaman museum, dengan nomor E 10 60 terpasang pada sisi kabinnya. Bentuknya ringkas dengan kabin terbuka, ciri lokomotif yang dipakai di jalur pegunungan Sumatera Barat. Di belakangnya menjulang bukit hijau dengan tulisan SAWAHLUNTO di lerengnya, sementara sebuah lampu jalan berglobe bulat berdiri di sisi kiri. Lokomotif ini adalah bagian dari koleksi sarana perkeretaapian yang menjadi inti museum.",
+        "period": "lokomotif uap era kolonial",
+        "detail": [
+          "Lokomotif hitam bernomor E 10 60 terpasang pada sisi kabinnya.",
+          "Kabin terbuka, ciri lokomotif untuk jalur pegunungan Sumatera Barat.",
+          "Bukit hijau di belakang memperlihatkan tulisan SAWAHLUNTO di lerengnya.",
+          "Lampu jalan berglobe bulat berdiri di sisi kiri rel."
+        ]
+      },
+      {
+        "src": "/images/museums/museum-kereta-api-sawahlunto/3.jpg",
+        "alt": "Peron Stasiun Sawahlunto dengan gerbong hijau dan papan nama stasiun",
+        "caption": "Peron Stasiun Sawahlunto, kini bagian dari museum.",
+        "credit": "Pemerintah Kota Sawahlunto",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:MUSEUM-KERETA-API-2019.jpg",
+        "title": "Peron Stasiun Sawahlunto",
+        "background": "Peron beratap rangka baja ini masih memakai papan nama STASIUN SAWAHLUNTO dengan keterangan ketinggian +262 M. Di jalur kiri berderet gerbong berwarna hijau, sementara bangunan stasiun bercat putih dan hitam berdiri di sisi kanan. Stasiun ini sudah tidak melayani angkutan penumpang reguler dan difungsikan sebagai museum, tetapi rel, peron, dan gerbongnya dipertahankan seperti keadaan aslinya. Deretan tiang baja dan lampu di langit-langit memberi kesan bangunan peninggalan masa kolonial.",
+        "period": "stasiun era kolonial, +262 m",
+        "detail": [
+          "Papan nama STASIUN SAWAHLUNTO masih terpasang, lengkap dengan +262 M.",
+          "Gerbong hijau berderet di jalur kiri peron.",
+          "Bangunan stasiun bercat putih dan hitam berdiri di sisi kanan.",
+          "Rel dan peron dipertahankan meski stasiun sudah difungsikan sebagai museum."
+        ]
       }
     ],
     "types": [
@@ -2010,6 +2099,24 @@
           "Bentuk bangunannya mengacu pada rumah panggung Kayu Tinggi, rumah tradisional Jambi.",
           "Ornamen khas Jambi menjadi ciri yang membedakannya dari bangunan provinsi lain.",
           "Letaknya di tepi danau membuat bangunan mudah dikenali dari kejauhan."
+        ]
+      },
+      {
+        "src": "/images/museums/museum-negeri-jambi/2.jpg",
+        "alt": "Gedung Museum Siginjei Jambi dengan papan nama di atas pintu masuk",
+        "caption": "Gedung Museum Siginjei, nama lain Museum Negeri Jambi.",
+        "credit": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Museum_Siginjei.png",
+        "title": "Gedung Museum Siginjei",
+        "background": "Gedung berlantai dua ini memasang papan MUSEUM SIGINJEI di atas pintu masuknya, nama yang dipakai sejak 2012 untuk museum yang sebelumnya bernama Museum Negeri Jambi. Atapnya lebar berwarna gelap dengan bentuk bertingkat, sementara di atas pintu masuk terdapat hiasan segitiga berukir. Halaman depan berupa lapangan luas dengan beberapa pohon palem dan tiang bendera di tengahnya. Di kejauhan tampak menara telekomunikasi, penanda bahwa museum ini berada di dalam kota.",
+        "period": "gedung dibangun 1981, diresmikan 1988",
+        "detail": [
+          "Papan MUSEUM SIGINJEI terpasang di atas pintu masuk gedung.",
+          "Nama Siginjei dipakai sejak 2012, menggantikan Museum Negeri Jambi.",
+          "Atap lebar berwarna gelap dengan hiasan segitiga berukir di atas pintu.",
+          "Halaman depan berupa lapangan luas dengan pohon palem dan tiang bendera."
         ]
       }
     ],
@@ -2938,6 +3045,42 @@
           "Di halaman dan ruang pamer terdapat koleksi adat, tenun, dan perlengkapan upacara.",
           "Museum ini dipertahankan sebagai rujukan utama kebudayaan Lampung."
         ]
+      },
+      {
+        "src": "/images/museums/museum-negeri-lampung/2.jpg",
+        "alt": "Dua bongkahan batu gelap di dalam vitrin Museum Negeri Lampung Ruwa Jurai",
+        "caption": "Dua contoh batuan dalam vitrin geologika Museum Lampung.",
+        "credit": "Pandamark",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Geologika_Museum_Lampung_(1).jpg",
+        "title": "Batuan koleksi geologika",
+        "background": "Dua bongkahan batu berwarna gelap dipajang berdampingan di atas alas putih di dalam vitrin kaca. Di belakangnya terpasang mural hutan tropis sebagai latar, menandakan bagian geologika museum yang menghubungkan batuan dengan bentang alam Lampung. Pengunjung tampak di sisi kiri, memperlihatkan skala benda yang dipamerkan. Ruang geologika seperti ini biasanya menjelaskan bahan pembentuk tanah dan gunung di wilayah Lampung.",
+        "period": null,
+        "detail": [
+          "Dua bongkahan batu gelap dipajang berdampingan di atas alas putih.",
+          "Vitrin diberi latar mural hutan tropis, bukan dinding polos.",
+          "Pengunjung di sisi kiri memperlihatkan skala benda pameran.",
+          "Bagian geologika menghubungkan koleksi batuan dengan bentang alam Lampung."
+        ]
+      },
+      {
+        "src": "/images/museums/museum-negeri-lampung/3.jpg",
+        "alt": "Teropong kuningan panjang yang dipamerkan di atas penyangga kaca",
+        "caption": "Teropong kuningan dalam koleksi teknografika Museum Lampung.",
+        "credit": "Bakteriyakult",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Teknografika_Museum_Lampung_(16).jpg",
+        "title": "Teropong kuningan",
+        "background": "Sebuah teropong kuningan berukuran panjang dipamerkan mendatar di atas dua penyangga kaca bening. Tabungnya terdiri atas beberapa bagian yang disambung, dengan cincin penguat di sekitar ujung yang lebih besar. Benda seperti ini masuk kategori teknografika: alat yang menunjukkan tingkat teknologi dan keterampilan logam pada masanya. Latar ruang yang polos membuat bentuk tabung dan warna kuningan menonjol.",
+        "period": "alat optik masa kolonial",
+        "detail": [
+          "Teropong dipamerkan mendatar di atas dua penyangga kaca bening.",
+          "Tabung kuningan tersusun dari beberapa bagian yang disambung.",
+          "Cincin penguat tampak di sekitar ujung tabung yang lebih besar.",
+          "Benda ini termasuk teknografika, yaitu alat yang menunjukkan keterampilan teknologi."
+        ]
       }
     ],
     "types": [
@@ -3022,6 +3165,24 @@
           "Rumah awal biasanya sederhana karena lahan di sekitarnya belum dibuka.",
           "Museum ini didedikasikan pada sejarah program transmigrasi di Lampung.",
           "Lampung menjadi salah satu tujuan utama program pemindahan penduduk pada abad ke-20."
+        ]
+      },
+      {
+        "src": "/images/museums/museum-ketransmigrasian-lampung/2.jpg",
+        "alt": "Anjungan Lampung berupa rumah panggung kayu dengan papan nama hijau",
+        "caption": "Anjungan Lampung di kompleks Museum Ketransmigrasian.",
+        "credit": "Tidak diketahui (unggahan Wiki Jelajah Museum Indonesia)",
+        "license": "Public domain",
+        "licenseUrl": null,
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Museum_ketransamigrasian_lampung_02.jpg",
+        "title": "Anjungan Lampung",
+        "background": "Sebuah rumah panggung kayu beratap sirap berdiri di atas lahan berumput, dengan papan hijau bertulisan ANJUNGAN LAMPUNG di depannya. Bangunan ini adalah salah satu anjungan daerah di kompleks Museum Ketransmigrasian, tempat tiap daerah asal transmigran menampilkan bentuk rumah adatnya. Kolong rumah dibiarkan terbuka, sementara tangga kayu berukir mengarah ke pintu masuk. Pepohonan muda dan jalan paving memperlihatkan kawasan itu ditata sebagai taman.",
+        "period": null,
+        "detail": [
+          "Rumah panggung kayu beratap sirap berdiri di atas lahan berumput.",
+          "Papan hijau bertulisan ANJUNGAN LAMPUNG menandai identitas bangunan.",
+          "Kolong rumah dibiarkan terbuka, dengan tangga kayu berukir menuju pintu.",
+          "Anjungan daerah menampilkan bentuk rumah adat dari daerah asal transmigran."
         ]
       }
     ],
