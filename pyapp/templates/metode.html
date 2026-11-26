@@ -29,10 +29,18 @@
     <div class="angka">{{ "{:,}".format(perbandingan.closure_rdfs).replace(",", ".") }}</div>
   </div>
   <div class="kartu">
-    <div class="label">Fakta turunan</div>
-    <div class="angka">{{ "{:,}".format(perbandingan.inferred).replace(",", ".") }}</div>
+    <div class="label">Fakta turunan informatif</div>
+    <div class="angka">{{ "{:,}".format(ringkasan_turunan.informatif).replace(",", ".") }}</div>
   </div>
 </div>
+<p class="meta">
+  Selisih closure − asserted: {{ "{:,}".format(perbandingan.inferred).replace(",", ".") }} triple.
+  Angka ini lebih besar karena reasoner juga menulis artefak yang benar secara logika
+  tetapi tidak menjelaskan apa pun tentang museum — misalnya <code>x owl:sameAs x</code>,
+  node restriksi OWL, dan aksioma kosakata. Yang dihitung sebagai
+  <em>informatif</em> hanya fakta baru tentang entitas data (museum, pameran, foto,
+  kota, provinsi), yaitu baris yang ditampilkan di tabel di bawah.
+</p>
 
 <h2 style="margin-top:32px">Contoh rantai penalaran</h2>
 <p class="ringkas">Untuk Museum Negeri Aceh:</p>
@@ -42,8 +50,45 @@
 
 <h2 style="margin-top:32px">Contoh fakta turunan ({{ jumlah_turunan }} total)</h2>
 {% if turunan %}
-<pre tabindex="0"><code>{% for f in turunan %}{{ f.subjek_n3 }} {{ f.predikat_n3 }} {{ f.objek_n3 }} .
-{% endfor %}</code></pre>
+{% if ringkasan_turunan.per_aturan %}
+<p class="ringkas">
+  Per aturan:
+  {% for nama, n in ringkasan_turunan.per_aturan.items() %}
+  <span class="chip"><code>{{ nama }}</code> {{ n }}</span>
+  {% endfor %}
+  {% if ringkasan_turunan.dua_jalur_atau_lebih %}
+  — {{ ringkasan_turunan.dua_jalur_atau_lebih }} fakta bisa diturunkan lewat lebih dari satu
+  aturan, jadi dihitung di setiap aturannya.
+  {% endif %}
+</p>
+<ul class="meta">
+  <li><code>rdfs9</code> — tipe diwariskan dari <code>rdfs:subClassOf</code></li>
+  <li><code>rdfs2</code> / <code>rdfs3</code> — tipe dari <code>rdfs:domain</code> / <code>rdfs:range</code></li>
+  <li><code>prp-inv</code> — relasi balik dari <code>owl:inverseOf</code></li>
+  <li><code>prp-symp</code> — relasi simetris (<code>owl:SymmetricProperty</code>)</li>
+</ul>
+{% endif %}
+<table class="turunan">
+  <caption class="sr-only">Contoh fakta yang diturunkan reasoner beserta aturannya</caption>
+  <thead>
+    <tr>
+      <th scope="col">Subjek</th>
+      <th scope="col">Predikat</th>
+      <th scope="col">Objek</th>
+      <th scope="col">Aturan</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for f in turunan %}
+    <tr>
+      <td><code>{{ f.subjek_n3 }}</code></td>
+      <td><code>{{ f.predikat_n3 }}</code></td>
+      <td><code>{{ f.objek_n3 }}</code></td>
+      <td>{% if f.aturan %}{{ f.aturan | join(", ") }}{% else %}—{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% else %}
 <p class="meta">
   Tidak ada fakta turunan yang perlu ditampilkan: setiap tipe museum sudah ditulis

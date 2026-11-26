@@ -1,15 +1,12 @@
-/* Semantic Search Engine Museum Sumatera
-   Gaya arsip: kertas, garis tipis, tipografi serif untuk judul. */
-
 :root {
   --paper: #f6f3ec;
   --paper-2: #fffdf8;
   --ink: #23201b;
   --ink-soft: #57514a;
-  /* #8d867d semula hanya 3.25:1 di atas --paper; #6b645b ≥ 4.6:1 (WCAG AA). */
+
   --ink-faint: #6b645b;
   --rule: #d8d2c6;
-  /* Batas kontrol formulir butuh 3:1 (WCAG 1.4.11); --rule hanya garis hias. */
+
   --rule-kuat: #8f887c;
   --accent: #8c3b1e;
   --accent-soft: #f0e2d8;
@@ -24,7 +21,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  /* 100% (bukan 16px) agar ukuran huruf pilihan pengguna di browser dihormati. */
+
   font-size: 100%;
   line-height: 1.6;
 }
@@ -32,15 +29,11 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* --- aksesibilitas ----------------------------------------------------- */
-
-/* Fokus keyboard selalu terlihat; :focus-visible tidak mengganggu klik tetikus. */
 :focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
 
-/* Skip-link: tersembunyi sampai mendapat fokus Tab pertama. */
 .lompat {
   position: absolute;
   left: 12px;
@@ -54,7 +47,6 @@ a:hover { text-decoration: underline; }
 }
 .lompat:focus { top: 12px; text-decoration: none; }
 
-/* Teks hanya untuk pembaca layar (mis. "membuka tab baru"). */
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -67,8 +59,6 @@ a:hover { text-decoration: underline; }
 
 main:focus { outline: none; }
 
-/* Tautan di dalam kalimat diberi garis bawah: warna saja tidak cukup
-   membedakannya dari teks biasa (WCAG 1.4.1). */
 main p a, main td a, main li > a, .ringkas a { text-decoration: underline; text-underline-offset: 2px; }
 main h3 a { text-decoration: none; }
 
@@ -91,8 +81,6 @@ h2 { font-size: 1.3rem; }
 h3 { font-size: 1.05rem; }
 
 .isi { max-width: 960px; margin: 0 auto; padding: 0 20px 72px; }
-
-/* --- kepala ------------------------------------------------------------ */
 
 header.situs {
   border-bottom: 1px solid var(--rule);
@@ -118,8 +106,6 @@ nav.situs { display: flex; gap: 18px; font-size: .9rem; flex-wrap: wrap; }
 nav.situs a { color: var(--ink-soft); }
 nav.situs a.aktif, nav.situs a[aria-current="page"] { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
 
-/* --- label kecil ------------------------------------------------------- */
-
 .label {
   font-size: .68rem;
   letter-spacing: .09em;
@@ -137,8 +123,6 @@ nav.situs a.aktif, nav.situs a[aria-current="page"] { color: var(--accent); font
   color: var(--ink-soft);
 }
 .chip.andalan { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-
-/* --- kartu ------------------------------------------------------------- */
 
 .kartu {
   border: 1px solid var(--rule);
@@ -161,8 +145,6 @@ nav.situs a.aktif, nav.situs a[aria-current="page"] { color: var(--accent); font
   line-height: 1.1;
 }
 
-/* --- daftar hasil ------------------------------------------------------ */
-
 .hasil { list-style: none; padding: 0; margin: 20px 0 0; }
 .hasil li {
   border-bottom: 1px solid var(--rule);
@@ -172,8 +154,6 @@ nav.situs a.aktif, nav.situs a[aria-current="page"] { color: var(--accent); font
 .hasil h3 { margin-bottom: 2px; }
 .meta { font-size: .84rem; color: var(--ink-faint); }
 .ringkas { color: var(--ink-soft); font-size: .92rem; margin: .5em 0 0; max-width: 62ch; }
-
-/* --- formulir ---------------------------------------------------------- */
 
 form.saring { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; margin: 20px 0 8px; }
 form.saring label { display: flex; flex-direction: column; font-size: .78rem; color: var(--ink-soft); gap: 4px; }
@@ -205,8 +185,6 @@ button.ghost, .tombol.ghost {
   color: var(--accent);
 }
 
-/* --- blok kode --------------------------------------------------------- */
-
 pre {
   background: #2b2721;
   color: #f2eee6;
@@ -218,13 +196,9 @@ pre {
 }
 code { font-family: "Cascadia Code", Consolas, monospace; font-size: .88em; }
 
-/* --- tabel ------------------------------------------------------------- */
-
 table { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: 12px; }
 th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); }
-
-/* --- pameran & galeri -------------------------------------------------- */
 
 .pameran { list-style: none; padding: 0; margin: 16px 0 0; }
 .pameran li { border-bottom: 1px solid var(--rule); padding: 14px 0; display: grid; grid-template-columns: 2rem 1fr; gap: 12px; }
@@ -239,8 +213,6 @@ th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color:
 .galeri .poin li { display: flex; gap: 6px; }
 .galeri .poin li::before { content: "—"; color: var(--ink-faint); }
 
-/* --- peta ------------------------------------------------------------- */
-
 .peta {
   height: 480px;
   margin-top: 16px;
@@ -248,8 +220,6 @@ th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color:
   border-radius: 4px;
 }
 @media (max-width: 620px) { .peta { height: 360px; } }
-
-/* --- status ------------------------------------------------------------ */
 
 .status { display: inline-block; font-size: .78rem; padding: 3px 10px; border-radius: 3px; }
 .status.lolos { background: #e2efe6; color: var(--ok); }
@@ -274,3 +244,5 @@ footer.situs {
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+
+table.turunan td code { word-break: break-word; overflow-wrap: anywhere; }

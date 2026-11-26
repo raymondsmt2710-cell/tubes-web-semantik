@@ -173,6 +173,54 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
     }
 
 
+def _ringkasan_turunan(fakta: list[dict[str, Any]]) -> dict[str, Any]:
+    """Hitung fakta turunan per aturan dari daftar yang sama dengan tabel.
+
+    Angka di kartu harus cocok dengan baris yang bisa ditelusuri pembaca.
+    ``len(closure) - len(asserted)`` tidak dipakai di sini karena memuat
+    artefak reasoner (``x owl:sameAs x``, bnode restriksi, aksioma vocabulary).
+    Fakta dengan dua aturan (mis. ``rdfs2`` dan ``rdfs9``) dihitung di
+    keduanya, sehingga jumlah ``per_aturan`` boleh melebihi ``informatif``.
+    """
+    per_aturan: dict[str, int] = {}
+    jalur_ganda = 0
+    for f in fakta:
+        aturan = f.get("aturan") or []
+        if len(aturan) > 1:
+            jalur_ganda += 1
+        for nama in aturan:
+            per_aturan[nama] = per_aturan.get(nama, 0) + 1
+    return {
+        "informatif": len(fakta),
+        "per_aturan": dict(sorted(per_aturan.items(), key=lambda kv: (-kv[1], kv[0]))),
+        "dua_jalur_atau_lebih": jalur_ganda,
+    }
+
+
+def _contoh_turunan(
+    fakta: list[dict[str, Any]], maks: int = 20, per_aturan: int = 5
+) -> list[dict[str, Any]]:
+    """Pilih contoh yang mewakili setiap aturan, bukan sekadar 20 baris pertama.
+
+    Tanpa ini, 218 fakta ``prp-inv`` di urutan awal akan memenuhi seluruh
+    contoh dan aturan lain (``rdfs9``, ``rdfs2``) tidak pernah terlihat.
+    Setiap kombinasi aturan mendapat jatah dulu, sisanya diisi berurutan.
+    """
+    terpilih: list[int] = []
+    jatah: dict[tuple[str, ...], int] = {}
+    for i, f in enumerate(fakta):
+        kunci = tuple(f.get("aturan") or ())
+        if jatah.get(kunci, 0) < per_aturan:
+            jatah[kunci] = jatah.get(kunci, 0) + 1
+            terpilih.append(i)
+    for i in range(len(fakta)):
+        if len(terpilih) >= maks:
+            break
+        if i not in terpilih:
+            terpilih.append(i)
+    return [fakta[i] for i in sorted(terpilih[:maks])]
+
+
 def _alt_foto(judul: str, alt_data: Any, nama_museum: str) -> str:
     """Teks ``alt`` yang menjelaskan isi foto, bukan asal berkasnya.
 
@@ -371,8 +419,9 @@ def halaman_metode(request: Request, store: MuseumStore = Depends(get_store)):
         "metode.html",
         {
             "perbandingan": perbandingan(store),
-            "turunan": semua_turunan[:20],
+            "turunan": _contoh_turunan(semua_turunan),
             "jumlah_turunan": len(semua_turunan),
+            "ringkasan_turunan": _ringkasan_turunan(semua_turunan),
             "rantai": jelaskan_tipe(store, "museum-negeri-aceh"),
             "konsistensi": cek_konsistensi(store),
             "kelas": sorted(skema.kelas.values()),
@@ -459,10 +508,12 @@ def api_tanya(
 
 @app.get("/api/metode")
 def api_metode(store: MuseumStore = Depends(get_store)):
+    semua_turunan = fakta_turunan(store, batas=10_000)
     return {
         "perbandingan": perbandingan(store),
-        "jumlah_fakta_turunan": len(fakta_turunan(store, batas=10_000)),
-        "fakta_turunan": fakta_turunan(store, batas=20),
+        "jumlah_fakta_turunan": len(semua_turunan),
+        "ringkasan_turunan": _ringkasan_turunan(semua_turunan),
+        "fakta_turunan": _contoh_turunan(semua_turunan),
         "konsistensi": cek_konsistensi(store),
         "subkelas": subkelas_museum(store),
     }
