@@ -69,7 +69,14 @@ def kueri_cari(
     if era:
         filter_baris.append(f"  FILTER(LCASE(STR(?era)) = LCASE({_literal(era)}))")
     if tahun_min is not None:
-        filter_baris.append("  FILTER(BOUND(?tahun) && xsd:integer(STR(?tahun)) >= %d)" % tahun_min)
+        # `xsd:gYear` bukan integer: `xsd:integer(?tahun)` dan perbandingan
+        # antar-`gYear` tidak didukung seragam antar engine (Fuseki/Virtuoso bisa
+        # menolak). Nilai tahun selalu 4 digit, jadi perbandingan string
+        # memberi urutan kronologis yang benar dan aman di semua engine.
+        aman_tahun = int(tahun_min)
+        filter_baris.append(
+            f'  FILTER(BOUND(?tahun) && STR(?tahun) >= "{aman_tahun:04d}")'
+        )
 
     for kata in _bersihkan_kata(q or ""):
         literal = _literal(kata)

@@ -140,7 +140,10 @@ class Intent:
 
 
 _TOPIK: list[tuple[str, tuple[str, ...]]] = [
-    ("pameran", ("pameran", "koleksi", "benda", "exhibit")),
+    # "koleksi"/"benda" berarti jumlah benda museum (`collectionSize`), bukan
+    # jumlah pameran. Diletakkan sebelum pameran agar tidak tertimpa.
+    ("koleksi", ("koleksi", "benda")),
+    ("pameran", ("pameran", "exhibit")),
     ("galeri", ("galeri", "foto", "gambar", "image")),
     ("provinsi", ("provinsi",)),
     ("kota", ("kota", "kabupaten")),
@@ -379,12 +382,27 @@ def _rakit(pertanyaan: str, store: MuseumStore) -> str:
             )
         return (
             f"{PREFIXES}\nSELECT ?nama ?nilai WHERE {{\n"
-            f"  ?m a sdp:Museum ; {NAMA} ?nama ; sdp:{niat.atribut} ?nilai .\n"
+            f"  ?m a sdp:Museum .\n"
+            f"  ?m {NAMA} ?nama .\n"
+            f"  ?m sdp:{niat.atribut} ?nilai .\n"
             f"}}\nLIMIT 50"
         )
 
     # --- hitung ------------------------------------------------------------
     if niat.jenis == "hitung":
+        if niat.topik == "koleksi":
+            # Jumlah benda disimpan sebagai angka pada museum, bukan sebagai
+            # node terpisah; jumlahkan nilainya, bukan hitung node.
+            pola = "  ?x a sdp:Museum ; sdp:collectionSize ?jumlahBenda ."
+            sempit_koleksi: list[str] = []
+            if jangkar and niat.jangkar:
+                sempit_koleksi.append(f"  FILTER(?x = {jangkar})")
+            badan = pola + ("\n" + "\n".join(sempit_koleksi) if sempit_koleksi else "")
+            return (
+                f"{PREFIXES}\n"
+                "SELECT (SUM(?jumlahBenda) AS ?jumlah) WHERE {\n"
+                f"{badan}\n}}\nLIMIT 50"
+            )
         if niat.topik == "pameran":
             pola = "  ?m a sdp:Museum ; sdp:hasExhibit ?x ."
         elif niat.topik == "galeri":
@@ -444,7 +462,9 @@ def _rakit(pertanyaan: str, store: MuseumStore) -> str:
     # --- daftar pameran / galeri -------------------------------------------
     if niat.topik == "pameran":
         pola = (
-            f"  ?m a sdp:Museum ; {NAMA} ?museum ; sdp:hasExhibit ?x .\n"
+            f"  ?m a sdp:Museum .\n"
+            f"  ?m {NAMA} ?museum .\n"
+            "  ?m sdp:hasExhibit ?x .\n"
             "  ?x sdp:exhibitTitle ?judul ."
         )
         if jangkar:
@@ -629,11 +649,17 @@ def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]
     ``OFFSET`` juga dibatasi agar tidak bisa dijadikan cara mengambil data
     sangat dalam tanpa melewati ``LIMIT``.
 
+    ``maks`` boleh **diperkecil** pemanggil, tetapi tidak pernah diperbesar:
+    batas 50 adalah janji ke pengguna, bukan setelan internal.
+
     Yang **tidak** diperiksa: apakah arah relasi sesuai maksud pertanyaan, dan
     apakah pengguna berhak atas data itu.
     """
     if not q or not q.strip():
         return False, "query kosong"
+
+    # Batas efektif tidak boleh melebihi MAKS_LIMIT, apa pun kata pemanggil.
+    maks = min(int(maks), MAKS_LIMIT)
 
     try:
         algebra = prepareQuery(q, initNs=PREFIX_MAP).algebra
@@ -817,6 +843,8 @@ def _rangkai(pertanyaan: str, baris: list[Any], niat: Intent | None = None) -> s
 
     if niat.jenis == "hitung":
         nilai = str(baris[0][0]) if baris and baris[0] else "0"
+        if niat.topik == "koleksi":
+            return f"Total {nilai} benda koleksi yang tercatat di graf."
         satuan = {
             "pameran": "pameran",
             "galeri": "foto",

@@ -80,6 +80,7 @@ WHERE {{
        + COALESCE(?bEra, 0) + COALESCE(?bBab, 0) AS ?skor)
   FILTER(?skor > 0)
 }}
+LIMIT {max(1, int(maks))}
 """
 
 

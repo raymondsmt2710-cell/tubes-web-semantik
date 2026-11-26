@@ -159,6 +159,11 @@ def cek_konsistensi(store: MuseumStore) -> list[str]:
     OWL tidak "menolak" data seperti constraint basis data — ia membuat model
     menjadi tidak konsisten. Pesan ini menyebut pasangan kelasnya supaya
     pemodelan yang keliru bisa diperbaiki di sumbernya.
+
+    Pemeriksaan dilakukan pada **closure**, bukan hanya graf asserted: kelas
+    disjoint sering baru terpenuhi lewat `rdfs:subClassOf` atau `rdfs:domain`,
+    dan justru pelanggaran hasil inferensi itulah yang paling perlu dilihat —
+    tidak ada di data mentah, jadi sulit ditemukan dengan mata.
     """
     pasangan: list[tuple[URIRef, URIRef]] = []
     for kiri, _, kanan in store.asserted.triples((None, OWL.disjointWith, None)):
@@ -166,20 +171,31 @@ def cek_konsistensi(store: MuseumStore) -> list[str]:
             pasangan.append((kiri, kanan))
             pasangan.append((kanan, kiri))
 
+    if not pasangan:
+        return []
+
     pesan: list[str] = []
-    for node in store.asserted.subjects(RDF.type, None):
+    terlihat: set[str] = set()
+
+    # Telusuri tipe pada closure: gabungan tipe asserted + turunan.
+    for node in set(store.closure.subjects(RDF.type, None)):
+        if not isinstance(node, URIRef):
+            continue
         tipe = {
-            t for t in store.asserted.objects(node, RDF.type) if isinstance(t, URIRef)
+            t for t in store.closure.objects(node, RDF.type) if isinstance(t, URIRef)
         }
         for kiri, kanan in pasangan:
             if kiri in tipe and kanan in tipe:
+                kunci = f"{node}|{kiri}|{kanan}"
+                if kunci in terlihat:
+                    continue
+                terlihat.add(kunci)
+                asal = "akibat inferensi" if (
+                    kanan not in set(store.asserted.objects(node, RDF.type))
+                ) else ""
+                akhiran = f" ({asal})" if asal else ""
                 pesan.append(
                     f"{store.nama(node)} bertipe {_n3(store, kiri)} sekaligus "
-                    f"{_n3(store, kanan)}, padahal keduanya owl:disjointWith."
+                    f"{_n3(store, kanan)}, padahal keduanya owl:disjointWith{akhiran}."
                 )
-    # Buang duplikat tanpa mengubah urutan.
-    unik: list[str] = []
-    for p in pesan:
-        if p not in unik:
-            unik.append(p)
-    return unik
+    return pesan

@@ -110,7 +110,7 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
                 "periode": str(store.asserted.value(node, SDP.exhibitPeriod) or ""),
                 "asal": str(store.asserted.value(node, SDP.exhibitOrigin) or ""),
                 "bahan": str(store.asserted.value(node, SDP.exhibitMaterial) or ""),
-                "andalan": bool(store.asserted.value(node, SDP.exhibitHighlight)),
+                "andalan": _benar(store.asserted.value(node, SDP.exhibitHighlight)),
             }
         )
 
@@ -151,19 +151,57 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
     return {
         "iri": str(iri),
         "slug": slug,
-        "nama": teks(SDP.name) or slug,
+        "nama": teks(SDP.name) or _nama_dari_slug(slug),
         "deskripsi": teks(SDP.description),
         "alamat": teks(SDP.address),
         "kota": store.nama(kota) if kota is not None else None,
         "provinsi": store.nama(provinsi) if provinsi is not None else None,
         "tema": store.nama(tema_node) if tema_node is not None else None,
         "era": store.nama(era_node) if era_node is not None else None,
-        "tahun": int(tahun) if tahun is not None else None,
+        "tahun": _tahun_dari(tahun),
         "verifikasi": teks(SDP.verificationStatus),
         "exhibits": pameran,
         "gallery": galeri,
         "sources": sumber,
     }
+
+
+def _nama_dari_slug(slug: str) -> str:
+    """Ubah slug menjadi label yang bisa dibaca, mis. "museum-negeri-aceh".
+
+    Menampilkan slug mentah sebagai judul halaman terasa seperti data yang belum
+    jadi; ini hanya dipakai bila museum benar-benar tidak punya nama.
+    """
+    return slug.replace("-", " ").title() or "Museum tanpa nama"
+
+
+def _tahun_dari(nilai: Any) -> int | None:
+    """Ambil tahun dari literal `xsd:gYear` tanpa melempar error.
+
+    `int("1915")` aman, tetapi `xsd:gYear` bisa berisi bentuk lain
+    ("1915-01-01") pada data yang tidak bersih. Kegagalan konversi tidak boleh
+    menjatuhkan seluruh halaman.
+    """
+    if nilai is None:
+        return None
+    try:
+        return int(str(nilai).strip()[:4])
+    except (TypeError, ValueError):
+        return None
+
+
+def _benar(nilai: Any) -> bool:
+    """Baca nilai boolean dari graf tanpa terjebak truthiness Python.
+
+    `Literal("false")` bernilai **True** di Python karena string-nya tidak
+    kosong. Nilai "false"/"0"/"no" harus dibaca sebagai False.
+    """
+    if nilai is None:
+        return False
+    if isinstance(nilai, bool):
+        return nilai
+    teks = str(nilai).strip().lower()
+    return teks not in ("false", "0", "", "no", "tidak")
 
 
 def _museum_iri(store: MuseumStore, slug: str) -> URIRef | None:

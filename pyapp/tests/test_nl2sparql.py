@@ -244,6 +244,24 @@ def test_guard_menolak_limit_nol(store):
     assert ok is False
 
 
+def test_guard_tidak_bisa_dilonggarkan_lewat_parameter_maks(store):
+    """`maks` boleh diperkecil pemanggil, tidak boleh diperbesar.
+
+    Batas 50 adalah janji ke pengguna (dan ke endpoint publik nanti); parameter
+    internal tidak boleh dipakai menaikkannya.
+    """
+    q = "SELECT ?s WHERE { ?s a <https://museumsumatera.id/ontology#Museum> } LIMIT 100"
+    ok, pesan = aman(q, store, maks=1000)
+    assert ok is False, "maks di atas MAKS_LIMIT harus diabaikan"
+    assert str(MAKS_LIMIT) in pesan or "LIMIT" in pesan.upper()
+
+
+def test_guard_boleh_diperketat_pemanggil(store):
+    q = "SELECT ?s WHERE { ?s a <https://museumsumatera.id/ontology#Museum> } LIMIT 20"
+    ok, pesan = aman(q, store, maks=10)
+    assert ok is False, pesan
+
+
 # --- skema dari graf ------------------------------------------------------
 
 
@@ -326,6 +344,31 @@ def test_intent_kota_bukan_museum(store):
     """Pertanyaan tentang kota jangan dibaca sebagai hitung museum."""
     i = intent("ada berapa kota di Sumatera?", store)
     assert i.topik == "kota"
+
+
+@pytest.mark.parametrize(
+    "pertanyaan",
+    [
+        "berapa koleksi Museum Negeri Aceh?",
+        "ada berapa koleksi?",
+        "berapa benda di Museum Negeri Aceh?",
+    ],
+)
+def test_intent_koleksi_bukan_pameran(store, pertanyaan):
+    """"Koleksi" berarti jumlah benda (`collectionSize`), bukan jumlah pameran.
+
+    Tanpa pemisahan ini, "berapa koleksi Museum X" dijawab dengan jumlah
+    pameran — satuan yang menyesatkan pembaca.
+    """
+    i = intent(pertanyaan, store)
+    assert i.topik != "pameran", f"{pertanyaan} -> topik {i.topik}"
+    assert i.topik == "koleksi" or i.atribut == "collectionSize"
+
+
+def test_pameran_tetap_dikenali_sebagai_pameran(store):
+    i = intent("pameran apa saja di Museum Negeri Aceh?", store)
+    assert i.topik == "pameran"
+
 
 
 
