@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 from rdflib import Graph
-from rdflib.namespace import RDF, RDFS
+from rdflib.namespace import OWL, RDF, RDFS
 
 from semweb.namespace import SDP
 from semweb.store import MuseumStore
@@ -12,7 +12,6 @@ from semweb.store import MuseumStore
 from store_bersama import store_data
 
 AKAR = Path(__file__).resolve().parent.parent.parent
-DATA_TTL = AKAR / "data" / "museum-sumatera.ttl"
 ONTO_TTL = AKAR / "ontology" / "museum-sumatera.ttl"
 
 TTL_DATA = """
@@ -88,8 +87,11 @@ def test_data_penuh_memuat_ontologi_otomatis():
     store = store_data()
     assert len(store.asserted) > 0
     assert len(store.ontologi) > 0
-    assert len(store.premis) >= len(store.asserted)
-    assert len(store.premis) >= len(store.ontologi)
+    # `premis` = asserted ∪ ontologi. Diuji sebagai gabungan yang tepat, bukan
+    # sekadar `>=`: kalau `_gabung` membuang ontologi, `premis` akan sama dengan
+    # `asserted` dan `>= len(ontologi)` tetap lolos.
+    irisan = set(store.asserted) & set(store.ontologi)
+    assert len(store.premis) == len(store.asserted) + len(store.ontologi) - len(irisan)
     assert len(store.closure) > len(store.premis), "closure harus memuat fakta turunan"
     assert store.ontologi_path == ONTO_TTL
 
@@ -120,17 +122,32 @@ def test_asserted_tidak_kena_ontologi():
     satu-satunya jaring pengamannya.
 
     Jumlah triple tidak ditulis sebagai angka mati: `data/museums.json` berubah saat
-    museum dilengkapi, dan angka mati akan gagal bukan karena logika salah. Yang
-    diuji adalah sifatnya — aksioma ontologi tidak boleh muncul di `asserted`.
+    museum dilengkapi, dan angka mati akan gagal bukan karena logika salah.
+
+    Yang diperiksa bukan hanya `rdfs:domain`: aksioma ontologi mana pun yang bocor
+    harus tertangkap. `data/museum-sumatera.ttl` hanya menulis 4 `rdfs:subClassOf`
+    dan tidak menulis satu pun `rdfs:domain`, `rdfs:range`, `owl:inverseOf`, atau
+    `owl:disjointWith` — jadi semuanya harus nol di `asserted`.
     """
     if not ONTO_TTL.exists():
         pytest.skip("ontology/ tidak ada")
     store = store_data()
+
     assert len(store.asserted) > 0
-    assert (SDP.hasExhibit, RDFS.domain, SDP.Museum) not in store.asserted
-    assert len(list(store.asserted.triples((None, RDFS.domain, None)))) == 0
-    # `premis` justru harus memuatnya — kalau tidak, ontologi gagal dimuat.
+    for aksioma in (RDFS.domain, RDFS.range, OWL.inverseOf, OWL.disjointWith):
+        assert len(list(store.asserted.triples((None, aksioma, None)))) == 0, (
+            f"aksioma {aksioma} bocor ke asserted"
+        )
+
+    # `premis` justru harus memuatnya — kalau tidak, ontologi gagal dimuat sama sekali.
     assert len(list(store.premis.triples((None, RDFS.domain, None)))) > 0
+    assert len(list(store.premis.triples((None, OWL.inverseOf, None)))) > 0
+
+    # Aksioma yang memang ditulis data (subClassOf) boleh ada di asserted, tetapi
+    # ontologi harus menambah lebih banyak: kalau tidak, ia tidak ikut tergabung.
+    assert len(list(store.premis.triples((None, RDFS.subClassOf, None)))) > len(
+        list(store.asserted.triples((None, RDFS.subClassOf, None)))
+    )
 
 
 def test_skema_graf_dan_cari_iri_sama_dengan_tanpa_ontologi():

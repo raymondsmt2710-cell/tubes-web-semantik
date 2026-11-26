@@ -12,7 +12,6 @@ from semweb.store import MuseumStore
 from store_bersama import store_data
 
 AKAR = Path(__file__).resolve().parent.parent.parent
-DATA_TTL = AKAR / "data" / "museum-sumatera.ttl"
 ONTO_TTL = AKAR / "ontology" / "museum-sumatera.ttl"
 
 PREDIKAT_AKSIOMA = {
@@ -66,25 +65,35 @@ def test_ontologi_menambah_banyak_fakta_inverse():
     if not ONTO_TTL.exists():
         pytest.skip("ontology/ tidak ada — angka target tidak terverifikasi")
     fakta = fakta_turunan(store_penuh(), batas=10_000)
-    tanpa = fakta_turunan(
-        store_data("none"), batas=10_000
-    )
+    tanpa = fakta_turunan(store_data("none"), batas=10_000)
     assert len(fakta) > len(tanpa)
-    inv = [f for f in fakta if f["predikat"].endswith("OfMuseum")]
-    assert len(inv) > len(tanpa), "mayoritas fakta baru harus dari owl:inverseOf"
+
+    # Diukur lewat `aturan`, bukan tebak-tebakan dari akhiran predikat: yang ingin
+    # dijaga adalah bahwa mayoritas fakta TAMBAHAN berasal dari `prp-inv`.
+    tambahan = len(fakta) - len(tanpa)
+    dari_inverse = sum(1 for f in fakta if "prp-inv" in f["aturan"])
+    assert dari_inverse > tambahan / 2, (
+        f"mayoritas tambahan harus dari prp-inv: {dari_inverse} dari {tambahan}"
+    )
 
 
 def test_tanpa_ontologi_hanya_rdfs9_yang_jalan():
     """Tanpa aksioma ontologi, hanya rdfs9 dari subClassOf di data yang bisa jalan.
 
-    Yang dijaga: hasilnya sedikit, bukan kosong, dan semuanya berlabel `rdfs9`.
+    Yang dijaga: hasilnya tidak kosong, dan tidak ada aturan yang bergantung pada
+    ontologi (`prp-inv`, `rdfs2`, `rdfs3`, `prp-symp`) yang ikut menyala. Kesamaan
+    himpunan penuh sengaja tidak dipakai: kalau kelak `data/` menulis aksioma
+    domain sendiri, `rdfs2` sah muncul tanpa ontologi dan test akan gagal karena
+    data berubah, bukan karena kode salah.
     """
     if not ONTO_TTL.exists():
         pytest.skip("ontology/ tidak ada")
     store = store_data("none")
     fakta = fakta_turunan(store, batas=10_000)
     assert fakta
-    assert {a for f in fakta for a in f["aturan"]} == {"rdfs9"}
+    nama = {a for f in fakta for a in f["aturan"]}
+    assert nama <= {"rdfs9", "rdfs11"}, f"aturan bergantung ontologi ikut menyala: {nama}"
+    assert "tidak teridentifikasi" not in nama
 
 
 def test_urut_sebelum_potong_bukan_sesudah():
