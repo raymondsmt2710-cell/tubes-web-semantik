@@ -10,10 +10,11 @@ from __future__ import annotations
 from collections import deque
 from typing import Any, NamedTuple
 
-from rdflib import BNode, Literal, URIRef
+from owlrl import DeductiveClosure, OWLRL_Semantics
+from rdflib import BNode, Graph, Literal, URIRef
 from rdflib.namespace import OWL, RDF, RDFS
 
-from .namespace import RES
+from .namespace import BIND, RES
 from .store import MuseumStore
 
 # Predikat yang isinya aksioma vocabulary, bukan pengetahuan tentang data museum.
@@ -69,6 +70,33 @@ def _n3(store: MuseumStore, node) -> str:
         return str(node)
 
 
+def _informatif(asserted: set[tuple], s, p, o) -> bool:
+    """Apakah satu triple layak ditampilkan sebagai fakta turunan.
+
+    Satu definisi dipakai bersama oleh `fakta_turunan` dan `langkah_penalaran`:
+    halaman `/metode` menampilkan keduanya berdampingan, jadi "informatif" di
+    tabel putaran harus berarti persis hal yang sama dengan daftar fakta di
+    bawahnya. Kalau penyaringnya disalin, dua angka itu bisa berbeda tanpa ada
+    yang menyadari.
+
+    `asserted` diterima sebagai himpunan (bukan store) karena pemanggil sudah
+    memilikinya: menyusun ulang `set(store.asserted)` untuk tiap triple berarti
+    menyalin ribuan triple ribuan kali.
+    """
+    if isinstance(s, BNode) or isinstance(o, BNode):
+        return False
+    if (s, p, o) in asserted:
+        return False
+    # Hanya entitas data kita sendiri; aksioma vocabulary dilewati.
+    if not str(s).startswith(str(RES)):
+        return False
+    if p in _AKSIOMA_PREDIKAT:
+        return False
+    if isinstance(o, URIRef) and o in _OBJEK_TRIVIAL:
+        return False
+    return True
+
+
 def fakta_turunan(
     store: MuseumStore,
     subjek: URIRef | None = None,
@@ -108,17 +136,7 @@ def fakta_turunan(
 
     pola = (subjek, None, None) if subjek is not None else (None, None, None)
     for s, p, o in store.closure.triples(pola):
-        if isinstance(s, BNode) or isinstance(o, BNode):
-            continue
-        if (s, p, o) in asserted:
-            continue
-
-        # Hanya entitas data kita sendiri; aksioma vocabulary dilewati.
-        if not str(s).startswith(str(RES)):
-            continue
-        if p in _AKSIOMA_PREDIKAT:
-            continue
-        if isinstance(o, URIRef) and o in _OBJEK_TRIVIAL:
+        if not _informatif(asserted, s, p, o):
             continue
 
         kunci_fakta = (str(s), str(p), str(o))
@@ -168,6 +186,75 @@ _URUTAN_ATURAN = ("prp-inv", "prp-symp", "rdfs9", "rdfs11", "rdfs2", "rdfs3")
 def _kalimat(store: MuseumStore, s, p, o) -> str:
     """Satu triple premis sebagai kalimat yang bisa dibaca manusia."""
     return f"{_n3(store, s)} {_n3(store, p)} {_n3(store, o)}"
+
+
+def langkah_penalaran(
+    store: MuseumStore,
+    batas_putaran: int = 5,
+) -> list[dict[str, Any]]:
+    """Jalankan reasoner putaran demi putaran sampai tidak ada triple baru.
+
+    Materi P12 memperlihatkan penalaran sebagai putaran: tiap putaran menerapkan
+    aturan sekali, lalu hasilnya dipakai putaran berikutnya, sampai tidak ada
+    fakta baru (fixpoint). Fungsi ini mereproduksi tabel itu apa adanya.
+
+    Temuan yang **tidak** diperbaiki di sini: `owlrl` sudah menjenuhkan graf
+    sampai fixpoint di dalam satu `expand()`. Jadi putaran pertama menghasilkan
+    ribuan triple mentah dan seluruh fakta informatif, sedangkan putaran kedua
+    hanya menambah aksioma tipe data dan `owl:disjointWith` yang tidak
+    menjelaskan apa pun tentang museum. Memaksa putaran kedua yang informatif
+    lewat stratifikasi aturan manual sudah dicoba dan gagal (`rdfs9` di atas
+    `rdfs2` menambah nol). Karena itu keluarannya memang satu putaran
+    informatif diikuti fixpoint — bukan cacat yang perlu ditutupi.
+
+    Graf diperluas pada **salinan** `store.premis`: `DeductiveClosure` menambah
+    triple ke graf yang diserahkannya, dan store dipakai bersama seluruh
+    aplikasi. Memperluas graf aslinya akan membuat panggilan kedua melihat graf
+    yang sudah tertutup dan melaporkan nol fakta baru.
+
+    Pemanggil membedakan "fixpoint tercapai" dari "batas tercapai" hanya lewat
+    `mentah` elemen terakhir, jadi putaran terakhir sah bernilai > 0 bila
+    `batas_putaran` habis lebih dulu.
+    """
+    graf = Graph()
+    # Prefiks aplikasi ikut dibawa walau `expand()` tidak membutuhkannya: graf ini
+    # adalah salinan `premis`, dan graf salinan yang tidak membawa prefiks akan
+    # mencetak IRI penuh begitu ada yang menelusurinya saat menyelidiki selisih
+    # putaran. Pola yang sama dipakai `store._graf_baru`.
+    for prefiks, ns in BIND.items():
+        graf.bind(prefiks, ns)
+    for triple in store.premis:
+        graf.add(triple)
+
+    asserted = set(store.asserted)
+    sebelum = set(graf)
+    langkah: list[dict[str, Any]] = []
+
+    for nomor in range(1, batas_putaran + 1):
+        DeductiveClosure(OWLRL_Semantics).expand(graf)
+        sesudah = set(graf)
+        baru = sesudah - sebelum
+
+        # Urutkan sebelum dipotong: urutan iterasi graf tidak dijamin stabil,
+        # dan panel menampilkan tiga contoh yang sama setiap kali halaman dimuat.
+        informatif = sorted(
+            (t for t in baru if _informatif(asserted, *t)),
+            key=lambda t: tuple(str(n) for n in t),
+        )
+        langkah.append(
+            {
+                "putaran": nomor,
+                "mentah": len(baru),
+                "informatif": len(informatif),
+                "contoh": [_kalimat(store, *t) for t in informatif[:3]],
+            }
+        )
+
+        sebelum = sesudah
+        if not baru:
+            break
+
+    return langkah
 
 
 class _Aksioma(NamedTuple):
