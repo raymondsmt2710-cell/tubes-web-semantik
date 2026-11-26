@@ -74,15 +74,20 @@ def kueri_cari(
         # menolak). Perbandingan string juga tidak cukup: `"950" > "1000"`.
         # Solusinya bandingkan (panjang, isi) agar urutan kronologis tetap benar
         # untuk tahun berapa pun jumlah digitnya.
+        #
+        # Empat digit pertama diambil lebih dulu: `xsd:gYear` bisa berisi bentuk
+        # tidak sah seperti "1915-01-01" (10 karakter), dan tanpa pemotongan ini
+        # `STRLEN > 4` selalu benar sehingga filter meloloskan tahun apa pun.
         aman_tahun = int(tahun_min)
         if aman_tahun < 0:
             aman_tahun = 0
         teks_tahun = f"{aman_tahun:04d}" if aman_tahun >= 1000 else str(aman_tahun)
+        tahun4 = f"SUBSTR(STR(?tahun), 1, 4)"
         filter_baris.append(
             "  FILTER(BOUND(?tahun) && (\n"
-            f"    STRLEN(STR(?tahun)) > {len(teks_tahun)} ||\n"
-            f"    (STRLEN(STR(?tahun)) = {len(teks_tahun)} && "
-            f'STR(?tahun) >= "{teks_tahun}")\n'
+            f"    STRLEN({tahun4}) > {len(teks_tahun)} ||\n"
+            f"    (STRLEN({tahun4}) = {len(teks_tahun)} && "
+            f'{tahun4} >= "{teks_tahun}")\n'
             "  ))"
         )
 
@@ -101,7 +106,9 @@ def kueri_cari(
 
     urutan = {
         "nama": "ORDER BY LCASE(STR(?nama))",
-        "tahun": "ORDER BY COALESCE(xsd:integer(STR(?tahun)), 0)",
+        # Empat digit pertama, alasannya sama dengan filter `tahun_min` di atas:
+        # `xsd:gYear` bisa berisi "1915-01-01" dan `xsd:integer()` menolaknya.
+        "tahun": "ORDER BY COALESCE(xsd:integer(SUBSTR(STR(?tahun), 1, 4)), 0)",
     }.get(urut or "", "ORDER BY LCASE(STR(?nama))")
 
     badan = "\n".join(pola + filter_baris)
@@ -162,7 +169,9 @@ def cari_museum(
         if baris[4] is not None and str(baris[4]) not in entri["tema"]:
             entri["tema"].append(str(baris[4]))
         if entri["tahun"] is None and baris[6] is not None:
-            mentah = str(baris[6])
+            # `xsd:gYear` bisa berisi bentuk tidak sah seperti "1915-01-01";
+            # `int()` menolaknya, jadi ambil empat digit pertama lebih dulu.
+            mentah = str(baris[6]).strip()[:4]
             try:
                 entri["tahun"] = int(mentah)
             except ValueError:
