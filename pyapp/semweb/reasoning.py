@@ -75,7 +75,7 @@ def fakta_turunan(
     """
     asserted = set(store.asserted)
     terlihat: set[tuple[str, str, str]] = set()
-    baris: list[tuple[str, str, str, dict[str, Any]]] = []
+    hasil: list[dict[str, Any]] = []
 
     pola = (subjek, None, None) if subjek is not None else (None, None, None)
     for s, p, o in store.closure.triples(pola):
@@ -97,27 +97,24 @@ def fakta_turunan(
             continue
         terlihat.add(kunci)
 
-        baris.append(
-            (
-                kunci[0],
-                kunci[1],
-                kunci[2],
-                {
-                    "subjek": kunci[0],
-                    "predikat": kunci[1],
-                    "objek": kunci[2],
-                    "subjek_n3": _n3(store, s),
-                    "predikat_n3": _n3(store, p),
-                    "objek_n3": _n3(store, o),
-                    # Task 5 akan menggantinya dengan nama aturan sebenarnya;
-                    # untuk sekarang nilai ini sah dan menjaga bentuk keluaran.
-                    "aturan": ["tidak teridentifikasi"],
-                },
-            )
+        hasil.append(
+            {
+                "subjek": kunci[0],
+                "predikat": kunci[1],
+                "objek": kunci[2],
+                "subjek_n3": _n3(store, s),
+                "predikat_n3": _n3(store, p),
+                "objek_n3": _n3(store, o),
+                # Task 5 akan menggantinya dengan nama aturan sebenarnya;
+                # untuk sekarang nilai ini sah dan menjaga bentuk keluaran.
+                "aturan": ["tidak teridentifikasi"],
+            }
         )
 
-    baris.sort(key=lambda b: (b[0], b[1], b[2]))
-    return [b[3] for b in baris[:batas]]
+    # Urutkan penuh dulu, baru potong: memotong sambil mengiterasi graf membuat
+    # isi halaman bergantung pada urutan iterasi yang tidak dijamin stabil.
+    hasil.sort(key=lambda f: (f["subjek"], f["predikat"], f["objek"]))
+    return hasil[:batas]
 
 
 def jelaskan_tipe(store: MuseumStore, slug: str) -> list[str]:
