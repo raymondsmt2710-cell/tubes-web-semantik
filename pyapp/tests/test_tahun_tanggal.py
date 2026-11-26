@@ -72,10 +72,30 @@ def test_urut_tahun_membaca_tahun_berbentuk_tanggal():
 
 
 def test_data_asli_tetap_benar():
-    """Perbaikan tidak boleh mengubah hasil pada data yang sudah bersih."""
+    """Perbaikan tidak boleh mengubah hasil pada data yang sudah bersih.
+
+    Jumlahnya tidak ditulis sebagai angka mati: isi `data/museums.json` berubah
+    saat museum dilengkapi (tugas A4 mengisi 13 tahun yang tadinya kosong), dan
+    angka mati akan gagal bukan karena filternya salah. Yang diuji adalah
+    sifatnya: setiap museum yang lolos ambang memang bertahun >= ambang, dan
+    jumlahnya sama dengan jumlah museum bertahun yang memenuhi ambang itu.
+    """
     if not DATA_TTL.exists():
         pytest.skip("data museum tidak ada")
     store = MuseumStore.dari_turtle(path=DATA_TTL)
-    assert len(cari_museum(store, tahun_min=1950, batas=1000)) == 11
-    assert len(cari_museum(store, tahun_min=1000, batas=1000)) == 13
-    assert len(cari_museum(store, batas=1000)) == 28
+    semua = cari_museum(store, batas=1000)
+
+    assert len(semua) == 28, "jumlah museum di data berubah; periksa data/museums.json"
+
+    for ambang in (1000, 1950, 2000):
+        hasil = cari_museum(store, tahun_min=ambang, batas=1000)
+        diharapkan = {
+            m["slug"] for m in semua if m["tahun"] is not None and m["tahun"] >= ambang
+        }
+        assert {m["slug"] for m in hasil} == diharapkan, (
+            f"filter tahun_min={ambang} tidak sesuai data"
+        )
+        # Museum tanpa tahun tidak boleh ikut lolos filter tahun.
+        assert all(m["tahun"] is not None for m in hasil), (
+            f"museum tanpa tahun lolos filter tahun_min={ambang}"
+        )

@@ -26,32 +26,32 @@ Setiap tugas punya empat bagian:
 
 ## Ringkasan pembagian
 
-| Orang | Track | Fokus | Tugas |
+| Nama | Track | Fokus | Tugas |
 |---|---|---|---|
-| **A** | Data & Ontologi | sumber kebenaran, kualitas data, lisensi foto | A1–A4 |
-| **B** | SPARQL & Inferensi | query, penalaran, materialisasi | B1–B4 |
-| **C** | NL2SPARQL & LLM | pertanyaan bahasa alami, guard, integrasi model | C1–C4 |
-| **D** | Antarmuka & Rilis | halaman, aksesibilitas, dokumentasi, deploy | D1–D4 |
+| **Alvin** | Data & Ontologi | sumber kebenaran, kualitas data, lisensi foto | A1–A4 |
+| **Ryan F** | SPARQL & Inferensi | query, penalaran, materialisasi | B1–B4 |
+| **Ryan D** | NL2SPARQL & LLM | pertanyaan bahasa alami, guard, integrasi model | C1–C4 |
+| **Cherles** | Antarmuka & Rilis | halaman, aksesibilitas, dokumentasi, deploy | D1–D4 |
 
 **Berkas yang menjadi milik masing-masing** (jangan diubah orang lain tanpa izin):
 
-| Orang | Berkas utama |
+| Nama | Berkas utama |
 |---|---|
-| A | `data/museums.json`, `ontology/*.ttl`, `pyapp/semweb/generator.py`, `public/images/` |
-| B | `pyapp/semweb/search.py`, `relations.py`, `construct.py`, `reasoning.py`, `store.py` |
-| C | `pyapp/semweb/nl2sparql.py`, `graphrag.py`, `pyapp/scripts/demo.py` |
-| D | `pyapp/main.py`, `pyapp/templates/`, `pyapp/static/`, `README.md`, `docs/` |
+| Alvin | `data/museums.json`, `ontology/*.ttl`, `pyapp/semweb/generator.py`, `public/images/` |
+| Ryan F | `pyapp/semweb/search.py`, `relations.py`, `construct.py`, `reasoning.py`, `store.py` |
+| Ryan D | `pyapp/semweb/nl2sparql.py`, `graphrag.py`, `pyapp/scripts/demo.py` |
+| Cherles | `pyapp/main.py`, `pyapp/templates/`, `pyapp/static/`, `README.md`, `docs/` |
 
 `pyapp/tests/` dipakai bersama — setiap orang menambah berkas test sendiri dengan
-nama yang jelas, mis. `test_data_kualitas.py` (A), `test_materialisasi.py` (B).
+nama yang jelas, mis. `test_data_kualitas.py` (Alvin), `test_materialisasi.py` (Ryan F).
 
 ---
 
-## Orang A — Data & Ontologi
+## Alvin — Data & Ontologi
 
 Fokus: memastikan data museum benar, lengkap, dan berlisensi jelas.
 
-### A1. [P] Perbaiki foto yang masih minim — **Perbaikan/kualitas data**
+### 1. [P] Perbaiki foto yang masih minim — **Perbaikan/kualitas data**
 
 **Apa.** Enam museum hanya punya **1 foto** (terverifikasi pada data sekarang):
 - `museum-negeri-lampung`
@@ -82,7 +82,7 @@ Tambahkan **1–2 foto** untuk masing-masing, diambil dari Wikimedia Commons.
 
 ---
 
-### A2. [P] Uji kepatuhan ontologi otomatis — **Pengembangan**
+### 2. [P] Uji kepatuhan ontologi otomatis — **Pengembangan**
 
 **Apa.** Buat skrip yang memeriksa ontologi secara otomatis, menggantikan
 pemeriksaan manual di Protégé.
@@ -107,7 +107,7 @@ pemeriksaan manual di Protégé.
 
 ---
 
-### A3. [P] Verifikasi `tahun_min` untuk tahun < 1000 — ✅ **SUDAH DIPERBAIKI**
+### 3. [P] Verifikasi `tahun_min` untuk tahun < 1000 — ✅ **SUDAH DIPERBAIKI**
 
 Bug ini ditemukan saat menyusun rencana dan **sudah diperbaiki** karena dampaknya
 kecil dan perbaikannya singkat. Test regresi ada di
@@ -117,21 +117,21 @@ kecil dan perbaikannya singkat. Test regresi ada di
 - `search.py` membandingkan (panjang, isi) tahun, bukan string mentah.
 - Test: data tahun `950` dan `1980`; `tahun_min=1000` tidak mengembalikan 950.
 
-**Sisa pekerjaan untuk Orang A:** **jangan dikerjakan ulang.** Cukup jalankan
+**Sisa pekerjaan untuk Alvin:** **jangan dikerjakan ulang.** Cukup jalankan
 `pytest tests/test_rencana_regresi.py` untuk memastikan tetap hijau saat mengubah
 data. Bila kelak data memuat `establishedYear` berbentuk tanggal
 (`"1915-01-01"`), perbaiki `search.py` agar hanya mengambil empat digit pertama.
 
 **Bergantung pada:** —
 
-### A3b. [P] Tangani `establishedYear` berbentuk tanggal — **Perbaikan bug (pencegahan)**
+### 3b. [P] Tangani `establishedYear` berbentuk tanggal — **Perbaikan bug (pencegahan)**
 
 **Apa.** Bila data memuat tahun berbentuk `"1915-01-01"` (bisa terjadi bila
 seseorang mengisi tanggal lengkap), filter tahun dan halaman museum harus tetap
 bekerja.
 
 **Di mana.** `pyapp/semweb/search.py`, `pyapp/main.py` (`_tahun_dari` sudah aman).
-**Minta izin Orang B** untuk `search.py`.
+**Minta izin Ryan F** untuk `search.py`.
 
 **Yang dikerjakan.** Pastikan pengambilan tahun mengambil empat digit pertama
 sebelum dibandingkan. Tambahkan test dengan data berbentuk tanggal.
@@ -139,11 +139,11 @@ sebelum dibandingkan. Tambahkan test dengan data berbentuk tanggal.
 **Selesai bila:** test baru hijau; filter tahun minimum tetap benar untuk data
 berbentuk tanggal.
 
-**Bergantung pada:** izin Orang B.
+**Bergantung pada:** izin Ryan F.
 
 ---
 
-### A4. [P] Verifikasi ulang data museum — **Kualitas data**
+### 4. [P] Verifikasi ulang data museum — **Kualitas data**
 
 **Apa.** Seluruh 28 museum berstatus `perlu-verifikasi`. Periksa minimal **nama,
 kota, provinsi, dan tahun berdiri** terhadap sumber resmi (situs museum, Wikipedia,
@@ -165,11 +165,11 @@ situs pemerintah daerah).
 
 ---
 
-## Orang B — SPARQL & Inferensi
+## Ryan F — SPARQL & Inferensi
 
 Fokus: kebenaran query, penalaran, dan performa triple store.
 
-### B1. [P] Materialisasi closure ke Fuseki — **Pengembangan**
+### 1. [P] Materialisasi closure ke Fuseki — **Pengembangan**
 
 **Apa.** Simpan hasil CONSTRUCT sebagai named graph di Fuseki, lalu bandingkan
 waktu query sebelum dan sesudah.
@@ -193,13 +193,13 @@ waktu query sebelum dan sesudah.
 
 ---
 
-### B2. [P] Penelusuran aturan penalaran — **Pengembangan**
+### 2. [P] Penelusuran aturan penalaran — **Pengembangan**
 
 **Apa.** `/metode` menampilkan fakta turunan, tetapi belum menjelaskan **aturan
 mana** yang menghasilkannya. Ini inti materi P12.
 
 **Di mana.** `pyapp/semweb/reasoning.py`, `pyapp/templates/metode.html`
-**koordinasi dengan Orang D** untuk template.
+**koordinasi dengan Cherles** untuk template.
 
 **Yang dikerjakan.**
 - Untuk setiap fakta turunan, tentukan aturan yang menghasilkannya:
@@ -219,13 +219,13 @@ mana** yang menghasilkannya. Ini inti materi P12.
 
 ---
 
-### B3. [P] Perbaiki risiko subquery bersarang di guard — **Perbaikan bug**
+### 3. [P] Perbaiki risiko subquery bersarang di guard — **Perbaikan bug**
 
 **Apa.** Guard menolak subquery tanpa `LIMIT`, tetapi belum diuji untuk
 **tiga level** subquery bersarang.
 
 **Di mana.** `pyapp/semweb/nl2sparql.py` (`_slice_di()`).
-**Koordinasikan dengan Orang C** — ini berkasnya.
+**Koordinasikan dengan Ryan D** — ini berkasnya.
 
 **Yang dikerjakan.**
 - Uji query dengan subquery 3 level, pastikan guard menolak yang tanpa `LIMIT`.
@@ -236,17 +236,17 @@ mana** yang menghasilkannya. Ini inti materi P12.
 - Test baru ada dan hijau.
 - Guard tetap menerima query sah yang biasa.
 
-**Bergantung pada:** bicara dengan Orang C dulu.
+**Bergantung pada:** bicara dengan Ryan D dulu.
 
 ---
 
-### B4. [P] Percepat halaman `/metode` — **Performa**
+### 4. [P] Percepat halaman `/metode` — **Performa**
 
 **Apa.** `/metode` menghitung `fakta_turunan(batas=10_000)` pada setiap kunjungan.
 Biayanya tumbuh seiring ukuran closure.
 
 **Di mana.** `pyapp/semweb/reasoning.py`.
-**Koordinasikan dengan Orang D** (main.py memanggilnya).
+**Koordinasikan dengan Cherles** (main.py memanggilnya).
 
 **Yang dikerjakan.**
 - Saring subjek `res:` lebih awal di dalam generator (bukan setelah semua
@@ -261,11 +261,11 @@ Biayanya tumbuh seiring ukuran closure.
 
 ---
 
-## Orang C — NL2SPARQL & LLM
+## Ryan D — NL2SPARQL & LLM
 
 Fokus: pertanyaan bahasa Indonesia, keamanan guard, dan integrasi model.
 
-### C1. [P] Adapter LLM sungguhan — **Pengembangan**
+### 1. [P] Adapter LLM sungguhan — **Pengembangan**
 
 **Apa.** Penerjemah sekarang berbasis aturan (deterministik). Materi P13 memakai
 LLM. Sambungkan satu penyedia agar keduanya bisa dibandingkan.
@@ -295,7 +295,7 @@ Manfaatkan parameter `penerjemah` / `llm` yang **sudah ada** di `nl2sparql.py`.
 
 ---
 
-### C2. [P] Perbaiki jangkar untuk nama museum pendek — **PERBAIKAN BUG**
+### 2. [P] Perbaiki jangkar untuk nama museum pendek — **PERBAIKAN BUG**
 
 **Apa.** `graphrag.jangkar()` menuntut **label lengkap** muncul di pertanyaan.
 
@@ -323,7 +323,7 @@ utuh di teks.
 
 ---
 
-### C3. [P] Guard: larang `GRAPH` dan `FROM` — **Perbaikan bug**
+### 3. [P] Guard: larang `GRAPH` dan `FROM` — **Perbaikan bug**
 
 **Apa.** Guard memeriksa IRI, tetapi belum ada test eksplisit bahwa klausa
 `GRAPH <...>` dan `FROM <...>` dengan IRI tak dikenal ditolak.
@@ -343,7 +343,7 @@ utuh di teks.
 
 ---
 
-### C4. [P] Perluas cakupan pertanyaan — **Pengembangan**
+### 4. [P] Perluas cakupan pertanyaan — **Pengembangan**
 
 **Apa.** Penerjemah aturan sekarang mengenali: museum, pameran, galeri, provinsi,
 kota, tema, era, koleksi. Tambahkan pertanyaan yang wajar ditanyakan pengunjung.
@@ -367,11 +367,11 @@ kota, tema, era, koleksi. Tambahkan pertanyaan yang wajar ditanyakan pengunjung.
 
 ---
 
-## Orang D — Antarmuka & Rilis
+## Cherles — Antarmuka & Rilis
 
 Fokus: halaman, aksesibilitas, dokumentasi, dan deploy.
 
-### D1. [P] JSON-LD & schema.org — **Pengembangan**
+### 1. [P] JSON-LD & schema.org — **Pengembangan**
 
 **Apa.** Materi P3 diajarkan, belum ada wujudnya. Tambahkan structured data.
 
@@ -395,7 +395,7 @@ buat baru `pyapp/semweb/jsonld.py` dan `pyapp/tests/test_jsonld.py`.
 
 ---
 
-### D2. [P] Aksesibilitas — **Pengembangan**
+### 2. [P] Aksesibilitas — **Pengembangan**
 
 **Apa.** Pastikan halaman bisa dipakai pembaca layar dan keyboard.
 
@@ -416,7 +416,7 @@ buat baru `pyapp/semweb/jsonld.py` dan `pyapp/tests/test_jsonld.py`.
 
 ---
 
-### D3. [P] Halaman peta museum — **Pengembangan**
+### 3. [P] Halaman peta museum — **Pengembangan**
 
 **Apa.** Data `latitude`/`longitude` sudah ada untuk semua museum, tetapi belum
 ditampilkan di peta.
@@ -436,7 +436,7 @@ ditampilkan di peta.
 
 ---
 
-### D4. [P] Deploy & dokumentasi rilis — **Pengembangan**
+### 4. [P] Deploy & dokumentasi rilis — **Pengembangan**
 
 **Apa.** Proyek berjalan lokal. Perlu bisa diakses juri/dosen lewat URL.
 
@@ -479,13 +479,13 @@ Status **terverifikasi** pada 26 November 2026.
 | Bug / risiko | Status | Pemilik | Butuh izin dari |
 |---|---|---|---|
 | `tahun_min` salah untuk tahun < 1000 | ✅ sudah diperbaiki | — | — |
-| Jangkar meleset: "Museum Aceh" → provinsi, bukan museum (**terbukti**) | **AKTIF** | C | — |
-| Foto hanya 1 buah di **6** museum | Kualitas data | A | — |
-| **24 dari 28** museum hanya punya 1 sumber | Kualitas data | A | — |
-| Subquery 3 level di guard | Belum diuji | B | C (`nl2sparql.py`) |
-| `/metode` lambat (hitung 10.000 fakta tiap kunjungan) | Performa | B | D (`main.py`) |
-| `GRAPH`/`FROM`/`SERVICE` di guard | **Sudah ditolak** — perlu test formal | C | — |
-| Data tahun berbentuk tanggal (`1915-01-01`) | Pencegahan | A | B (`search.py`) |
+| Jangkar meleset: "Museum Aceh" → provinsi, bukan museum (**terbukti**) | **AKTIF** | Ryan D | — |
+| Foto hanya 1 buah di **6** museum | Kualitas data | Alvin | — |
+| **24 dari 28** museum hanya punya 1 sumber | Kualitas data | Alvin | — |
+| Subquery 3 level di guard | Belum diuji | Ryan F | Ryan D (`nl2sparql.py`) |
+| `/metode` lambat (hitung 10.000 fakta tiap kunjungan) | Performa | Ryan F | Cherles (`main.py`) |
+| `GRAPH`/`FROM`/`SERVICE` di guard | **Sudah ditolak** — perlu test formal | Ryan D | — |
+| Data tahun berbentuk tanggal (`1915-01-01`) | Pencegahan | Alvin | Ryan F (`search.py`) |
 | Slug URL tidak sah | ✅ sudah diperbaiki | — | — |
 | `bool("false")` dibaca True | ✅ sudah diperbaiki | — | — |
 | "koleksi" dianggap "pameran" | ✅ sudah diperbaiki | — | — |
