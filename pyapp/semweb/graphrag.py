@@ -121,14 +121,151 @@ def _memuat(teks: str, label: str) -> bool:
     return re.search(pola, teks) is not None
 
 
+# Kata yang menyebut jenis entitas, bukan nama diri. Kata-kata ini dibuang
+# sebelum mencocokkan label sebagian, karena "Museum Aceh" tidak boleh dicocokkan
+# sebagai nama museum yang memuat kata "museum".
+_KATA_UMUM = {
+    "museum",
+    "museums",
+    "kota",
+    "kabupaten",
+    "provinsi",
+    "propinsi",
+    "daerah",
+    "tema",
+    "era",
+    "pameran",
+    "koleksi",
+    "foto",
+    "galeri",
+    "sejarah",
+    "di",
+    "ke",
+    "dari",
+    "yang",
+    "apa",
+    "saja",
+    "ada",
+    "berapa",
+    "jumlah",
+    "kapan",
+    "bagaimana",
+    "dan",
+    "atau",
+    "dengan",
+    "untuk",
+    "isi",
+    "punya",
+    "memiliki",
+}
+
+# Kata yang menandakan pertanyaan menyebut **nama diri**, bukan wilayah.
+# Jalur pencocokan sebagian hanya masuk akal bila salah satunya muncul: tanpa
+# itu, "museum apa saja di Aceh" akan salah dianggap menyebut museum tertentu.
+_KATA_NAMA = {"museum", "museums"}
+
+# Kata tanya menandakan pertanyaan tentang kategori, bukan penamaan entitas.
+# Bila salah satunya muncul, jalur pencocokan sebagian tidak dijalankan.
+_KATA_TANYA = {
+    "apa",
+    "saja",
+    "berapa",
+    "mana",
+    "kapan",
+    "bagaimana",
+    "siapa",
+    "jumlah",
+}
+
+# Kata wilayah: pertanyaan yang menyebutnya sedang menyaring per wilayah, bukan
+# menamai museum. "museum di Aceh" harus menghasilkan jangkar provinsi, bukan
+# dua museum yang kebetulan berbagi kata "aceh".
+_KATA_WILAYAH = {"kota", "kabupaten", "provinsi", "propinsi", "daerah", "wilayah"}
+
+# Preposisi lokasi menandakan penyaringan wilayah, bukan penamaan entitas.
+# "museum di Aceh" memakai "di"; "Museum Aceh" tidak.
+_KATA_LOKASI = {"di", "dari", "ke", "pada", "dalam"}
+
+
+def _kata_bermakna(teks: str) -> set[str]:
+    """Kata isi pada pertanyaan, tanpa kata umum dan tanpa angka/tanda baca."""
+    hasil: set[str] = set()
+    for bagian in re.split(r"[^\w]+", teks.lower()):
+        if len(bagian) < 3:
+            continue
+        if bagian in _KATA_UMUM:
+            continue
+        if bagian.isdigit():
+            continue
+        hasil.add(bagian)
+    return hasil
+
+
+def _kata_bermakna_awal(teks: str) -> set[str]:
+    """Semua kata pada teks, termasuk kata pendek dan kata umum.
+
+    Dipakai hanya untuk memeriksa niat pertanyaan: apakah ia bertanya tentang
+    kategori, menyaring wilayah, atau menamai entitas. Kata pendek tetap
+    dipertahankan di sini karena "di" dan "ke" justru penanda lokasi.
+    """
+    hasil: set[str] = set()
+    for bagian in re.split(r"[^\w]+", teks.lower()):
+        if not bagian:
+            continue
+        hasil.add(bagian)
+    return hasil
+
+
+def _skor_sebagian(teks: str, label: str) -> float:
+    """Seberapa cocok label dengan pertanyaan yang menyebut namanya sebagian.
+
+    Dua sisi dihitung, karena satu sisi saja membuat dua museum berbeda mendapat
+    skor sama:
+
+    - **Cakupan pertanyaan**: berapa bagian kata isi pertanyaan yang ada di label.
+    - **Kekhususan label**: berapa bagian kata isi label yang disebut pertanyaan.
+
+    Contoh: pertanyaan "museum aceh" terhadap dua label.
+
+    - "Museum Negeri Aceh": cakupan 1/1, kekhususan 1/2 -> 0.5
+    - "Museum Tsunami Aceh": cakupan 1/1, kekhususan 1/2 -> 0.5
+
+    Keduanya seri, dan itu memang benar: "Museum Aceh" **ambigu** antara dua
+    museum. Jangkar mengembalikan keduanya, dan lapisan jawaban yang menyebut
+    ambiguitas. Yang tidak boleh terjadi adalah memilih salah satu tanpa dasar.
+
+    Bila hanya satu museum yang cocok, skornya tetap dipakai apa adanya.
+    """
+    kata_tanya = _kata_bermakna(teks)
+    if not kata_tanya:
+        return 0.0
+
+    kata_label = _kata_bermakna(label)
+    if not kata_label:
+        return 0.0
+
+    cocok = kata_tanya & kata_label
+    if not cocok:
+        return 0.0
+
+    cakupan = len(cocok) / len(kata_tanya)
+    kekhususan = len(cocok) / len(kata_label)
+
+    return cakupan * 0.5 + kekhususan * 0.5
+
+
 def jangkar(store: MuseumStore, pertanyaan: str, maks: int = 3) -> list[Jangkar]:
     """Temukan entitas jangkar yang disebut pada pertanyaan.
 
-    Dua hal dijaga supaya jangkar tidak meleset:
+    Tiga hal dijaga supaya jangkar tidak meleset:
 
     - **Label terpanjang menang.** "Museum Negeri Aceh" harus mengalahkan
       "Aceh" bila keduanya muncul, karena label panjang lebih spesifik.
     - **Batas kata.** Pencocokan memakai batas kata, bukan ``in`` biasa.
+    - **Nama sebagian tetap dikenali.** Pertanyaan "Museum Aceh" tidak memuat
+      label utuh mana pun, tetapi jelas menunjuk museum. Bila pencocokan utuh
+      tidak menghasilkan **satu pun museum**, jalur kedua mencocokkan kata isi
+      dan memilih museum dengan skor tertinggi.
     """
     teks = (pertanyaan or "").strip().lower()
     if not teks:
@@ -152,22 +289,67 @@ def jangkar(store: MuseumStore, pertanyaan: str, maks: int = 3) -> list[Jangkar]
         if isinstance(s, URIRef)
     }
 
+    kandidat_museum: list[tuple[URIRef, str]] = []
+    for kelas_nyata in jenis_museum:
+        for node in store.asserted.subjects(RDF.type, kelas_nyata):
+            if not isinstance(node, URIRef):
+                continue
+            label = store.nama(node)
+            if label:
+                kandidat_museum.append((node, label))
+
     temuan: list[tuple[int, int, Jangkar]] = []
     sudah: set[str] = set()
 
     for kelas, (urutan, jenis) in prioritas_jenis.items():
-        kandidat = jenis_museum if kelas == SDP.Museum else {kelas}
-        for kelas_nyata in kandidat:
-            for node in store.asserted.subjects(RDF.type, kelas_nyata):
-                if not isinstance(node, URIRef):
+        if kelas == SDP.Museum:
+            pasangan = kandidat_museum
+        else:
+            pasangan = [
+                (node, store.nama(node))
+                for node in store.asserted.subjects(RDF.type, kelas)
+                if isinstance(node, URIRef)
+            ]
+
+        for node, label in pasangan:
+            if not label or not _memuat(teks, label):
+                continue
+            if str(node) in sudah:
+                continue
+            sudah.add(str(node))
+            temuan.append((-len(label), urutan, Jangkar(node, label, jenis)))
+
+    ada_museum = any(j.jenis == "museum" for _, _, j in temuan)
+
+    kata_awal = _kata_bermakna_awal(teks)
+    bertanya_kategori = bool(kata_awal & _KATA_TANYA)
+    menyaring_wilayah = bool(kata_awal & (_KATA_WILAYAH | _KATA_LOKASI))
+
+    if not ada_museum and not bertanya_kategori and not menyaring_wilayah:
+        # Jalur kedua: nama disebut sebagian. Hanya dijalankan bila pencocokan
+        # utuh tidak menemukan museum sama sekali **dan** pertanyaan tidak
+        # berbentuk pertanyaan kategori ("apa saja", "berapa", "mana").
+        # Tanpa syarat kedua, "museum apa saja di Aceh" akan salah dianggap
+        # menamai museum tertentu.
+        sebagian: list[tuple[float, int, Jangkar]] = []
+        for node, label in kandidat_museum:
+            if str(node) in sudah:
+                continue
+            skor = _skor_sebagian(teks, label)
+            if skor <= 0.0:
+                continue
+            sebagian.append((skor, -len(label), Jangkar(node, label, "museum")))
+
+        if sebagian:
+            sebagian.sort(key=lambda t: (t[0], t[1]), reverse=True)
+            teratas = sebagian[0][0]
+            for skor, _, j in sebagian:
+                if skor < teratas:
                     continue
-                label = store.nama(node)
-                if not label or not _memuat(teks, label):
+                if str(j.iri) in sudah:
                     continue
-                if str(node) in sudah:
-                    continue
-                sudah.add(str(node))
-                temuan.append((-len(label), urutan, Jangkar(node, label, jenis)))
+                sudah.add(str(j.iri))
+                temuan.append((-len(j.label), 0, j))
 
     temuan.sort(key=lambda t: (t[0], t[1]))
     return [j for _, _, j in temuan[:maks]]
