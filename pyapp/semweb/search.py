@@ -71,11 +71,19 @@ def kueri_cari(
     if tahun_min is not None:
         # `xsd:gYear` bukan integer: `xsd:integer(?tahun)` dan perbandingan
         # antar-`gYear` tidak didukung seragam antar engine (Fuseki/Virtuoso bisa
-        # menolak). Nilai tahun selalu 4 digit, jadi perbandingan string
-        # memberi urutan kronologis yang benar dan aman di semua engine.
+        # menolak). Perbandingan string juga tidak cukup: `"950" > "1000"`.
+        # Solusinya bandingkan (panjang, isi) agar urutan kronologis tetap benar
+        # untuk tahun berapa pun jumlah digitnya.
         aman_tahun = int(tahun_min)
+        if aman_tahun < 0:
+            aman_tahun = 0
+        teks_tahun = f"{aman_tahun:04d}" if aman_tahun >= 1000 else str(aman_tahun)
         filter_baris.append(
-            f'  FILTER(BOUND(?tahun) && STR(?tahun) >= "{aman_tahun:04d}")'
+            "  FILTER(BOUND(?tahun) && (\n"
+            f"    STRLEN(STR(?tahun)) > {len(teks_tahun)} ||\n"
+            f"    (STRLEN(STR(?tahun)) = {len(teks_tahun)} && "
+            f'STR(?tahun) >= "{teks_tahun}")\n'
+            "  ))"
         )
 
     for kata in _bersihkan_kata(q or ""):
