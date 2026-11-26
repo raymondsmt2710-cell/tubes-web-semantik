@@ -201,3 +201,24 @@ def test_pertanyaan_alamat_tanpa_jangkar_tidak_menjawab_satu_museum(store):
     teks = hasil.jawaban.lower()
     assert "sebutkan" in teks or "nama museum" in teks or "tidak" in teks
 
+
+# --- graf kosong ----------------------------------------------------------
+
+
+def test_graf_kosong_memberi_pesan_jelas_bukan_iri_tidak_dikenal():
+    """Bila graf belum berisi museum, pesannya harus menjelaskan itu.
+
+    "Query ditolak (IRI tidak dikenal)" menyesatkan: pengguna mengira ada yang
+    salah dengan pertanyaannya, padahal datanya belum dimuat.
+    """
+    from semweb.nl2sparql import jawab
+    from semweb.store import MuseumStore
+
+    kosong = MuseumStore.dari_turtle(
+        data="@prefix sdp: <https://museumsumatera.id/ontology#> .\n"
+    )
+    hasil = jawab("museum apa saja?", kosong)
+    teks = hasil.jawaban.lower()
+    assert "kosong" in teks or "belum" in teks or "tidak ada data" in teks
+    assert "iri tidak dikenal" not in teks
+

@@ -740,6 +740,16 @@ class Hasil:
         }
 
 
+def _graf_kosong(store: MuseumStore) -> bool:
+    """Apakah graf belum berisi satu pun museum.
+
+    Dicek dari closure karena tipe `sdp:Museum` bisa berupa hasil inferensi.
+    """
+    from rdflib.namespace import RDF
+
+    return next(iter(store.closure.subjects(RDF.type, SDP.Museum)), None) is None
+
+
 def _teks_baris(baris: Iterable[Any]) -> list[str]:
     return [label_slug(str(x)) if isinstance(x, URIRef) else str(x) for x in baris]
 
@@ -763,6 +773,20 @@ def jawab(
     """
     query = ke_sparql(pertanyaan, store, llm=penerjemah)
     ok, pesan = aman(query, store)
+
+    # Graf kosong adalah keadaan data, bukan kesalahan pertanyaan. Pesan
+    # "IRI tidak dikenal" akan menyesatkan pengguna.
+    if not ok and _graf_kosong(store):
+        return Hasil(
+            pertanyaan=pertanyaan,
+            query=query,
+            lolos=False,
+            pesan="graf kosong",
+            jawaban=(
+                "Graf belum berisi data museum. Jalankan `python scripts/generate.py` "
+                "lalu muat ulang halaman."
+            ),
+        )
 
     if not ok:
         di_luar_domain = intent(pertanyaan, store).jenis == "tidak_dikenal"
