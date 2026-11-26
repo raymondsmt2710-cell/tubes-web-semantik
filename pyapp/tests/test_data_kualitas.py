@@ -1,6 +1,6 @@
-"""Test kualitas data museum (tugas A1).
+"""Test kualitas data museum (tugas A1 dan A4).
 
-Berkas ini menjaga dua hal yang mudah rusak diam-diam:
+Berkas ini menjaga hal-hal yang mudah rusak diam-diam:
 
 1. **Setiap museum punya cukup foto.** Galeri dengan satu foto membuat halaman
    museum terasa kosong dan tidak memberi pembaca pilihan sudut pandang.
@@ -8,10 +8,14 @@ Berkas ini menjaga dua hal yang mudah rusak diam-diam:
    adalah risiko hukum, bukan sekadar cacat tampilan. Daftar lisensi yang
    diizinkan diambil apa adanya dari tugas A1: CC0, CC BY, CC BY-SA, dan
    domain publik. Tidak ada pengecualian.
+3. **Setiap museum punya minimal dua sumber.** Satu sumber berarti tidak ada
+   yang bisa dipakai untuk memeriksa silang; klaim tanpa pembanding adalah
+   klaim yang tidak diperiksa. Dua sumber juga yang membuat status
+   ``terverifikasi`` punya arti.
 
 Test ini memeriksa `data/museums.json` yang sebenarnya, bukan fixture. Dengan
-begitu ia berfungsi sebagai gerbang: data yang melanggar aturan lisensi tidak
-bisa masuk tanpa ketahuan.
+begitu ia berfungsi sebagai gerbang: data yang melanggar aturan lisensi atau
+yang sumbernya kurang tidak bisa masuk tanpa ketahuan.
 """
 
 from __future__ import annotations
@@ -37,6 +41,23 @@ MINIMAL_FOTO = 2
 MINIMAL_LATAR = 220
 MINIMAL_POIN = 2
 MAKSIMAL_POIN = 4
+
+# Tugas A4: setiap museum harus diperiksa terhadap minimal dua sumber.
+MINIMAL_SUMBER = 2
+
+# Pengecualian yang didokumentasikan, bukan dilonggarkan diam-diam.
+#
+# `museum-sisingamangaraja-xii` tidak dapat diverifikasi: tidak terdaftar di
+# NPNM (19 museum Sumatera Utara), tidak punya artikel Wikipedia, tidak ada di
+# indonesia.travel, museum.co.id, maupun Wikidata, dan OpenStreetMap tidak
+# dapat dihubungi saat pengecekan. Satu-satunya sumber yang ada adalah artikel
+# biografi Sisingamangaraja XII, yang tidak menyebut museum. Sesuai tugas A4
+# ("jangan dipaksa"), record dibiarkan `perlu-verifikasi` dengan sumber
+# seadanya dan dicatat sebagai temuan yang belum selesai, bukan diisi sumber
+# yang tidak benar-benar mendukung klaimnya.
+SUMBER_DIKECUALIKAN = {
+    "museum-sisingamangaraja-xii": "tidak dapat diverifikasi dari sumber mana pun",
+}
 
 
 def muat() -> list[dict]:
@@ -190,3 +211,100 @@ def test_tidak_ada_src_ganda_dalam_satu_museum():
                 ganda.append(f"{r['slug']} foto ke-{i}: {src}")
             terlihat.add(src)
     assert ganda == [], "src ganda: " + "; ".join(ganda)
+
+
+# ------------------------------------------------------------- sumber (A4)
+
+
+def sumber(record: dict) -> list[dict]:
+    return record.get("sources") or []
+
+
+def test_setiap_museum_punya_minimal_dua_sumber():
+    """Tugas A4: satu sumber tidak bisa diperiksa silang, dua bisa.
+
+    Pengecualian hanya yang tercatat di ``SUMBER_DIKECUALIKAN``; daftar itu
+    ikut diuji supaya tidak menjadi tempat menyembunyikan museum yang lupa
+    dilengkapi.
+    """
+    kurang = [
+        f"{r['slug']} ({len(sumber(r))} sumber)"
+        for r in muat()
+        if len(sumber(r)) < MINIMAL_SUMBER
+        and r["slug"] not in SUMBER_DIKECUALIKAN
+    ]
+    assert kurang == [], (
+        f"{len(kurang)} museum punya kurang dari {MINIMAL_SUMBER} sumber: "
+        + ", ".join(kurang)
+    )
+
+
+def test_pengecualian_sumber_masih_relevan():
+    """Daftar pengecualian tidak boleh menyimpan museum yang sudah lengkap.
+
+    Bila sebuah museum kelak berhasil diverifikasi, entri pengecualiannya harus
+    dihapus. Kalau tidak, pengecualian itu berubah dari catatan jujur menjadi
+    celah yang tidak disadari.
+    """
+    slugs = {r["slug"]: r for r in muat()}
+    usang = [
+        slug
+        for slug in SUMBER_DIKECUALIKAN
+        if slug in slugs and len(sumber(slugs[slug])) >= MINIMAL_SUMBER
+    ]
+    assert usang == [], "pengecualian sudah tidak perlu: " + ", ".join(usang)
+    hilang = [slug for slug in SUMBER_DIKECUALIKAN if slug not in slugs]
+    assert hilang == [], "pengecualian menunjuk museum yang tidak ada: " + ", ".join(hilang)
+
+
+def test_setiap_sumber_punya_label_dan_url_http():
+    """Sumber tanpa label atau tanpa URL tidak bisa dibuka pembaca."""
+    pelanggar = []
+    for r in muat():
+        for i, s in enumerate(sumber(r), start=1):
+            if not str(s.get("label") or "").strip():
+                pelanggar.append(f"{r['slug']} sumber ke-{i}: label kosong")
+            if not str(s.get("url") or "").startswith("http"):
+                pelanggar.append(f"{r['slug']} sumber ke-{i}: url {s.get('url')!r}")
+    assert pelanggar == [], "; ".join(pelanggar)
+
+
+def test_tidak_ada_url_sumber_ganda_dalam_satu_museum():
+    """Dua entri dengan URL sama bukan dua sumber; ia satu sumber dihitung dua kali."""
+    ganda = []
+    for r in muat():
+        terlihat = set()
+        for i, s in enumerate(sumber(r), start=1):
+            url = str(s.get("url") or "").strip().rstrip("/")
+            if url in terlihat:
+                ganda.append(f"{r['slug']} sumber ke-{i}: {url}")
+            terlihat.add(url)
+    assert ganda == [], "URL sumber ganda: " + "; ".join(ganda)
+
+
+def test_status_verifikasi_hanya_nilai_yang_dikenal():
+    """Status di luar dua nilai yang dikenal akan tampil sebagai badge kosong."""
+    dikenal = {"terverifikasi", "perlu-verifikasi"}
+    pelanggar = [
+        f"{r['slug']}: {r['verificationStatus']!r}"
+        for r in muat()
+        if r.get("verificationStatus") not in dikenal
+    ]
+    assert pelanggar == [], "; ".join(pelanggar)
+
+
+def test_museum_terverifikasi_punya_tahun_berdiri():
+    """Museum yang statusnya ``terverifikasi`` sudah diperiksa tahun berdirinya.
+
+    Bila tahunnya tetap kosong, status itu tidak bisa dipertanggungjawabkan:
+    tahun berdiri termasuk bidang yang wajib diperiksa pada tugas A4.
+    """
+    pelanggar = [
+        r["slug"]
+        for r in muat()
+        if r.get("verificationStatus") == "terverifikasi"
+        and not isinstance(r.get("establishedYear"), int)
+    ]
+    assert pelanggar == [], (
+        "museum terverifikasi tanpa tahun berdiri: " + "; ".join(pelanggar)
+    )

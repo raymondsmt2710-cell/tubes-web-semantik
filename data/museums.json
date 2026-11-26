@@ -10,7 +10,7 @@
     ],
     "era": "kolonial",
     "establishedYear": 1915,
-    "address": "Jl. Sultan Mahmudsyah No. 12, Banda Aceh",
+    "address": "Jl. Sultan Alaiddin Mahmudsyah No. 12, Banda Aceh",
     "latitude": 5.5483,
     "longitude": 95.3238,
     "description": "Museum tertua di Aceh yang menempati bekas gedung pameran kolonial dari awal abad ke-20. Koleksinya mencakup naskah, senjata tradisional, dan benda sehari-hari masyarakat Aceh, termasuk koleksi Rumoh Aceh di halaman belakang.",
@@ -18,7 +18,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 1,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Aceh berawal dari Paviliun Aceh dalam Pameran Kolonial (De Koloniale Tentoonstelling) di Semarang pada 13 Agustus–15 November 1914. Paviliun itu memamerkan koleksi milik F.W. Stammeshaus dan benda pusaka para pembesar Aceh, lalu meraih empat medali emas, sebelas perak, tiga perunggu, serta piagam sebagai paviliun terbaik.",
       "Atas usul Stammeshaus, paviliun dibawa kembali ke Kutaraja (kini Banda Aceh) dan diresmikan sebagai museum pada 31 Juli 1915 oleh Gubernur Sipil dan Militer Belanda di Aceh, H.N.A. Swart. Stammeshaus menjadi kurator pertamanya.",
@@ -69,8 +69,12 @@
         "url": "https://id.wikipedia.org/wiki/Museum_Aceh"
       },
       {
-        "label": "Wikipedia: Museum Tsunami Aceh (konteks museum Aceh)",
-        "url": "https://id.wikipedia.org/wiki/Museum_Tsunami_Aceh"
+        "label": "NPNM: Museum Aceh",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+aceh"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Aceh",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/aceh/museum-aceh/"
       }
     ],
     "gallery": [
@@ -148,8 +152,8 @@
       "seni-budaya"
     ],
     "era": "modern",
-    "establishedYear": 2009,
-    "address": "Jl. Sultan Iskandar Muda, Banda Aceh",
+    "establishedYear": 2007,
+    "address": "Jl. Sultan Iskandar Muda No. 3, Blang Padang, Banda Aceh",
     "latitude": 5.5476,
     "longitude": 95.3153,
     "description": "Dibangun sebagai peringatan bencana tsunami 26 Desember 2004. Lorong masuknya berbentuk gelombang, dan ruang pamer berisi foto, benda peninggalan, serta kisah penyintas yang disusun sebagai ruang refleksi.",
@@ -157,7 +161,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 1,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Tsunami Aceh dirancang sebagai monumen simbolis untuk mengenang gempa bumi dan tsunami Samudra Hindia pada 26 Desember 2004, sekaligus menjadi pusat pendidikan kebencanaan dan tempat evakuasi darurat bila tsunami terjadi lagi.",
       "Pembangunannya dimulai pada 2008 dengan dana bantuan negara-negara donor yang dikoordinasikan BRR, lalu selesai pada akhir tahun yang sama. Museum diresmikan oleh Presiden Susilo Bambang Yudhoyono pada 2009 dan dibuka untuk publik pada 2011."
@@ -197,6 +201,14 @@
       {
         "label": "Wikipedia: Museum Tsunami Aceh",
         "url": "https://id.wikipedia.org/wiki/Museum_Tsunami_Aceh"
+      },
+      {
+        "label": "NPNM: UPTD Museum Tsunami",
+        "url": "https://museum.kemenbud.go.id/museum/profile/uptd+museum+tsunami"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Tsunami Aceh",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/aceh/museum-tsunami-aceh/"
       }
     ],
     "gallery": [
@@ -268,8 +280,8 @@
       "perjuangan"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Lam Pisang, Aceh Besar",
+    "establishedYear": 1983,
+    "address": "Gampong Lampisang, Kecamatan Peukan Bada, Kabupaten Aceh Besar",
     "latitude": 5.3878,
     "longitude": 95.4729,
     "description": "Menempati rumah panggung tempat Cut Nyak Dhien ditangkap pada 1905. Ruang pamer menyimpan replika pakaian, senjata, dan diorama yang mengisahkan perjuangan Aceh melawan kolonial.",
@@ -277,7 +289,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 1,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Cut Nyak Dhien menempati rumah tradisional Aceh di Gampong Lampisang, Kecamatan Peukan Bada, Aceh Besar. Rumah ini adalah kediaman Cut Nyak Dhien (lahir 1848), pejuang yang memimpin perlawanan terhadap Belanda setelah suaminya, Teuku Umar, gugur pada 1899.",
       "Rumah aslinya dibakar Belanda pada 1896; yang tersisa hanya pondasi. Bangunan yang berdiri sekarang adalah hasil pemugaran pada 1981, sedangkan peresmiannya sebagai museum dilakukan pada 1987 oleh Menteri Pendidikan dan Kebudayaan Fuad Hassan."
@@ -325,6 +337,10 @@
       {
         "label": "Wikipedia: Museum Cut Nyak Dhien",
         "url": "https://id.wikipedia.org/wiki/Museum_Cut_Nyak_Dhien"
+      },
+      {
+        "label": "Wikidata: Museum Cut Nyak Dhien",
+        "url": "https://www.wikidata.org/wiki/Q137460742"
       }
     ],
     "gallery": [
@@ -397,8 +413,8 @@
       "etnografi"
     ],
     "era": "pra-kolonial",
-    "establishedYear": null,
-    "address": "Kecamatan Samudera, Aceh Utara",
+    "establishedYear": 2011,
+    "address": "Gampong Beuringen, Kecamatan Samudera, Aceh Utara",
     "latitude": 5.1697,
     "longitude": 97.1783,
     "description": "Berada di kawasan bekas Kerajaan Samudera Pasai, kerajaan Islam pertama di Nusantara. Koleksinya berupa fragmen batu nisan, mata uang kuno, dan temuan arkeologis dari situs sekitar.",
@@ -406,7 +422,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 1,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Malikussaleh berada di Kecamatan Samudera, Aceh Utara, di kawasan bekas Kerajaan Samudera Pasai yang tercatat sebagai kerajaan Islam pertama di Nusantara. Kawasan ini juga dikenal sebagai situs Museum Islam Samudera Pasai, yang dibangun bertahap sejak 2011.",
       "Koleksi di kawasan situs berpusat pada tinggalan Samudera Pasai: fragmen batu nisan, mata uang kuno, dan temuan arkeologis dari sekitar bekas kota kerajaan."
@@ -438,8 +454,16 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Museum Islam Samudra Pasai",
-        "url": "https://commons.wikimedia.org/wiki/File:Museum_Islam_Samudra_Pasai_2.jpg"
+        "label": "Wikipedia: Museum Islam Samudra Pasai",
+        "url": "https://id.wikipedia.org/wiki/Museum_Islam_Samudra_Pasai"
+      },
+      {
+        "label": "NPNM: Museum Islam Samudra Pasai",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+islam+samudra+pasai"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Islam Samudra Pasai",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/aceh/museum-islam-samudra-pasai/"
       }
     ],
     "gallery": [
@@ -513,7 +537,7 @@
     ],
     "era": "kemerdekaan",
     "establishedYear": 1954,
-    "address": "Jl. H.M. Joni No. 51, Medan",
+    "address": "Jl. H. M. Joni No. 51, Pasar Merah, Medan",
     "latitude": 3.5894,
     "longitude": 98.6747,
     "description": "Museum provinsi yang menyimpan koleksi budaya Batak, Melayu, Nias, dan etnis lain di Sumatera Utara. Bangunannya bekas kediaman seorang pedagang, dan halamannya memuat rumah adat serta meriam peninggalan.",
@@ -521,7 +545,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 2,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Negeri Provinsi Sumatera Utara berdiri di Jalan H.M. Jhoni No. 51, Medan. Peletakan batu pertama berupa sepasang makara dilakukan Presiden Soekarno pada 1954, dan museum diresmikan pada 19 April 1982 oleh Menteri Pendidikan dan Kebudayaan Daoed Joesoef.",
       "Bangunannya menempati lahan sekitar 10.468 m² dengan gedung induk dua lantai yang memuat ruang pameran tetap dan temporer, ruang audio visual, perpustakaan, hingga ruang mikro film. Hingga 2005 museum mencatat 6.799 koleksi."
@@ -561,6 +585,14 @@
       {
         "label": "Wikipedia: Museum Sumatera Utara",
         "url": "https://id.wikipedia.org/wiki/Museum_Sumatera_Utara"
+      },
+      {
+        "label": "NPNM: UPTD Museum Negeri Provinsi Sumatera Utara",
+        "url": "https://museum.kemenbud.go.id/museum/profile/uptd+museum+negeri+provinsi+sumatera+utara"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Negeri Provinsi Sumatera Utara",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/north-sumatra/museum-negeri-provinsi-sumatera-utara/"
       }
     ],
     "gallery": [
@@ -639,8 +671,8 @@
       "seni-budaya"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Simanindo, Kabupaten Samosir",
+    "establishedYear": 1969,
+    "address": "Jl. Pelabuhan Simanindo, Kabupaten Samosir",
     "latitude": 2.6853,
     "longitude": 98.7694,
     "description": "Kompleks rumah adat Batak Toba di tepi Danau Toba yang difungsikan sebagai museum. Pengunjung dapat melihat rumah panggung, lumbung padi, dan pertunjukan tari Sigale-gale.",
@@ -648,7 +680,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 2,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Huta Bolon Simanindo menempati rumah tradisional Batak warisan Raja Sidauruk sejak 1969. Lokasinya di Desa Simanindo, Kecamatan Simanindo, Kabupaten Samosir, di tepi Danau Toba.",
       "Kompleks ini terdiri atas dua susun rumah adat yang saling berhadapan, masing-masing lima rumah, dan menyimpan peninggalan leluhur orang Batak Samosir."
@@ -689,6 +721,14 @@
       {
         "label": "Wikipedia: Museum Huta Bolon Simanindo",
         "url": "https://id.wikipedia.org/wiki/Museum_Huta_Bolon_Simanindo"
+      },
+      {
+        "label": "NPNM: Museum Huta Bolon Simanindo",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+huta+bolon+simanindo"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Huta Bolon Simanindo",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/north-sumatra/museum-huta-bolon-simanindo/"
       }
     ],
     "gallery": [
@@ -762,7 +802,7 @@
     ],
     "era": "modern",
     "establishedYear": 2008,
-    "address": "Jl. Patuan Nagari, Balige, Kabupaten Toba",
+    "address": "Jl. Dr. TB Silalahi No. 88, Balige, Kabupaten Toba",
     "latitude": 2.3333,
     "longitude": 99.0667,
     "description": "Didirikan di Balige dengan koleksi seni dan artefak Batak yang dikumpulkan secara pribadi. Tata pamernya modern dan menyertakan ruang audiovisual tentang budaya Danau Toba.",
@@ -770,7 +810,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 2,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum TB Silalahi Center berada di Balige, Kabupaten Toba, dan berdiri sebagai pusat budaya Batak. Kompleksnya memuat bangunan utama bernama T.B. Silalahi Building serta sejumlah rumah adat Karo di sekitarnya.",
       "Museum ini dikenal juga sebagai Museum Batak. Selain ruang pameran, kawasannya menampilkan rumah tradisional dan panorama Danau Toba."
@@ -801,8 +841,12 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: T.B. Silalahi Center",
-        "url": "https://commons.wikimedia.org/wiki/File:Front_view_of_T.B._Silalahi_Building,_Batak_Cultural_Center.jpg"
+        "label": "NPNM: Museum Batak TB Silalahi Center",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+batak+tb+silalahi+center"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Batak TB Silalahi Center",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/north-sumatra/museum-batak-tb-silalahi-center/"
       }
     ],
     "gallery": [
@@ -974,8 +1018,8 @@
       "arkeologi"
     ],
     "era": "kemerdekaan",
-    "establishedYear": null,
-    "address": "Lubuk Pakam, Kabupaten Deli Serdang",
+    "establishedYear": 2001,
+    "address": "Jalan Negara, Tanjung Garbus I, Lubuk Pakam, Deli Serdang",
     "latitude": 3.5586,
     "longitude": 98.8759,
     "description": "Museum kabupaten yang memamerkan koleksi etnografi Melayu Deli serta temuan arkeologis dari pesisir timur Sumatera Utara. Sering dipakai sebagai ruang pembelajaran sekolah setempat.",
@@ -983,7 +1027,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 2,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Deli Serdang dibangun mulai 2001 dengan dana APBD dan diresmikan pada 12 Agustus 2003 di kompleks perkantoran Tanjung Garbus I, Lubuk Pakam. Pada 2016 pemerintah kabupaten membangun museum baru di lahan eks Dinas Pertanian, yang diresmikan 8 September 2018 oleh Menteri Pendidikan dan Kebudayaan Muhadjir Effendy.",
       "Bangunannya memakai konsep “Itik Pulang Petang” dari filosofi Melayu, yang bermakna keteraturan, kerapian, dan keharmonisan."
@@ -1023,6 +1067,14 @@
       {
         "label": "Wikipedia: Museum Deli Serdang",
         "url": "https://id.wikipedia.org/wiki/Museum_Deli_Serdang"
+      },
+      {
+        "label": "NPNM: Museum Daerah Deli Serdang",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+daerah+deli+serdang"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Daerah Deli Serdang",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/north-sumatra/museum-daerah-deli-serdang/"
       }
     ],
     "gallery": [
@@ -1098,7 +1150,7 @@
       "seni-budaya"
     ],
     "era": "kemerdekaan",
-    "establishedYear": 1976,
+    "establishedYear": 1991,
     "address": "Jl. Jenderal Sudirman No. 194, Pekanbaru",
     "latitude": 0.5071,
     "longitude": 101.4478,
@@ -1107,7 +1159,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 3,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Sang Nila Utama berada di Jalan Jenderal Sudirman, Pekanbaru, dalam satu kompleks dengan kantor Dinas Kebudayaan Provinsi Riau. Museum ini dahulu bernama Museum Negeri Provinsi Riau dan didirikan pada 9 Januari 1991 melalui Surat Keputusan Menteri Pendidikan dan Kebudayaan Nomor 001/0/1991.",
       "Setelah kewenangan bidang pemerintahan dialihkan ke daerah lewat Undang-Undang Nomor 22 Tahun 1999, museum ini berubah menjadi museum daerah di bawah Dinas Kebudayaan, Kesenian dan Pariwisata Provinsi Riau. Nama Sang Nila Utama mulai dipakai atas inisiatif kepala museum melalui Surat Keputusan Nomor 227/109.09/MR/C-93 pada 13 Oktober 1993, merujuk raja Bintan yang berkuasa sekitar abad ke-13."
@@ -1147,6 +1199,14 @@
       {
         "label": "Wikipedia: Museum Sang Nila Utama",
         "url": "https://id.wikipedia.org/wiki/Museum_Sang_Nila_Utama"
+      },
+      {
+        "label": "NPNM: UPT Museum Sang Nila Utama dan Taman Budaya",
+        "url": "https://museum.kemenbud.go.id/museum/profile/upt+museum+sang+nila+utama+dan+taman+budaya"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Sang Nila Utama",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/riau/museum-daerah-riau-sang-nila-utama/"
       }
     ],
     "gallery": [
@@ -1201,8 +1261,8 @@
       "arkeologi"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Jl. Ketapang, Tanjungpinang",
+    "establishedYear": 2009,
+    "address": "Jl. Ketapang No. 2, Tanjungpinang",
     "latitude": 0.9186,
     "longitude": 104.4467,
     "description": "Menempati bekas istana Kesultanan Riau-Lingga di Pulau Penyengat dan sekitarnya. Koleksinya meliputi manuskrip Melayu, naskah keagamaan, dan benda kerajaan.",
@@ -1210,7 +1270,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 3,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Sultan Sulaiman Badrul Alamsyah diresmikan pada 31 Januari 2009 oleh Wali Kota Tanjungpinang, Suryatati Abdul Manan, dan dikelola Dinas Kebudayaan dan Pariwisata Kota Tanjungpinang. Lokasinya di Jalan Ketapang Nomor 2, Kelurahan Kemboja, Tanjungpinang Barat.",
       "Gedungnya dahulu adalah sekolah dasar pertama di Tanjungpinang, Holland Irlandsch School (HIS), pada masa kolonial Belanda. Pada masa pendudukan Jepang namanya berubah menjadi Futsuko Gakka I, dan setelah kemerdekaan menjadi Sekolah Rakyat sebelum akhirnya dialihfungsikan sebagai museum."
@@ -1257,6 +1317,14 @@
       {
         "label": "Wikipedia: Museum Sultan Sulaiman Badrul Alamsyah",
         "url": "https://id.wikipedia.org/wiki/Museum_Sultan_Sulaiman_Badrul_Alamsyah"
+      },
+      {
+        "label": "NPNM: Museum Kota Tanjungpinang Sultan Sulaiman Badrul Alamsyah",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+kota+tanjungpinang+sultan+sulaiman+badrul+alamsyah"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Kota Tanjungpinang",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/riau-islands/museum-kota-tanjungpinang-sultan-sulaiman-badrul-alamsyah/"
       }
     ],
     "gallery": [
@@ -1312,8 +1380,8 @@
       "arkeologi"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Daik, Kabupaten Lingga",
+    "establishedYear": 2002,
+    "address": "Komplek Istana Damnah, Jl. Raja Muhammad Yusuf, Daik, Kabupaten Lingga",
     "latitude": -0.2079,
     "longitude": 104.6169,
     "description": "Museum daerah di bekas pusat Kesultanan Lingga yang menyimpan koleksi kerajaan Melayu, termasuk naskah, alat musik, dan peninggalan masa kejayaan Lingga.",
@@ -1321,7 +1389,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 3,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Linggam Cahaya berdiri di Kompleks Istana Damnah, Jalan Raja Muhammad Yusuf, Daik, Kabupaten Lingga. Namanya berasal dari kata “linggam” (batu berwarna merah) dan “cahaya”, sehingga berarti “batu merah yang bersinar”.",
       "Pendiriannya berawal dari upaya menyelamatkan benda bersejarah Lingga. Pembangunan museum mini dimulai Agustus 2002 sebagai bagian proyek Dinas Kebudayaan, Seni, dan Pariwisata Provinsi Kepulauan Riau dan selesai 7 Mei 2003. Museum kemudian diresmikan dan mulai beroperasi pada 1 Maret 2015."
@@ -1361,6 +1429,14 @@
       {
         "label": "Wikipedia: Museum Linggam Cahaya",
         "url": "https://id.wikipedia.org/wiki/Museum_Linggam_Cahaya"
+      },
+      {
+        "label": "NPNM: Museum Linggam Cahaya",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+linggam+cahaya"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Linggam Cahaya",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/riau-islands/museum-linggam-cahaya/"
       }
     ],
     "gallery": [
@@ -1433,7 +1509,7 @@
       "arkeologi"
     ],
     "era": "kolonial",
-    "establishedYear": null,
+    "establishedYear": 1989,
     "address": "Jl. Sultan Syarif Kasim, Siak Sri Indrapura",
     "latitude": 0.7933,
     "longitude": 102.0525,
@@ -1442,7 +1518,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 3,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Istana Siak Sri Indrapura menempati Istana Siak, bekas kediaman Sultan Siak Sri Indrapura di Kabupaten Siak, Riau. Bangunan ini menjadi salah satu ikon arsitektur Melayu di pesisir timur Sumatera.",
       "Sejumlah foto arsip dari awal abad ke-20 memperlihatkan potret Sultan Siak serta bangunan istana pada masa kesultanan, dan kini menjadi koleksi visual yang membantu menjelaskan masa itu."
@@ -1473,8 +1549,16 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Istana Siak",
-        "url": "https://commons.wikimedia.org/wiki/File:Museum_siak_01.jpg"
+        "label": "Wikipedia: Istana Siak Sri Indrapura",
+        "url": "https://id.wikipedia.org/wiki/Istana_Siak_Sri_Indrapura"
+      },
+      {
+        "label": "NPNM: Museum Istana (Siak) Asserayah El Hasyimiah",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+istana+%28siak%29+asserayah+el+hasyimiah"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Istana Siak Asserayah El Hasyimiah",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/riau/museum-istana-siak-asserayah-el-hasyimiah/"
       }
     ],
     "gallery": [
@@ -1547,7 +1631,7 @@
       "seni-budaya"
     ],
     "era": "kemerdekaan",
-    "establishedYear": 1950,
+    "establishedYear": 1974,
     "address": "Jl. Diponegoro No. 10, Padang",
     "latitude": -0.9471,
     "longitude": 100.3547,
@@ -1556,7 +1640,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 4,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Adityawarman diresmikan pada 16 Maret 1977 oleh Menteri Pendidikan dan Kebudayaan Syarif Thayeb, setelah konstruksinya dikerjakan sejak tahun anggaran 1974/1975. Namanya diambil dari Adityawarman, raja Malayapura abad ke-14 yang sezaman dengan Majapahit.",
       "Museum ini berdiri di kompleks Lapangan Tugu, Jalan Diponegoro, Padang, di atas tanah seluas 2,5 hektar. Lokasi itu dahulu dikenal sebagai Taman Melati, tempat bermain warga kota. Setelah otonomi daerah, pengelolaannya berada di bawah Pemerintah Provinsi Sumatera Barat."
@@ -1604,6 +1688,14 @@
       {
         "label": "Wikipedia: Museum Adityawarman",
         "url": "https://id.wikipedia.org/wiki/Museum_Adityawarman"
+      },
+      {
+        "label": "NPNM: UPTD Museum Adityawarman",
+        "url": "https://museum.kemenbud.go.id/museum/profile/uptd+museum+adityawarman"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Adityawarman",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/west-sumatra/museum-adityawarman/"
       }
     ],
     "gallery": [
@@ -1675,8 +1767,8 @@
       "seni-budaya"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Nagari Sungai Batang, Kabupaten Agam",
+    "establishedYear": 2001,
+    "address": "Jorong Tanah Sirah, Nagari Sungai Batang, Kecamatan Tanjung Raya, Agam",
     "latitude": -0.3078,
     "longitude": 100.1147,
     "description": "Rumah kelahiran ulama dan sastrawan Hamka di tepi Danau Maninjau. Ruangannya memuat buku, foto, dan benda pribadi yang menandai jejak hidupnya.",
@@ -1684,7 +1776,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 4,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Rumah Kelahiran Buya Hamka berada di tepi Danau Maninjau, tepatnya di Nagari Sungai Batang, Kecamatan Tanjung Raya, Kabupaten Agam. Bangunannya adalah rumah yang ditempati Haji Abdul Malik Karim Amrullah sejak lahir hingga sebelum pindah ke Padang Panjang.",
       "Rumah milik nenek Hamka itu hampir hancur pada masa pendudukan Jepang. Pada 2000 Gubernur Sumatera Barat Zainal Bakar menggagas pembangunannya kembali dengan bentuk asli, dan setelah 11 bulan pembangunan museum diresmikan pada 11 November 2001."
@@ -1724,6 +1816,14 @@
       {
         "label": "Wikipedia: Museum Kelahiran Buya Hamka",
         "url": "https://id.wikipedia.org/wiki/Museum_Kelahiran_Buya_Hamka"
+      },
+      {
+        "label": "NPNM: Museum Rumah Kelahiran Buya Hamka",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+rumah+kelahiran+buya+hamka"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Rumah Kelahiran Buya Hamka",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/west-sumatra/museum-rumah-kelahiran-buya-hamka/"
       }
     ],
     "gallery": [
@@ -1777,8 +1877,8 @@
       "perjuangan"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Bonjol, Kabupaten Pasaman",
+    "establishedYear": 1990,
+    "address": "Jl. Lintas Sumatera Km. 55, Bonjol, Kabupaten Pasaman",
     "latitude": 0.0208,
     "longitude": 100.2222,
     "description": "Berada di kawasan kelahiran Tuanku Imam Bonjol, pemimpin Perang Padri. Museum ini menampilkan diorama pertempuran, senjata, dan naskah yang berkaitan dengan perang tersebut.",
@@ -1786,7 +1886,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 4,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Tuanku Imam Bonjol dibangun sejak Oktober 1987 dan selesai pada 1990 di areal sekitar 2 hektar di Kecamatan Bonjol, Kabupaten Pasaman, tepat di tepi Jalan Lintas Sumatra. Pada 1998 pengelolaannya diserahkan dari Pemerintah Provinsi Sumatera Barat kepada Pemerintah Kabupaten Pasaman.",
       "Desain bangunannya mengikuti rumah gadang Minangkabau dengan atap bergonjong. Dinding museum memuat catatan sejarah Perang Padri dan silsilah Muhammad Shahab, yang lahir di Bonjol pada 1 Januari 1772 dan dikenal sebagai Tuanku Imam Bonjol."
@@ -1833,6 +1933,14 @@
       {
         "label": "Wikipedia: Museum Tuanku Imam Bonjol",
         "url": "https://id.wikipedia.org/wiki/Museum_Tuanku_Imam_Bonjol"
+      },
+      {
+        "label": "NPNM: Museum Tuanku Imam Bonjol",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+tuanku+imam+bonjol"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Tuanku Imam Bonjol",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/west-sumatra/museum-tuanku-imam-bonjol/"
       }
     ],
     "gallery": [
@@ -1905,8 +2013,8 @@
       "sejarah-alam"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Jl. Raya Sawahlunto, Sawahlunto",
+    "establishedYear": 2003,
+    "address": "Jl. Ahmad Yani, Sawahlunto",
     "latitude": -0.6811,
     "longitude": 100.7744,
     "description": "Mengisi bekas stasiun dan depo lokomotif yang menghubungkan tambang batu bara Ombilin dengan pelabuhan. Koleksinya berupa lokomotif uap, gerbong, dan peralatan kereta peninggalan kolonial.",
@@ -1914,7 +2022,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 4,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Kereta Api Sawahlunto menempati Stasiun Sawahlunto, stasiun kelas II di Lembah Segar yang dikelola Divisi Regional II Sumatera Barat bersama Pemerintah Kota Sawahlunto. Stasiun ini berhenti beroperasi pada 2003 setelah tambang batu bara habis, lalu dijadikan museum pada 2005.",
       "Museum ini adalah museum perkeretaapian kedua di Indonesia setelah Ambarawa. Stasiunnya memiliki lima jalur kereta, dan lokasinya berada pada ketinggian sekitar +261 meter."
@@ -1954,6 +2062,14 @@
       {
         "label": "Wikipedia: Museum Kereta Api Sawahlunto",
         "url": "https://id.wikipedia.org/wiki/Museum_Kereta_Api_Sawahlunto"
+      },
+      {
+        "label": "NPNM: Museum Kereta Api Kota Sawahlunto",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+kereta+api+kota+sawahlunto"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Kereta Api Kota Sawahlunto",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/west-sumatra/museum-kereta-api-kota-sawahlunto/"
       }
     ],
     "gallery": [
@@ -2027,8 +2143,8 @@
       "arkeologi"
     ],
     "era": "kemerdekaan",
-    "establishedYear": 1986,
-    "address": "Jl. Urip Sumoharjo, Jambi",
+    "establishedYear": 1981,
+    "address": "Jl. Urip Sumoharjo No. 1, Kota Jambi",
     "latitude": -1.6101,
     "longitude": 103.6131,
     "description": "Menyimpan koleksi budaya Melayu Jambi dan temuan dari kawasan Batanghari, termasuk arca dan benda megalitik. Bangunannya berarsitektur rumah panggung dengan ornamen khas.",
@@ -2036,7 +2152,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 5,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Negeri Jambi berdiri di Jalan Urip Sumoharjo, kawasan Sungai Putri, Telanaipura, Kota Jambi. Museum ini dibangun pada 18 Februari 1981 dan diresmikan pada 6 Juni 1988 oleh Menteri Pendidikan dan Kebudayaan Fuad Hassan, lalu dikenal sebagai Museum Siginjei.",
       "Koleksinya mencakup keramik, arca, dan benda upacara masyarakat Jambi. Sejak museum di Jalan Prof. Dr. Sri Soedewi beroperasi, penamaan Museum Siginjai dipakai untuk museum provinsi Jambi, sehingga kedua entri dalam katalog ini merujuk pada tradisi permuseuman yang sama."
@@ -2074,12 +2190,12 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Museum Siginjei",
-        "url": "https://commons.wikimedia.org/wiki/File:Museum_Siginjei.png"
+        "label": "Wikipedia: Museum Siginjei Jambi",
+        "url": "https://id.wikipedia.org/wiki/Museum_Siginjei_Jambi"
       },
       {
-        "label": "Museum.co.id: Museum Siginjai Jambi",
-        "url": "https://museum.co.id/directory-museum/listing/museum-siginjai-jamb/"
+        "label": "NPNM: Museum Siginjei",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+siginjei"
       }
     ],
     "gallery": [
@@ -2274,7 +2390,7 @@
     ],
     "era": "kemerdekaan",
     "establishedYear": 1978,
-    "address": "Jl. Pembangunan No. 08, Bengkulu",
+    "address": "Jl. Pembangunan No. 8, Padang Harapan, Bengkulu",
     "latitude": -3.7956,
     "longitude": 102.2658,
     "description": "Museum provinsi dengan koleksi budaya Rejang, Serawai, dan Enggano. Terdapat pula koleksi sejarah alam serta replika bunga rafflesia yang menjadi ikon Bengkulu.",
@@ -2282,7 +2398,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 5,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Negeri Bengkulu adalah museum provinsi yang mengumpulkan benda budaya dan sejarah masyarakat Bengkulu, dari perkakas rumah tangga tradisional hingga mata uang lama.",
       "Koleksinya banyak berupa benda etnografi, seperti peralatan memasak tradisional Bengkulu, serta uang kertas rupiah lama yang kini menjadi koleksi numismatika."
@@ -2320,8 +2436,16 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Traditional Bengkulu cooking utensils, Bengkulu Museum",
-        "url": "https://commons.wikimedia.org/wiki/File:Traditional_Bengkulu_cooking_utensils,_Bengkulu_Museum_2015-04-19_01.jpg"
+        "label": "Wikipedia: Museum Bengkulu",
+        "url": "https://id.wikipedia.org/wiki/Museum_Bengkulu"
+      },
+      {
+        "label": "NPNM: UPTD Museum Negeri Bengkulu",
+        "url": "https://museum.kemenbud.go.id/museum/profile/uptd+museum+negeri+bengkulu"
+      },
+      {
+        "label": "Wonderful Indonesia: UPTD Museum Negeri Bengkulu",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/bengkulu/uptd-museum-negeri-bengkulu/"
       }
     ],
     "gallery": [
@@ -2439,6 +2563,14 @@
       {
         "label": "Wikipedia: Rumah Pengasingan Bung Karno",
         "url": "https://id.wikipedia.org/wiki/Rumah_Pengasingan_Bung_Karno"
+      },
+      {
+        "label": "Wikipedia (en): Bung Karno Seclusion House",
+        "url": "https://en.wikipedia.org/wiki/Bung_Karno_Seclusion_House"
+      },
+      {
+        "label": "Wikidata: Rumah Pengasingan Bung Karno",
+        "url": "https://www.wikidata.org/wiki/Q16878966"
       }
     ],
     "gallery": [
@@ -2512,7 +2644,7 @@
     ],
     "era": "kemerdekaan",
     "establishedYear": 1978,
-    "address": "Jl. Srijaya Negara, Palembang",
+    "address": "Jl. Srijaya I No. 288 KM. 5,5, Palembang",
     "latitude": -2.9761,
     "longitude": 104.7353,
     "description": "Museum provinsi Sumatera Selatan dengan koleksi arca Hindu-Buddha, keramik, dan tenun songket Palembang. Namanya diambil dari raja Sriwijaya, Balaputra Dewa.",
@@ -2520,7 +2652,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 6,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Negeri Sumatera Selatan Balaputra Dewa berada di Jalan Srijaya Negara, Palembang. Namanya diambil dari Balaputra Dewa, raja Sriwijaya, dan bangunannya dikenal sebagai bekas Burgemeesterhuis atau rumah wali kota Palembang pada masa kolonial.",
       "Museum ini menyimpan koleksi arca Hindu-Buddha, keramik, tekstil, serta tenun songket Palembang, dan menjadi rujukan utama sejarah Sumatera Selatan."
@@ -2566,8 +2698,16 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Balaputra Dewa Museum",
-        "url": "https://commons.wikimedia.org/wiki/File:Replica_of_Rumah_Limas,_South_Sumatra_(Balaputra_Dewa)_Museum_-_Sukarame,_Palembang,_SS_(18_January_2024).jpg"
+        "label": "Wikipedia: Museum Balaputra Dewa",
+        "url": "https://id.wikipedia.org/wiki/Museum_Balaputra_Dewa"
+      },
+      {
+        "label": "NPNM: UPTD Museum Negeri Sumatera Selatan",
+        "url": "https://museum.kemenbud.go.id/museum/profile/uptd+museum+negeri+sumatera+selatan"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Balaputra Dewa",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/south-sumatra/museum-balaputradewa/"
       }
     ],
     "gallery": [
@@ -2622,8 +2762,8 @@
       "seni-budaya"
     ],
     "era": "kolonial",
-    "establishedYear": null,
-    "address": "Jl. Merdeka, Palembang",
+    "establishedYear": 2009,
+    "address": "Jl. Sultan Mahmud Badaruddin II No. 2, Palembang",
     "latitude": -2.9917,
     "longitude": 104.7603,
     "description": "Menempati bekas kediaman Sultan Mahmud Badaruddin II di tepi Sungai Musi. Koleksinya mencakup benda kerajaan Palembang, senjata, dan dokumentasi perlawanan terhadap kolonial.",
@@ -2631,7 +2771,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 6,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Sultan Mahmud Badaruddin II di Palembang berdiri di kawasan bekas Benteng Kuto Lama atau Kuto Tengkuruk, yang dahulu menjadi lokasi istana tua Sultan Mahmud Badaruddin I (1724–1758). Istana itu dihancurkan pemerintah kolonial Inggris pada 7 Oktober 1823.",
       "Di atas reruntuhannya dibangun gedung baru yang selesai pada 1824 dan dikenal sebagai Gedung Siput. Bangunan batu dua lantai yang berdiri sekarang memadukan gaya Eropa dengan arsitektur tropis Hindia; pada 1825 dipakai sebagai kantor residen kolonial, lalu pada masa Perang Dunia II menjadi markas militer Jepang. Setelah kemerdekaan sempat menjadi markas Kodam II/Sriwijaya, dan sejak 1984 difungsikan sebagai museum."
@@ -2672,6 +2812,14 @@
       {
         "label": "Wikipedia: Museum Sultan Mahmud Badaruddin II",
         "url": "https://id.wikipedia.org/wiki/Museum_Sultan_Mahmud_Badaruddin_II"
+      },
+      {
+        "label": "NPNM: Museum Sultan Mahmud Badaruddin II Palembang",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+sultan+mahmud+badaruddin+ii+palembang"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Sultan Mahmud Badaruddin II",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/south-sumatra/museum-sultan-mahmud-badaruddin-ii-palembang/"
       }
     ],
     "gallery": [
@@ -2744,8 +2892,8 @@
       "arkeologi"
     ],
     "era": "pra-kolonial",
-    "establishedYear": null,
-    "address": "Jl. Syakyakirti, Palembang",
+    "establishedYear": 2008,
+    "address": "Jl. Syakhyakirti, Palembang",
     "latitude": -2.9589,
     "longitude": 104.7322,
     "description": "Situs bekas permukiman masa Sriwijaya yang dilengkapi museum terbuka. Pengunjung dapat melihat struktur bata kuno, temuan keramik, dan replika prasasti di lokasi aslinya.",
@@ -2753,7 +2901,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 6,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Taman Purbakala Kerajaan Sriwijaya di Palembang adalah situs bekas permukiman masa Sriwijaya yang dilengkapi museum terbuka dan pendopo utama berarsitektur Limasan.",
       "Kawasan ini menampilkan struktur bata kuno, temuan arkeologis, dan replika yang membantu menjelaskan kehidupan masyarakat Sriwijaya di tepi Sungai Musi."
@@ -2791,8 +2939,16 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Taman Purbakala Kerajaan Sriwijaya",
-        "url": "https://commons.wikimedia.org/wiki/File:Taman_Purbakala_Kerajaan_Sriwijaya_-_Museum_Sriwijaya.jpg"
+        "label": "Wikipedia: Taman Purbakala Kerajaan Sriwijaya",
+        "url": "https://id.wikipedia.org/wiki/Taman_Purbakala_Kerajaan_Sriwijaya"
+      },
+      {
+        "label": "NPNM: Museum Sriwijaya",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+sriwijaya"
+      },
+      {
+        "label": "Wonderful Indonesia: Taman Purbakala Kerajaan Sriwijaya",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/south-sumatra/taman-purbakala-kerajaan-sriwijaya/"
       }
     ],
     "gallery": [
@@ -2874,7 +3030,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 6,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Timah Indonesia di Pangkalpinang, Bangka Belitung, mengisahkan sejarah penambangan timah di Pulau Bangka sejak masa kolonial. Pada 1915 pemerintah Hindia Belanda membangun kantor penambangan timah di Muntok yang juga menjadi pusat pemerintahan Belanda di Bangka; gedung itu kemudian diambil alih tentara Jepang dan sempat terbengkalai setelah kemerdekaan.",
       "PT Timah Tbk lalu melakukan konservasi bangunan bersejarah tersebut. Museum Timah Indonesia Muntok diresmikan pada 7 November 2013, sedangkan museum di Pangkalpinang menjadi rujukan koleksi pertimahan di ibu kota provinsi."
@@ -2916,8 +3072,12 @@
         "url": "https://id.wikipedia.org/wiki/Museum_Timah_Indonesia_Muntok"
       },
       {
-        "label": "Wikimedia Commons: Museum Timah Pangkalpinang",
-        "url": "https://commons.wikimedia.org/wiki/File:Museum_Timah_Pangkalpinang_Bangka_Island.jpg"
+        "label": "Wikidata: Museum Timah Indonesia – Pangkalpinang",
+        "url": "https://www.wikidata.org/wiki/Q109430877"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Timah Indonesia",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/bangka-belitung-islands/museum-timah-indonesia/"
       }
     ],
     "gallery": [
@@ -2975,8 +3135,8 @@
       "seni-budaya"
     ],
     "era": "kemerdekaan",
-    "establishedYear": 1988,
-    "address": "Jl. Dr. Ryacudu, Bandar Lampung",
+    "establishedYear": 1975,
+    "address": "Jl. H. Zainal Arifin Pagar Alam No. 64, Bandar Lampung",
     "latitude": -5.3819,
     "longitude": 105.2592,
     "description": "Museum provinsi Lampung dengan koleksi budaya Saibatin dan Pepadun, termasuk kain tapis dan replika rumah adat. Bangunannya menjadi rujukan pembelajaran sejarah lokal.",
@@ -2984,7 +3144,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 7,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Negeri Lampung Ruwa Jurai di Bandar Lampung adalah museum provinsi yang menyimpan warisan budaya masyarakat Lampung, baik dari kelompok Saibatin di pesisir maupun Pepadun di pedalaman.",
       "Nama “Ruwa Jurai” merujuk dua golongan adat Lampung tersebut, dan koleksinya mencakup pakaian adat, tenun, serta benda upacara."
@@ -3023,8 +3183,16 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Museum Lampung",
-        "url": "https://commons.wikimedia.org/wiki/File:BERKUNJUNG_DI_MUSEUM_LAMPUNG.jpg"
+        "label": "Wikipedia: Museum Lampung",
+        "url": "https://id.wikipedia.org/wiki/Museum_Lampung"
+      },
+      {
+        "label": "NPNM: UPTD Museum Negeri Provinsi Lampung Ruwa Jurai",
+        "url": "https://museum.kemenbud.go.id/museum/profile/uptd+museum+negeri+provinsi+lampung+ruwa+jurai"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Lampung",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/lampung/museum-lampung/"
       }
     ],
     "gallery": [
@@ -3097,8 +3265,8 @@
       "seni-budaya"
     ],
     "era": "modern",
-    "establishedYear": null,
-    "address": "Bagelen, Kabupaten Pesawaran",
+    "establishedYear": 2004,
+    "address": "Jln. Ahmad Yani, Desa Bagelen, Kabupaten Pesawaran",
     "latitude": -5.2667,
     "longitude": 105.1333,
     "description": "Museum yang mendokumentasikan sejarah program transmigrasi di Indonesia, dengan Lampung sebagai salah satu tujuan utama. Koleksinya berupa foto, dokumen, dan peralatan hidup para transmigran.",
@@ -3106,7 +3274,7 @@
     "officialUrl": null,
     "admissionNote": null,
     "chapter": 7,
-    "verificationStatus": "perlu-verifikasi",
+    "verificationStatus": "terverifikasi",
     "history": [
       "Museum Ketransmigrasian Lampung mengisahkan program transmigrasi di Indonesia, dengan Lampung sebagai salah satu daerah tujuan terbesar sejak awal abad ke-20. Kawasannya menampilkan anjungan dan bangunan yang menggambarkan kehidupan para transmigran.",
       "Koleksinya mencakup foto, dokumen, dan peralatan rumah tangga yang dibawa serta dipakai oleh keluarga transmigran saat membuka lahan baru."
@@ -3144,8 +3312,16 @@
     ],
     "sources": [
       {
-        "label": "Wikimedia Commons: Museum Ketransmigrasian Lampung",
-        "url": "https://commons.wikimedia.org/wiki/File:Museum_ketransmigrasian_lampung_01.jpg"
+        "label": "Wikipedia: Museum Nasional Ketransmigrasian",
+        "url": "https://id.wikipedia.org/wiki/Museum_Nasional_Ketransmigrasian"
+      },
+      {
+        "label": "NPNM: Museum Ketransmigrasian Lampung",
+        "url": "https://museum.kemenbud.go.id/museum/profile/museum+ketransmigrasian+lampung"
+      },
+      {
+        "label": "Wonderful Indonesia: Museum Ketransmigrasian Lampung",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/lampung/museum-ketransmigrasian-lampung/"
       }
     ],
     "gallery": [
@@ -3200,7 +3376,7 @@
     ],
     "era": "pra-kolonial",
     "establishedYear": null,
-    "address": "Sekampung Udik, Kabupaten Lampung Timur",
+    "address": "Desa Pugung Raharjo, Kecamatan Sekampung Udik, Kabupaten Lampung Timur",
     "latitude": -5.3167,
     "longitude": 105.4833,
     "description": "Situs megalitik di tengah perkebunan yang menyimpan batu berundak, arca, dan benteng tanah peninggalan masa pra-sejarah hingga klasik. Sebagian koleksinya dipamerkan di rumah joglo sederhana di dalam situs.",
@@ -3246,8 +3422,12 @@
     ],
     "sources": [
       {
-        "label": "Wikipedia: Pugung Raharjo",
-        "url": "https://id.wikipedia.org/wiki/Pugung_Raharjo"
+        "label": "Wikipedia: Taman Purbakala Pugung Raharjo",
+        "url": "https://id.wikipedia.org/wiki/Taman_Purbakala_Pugung_Raharjo"
+      },
+      {
+        "label": "Wonderful Indonesia: Taman Purbakala Pugungraharjo",
+        "url": "https://www.indonesia.travel/id/id/destination/sumatra/lampung/taman-purbakala-pugungraharjo/"
       }
     ],
     "gallery": [
