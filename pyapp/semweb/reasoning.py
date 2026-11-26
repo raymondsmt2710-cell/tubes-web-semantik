@@ -15,10 +15,26 @@ from rdflib.namespace import OWL, RDF, RDFS
 from .namespace import RES, SDP
 from .store import MuseumStore
 
-# Predikat yang tidak informatif bila muncul sebagai "fakta turunan".
-_TRIVIAL_PREDIKAT = {
-    RDF.type,
-}
+# Predikat yang isinya aksioma vocabulary, bukan pengetahuan tentang data museum.
+# `owl:sameAs` ikut dibuang karena reasoner menurunkan `x owl:sameAs x` untuk
+# setiap individu (2.316 triple di data asli) — refleksivitas itu tidak
+# menjelaskan apa pun, dan dulu lolos justru karena penyaring `s == o` hanya
+# berlaku untuk sebagian predikat.
+_AKSIOMA_PREDIKAT = frozenset(
+    {
+        OWL.sameAs,
+        RDFS.domain,
+        RDFS.range,
+        RDFS.subClassOf,
+        RDFS.subPropertyOf,
+        OWL.equivalentClass,
+        OWL.equivalentProperty,
+    }
+)
+
+# Objek yang selalu benar untuk hampir semua node, jadi menyebutnya tidak
+# menambah informasi apa pun bagi pembaca.
+_OBJEK_TRIVIAL = frozenset({OWL.Thing, OWL.Nothing, RDFS.Resource})
 
 
 def perbandingan(store: MuseumStore) -> dict[str, int]:
@@ -45,17 +61,21 @@ def fakta_turunan(
     store: MuseumStore,
     subjek: URIRef | None = None,
     batas: int = 50,
-) -> list[dict[str, str]]:
+) -> list[dict[str, Any]]:
     """Fakta yang ada di closure tetapi tidak pernah ditulis di data.
 
     Yang ditampilkan hanya fakta tentang entitas museum (museum, pameran, foto,
     kota, dan provinsi). Selebihnya adalah aksioma bawaan vocabulary OWL/XSD
     yang benar tetapi tidak menjelaskan apa pun tentang data kita — misalnya
     `owl:Nothing rdfs:subClassOf sdp:Museum` yang selalu benar secara logika.
+
+    Hasil diurutkan menurut `(subjek, predikat, objek)` **sebelum** dipotong
+    `batas`, supaya halaman yang menampilkan sebagian fakta tidak berubah-ubah
+    isinya setiap kali dimuat (urutan iterasi graf tidak dijamin).
     """
     asserted = set(store.asserted)
-    hasil: list[dict[str, str]] = []
     terlihat: set[tuple[str, str, str]] = set()
+    baris: list[tuple[str, str, str, dict[str, Any]]] = []
 
     pola = (subjek, None, None) if subjek is not None else (None, None, None)
     for s, p, o in store.closure.triples(pola):
@@ -67,15 +87,9 @@ def fakta_turunan(
         # Hanya entitas data kita sendiri; aksioma vocabulary dilewati.
         if not str(s).startswith(str(RES)):
             continue
-
-        # Artefak mesin reasoner bukan pengetahuan baru bagi pembaca.
-        if s == o and p in (OWL.sameAs, OWL.equivalentClass, RDFS.subClassOf, RDFS.subPropertyOf):
+        if p in _AKSIOMA_PREDIKAT:
             continue
-        if isinstance(o, URIRef) and o in (OWL.Thing, OWL.Nothing, RDFS.Resource):
-            continue
-        # `rdf:type owl:Thing` selalu benar untuk setiap individu; tidak
-        # menjelaskan apa pun tentang data museum.
-        if o == OWL.Thing:
+        if isinstance(o, URIRef) and o in _OBJEK_TRIVIAL:
             continue
 
         kunci = (str(s), str(p), str(o))
@@ -83,20 +97,27 @@ def fakta_turunan(
             continue
         terlihat.add(kunci)
 
-        hasil.append(
-            {
-                "subjek": str(s),
-                "predikat": str(p),
-                "objek": str(o),
-                "subjek_n3": _n3(store, s),
-                "predikat_n3": _n3(store, p),
-                "objek_n3": _n3(store, o),
-            }
+        baris.append(
+            (
+                kunci[0],
+                kunci[1],
+                kunci[2],
+                {
+                    "subjek": kunci[0],
+                    "predikat": kunci[1],
+                    "objek": kunci[2],
+                    "subjek_n3": _n3(store, s),
+                    "predikat_n3": _n3(store, p),
+                    "objek_n3": _n3(store, o),
+                    # Task 5 akan menggantinya dengan nama aturan sebenarnya;
+                    # untuk sekarang nilai ini sah dan menjaga bentuk keluaran.
+                    "aturan": ["tidak teridentifikasi"],
+                },
+            )
         )
-        if len(hasil) >= batas:
-            break
 
-    return hasil
+    baris.sort(key=lambda b: (b[0], b[1], b[2]))
+    return [b[3] for b in baris[:batas]]
 
 
 def jelaskan_tipe(store: MuseumStore, slug: str) -> list[str]:
