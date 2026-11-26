@@ -425,18 +425,18 @@ def test_langkah_penalaran_berhenti_di_fixpoint():
 def test_putaran_pertama_informatif_putaran_kedua_tidak():
     """`expand()` sudah menjenuhkan graf dalam satu panggilan.
 
-    Akibatnya seluruh fakta informatif muncul di putaran pertama — jumlahnya
-    harus sama dengan `fakta_turunan` — dan putaran berikutnya nol. Ini temuan
-    yang dilaporkan apa adanya, bukan cacat yang perlu dipaksa jadi banyak
-    putaran.
+    Akibatnya seluruh fakta informatif muncul di putaran pertama, dan putaran
+    berikutnya nol. Ini temuan yang dilaporkan apa adanya, bukan cacat yang
+    perlu dipaksa jadi banyak putaran.
     """
     if not ONTO_TTL.exists():
         pytest.skip("ontology/ tidak ada — angka target tidak terverifikasi")
     langkah = _langkah_penuh()
     assert langkah[0]["informatif"] > 0
     assert langkah[1]["informatif"] == 0
-    # Sifat yang ingin dijaga, bukan angka mati: jumlah seluruh fakta informatif
-    # di semua putaran sama dengan yang dilaporkan `fakta_turunan`.
+    # Sifat yang dijaga, bukan angka mati: jumlah fakta informatif di seluruh
+    # putaran sama dengan yang dilaporkan `fakta_turunan`. Bila kelak ada
+    # putaran kedua yang benar-benar informatif, asersi ini tetap sahih.
     assert sum(l["informatif"] for l in langkah) == len(
         fakta_turunan(store_penuh(), batas=10_000)
     )
