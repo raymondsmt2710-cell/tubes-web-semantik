@@ -13,6 +13,7 @@ mengikuti materi kuliah Web Semantik.
 
 | Materi | Pertemuan | Wujud di proyek ini |
 |---|---|---|
+| JSON-LD & schema.org | P3 | `semweb/jsonld.py`, `<script type="application/ld+json">` di halaman museum |
 | Model triple, URI, Turtle | P6–P7 | `semweb/generator.py`, `semweb/namespace.py` |
 | Ontologi RDFS & OWL | P5 | `ontology/museum-sumatera.ttl`, kelas di `generator.py` |
 | SPARQL SELECT | P9–P10 | `semweb/search.py` (filter di dalam query) |
@@ -80,12 +81,17 @@ pytest
 | `/` | Ringkasan graf dan hirarki kelas museum |
 | `/cari` | Pencarian dengan filter provinsi, tema, era, tahun minimum |
 | `/museum/{slug}` | Satu museum: isi pameran, galeri, benang merah, rantai penalaran |
+| `/peta` | Peta Leaflet 28 museum, saring per provinsi; tanpa JS tetap berupa daftar |
 | `/tanya` | Pertanyaan bahasa Indonesia → SPARQL → guard → jawaban |
 | `/metode` | Asserted vs closure, fakta turunan, konsistensi, skema dari graf |
 | `/api/docs` | Dokumentasi OpenAPI |
 
 API JSON tersedia di `/api/cari`, `/api/museum/{slug}`, `/api/tanya`,
-`/api/metode`, dan `/api/kesehatan`.
+`/api/metode`, dan `/api/kesehatan`. JSON-LD schema.org tersedia di
+`/api/museum/{slug}.jsonld` dan `/api/museum.jsonld` (seluruh museum).
+
+Menjalankan dengan Docker (dari akar repositori): `docker compose up --build`.
+Panduan deploy: [`../docs/deploy.md`](../docs/deploy.md).
 
 ## Cara kerja
 
@@ -131,6 +137,39 @@ dieksekusi:
 Query yang ditolak **tidak pernah dijalankan**. Pertanyaan yang tidak menyebut
 apa pun dari graf dijawab terus terang, bukan dengan angka asal-asalan.
 
+### 4b. Adapter LLM (opsional)
+
+Penerjemah aturan tetap menjadi jalur bawaan. Model bahasa bisa dipakai sebagai
+jalur kedua untuk dibandingkan, lewat `semweb/llm.py`.
+
+Isi `.env`:
+
+```
+LLM_PROVIDER=openai        # openai, groq, atau gemini
+LLM_API_KEY=...            # jangan di-commit
+LLM_MODEL=                 # kosongkan untuk model bawaan
+```
+
+Yang dijaga:
+
+- **Tanpa `LLM_API_KEY`, adapter tidak dibuat.** Aplikasi tetap jalan dengan
+  penerjemah aturan; tidak ada crash dan tidak ada peringatan.
+- **Query dari model tetap melewati guard yang sama.** Tidak ada jalan pintas:
+  `jawab()` memanggil `aman()` sebelum eksekusi, siapa pun yang menulis query.
+- **Kegagalan jaringan menghasilkan query kosong**, yang lalu ditolak guard
+  dengan pesan yang bisa dibaca pengguna — bukan halaman error.
+- **Kunci tidak pernah ditulis di kode** dan tidak ikut tercatat di badan
+  permintaan.
+
+Membandingkan kedua jalur pada 10 pertanyaan:
+
+```bash
+python scripts/bandingkan_llm.py
+```
+
+Tanpa kunci, skrip hanya menjalankan jalur aturan dan memberi tahu bahwa
+pembandingan belum bisa dilakukan; kode keluarnya tetap 0.
+
 ## Struktur
 
 ```
@@ -146,6 +185,7 @@ pyapp/
     construct.py           CONSTRUCT: hierarki & materialisasi
     reasoning.py           asserted vs inferred, konsistensi
     nl2sparql.py           skema, prompt, guard, verbalisasi
+    llm.py                 adapter model bahasa (opsional)
     graphrag.py            jangkar, n-hop, subgraf, konteks
   templates/               Jinja2
   static/style.css

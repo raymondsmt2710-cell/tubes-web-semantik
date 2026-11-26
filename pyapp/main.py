@@ -29,9 +29,17 @@ from rdflib.namespace import RDF
 from semweb.construct import subkelas_museum, verifikasi_hierarki
 from semweb.generator import load_records, tulis_ttl
 from semweb.graphrag import ambil_konteks
+from semweb.jsonld import museum_jsonld, semua_museum_jsonld
 from semweb.namespace import RES, SDP
+from semweb.peta import titik_museum
 from semweb.nl2sparql import jawab, ke_sparql, skema_graf
 from semweb.reasoning import cek_konsistensi, fakta_turunan, jelaskan_tipe, perbandingan
+
+try:
+    # Task 6 Ryan F. Selama belum di-merge, panel putaran tidak ditampilkan.
+    from semweb.reasoning import langkah_penalaran
+except ImportError:
+    langkah_penalaran = None
 from semweb.relations import benang_merah
 from semweb.search import cari_museum, daftar_era, daftar_provinsi, daftar_tema
 from semweb.store import MuseumStore
@@ -115,8 +123,11 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
             }
         )
 
+    nama_museum = teks(SDP.name) or _nama_dari_slug(slug)
+
     galeri = []
     for node in _urut(store.asserted.objects(iri, SDP.hasImage), SDP.imageIndex):
+        judul_foto = str(store.asserted.value(node, SDP.imageTitle) or "")
         poin = [
             str(store.asserted.value(d, SDP.detailText) or "")
             for d in _urut(store.asserted.objects(node, SDP.imageDetail), SDP.detailIndex)
@@ -124,7 +135,8 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
         galeri.append(
             {
                 "src": str(store.asserted.value(node, SDP.imageUrl) or ""),
-                "judul": str(store.asserted.value(node, SDP.imageTitle) or ""),
+                "judul": judul_foto,
+                "alt": _alt_foto(judul_foto, store.asserted.value(node, SDP.imageAlt), nama_museum),
                 "latar": str(store.asserted.value(node, SDP.imageBackground) or ""),
                 "periode": str(store.asserted.value(node, SDP.imagePeriod) or ""),
                 "kredit": str(store.asserted.value(node, SDP.imageCredit) or ""),
@@ -152,7 +164,7 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
     return {
         "iri": str(iri),
         "slug": slug,
-        "nama": teks(SDP.name) or _nama_dari_slug(slug),
+        "nama": nama_museum,
         "deskripsi": teks(SDP.description),
         "alamat": teks(SDP.address),
         "kota": store.nama(kota) if kota is not None else None,
@@ -165,6 +177,84 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
         "gallery": galeri,
         "sources": sumber,
     }
+
+
+def _langkah(store: MuseumStore) -> list[dict[str, Any]] | None:
+    """Putaran penalaran sampai fixpoint, dihitung sekali per store.
+
+    Setiap putaran menjalankan ulang reasoner, jadi hasilnya disimpan di objek
+    store (yang sudah singleton proses) agar /metode tidak menghitungnya di
+    setiap kunjungan.
+    """
+    if langkah_penalaran is None:
+        return None
+    simpanan = getattr(store, "_langkah_penalaran", None)
+    if simpanan is None:
+        simpanan = langkah_penalaran(store, batas_putaran=5)
+        store._langkah_penalaran = simpanan
+    return simpanan
+
+
+def _ringkasan_turunan(fakta: list[dict[str, Any]]) -> dict[str, Any]:
+    """Hitung fakta turunan per aturan dari daftar yang sama dengan tabel.
+
+    Angka di kartu harus cocok dengan baris yang bisa ditelusuri pembaca.
+    ``len(closure) - len(asserted)`` tidak dipakai di sini karena memuat
+    artefak reasoner (``x owl:sameAs x``, bnode restriksi, aksioma vocabulary).
+    Fakta dengan dua aturan (mis. ``rdfs2`` dan ``rdfs9``) dihitung di
+    keduanya, sehingga jumlah ``per_aturan`` boleh melebihi ``informatif``.
+    """
+    per_aturan: dict[str, int] = {}
+    jalur_ganda = 0
+    for f in fakta:
+        aturan = f.get("aturan") or []
+        if len(aturan) > 1:
+            jalur_ganda += 1
+        for nama in aturan:
+            per_aturan[nama] = per_aturan.get(nama, 0) + 1
+    return {
+        "informatif": len(fakta),
+        "per_aturan": dict(sorted(per_aturan.items(), key=lambda kv: (-kv[1], kv[0]))),
+        "dua_jalur_atau_lebih": jalur_ganda,
+    }
+
+
+def _contoh_turunan(
+    fakta: list[dict[str, Any]], maks: int = 20, per_aturan: int = 5
+) -> list[dict[str, Any]]:
+    """Pilih contoh yang mewakili setiap aturan, bukan sekadar 20 baris pertama.
+
+    Tanpa ini, 218 fakta ``prp-inv`` di urutan awal akan memenuhi seluruh
+    contoh dan aturan lain (``rdfs9``, ``rdfs2``) tidak pernah terlihat.
+    Setiap kombinasi aturan mendapat jatah dulu, sisanya diisi berurutan.
+    """
+    terpilih: list[int] = []
+    jatah: dict[tuple[str, ...], int] = {}
+    for i, f in enumerate(fakta):
+        kunci = tuple(f.get("aturan") or ())
+        if jatah.get(kunci, 0) < per_aturan:
+            jatah[kunci] = jatah.get(kunci, 0) + 1
+            terpilih.append(i)
+    for i in range(len(fakta)):
+        if len(terpilih) >= maks:
+            break
+        if i not in terpilih:
+            terpilih.append(i)
+    return [fakta[i] for i in sorted(terpilih[:maks])]
+
+
+def _alt_foto(judul: str, alt_data: Any, nama_museum: str) -> str:
+    """Teks ``alt`` yang menjelaskan isi foto, bukan asal berkasnya.
+
+    ``imageAlt`` di data berbentuk "Museum X — foto dari Wikimedia Commons":
+    itu keterangan sumber, bukan isi gambar. Judul foto ("Gedung pameran
+    tetap") lebih bermakna bagi pembaca layar, jadi diutamakan.
+    """
+    if judul.strip():
+        return f"{judul.strip()} — {nama_museum}"
+    if alt_data is not None and str(alt_data).strip():
+        return str(alt_data).strip()
+    return f"Foto {nama_museum}"
 
 
 def _nama_dari_slug(slug: str) -> str:
@@ -189,6 +279,18 @@ def _tahun_dari(nilai: Any) -> int | None:
         return int(str(nilai).strip()[:4])
     except (TypeError, ValueError):
         return None
+
+
+def _basis(request: Request) -> str:
+    """URL dasar situs untuk tautan absolut di JSON-LD.
+
+    ``SITUS_URL`` (mis. ``https://museum-sumatera.up.railway.app/``) dipakai bila
+    diisi, karena di belakang reverse proxy ``request.base_url`` bisa berisi
+    alamat internal kontainer, bukan alamat publik.
+    """
+    dari_env = os.environ.get("SITUS_URL", "").strip()
+    basis = dari_env or str(request.base_url)
+    return basis if basis.endswith("/") else basis + "/"
 
 
 def _benar(nilai: Any) -> bool:
@@ -298,6 +400,23 @@ def halaman_museum(slug: str, request: Request, store: MuseumStore = Depends(get
             "museum": _museum_dto(store, iri),
             "benang": benang_merah(store, slug, maks=6),
             "rantai_tipe": jelaskan_tipe(store, slug),
+            "jsonld": museum_jsonld(store, slug, _basis(request)),
+        },
+    )
+
+
+@app.get("/peta", response_class=HTMLResponse)
+def halaman_peta(request: Request, provinsi: str = "", store: MuseumStore = Depends(get_store)):
+    titik = titik_museum(store, provinsi or None)
+    return templates.TemplateResponse(
+        request,
+        "peta.html",
+        {
+            "titik": titik,
+            "provinsi": provinsi,
+            "daftar_provinsi": daftar_provinsi(store),
+            # Hanya museum berkoordinat yang bisa dijadikan penanda peta.
+            "penanda": [t for t in titik if t["lat"] is not None and t["lng"] is not None],
         },
     )
 
@@ -322,8 +441,10 @@ def halaman_metode(request: Request, store: MuseumStore = Depends(get_store)):
         "metode.html",
         {
             "perbandingan": perbandingan(store),
-            "turunan": semua_turunan[:20],
+            "turunan": _contoh_turunan(semua_turunan),
             "jumlah_turunan": len(semua_turunan),
+            "ringkasan_turunan": _ringkasan_turunan(semua_turunan),
+            "langkah": _langkah(store),
             "rantai": jelaskan_tipe(store, "museum-negeri-aceh"),
             "konsistensi": cek_konsistensi(store),
             "kelas": sorted(skema.kelas.values()),
@@ -366,6 +487,26 @@ def api_cari(
     return {"jumlah": len(hasil), "museum": hasil}
 
 
+# Route .jsonld didaftarkan SEBELUM /api/museum/{slug}: FastAPI mencocokkan
+# route sesuai urutan, dan slug berisi titik akan ditolak validasi slug.
+_JSONLD = "application/ld+json"
+
+
+@app.get("/api/museum.jsonld")
+def api_semua_jsonld(request: Request, store: MuseumStore = Depends(get_store)):
+    """Seluruh museum sebagai JSON-LD schema.org (``@graph``)."""
+    return JSONResponse(semua_museum_jsonld(store, _basis(request)), media_type=_JSONLD)
+
+
+@app.get("/api/museum/{slug}.jsonld")
+def api_museum_jsonld(slug: str, request: Request, store: MuseumStore = Depends(get_store)):
+    """Satu museum sebagai JSON-LD schema.org (materi P3)."""
+    doc = museum_jsonld(store, slug, _basis(request))
+    if doc is None:
+        return JSONResponse(status_code=404, content={"error": "Museum tidak ditemukan."})
+    return JSONResponse(doc, media_type=_JSONLD)
+
+
 @app.get("/api/museum/{slug}")
 def api_museum(slug: str, store: MuseumStore = Depends(get_store)):
     iri = _museum_iri(store, slug)
@@ -390,10 +531,13 @@ def api_tanya(
 
 @app.get("/api/metode")
 def api_metode(store: MuseumStore = Depends(get_store)):
+    semua_turunan = fakta_turunan(store, batas=10_000)
     return {
         "perbandingan": perbandingan(store),
-        "jumlah_fakta_turunan": len(fakta_turunan(store, batas=10_000)),
-        "fakta_turunan": fakta_turunan(store, batas=20),
+        "jumlah_fakta_turunan": len(semua_turunan),
+        "ringkasan_turunan": _ringkasan_turunan(semua_turunan),
+        "langkah_penalaran": _langkah(store),
+        "fakta_turunan": _contoh_turunan(semua_turunan),
         "konsistensi": cek_konsistensi(store),
         "subkelas": subkelas_museum(store),
     }

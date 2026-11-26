@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% set halaman = 'peta' %}
+
+{% block judul %}Peta museum{% endblock %}
+
+{% block kepala %}
+{# Leaflet dari CDN (bukan npm): aplikasi Python tidak memakai bundler.
+   integrity (SRI) memastikan berkas dari CDN tidak diubah pihak lain. #}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+{% endblock %}
+
+{% block isi %}
+<h1>Peta museum</h1>
+<p class="ringkas">
+  Lintang dan bujur dibaca dari graf (<code>sdp:latitude</code>, <code>sdp:longitude</code>)
+  lewat query <code>SELECT</code>; saringan provinsi ditulis di dalam query.
+  Pilih penanda untuk membuka halaman museumnya.
+</p>
+
+<form class="saring" method="get" action="/peta" id="form-peta">
+  <label>
+    Provinsi
+    <select name="provinsi" id="pilih-provinsi">
+      <option value="">Semua provinsi</option>
+      {% for p in daftar_provinsi %}
+      <option value="{{ p }}"{% if p == provinsi %} selected{% endif %}>{{ p }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <button type="submit">Tampilkan</button>
+</form>
+
+{# Disembunyikan sampai JavaScript berjalan: tanpa JS, daftar di bawah tetap lengkap. #}
+<div id="peta" class="peta" role="region" aria-label="Peta lokasi museum" hidden></div>
+
+<h2 style="margin-top:28px" id="judul-daftar">
+  {{ titik|length }} museum{% if provinsi %} di {{ provinsi }}{% endif %}
+</h2>
+{% if titik %}
+<ol class="hasil" id="daftar-peta">
+  {% for t in titik %}
+  <li data-slug="{{ t.slug }}" data-provinsi="{{ t.provinsi or '' }}">
+    <h3><a href="/museum/{{ t.slug }}">{{ t.nama }}</a></h3>
+    <p class="meta" style="margin:2px 0 0">
+      {{ t.kota or 'Kota tidak tercatat' }} · {{ t.provinsi or 'Provinsi tidak tercatat' }} ·
+      {% if t.lat is not none %}
+      {{ "%.4f"|format(t.lat) }}, {{ "%.4f"|format(t.lng) }}
+      {% else %}
+      koordinat belum tercatat
+      {% endif %}
+    </p>
+  </li>
+  {% endfor %}
+</ol>
+{% else %}
+<p class="kosong">Tidak ada museum untuk provinsi ini. <a href="/peta">Tampilkan semua provinsi</a>.</p>
+{% endif %}
+
+<script type="application/json" id="data-peta">{{ penanda|tojson }}</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+(function () {
+  // Bila CDN gagal dimuat, halaman tetap berupa daftar — tidak ada error.
+  if (typeof L === "undefined") return;
+
+  var wadah = document.getElementById("peta");
+  var data = JSON.parse(document.getElementById("data-peta").textContent);
+  wadah.hidden = false;
+
+  // Pusat awal: tengah Pulau Sumatera.
+  var peta = L.map(wadah, { scrollWheelZoom: false }).setView([-0.5, 101.5], 5);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(peta);
+
+  var batas = [];
+  data.forEach(function (m) {
+    // Isi popup dirakit lewat DOM (textContent), bukan string HTML,
+    // agar nama museum dari data tidak bisa menyuntikkan markup.
+    var isi = document.createElement("div");
+    var tautan = document.createElement("a");
+    tautan.href = "/museum/" + encodeURIComponent(m.slug);
+    tautan.textContent = m.nama;
+    var ket = document.createElement("div");
+    ket.className = "meta";
+    ket.textContent = [m.kota, m.provinsi].filter(Boolean).join(" · ");
+    isi.appendChild(tautan);
+    isi.appendChild(ket);
+
+    L.marker([m.lat, m.lng], { title: m.nama, alt: m.nama }).addTo(peta).bindPopup(isi);
+    batas.push([m.lat, m.lng]);
+  });
+
+  if (batas.length > 1) {
+    peta.fitBounds(batas, { padding: [30, 30] });
+  } else if (batas.length === 1) {
+    peta.setView(batas[0], 11);
+  }
+
+})();
+</script>
+{% endblock %}

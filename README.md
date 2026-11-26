@@ -1,3 +1,5 @@
+_Repositori: `tubes-web-semantik` — Tugas Proyek Web Semantik._
+
 # Museum Sumatera — Pameran Digital
 
 Situs pameran digital tentang museum di Pulau Sumatera. Alih-alih katalog datar,
@@ -5,13 +7,83 @@ Situs pameran digital tentang museum di Pulau Sumatera. Alih-alih katalog datar,
 dihubungkan kembali lewat tema, kota, era, dan kedekatan bab. Seluruh data
 disimpan sebagai RDF di Apache Jena Fuseki dan dibaca lewat SPARQL.
 
-## Prasyarat
+## Dua aplikasi, satu data
+
+Repositori ini berisi **dua** aplikasi yang membaca data yang sama
+(`data/museums.json`):
+
+| | Aplikasi Python (`pyapp/`) — **utama** | Aplikasi TypeScript (`src/`) |
+|---|---|---|
+| Teknologi | FastAPI, rdflib, owlrl, Jinja2 | Next.js, Fuseki |
+| Triple store | Turtle dibaca langsung, closure OWL-RL di memori | Apache Jena Fuseki (wajib) |
+| Halaman | beranda, cari, museum, **peta**, tanya, metode, API JSON / JSON-LD | katalog, jelajah bab, tanya |
+| Test | `cd pyapp && pytest` | `npx vitest run` |
+
+Jalankan aplikasi Python dengan satu perintah (butuh Docker):
+
+```bash
+docker compose up --build      # lalu buka http://localhost:8000
+```
+
+Tanpa Docker: lihat [`pyapp/README.md`](pyapp/README.md). Panduan deploy ke
+Railway / VPS: [`docs/deploy.md`](docs/deploy.md).
+
+### Keputusan desain
+
+- **Mengapa Python.** Materi kuliah (P6–P13) mengajarkan `rdflib` untuk RDF dan
+  SPARQL serta `owlrl` untuk penalaran OWL-RL. Aplikasi pertama ditulis dalam
+  TypeScript; aplikasi Python dibuat agar setiap konsep kuliah punya wujud
+  langsung di kode yang sama dengan materi, dan agar penalaran bisa dijalankan
+  di proses aplikasi tanpa server tambahan.
+- **Mengapa datanya sama.** `data/museums.json` tetap satu-satunya sumber
+  kebenaran. Kedua aplikasi membangkitkan RDF dari berkas itu, sehingga
+  perbedaan hasil antara keduanya pasti berasal dari kode, bukan data. Data yang
+  sudah dikurasi (lisensi foto, sumber) juga tidak perlu dikerjakan dua kali.
+- **Mengapa Fuseki opsional di Python.** Untuk 28 museum (±6.700 triple
+  setelah penalaran) graf muat di memori. Query tetap ditulis sebagai SPARQL
+  standar dengan `PREFIX` lengkap, jadi bisa dipindah ke Fuseki tanpa berubah.
+- **JSON-LD schema.org (P3).** Setiap halaman museum menyisipkan
+  `<script type="application/ld+json">` berkosakata `schema.org`
+  (`Museum`, `PostalAddress`, `GeoCoordinates`), dan tersedia di
+  `/api/museum/{slug}.jsonld` serta `/api/museum.jsonld` (seluruh museum).
+  Bidang yang tidak ada di graf dihilangkan, bukan diisi `null`.
+
+### Batasan yang diketahui
+
+Ditulis supaya penilaian jujur. Status per 27 November 2026.
+
+- **4 dari 28 museum belum terverifikasi**: Museum Sisingamangaraja XII,
+  Museum Siginjai, Rumah Pengasingan Bung Karno, dan Taman Purbakala Pugung
+  Raharjo. Museum Sisingamangaraja XII juga baru punya satu sumber acuan.
+  Rincian pemeriksaan ada di
+  [`docs/superpowers/reports/2026-11-26-verifikasi-data-museum.md`](docs/superpowers/reports/2026-11-26-verifikasi-data-museum.md).
+- **Jam buka dan harga tiket belum ada di data.** Karena itu JSON-LD tidak
+  memuat `openingHours`; bidang itu akan muncul otomatis bila
+  `sdp:openingHours` diisi.
+- **NL2SPARQL bawaan masih berbasis aturan.** Adapter LLM (`pyapp/semweb/llm.py`)
+  sudah ada dan bisa dibandingkan lewat `scripts/bandingkan_llm.py`, tetapi
+  butuh `LLM_API_KEY`; tanpa kunci, aplikasi memakai penerjemah aturan.
+  Pertanyaan di luar pola yang dikenali ditolak, bukan ditebak.
+- **Image Docker tidak membawa `.env`.** Bila ingin memakai LLM di kontainer,
+  isi `LLM_PROVIDER` dan `LLM_API_KEY` sebagai variabel lingkungan platform.
+- **Peta bergantung pada CDN** (unpkg untuk Leaflet, OpenStreetMap untuk
+  ubin peta). Bila jaringan memblokirnya, halaman `/peta` tetap menampilkan
+  daftar museum lengkap dengan koordinat, tanpa peta.
+- **Aksesibilitas** diperiksa dengan axe-core (0 pelanggaran pada 6 halaman
+  utama) dan test otomatis (`pyapp/tests/test_aksesibilitas.py`), tetapi belum
+  diuji langsung dengan pembaca layar (NVDA/VoiceOver).
+- **Closure dihitung saat permintaan pertama** setelah server menyala, sehingga
+  permintaan pertama butuh beberapa detik.
+
+## Aplikasi TypeScript
+
+### Prasyarat
 
 - Node.js 20 atau lebih baru dan npm (proyek ini memakai **npm**, bukan bun).
 - Apache Jena Fuseki yang berjalan lokal. Langkah lengkapnya ada di
   [`docs/fuseki-setup.md`](docs/fuseki-setup.md).
 
-## Menjalankan dari nol
+### Menjalankan dari nol
 
 ```bash
 # 1. Pasang dependensi
@@ -196,7 +268,8 @@ sebagai peringatan (bukan error) supaya data lama tidak memblokir build, tetapi
 kondisi sehat adalah nol peringatan kedalaman. Generator RDF juga berhenti dengan
 pesan yang menyebut museum dan nomor foto bila aturan lisensi dilanggar.
 
-**Status data.** Semua museum tetap berstatus `perlu-verifikasi`. Catatan
+**Status data.** 24 museum berstatus `terverifikasi` dan 4 masih
+`perlu-verifikasi` (lihat *Batasan yang diketahui*). Catatan
 sejarah disusun ulang dari sumber yang tercantum di setiap halaman, bukan
 salinan langsung, dan pengguna diarahkan memeriksa kanal resmi museum untuk jam
 buka serta harga tiket.
@@ -237,10 +310,10 @@ Kegagalan menghubungi Fuseki dibalas `502` dengan pesan Bahasa Indonesia.
 
 ## Catatan verifikasi
 
-Seluruh entri saat ini berstatus **perlu-verifikasi**. Nama, alamat, tahun
-berdiri, dan catatan kunjungan disusun untuk keperluan pembelajaran dan belum
-diperiksa ulang terhadap sumber resmi. Lencana pada setiap halaman museum
-menunjukkan status ini secara terbuka. Jangan memakai data di situs ini sebagai
+24 dari 28 entri berstatus **terverifikasi**: nama, kota, provinsi, dan tahun
+berdiri sudah dicocokkan ke sumber resmi. Empat entri lain masih
+**perlu-verifikasi**. Lencana pada setiap halaman museum menunjukkan status ini
+secara terbuka, dan jam buka serta harga tiket belum diperiksa. Jangan memakai data di situs ini sebagai
 rujukan perjalanan tanpa memeriksanya kembali.
 
 ## Test

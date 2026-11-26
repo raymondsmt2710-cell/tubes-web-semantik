@@ -114,14 +114,28 @@ def skema_graf(store: MuseumStore) -> Skema:
 
 
 def kosakata(store: MuseumStore) -> set[str]:
-    """Semua IRI yang boleh dipakai: isi graf ditambah kosakata standar."""
+    """Semua IRI yang boleh dipakai: isi graf ditambah kosakata standar.
+
+    Prefiks namespace ikut dimasukkan. Sebelumnya hanya IRI yang muncul sebagai
+    triple yang dihitung, sehingga ``FROM <https://museumsumatera.id/ontology#>``
+    — alamat yang sah dan dipakai proyek sendiri — ditolak sebagai "IRI tidak
+    dikenal". Namespace adalah nama graf, bukan triple, dan tetap harus diterima.
+    """
     BAKU = {
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
         "http://www.w3.org/2000/01/rdf-schema#label",
         "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+        # Tipe data XSD dipakai di dalam FILTER, bukan sebagai triple. Tanpa ini,
+        # `FILTER(xsd:integer(...) < 1950)` ditolak sebagai "IRI tidak dikenal".
+        "http://www.w3.org/2001/XMLSchema#integer",
+        "http://www.w3.org/2001/XMLSchema#gYear",
+        "http://www.w3.org/2001/XMLSchema#string",
+        "http://www.w3.org/2001/XMLSchema#decimal",
+        "http://www.w3.org/2001/XMLSchema#boolean",
     }
     isi = {str(x) for triple in store.asserted for x in triple if isinstance(x, URIRef)}
-    return isi | BAKU | set(skema_graf(store).semua_iri())
+    prefiks = set(PREFIX_MAP.values())
+    return isi | BAKU | prefiks | set(skema_graf(store).semua_iri())
 
 
 # ---------------------------------------------------------------- intent
@@ -152,6 +166,25 @@ _TOPIK: list[tuple[str, tuple[str, ...]]] = [
 ]
 
 _HITUNG = ("berapa", "jumlah", "banyak", "hitung", "total")
+
+# Pertanyaan tentang museum yang punya foto. Berbeda dari "berapa foto", yang
+# menghitung; ini mendaftar museumnya.
+_PUNYA_FOTO = re.compile(
+    r"\b(?:punya|mempunyai|memiliki|ada)\b.{0,30}?\b(?:foto|gambar|galeri|image)\b"
+)
+
+# Batas tahun: "sebelum 1950", "sesudah 2000", "setelah 2000", "di atas 1900".
+_BATAS_TAHUN = re.compile(
+    r"\b(sebelum|sesudah|setelah|sejak|di\s+atas|di\s+bawah|lebih\s+dari|kurang\s+dari)\b"
+    r"\s*(?:tahun\s*)?(\d{3,4})\b"
+)
+
+# Kata yang menandakan permintaan urut tahun. "tertua" = urut naik, "termuda" = turun.
+_TERTUA = re.compile(r"\b(tertua|terlama|paling\s+tua|paling\s+lama)\b")
+_TERMUDA = re.compile(r"\b(termuda|terbaru|paling\s+muda|paling\s+baru)\b")
+
+# Pertanyaan tentang hubungan dua museum.
+_HUBUNGAN = re.compile(r"\b(hubungan|relasi|kaitan|benang\s+merah)\b")
 
 # Kata yang menandakan pertanyaan di luar kemampuan graf. Graf menyimpan fakta
 # museum (lokasi, tema, era, pameran, foto), bukan harga tiket atau jam buka —
@@ -240,6 +273,64 @@ def intent(pertanyaan: str, store: MuseumStore | None = None) -> Intent:
     if atribut == "establishedYear":
         hitung = False
 
+    # --- C4: empat bentuk pertanyaan baru --------------------------------
+    #
+    # Semuanya mengembalikan Intent lebih awal supaya tidak tertimpa logika
+    # topik di bawah, dan supaya `_rakit` bisa memakai penanda khusus.
+
+    batas = _BATAS_TAHUN.search(teks)
+    if batas is not None:
+        arah, angka = batas.group(1), int(batas.group(2))
+        jenis_batas = "bawah" if arah in (
+            "sebelum", "di bawah", "kurang dari"
+        ) else "atas"
+        return Intent(
+            "batas_tahun",
+            "museum",
+            jangkar=None,
+            atribut=f"{jenis_batas}:{angka}",
+            kata=kata,
+            alasan=f"batas_tahun={jenis_batas}:{angka}",
+        )
+
+    if _TERTUA.search(teks) or _TERMUDA.search(teks):
+        arah = "naik" if _TERTUA.search(teks) else "turun"
+        jangkar_tertua = None
+        if store is not None:
+            temuan = cari_jangkar(store, teks, maks=1)
+            if temuan:
+                jangkar_tertua = temuan[0].iri
+        return Intent(
+            "urut_tahun",
+            "museum",
+            jangkar=jangkar_tertua,
+            atribut=arah,
+            kata=kata,
+            alasan=f"urut_tahun={arah}",
+        )
+
+    if _HUBUNGAN.search(teks) and store is not None:
+        temuan = cari_jangkar(store, teks, maks=2)
+        museum = [j for j in temuan if j.jenis == "museum"]
+        if len(museum) >= 2:
+            return Intent(
+                "hubungan",
+                "museum",
+                jangkar=str(museum[0].iri),
+                atribut=str(museum[1].iri),
+                kata=kata,
+                alasan="hubungan dua museum",
+            )
+
+    if _PUNYA_FOTO.search(teks) and not any(_ada_kata(teks, k) for k in _HITUNG):
+        return Intent(
+            "punya_foto",
+            "museum",
+            jangkar=None,
+            kata=kata,
+            alasan="museum yang punya foto",
+        )
+
     topik = None
     for nama, kunci in _TOPIK:
         if any(_ada_kata(teks, k) for k in kunci):
@@ -252,9 +343,15 @@ def intent(pertanyaan: str, store: MuseumStore | None = None) -> Intent:
         if temuan:
             jangkar = temuan[0].iri
 
-    # Domain graf adalah museum; kata "museum" sendiri dihitung sebagai topik.
+    # Kata "museum" berarti yang ditanya **museum**, kecuali pertanyaan menyebut
+    # topik yang lebih spesifik (pameran, galeri, koleksi). "museum apa saja di
+    # kota Banda Aceh" menyebut "kota", tetapi topiknya museum dan kota hanya
+    # jangkar penyaring — tanpa aturan ini jawabannya berbunyi "Ditemukan 2 kota"
+    # padahal isinya nama museum. Sebaliknya "berapa pameran di Museum X" harus
+    # tetap dihitung sebagai pameran, bukan museum.
     menyebut_museum = _ada_kata(teks, "museum")
-    if topik is None and menyebut_museum:
+    topik_spesifik = {"pameran", "galeri", "koleksi"}
+    if menyebut_museum and topik not in topik_spesifik:
         topik = "museum"
 
     # Jangkar saja tidak cukup untuk menentukan topik: "berapa kota di Sumatera"
@@ -373,6 +470,104 @@ def _rakit(pertanyaan: str, store: MuseumStore) -> str:
     if niat.jenis == "tidak_dikenal":
         return ""
 
+    # --- batas tahun: museum sebelum/sesudah tahun tertentu ----------------
+    if niat.jenis == "batas_tahun" and niat.atribut:
+        arah, _, angka = niat.atribut.partition(":")
+        pembanding = "<" if arah == "bawah" else ">"
+        # establishedYear bertipe xsd:gYear. Membandingkannya sebagai angka
+        # lewat xsd:integer membuat "1915"^^xsd:gYear gagal di-cast pada
+        # sebagian implementasi, jadi nilainya diambil sebagai string lebih
+        # dulu. Tahun 3-4 digit aman dibandingkan secara leksikografis karena
+        # panjangnya sama.
+        return (
+            f"{PREFIXES}\n"
+            "SELECT DISTINCT ?museum ?nama ?tahun WHERE {\n"
+            "  ?museum a sdp:Museum ;\n"
+            f"          {NAMA} ?nama ;\n"
+            "          sdp:establishedYear ?tahun .\n"
+            f"  FILTER(xsd:integer(STR(?tahun)) {pembanding} {angka})\n"
+            "}\n"
+            "ORDER BY ?tahun\nLIMIT 50"
+        )
+
+    # --- urut tahun: museum tertua / termuda -------------------------------
+    if niat.jenis == "urut_tahun":
+        urutan = "ASC" if niat.atribut == "naik" else "DESC"
+        pola = [
+            "  ?museum a sdp:Museum ;",
+            f"          {NAMA} ?nama ;",
+            "          sdp:establishedYear ?tahun .",
+        ]
+        if jangkar:
+            jenis = _jenis_jangkar(store, niat.jangkar)
+            if jenis == "provinsi" and _properti_ada(store, "locatedInProvince"):
+                pola.append(f"  ?museum sdp:locatedInProvince {jangkar} .")
+            elif jenis == "kota" and _properti_ada(store, "locatedInCity"):
+                pola.append(f"  ?museum sdp:locatedInCity {jangkar} .")
+        # "Museum tertua" menanyakan **satu** museum, bukan daftar semua museum
+        # terurut. Tanpa LIMIT 1, jawabannya "ditemukan 4 museum" — benar secara
+        # data, tetapi bukan yang ditanyakan.
+        return (
+            f"{PREFIXES}\n"
+            "SELECT DISTINCT ?museum ?nama ?tahun WHERE {\n"
+            f"{chr(10).join(pola)}\n"
+            "}\n"
+            f"ORDER BY {urutan}(xsd:integer(STR(?tahun)))\nLIMIT 1"
+        )
+
+    # --- hubungan dua museum ----------------------------------------------
+    if niat.jenis == "hubungan" and niat.jangkar and niat.atribut:
+        lain = f"<{niat.atribut}>"
+        # Hanya properti yang benar-benar dipakai di graf yang masuk query.
+        # `relatedMuseum` tidak selalu ada; bila dipaksakan, guard menolak query
+        # buatan sistem sendiri dengan pesan "IRI tidak dikenal".
+        cabang: list[str] = []
+        if _properti_ada(store, "relatedMuseum"):
+            cabang.append(
+                f"  {{ {jangkar} sdp:relatedMuseum {lain} . "
+                f'BIND("relasi" AS ?jenis) BIND({lain} AS ?nilai) }}'
+            )
+        if _properti_ada(store, "locatedInProvince"):
+            cabang.append(
+                f"  {{ {jangkar} sdp:locatedInProvince ?p . "
+                f"{lain} sdp:locatedInProvince ?p . "
+                'BIND("provinsi" AS ?jenis) BIND(?p AS ?nilai) }'
+            )
+        if _properti_ada(store, "hasTheme"):
+            cabang.append(
+                f"  {{ {jangkar} sdp:hasTheme ?t . {lain} sdp:hasTheme ?t . "
+                'BIND("tema" AS ?jenis) BIND(?t AS ?nilai) }'
+            )
+        if _properti_ada(store, "locatedInCity"):
+            cabang.append(
+                f"  {{ {jangkar} sdp:locatedInCity ?c . {lain} sdp:locatedInCity ?c . "
+                'BIND("kota" AS ?jenis) BIND(?c AS ?nilai) }'
+            )
+        if not cabang:
+            return ""
+        return (
+            f"{PREFIXES}\n"
+            "SELECT DISTINCT ?jenis ?nilai WHERE {\n"
+            + "\n  UNION\n".join(cabang)
+            + "\n}\nLIMIT 50"
+        )
+
+    # --- museum yang punya foto -------------------------------------------
+    if niat.jenis == "punya_foto":
+        # Satu museum bisa punya banyak foto. Tanpa GROUP BY, museum yang punya
+        # tiga foto muncul tiga kali dan menghabiskan LIMIT — pengguna melihat
+        # daftar yang penuh duplikat, bukan daftar museum.
+        return (
+            f"{PREFIXES}\n"
+            "SELECT ?museum ?nama WHERE {\n"
+            "  ?museum a sdp:Museum ;\n"
+            f"          {NAMA} ?nama ;\n"
+            "          sdp:hasImage ?foto .\n"
+            "}\n"
+            "GROUP BY ?museum ?nama\n"
+            "ORDER BY LCASE(STR(?nama))\nLIMIT 50"
+        )
+
     # --- atribut: nilai tunggal sebuah museum -------------------------------
     if niat.jenis == "atribut" and niat.atribut:
         if jangkar:
@@ -481,6 +676,30 @@ def _rakit(pertanyaan: str, store: MuseumStore) -> str:
         return (
             f"{PREFIXES}\nSELECT ?x ?judul WHERE {{\n{pola}\n}}"
             "\nORDER BY ?judul\nLIMIT 50"
+        )
+
+    # --- daftar tema / era / provinsi / kota ------------------------------
+    # Hanya dijalankan bila pertanyaan **tidak** menyebut museum. Tanpa syarat
+    # ini, "museum apa yang ada di kota Banda Aceh?" dibaca sebagai "daftar
+    # kota" — karena kata "kota" muncul, padahal yang ditanya museumnya.
+    if (
+        niat.jenis == "daftar"
+        and niat.topik in ("tema", "era", "provinsi", "kota")
+        and not _ada_kata(pertanyaan.lower(), "museum")
+    ):
+        kelas = {
+            "tema": "Theme",
+            "era": "Era",
+            "provinsi": "Province",
+            "kota": "City",
+        }[niat.topik]
+        return (
+            f"{PREFIXES}\n"
+            f"SELECT DISTINCT ?x ?nama WHERE {{\n"
+            f"  ?x a sdp:{kelas} ;\n"
+            f"      {NAMA} ?nama .\n"
+            f"}}\n"
+            "ORDER BY LCASE(STR(?nama))\nLIMIT 50"
         )
 
     # --- daftar museum -----------------------------------------------------
@@ -638,6 +857,55 @@ def _slice_di(algebra: Any) -> tuple[list[Any], int]:
     return hasil, subquery
 
 
+def _klausa_terlarang(algebra: Any) -> str | None:
+    """Cari klausa dataset/federasi yang tidak boleh dipakai pengguna.
+
+    Dua bentuk ditolak, dan alasannya berbeda:
+
+    - ``GRAPH <iri>`` dan ``SERVICE <iri>`` sudah tertangkap pemeriksaan IRI
+      asing, tetapi hanya bila IRI-nya tidak dikenal. Yang tidak tertangkap
+      adalah bentuk **variabel**: ``GRAPH ?g`` dan ``SERVICE ?v`` tidak punya
+      IRI sama sekali, sehingga pemeriksaan keempat tidak melihat apa pun.
+    - ``SERVICE ?v`` paling berbahaya: variabel bisa terikat ke endpoint luar,
+      dan query menghubungi server di luar kendali aplikasi. Untuk aplikasi yang
+      hanya membaca satu graf lokal, tidak ada alasan sah memakai SERVICE.
+
+    Mengembalikan nama klausa yang ditemukan, atau ``None`` bila bersih.
+    """
+    ditemukan: list[str] = []
+
+    def jalan(node: Any, kedalaman: int = 0) -> None:
+        if node is None or kedalaman > 40 or ditemukan:
+            return
+
+        nama = getattr(node, "name", None)
+        if nama == "ServiceGraphPattern":
+            # SERVICE dengan IRI tetap sudah tertangkap pemeriksaan IRI asing di
+            # bawah. Yang perlu ditolak di sini adalah bentuk variabel, karena
+            # tidak ada IRI untuk diperiksa.
+            istilah = node.get("term") if hasattr(node, "get") else None
+            if not isinstance(istilah, URIRef):
+                ditemukan.append("SERVICE")
+                return
+        elif nama == "Graph":
+            istilah = node.get("term") if hasattr(node, "get") else None
+            if not isinstance(istilah, URIRef):
+                ditemukan.append("GRAPH")
+                return
+
+        if hasattr(node, "values"):
+            for nilai in node.values():
+                jalan(nilai, kedalaman + 1)
+            return
+
+        if isinstance(node, (list, tuple, set)):
+            for item in node:
+                jalan(item, kedalaman + 1)
+
+    jalan(algebra)
+    return ditemukan[0] if ditemukan else None
+
+
 def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]:
     """Guard: periksa query **sebelum** dijalankan (P13 bagian 16).
 
@@ -669,6 +937,19 @@ def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]
     nama = getattr(algebra, "name", "")
     if nama != "SelectQuery":
         return False, f"hanya SELECT (ditemukan {nama or 'bukan query'})"
+
+    # Pemeriksaan IRI asing dijalankan lebih dulu: bila ada IRI asing, pesan itu
+    # lebih spesifik dan lebih berguna daripada pesan bentuk klausa.
+    dikenal = kosakata(store)
+    asing = sorted({str(i) for i in _iri_di(algebra) if str(i) not in dikenal})
+    if asing:
+        return False, "IRI tidak dikenal: " + ", ".join(asing)
+
+    terlarang = _klausa_terlarang(algebra)
+    if terlarang == "SERVICE":
+        return False, "SERVICE tidak diizinkan: query hanya boleh membaca graf lokal"
+    if terlarang == "GRAPH":
+        return False, "GRAPH harus memakai IRI tetap, bukan variabel"
 
     potongan, jumlah_subquery = _slice_di(algebra)
     if not potongan:
@@ -702,11 +983,6 @@ def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]
                 return False, "OFFSET harus bilangan bulat"
             if nilai_mulai > maks:
                 return False, f"OFFSET {nilai_mulai} melebihi batas {maks}"
-
-    dikenal = kosakata(store)
-    asing = sorted({str(i) for i in _iri_di(algebra) if str(i) not in dikenal})
-    if asing:
-        return False, "IRI tidak dikenal: " + ", ".join(asing)
 
     return True, "ok"
 
@@ -925,13 +1201,47 @@ def _rangkai(pertanyaan: str, baris: list[Any], niat: Intent | None = None) -> s
             )
         return teks + "."
 
+    if niat.jenis == "hubungan":
+        # Kolomnya ?jenis ?nilai. Menyebutnya "museum" menyesatkan: isinya
+        # provinsi, tema, atau kota yang sama, bukan museum.
+        potong = [
+            f"{r[0]}: {label_slug(str(r[1]))}"
+            for r in baris
+            if len(r) > 1 and r[0] is not None and r[1] is not None
+        ]
+        return "Titik temu kedua museum: " + "; ".join(potong[:10]) + "."
+
+    if niat.jenis == "urut_tahun":
+        if jumlah == 1:
+            nama = str(baris[0][1]) if len(baris[0]) > 1 else str(baris[0][0])
+            tahun = str(baris[0][2]) if len(baris[0]) > 2 else "-"
+            sebutan = "tertua" if niat.atribut == "naik" else "termuda"
+            return f"Museum {sebutan}: {nama} ({tahun})."
+        return f"Ditemukan {jumlah} museum terurut menurut tahun."
+
     if jumlah == 1:
         nama = str(baris[0][1]) if len(baris[0]) > 1 else str(baris[0][0])
-        return f"Ditemukan 1 museum: {nama}."
+        satuan = {
+            "tema": "tema",
+            "era": "era",
+            "provinsi": "provinsi",
+            "kota": "kota",
+        }.get(niat.topik, "museum")
+        return f"Ditemukan 1 {satuan}: {nama}."
+
+    # Kolom kedua berisi nama untuk museum, tetapi untuk topik daftar seperti
+    # tema/era/provinsi/kota kolom pertama adalah IRI dan kolom kedua namanya.
+    satuan = {
+        "tema": "tema",
+        "era": "era",
+        "provinsi": "provinsi",
+        "kota": "kota",
+    }.get(niat.topik, "museum")
+
     nama = [str(r[1]) for r in baris if len(r) > 1 and r[1] is not None]
     tampil = nama[:10]
     sisa = len(nama) - len(tampil)
-    teks = f"Ditemukan {len(nama)} museum: " + "; ".join(tampil)
+    teks = f"Ditemukan {len(nama)} {satuan}: " + "; ".join(tampil)
     if sisa > 0:
         teks += f"; dan {sisa} lainnya"
     return teks + "."

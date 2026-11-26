@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% set halaman = 'cari' %}
+{# Halaman detail di dalam bagian Cari: aria-current="true", bukan "page". #}
+{% set detail = true %}
 
 {% block judul %}{{ museum.nama }}{% endblock %}
+
+{% block kepala %}
+{% if jsonld %}
+{# tojson meng-escape <, >, & dan ' sehingga teks data tidak bisa menutup tag script. #}
+<script type="application/ld+json">{{ jsonld|tojson }}</script>
+{% endif %}
+{% endblock %}
 
 {% block isi %}
 <p class="meta"><a href="/cari">← Kembali ke katalog</a></p>
@@ -58,7 +67,7 @@
   {% for g in museum.gallery %}
   <figure>
     {% if g.src %}
-    <img src="{{ g.src }}" alt="{{ g.judul or museum.nama }}" loading="lazy">
+    <img src="{{ g.src }}" alt="{{ g.alt }}" loading="lazy">
     {% endif %}
     <figcaption>
       <div style="display:flex;justify-content:space-between;gap:8px">
@@ -74,8 +83,8 @@
       {% endif %}
       <p class="meta" style="margin-top:8px">
         Foto: {{ g.kredit or 'Tidak dicatat' }} ·
-        {% if g.lisensi_url %}<a href="{{ g.lisensi_url }}" target="_blank" rel="noreferrer noopener">{{ g.lisensi or 'Lisensi tidak dicatat' }}</a>{% else %}{{ g.lisensi or 'Lisensi tidak dicatat' }}{% endif %}
-        {% if g.sumber_url %} · <a href="{{ g.sumber_url }}" target="_blank" rel="noreferrer noopener">Wikimedia Commons</a>{% endif %}
+        {% if g.lisensi_url %}<a href="{{ g.lisensi_url }}" target="_blank" rel="noreferrer noopener">{{ g.lisensi or 'Lisensi tidak dicatat' }}<span class="sr-only"> (membuka tab baru)</span></a>{% else %}{{ g.lisensi or 'Lisensi tidak dicatat' }}{% endif %}
+        {% if g.sumber_url %} · <a href="{{ g.sumber_url }}" target="_blank" rel="noreferrer noopener">Wikimedia Commons<span class="sr-only"> (membuka tab baru)</span></a>{% endif %}
       </p>
     </figcaption>
   </figure>
@@ -111,11 +120,16 @@
 </ul>
 
 {# --- sumber --- #}
+<p class="meta" style="margin-top:24px">
+  Data terstruktur: <a href="/api/museum/{{ museum.slug }}.jsonld">JSON-LD schema.org</a>
+  · <a href="/api/museum/{{ museum.slug }}">JSON proyek</a>
+</p>
+
 {% if museum.sources %}
 <h2 style="margin-top:32px">Sumber catatan</h2>
 <ul class="ringkas">
   {% for s in museum.sources %}
-  <li><a href="{{ s.url }}" target="_blank" rel="noreferrer noopener">{{ s.label or s.url }}</a></li>
+  <li><a href="{{ s.url }}" target="_blank" rel="noreferrer noopener">{{ s.label or s.url }}<span class="sr-only"> (membuka tab baru)</span></a></li>
   {% endfor %}
 </ul>
 {% endif %}

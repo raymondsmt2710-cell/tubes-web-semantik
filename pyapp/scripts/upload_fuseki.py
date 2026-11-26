@@ -19,22 +19,11 @@ import urllib.request
 from pathlib import Path
 
 AKAR = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(AKAR / "pyapp"))
+
+from semweb.env import baca_env
+
 DATA = AKAR / "data" / "museum-sumatera.ttl"
-
-
-def baca_env() -> dict[str, str]:
-    """Baca pasangan KEY=VALUE dari ``.env`` di akar proyek (bila ada)."""
-    nilai: dict[str, str] = {}
-    env = AKAR / ".env"
-    if not env.exists():
-        return nilai
-    for baris in env.read_text(encoding="utf-8").splitlines():
-        baris = baris.strip()
-        if not baris or baris.startswith("#") or "=" not in baris:
-            continue
-        kunci, _, isi = baris.partition("=")
-        nilai[kunci.strip()] = isi.strip()
-    return nilai
 
 
 def unggah(endpoint: str, isi: bytes, tipe: str = "text/turtle") -> None:
