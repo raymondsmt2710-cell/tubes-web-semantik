@@ -45,13 +45,13 @@
 
 {% if hasil.query %}
 <h2 style="margin-top:28px">Query yang dijalankan</h2>
-<pre><code>{{ hasil.query }}</code></pre>
+<pre tabindex="0" aria-label="Query SPARQL yang dijalankan"><code>{{ hasil.query }}</code></pre>
 {% endif %}
 
 {% if hasil.jangkar %}
 <h2 style="margin-top:28px">Jangkar (anchor) retrieval</h2>
 <table>
-  <thead><tr><th>Entitas</th><th>Jenis</th></tr></thead>
+  <thead><tr><th scope="col">Entitas</th><th scope="col">Jenis</th></tr></thead>
   <tbody>
     {% for j in hasil.jangkar %}
     <tr><td><code>{{ j.label or j.iri }}</code></td><td>{{ j.jenis }}</td></tr>
@@ -73,7 +73,7 @@
   Yang dikirim sebagai konteks hanya subgraf di sekitar jangkar — bukan seluruh graf.
   Total {{ konteks.triple|length }} triple pada {{ konteks.hop }} hop.
 </p>
-<pre><code>{% for t in konteks.triple[:20] %}{{ t }}
+<pre tabindex="0" aria-label="Triple konteks subgraf"><code>{% for t in konteks.triple[:20] %}{{ t }}
 {% endfor %}</code></pre>
 {% endif %}
 

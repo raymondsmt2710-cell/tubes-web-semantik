@@ -5,25 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block judul %}Museum Sumatera{% endblock %} · Semantic Search Engine</title>
   <link rel="stylesheet" href="/static/style.css">
+  {% block kepala %}{% endblock %}
 </head>
 <body>
+  <a class="lompat" href="#konten">Langsung ke konten utama</a>
+
   <header class="situs">
     <div class="isi">
       <a class="merek" href="/">
         Museum Sumatera
         <span>Semantic Search Engine · Python + rdflib + OWL-RL</span>
       </a>
-      <nav class="situs">
-        <a href="/" class="{{ 'aktif' if halaman == 'beranda' }}">Beranda</a>
-        <a href="/cari" class="{{ 'aktif' if halaman == 'cari' }}">Cari</a>
-        <a href="/tanya" class="{{ 'aktif' if halaman == 'tanya' }}">Tanya</a>
-        <a href="/metode" class="{{ 'aktif' if halaman == 'metode' }}">Metode</a>
+      <nav class="situs" aria-label="Navigasi utama">
+        <a href="/"{% if halaman == 'beranda' %} class="aktif" aria-current="{{ 'true' if detail else 'page' }}"{% endif %}>Beranda</a>
+        <a href="/cari"{% if halaman == 'cari' %} class="aktif" aria-current="{{ 'true' if detail else 'page' }}"{% endif %}>Cari</a>
+        <a href="/peta"{% if halaman == 'peta' %} class="aktif" aria-current="{{ 'true' if detail else 'page' }}"{% endif %}>Peta</a>
+        <a href="/tanya"{% if halaman == 'tanya' %} class="aktif" aria-current="{{ 'true' if detail else 'page' }}"{% endif %}>Tanya</a>
+        <a href="/metode"{% if halaman == 'metode' %} class="aktif" aria-current="{{ 'true' if detail else 'page' }}"{% endif %}>Metode</a>
         <a href="/api/docs">API</a>
       </nav>
     </div>
   </header>
 
-  <main class="isi">
+  <main class="isi" id="konten" tabindex="-1">
     {% block isi %}{% endblock %}
   </main>
 
