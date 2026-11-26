@@ -84,7 +84,24 @@ def fakta_turunan(
     Hasil diurutkan menurut `(subjek, predikat, objek)` **sebelum** dipotong
     `batas`, supaya halaman yang menampilkan sebagian fakta tidak berubah-ubah
     isinya setiap kali dimuat (urutan iterasi graf tidak dijamin).
+
+    Hasil disimpan di cache milik store, berkunci `(subjek, batas)`: menyusuri
+    closure dan mengatribusikan aturan tidak murah, sedangkan halaman memanggil
+    fungsi ini pada setiap render dengan argumen yang sama. Cache menempel pada
+    instance store — bukan kamus global berkunci `id(store)` — karena `id()`
+    didaur ulang setelah garbage collection dan suite test membuat puluhan
+    store; kunci seperti itu bisa mengembalikan fakta graf lain.
     """
+    cache = getattr(store, "_cache_fakta_turunan", None)
+    if cache is None:
+        cache = {}
+        store._cache_fakta_turunan = cache
+
+    kunci = (subjek, batas)
+    tersimpan = cache.get(kunci)
+    if tersimpan is not None:
+        return _salinan(tersimpan)
+
     asserted = set(store.asserted)
     terlihat: set[tuple[str, str, str]] = set()
     hasil: list[dict[str, Any]] = []
@@ -104,29 +121,45 @@ def fakta_turunan(
         if isinstance(o, URIRef) and o in _OBJEK_TRIVIAL:
             continue
 
-        kunci = (str(s), str(p), str(o))
-        if kunci in terlihat:
+        kunci_fakta = (str(s), str(p), str(o))
+        if kunci_fakta in terlihat:
             continue
-        terlihat.add(kunci)
+        terlihat.add(kunci_fakta)
 
         hasil.append(
             {
-                "subjek": kunci[0],
-                "predikat": kunci[1],
-                "objek": kunci[2],
+                "subjek": kunci_fakta[0],
+                "predikat": kunci_fakta[1],
+                "objek": kunci_fakta[2],
                 "subjek_n3": _n3(store, s),
                 "predikat_n3": _n3(store, p),
                 "objek_n3": _n3(store, o),
-                # Nilai sementara sampai aturan penalaran diberi label; bentuk
-                # keluaran sudah final supaya pemakainya tidak perlu berubah.
-                "aturan": ["tidak teridentifikasi"],
             }
         )
 
     # Urutkan penuh dulu, baru potong: memotong sambil mengiterasi graf membuat
     # isi halaman bergantung pada urutan iterasi yang tidak dijamin stabil.
     hasil.sort(key=lambda f: (f["subjek"], f["predikat"], f["objek"]))
-    return hasil[:batas]
+    hasil = hasil[:batas]
+
+    # Atribusi aturan dikerjakan **setelah** pemotongan: `aturan_fakta` menyusuri
+    # graf premis per fakta, dan pemanggil yang hanya minta 20 baris tidak perlu
+    # justifikasi seluruh ratusan fakta. Nilainya daftar nama aturan, bukan objek
+    # justifikasi penuh — halaman hanya menyebut aturan mana yang bekerja.
+    for fakta in hasil:
+        fakta["aturan"] = [a["aturan"] for a in aturan_fakta(store, fakta)]
+
+    cache[kunci] = hasil
+    return _salinan(hasil)
+
+
+def _salinan(fakta: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Salinan yang boleh dipegang pemanggil tanpa merusak cache.
+
+    `aturan` ikut disalin karena ia satu-satunya nilai bersarang: salinan dangkal
+    biasa masih membiarkan pemanggil mengubah isi cache lewat daftar itu.
+    """
+    return [dict(f, aturan=list(f["aturan"])) for f in fakta]
 
 
 _URUTAN_ATURAN = ("prp-inv", "prp-symp", "rdfs9", "rdfs11", "rdfs2", "rdfs3")
@@ -174,6 +207,21 @@ def _peta_aksioma(premis) -> _Aksioma:
         subkelas.setdefault(a, set()).add(b)
 
     return _Aksioma(inverse, domain, rentang, subkelas)
+
+
+def _peta_aksioma_tercache(store: MuseumStore) -> _Aksioma:
+    """Indeks aksioma dibangun sekali per store, bukan sekali per fakta.
+
+    `fakta_turunan` memanggil `aturan_fakta` untuk setiap fakta yang ditampilkan,
+    dan membangun ulang indeks di tiap panggilan berarti menggambar ulang graf
+    premis 300-an kali. Indeks ini hanya bergantung pada `store.premis`, yang
+    tidak berubah setelah store dibuat, jadi aman disimpan pada instance.
+    """
+    peta = getattr(store, "_cache_peta_aksioma", None)
+    if peta is None:
+        peta = _peta_aksioma(store.premis)
+        store._cache_peta_aksioma = peta
+    return peta
 
 
 def _jejak_subkelas(
@@ -224,7 +272,7 @@ def aturan_fakta(store: MuseumStore, fakta: dict[str, Any]) -> list[dict[str, An
     predikat = URIRef(fakta["predikat"])
     objek = URIRef(fakta["objek"])
     premis = store.premis
-    peta = _peta_aksioma(premis)
+    peta = _peta_aksioma_tercache(store)
 
     hasil: dict[str, list[str]] = {}
 

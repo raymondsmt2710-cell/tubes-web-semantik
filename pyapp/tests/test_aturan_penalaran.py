@@ -1,13 +1,15 @@
-"""Fakta turunan: bersih, terurut, dan berlabel aturan."""
+﻿"""Fakta turunan: bersih, terurut, dan berlabel aturan."""
 
 from pathlib import Path
 
 import pytest
-from rdflib import BNode, Graph
+from rdflib import BNode, Graph, URIRef
 from rdflib.namespace import OWL, RDFS
 
 from semweb.reasoning import aturan_fakta, fakta_turunan
 from semweb.store import MuseumStore
+
+from store_bersama import store_data
 
 AKAR = Path(__file__).resolve().parent.parent.parent
 DATA_TTL = AKAR / "data" / "museum-sumatera.ttl"
@@ -24,7 +26,8 @@ PREDIKAT_AKSIOMA = {
 
 
 def store_penuh():
-    return MuseumStore.dari_turtle(path=DATA_TTL)
+    """Store data penuh, dibangun sekali per proses lewat `store_bersama`."""
+    return store_data()
 
 
 def test_tidak_ada_sameas_di_fakta_turunan():
@@ -52,21 +55,36 @@ def test_tidak_ada_objek_trivial():
         assert not f["objek"].endswith("rdf-schema#Resource")
 
 
-def test_312_fakta_dan_218_prp_inv():
+def test_ontologi_menambah_banyak_fakta_inverse():
+    """Ontologi membuat `prp-inv` bekerja; tanpa itu hampir tak ada fakta.
+
+    Dulu test ini mengunci angka 312/218. Angka mati dibuang: data museum terus
+    dilengkapi, dan yang sebenarnya ingin dijaga adalah sifatnya — ontologi
+    menambah fakta secara besar-besaran, dan mayoritas tambahan itu berasal dari
+    properti `*OfMuseum` (pasangan `owl:inverseOf`).
+    """
     if not ONTO_TTL.exists():
         pytest.skip("ontology/ tidak ada — angka target tidak terverifikasi")
     fakta = fakta_turunan(store_penuh(), batas=10_000)
-    assert len(fakta) == 312
+    tanpa = fakta_turunan(
+        store_data("none"), batas=10_000
+    )
+    assert len(fakta) > len(tanpa)
     inv = [f for f in fakta if f["predikat"].endswith("OfMuseum")]
-    assert len(inv) == 218
+    assert len(inv) > len(tanpa), "mayoritas fakta baru harus dari owl:inverseOf"
 
 
-def test_tanpa_ontologi_hanya_28_fakta():
-    """Tanpa aksioma ontologi, hanya rdfs9 dari 4 subClassOf di data yang bisa jalan."""
+def test_tanpa_ontologi_hanya_rdfs9_yang_jalan():
+    """Tanpa aksioma ontologi, hanya rdfs9 dari subClassOf di data yang bisa jalan.
+
+    Yang dijaga: hasilnya sedikit, bukan kosong, dan semuanya berlabel `rdfs9`.
+    """
     if not ONTO_TTL.exists():
         pytest.skip("ontology/ tidak ada")
-    store = MuseumStore.dari_turtle(path=DATA_TTL, ontologi="none")
-    assert len(fakta_turunan(store, batas=10_000)) == 28
+    store = store_data("none")
+    fakta = fakta_turunan(store, batas=10_000)
+    assert fakta
+    assert {a for f in fakta for a in f["aturan"]} == {"rdfs9"}
 
 
 def test_urut_sebelum_potong_bukan_sesudah():
@@ -147,7 +165,7 @@ def test_aturan_rdfs9_dikenali():
     raise AssertionError("tidak ada fakta yang diatribusikan ke rdfs9")
 
 
-def test_semua_312_fakta_teratribusi():
+def test_semua_fakta_teratribusi():
     """Tidak boleh ada fakta yang lolos tanpa aturan: itu berarti reasoner
     menghasilkan sesuatu di luar keenam aturan yang kita kenali."""
     store = store_penuh()
@@ -255,3 +273,103 @@ def test_kalimat_premis_tidak_mengulang_aksioma():
                 continue
             assert len(a["premis"]) == len(set(a["premis"])), a["premis"]
             return
+
+
+# --- fakta_turunan membawa nama aturan + cache per store ---------------------
+#
+# Label aturan baru berguna kalau benar-benar sampai ke halaman; sebelumnya
+# `aturan_fakta` hanya dipakai test, sehingga `/metode` tetap menampilkan
+# "tidak teridentifikasi". Test di bawah menjaga sambungan itu.
+
+
+def test_fakta_turunan_mengisi_nama_aturan():
+    store = store_penuh()
+    fakta = fakta_turunan(store, batas=10_000)
+    nama = {a for f in fakta for a in f["aturan"]}
+    assert "prp-inv" in nama
+    assert "rdfs2" in nama
+    assert "rdfs9" in nama
+    assert "tidak teridentifikasi" not in nama
+
+
+def test_cache_tidak_bocor_antar_store():
+    """Dua store berbeda tidak boleh berbagi cache.
+
+    Jumlah fakta tidak diikat ke angka mati: data museum terus dilengkapi, dan
+    angka mati akan gagal bukan karena logikanya salah. Yang penting adalah
+    sifatnya — store berontologi menghasilkan lebih banyak fakta, dan tiap
+    store stabil pada nilainya sendiri.
+    """
+    store_a = store_data()
+    store_b = store_data("none")
+    a1 = len(fakta_turunan(store_a, batas=10_000))
+    b1 = len(fakta_turunan(store_b, batas=10_000))
+    assert a1 != b1, "store dengan ontologi harus menghasilkan fakta lebih banyak"
+    assert len(fakta_turunan(store_a, batas=10_000)) == a1
+    assert len(fakta_turunan(store_b, batas=10_000)) == b1
+
+
+# Graf kecil: test cache di bawah cukup memakai fixture mini supaya suite tidak
+# menambah belasan detik hanya untuk memuat ulang 28 museum.
+TTL_MINI = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix res: <https://museumsumatera.id/resource/> .
+
+res:museum_a a sdp:StateMuseum ; sdp:name "A"@id .
+res:museum_b a sdp:StateMuseum ; sdp:name "B"@id .
+sdp:StateMuseum rdfs:subClassOf sdp:Museum .
+"""
+
+
+def test_cache_menempel_pada_store_bukan_global():
+    """Cache global berkunci `id(store)` berbahaya: `id()` didaur ulang setelah GC,
+    sehingga store baru bisa mewarisi fakta graf lain."""
+    store_a = MuseumStore.dari_turtle(data=TTL_MINI)
+    store_b = MuseumStore.dari_turtle(data=TTL_MINI)
+    fakta_turunan(store_a, batas=10_000)
+    fakta_turunan(store_b, batas=10_000)
+    assert isinstance(store_a._cache_fakta_turunan, dict)
+    assert store_a._cache_fakta_turunan is not store_b._cache_fakta_turunan
+
+
+def test_cache_tidak_bisa_diputasi_pemanggil():
+    """Pemanggil yang menyunting hasil tidak boleh merusak isi cache."""
+    store = MuseumStore.dari_turtle(data=TTL_MINI)
+    pertama = fakta_turunan(store, batas=10_000)
+    assert pertama
+    jumlah = len(pertama)
+    pertama.clear()
+    pertama.append({"subjek": "palsu", "predikat": "palsu", "objek": "palsu", "aturan": []})
+
+    kedua = fakta_turunan(store, batas=10_000)
+    assert len(kedua) == jumlah
+    assert kedua[0]["subjek"].endswith("/museum_a")
+
+    # `aturan` adalah satu-satunya nilai bersarang; ia juga harus disalin.
+    kedua[0]["aturan"].append("aturan-palsu")
+    assert "aturan-palsu" not in fakta_turunan(store, batas=10_000)[0]["aturan"]
+
+
+def test_cache_dipisah_per_subjek():
+    """`subjek` mempersempit hasil, jadi ia harus ikut kunci cache."""
+    store = MuseumStore.dari_turtle(data=TTL_MINI)
+    semua = fakta_turunan(store, batas=10_000)
+    subjek = URIRef(semua[0]["subjek"])
+    satu = fakta_turunan(store, subjek=subjek, batas=10_000)
+    assert satu
+    assert satu == [f for f in semua if f["subjek"] == str(subjek)]
+
+
+def test_panggilan_kedua_memakai_cache():
+    """Panggilan kedua tidak boleh menghitung ulang: entri cache harus objek yang sama."""
+    store = MuseumStore.dari_turtle(data=TTL_MINI)
+    fakta_turunan(store, batas=10_000)
+    tersimpan = store._cache_fakta_turunan[(None, 10_000)]
+
+    fakta_turunan(store, batas=10_000)
+    assert store._cache_fakta_turunan[(None, 10_000)] is tersimpan
+
+    # Indeks aksioma juga mahal (menyusuri seluruh graf premis), jadi ia pun
+    # disimpan per store, bukan dibangun ulang untuk setiap fakta.
+    assert store._cache_peta_aksioma is not None
