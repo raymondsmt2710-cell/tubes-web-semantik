@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+import pytest
 from rdflib import BNode
 from rdflib.namespace import OWL, RDFS
 
@@ -53,11 +54,32 @@ def test_tidak_ada_objek_trivial():
 
 def test_312_fakta_dan_218_prp_inv():
     if not ONTO_TTL.exists():
-        return
+        pytest.skip("ontology/ tidak ada — angka target tidak terverifikasi")
     fakta = fakta_turunan(store_penuh(), batas=10_000)
     assert len(fakta) == 312
     inv = [f for f in fakta if f["predikat"].endswith("OfMuseum")]
     assert len(inv) == 218
+
+
+def test_tanpa_ontologi_hanya_28_fakta():
+    """Tanpa aksioma ontologi, hanya rdfs9 dari 4 subClassOf di data yang bisa jalan."""
+    if not ONTO_TTL.exists():
+        pytest.skip("ontology/ tidak ada")
+    store = MuseumStore.dari_turtle(path=DATA_TTL, ontologi="none")
+    assert len(fakta_turunan(store, batas=10_000)) == 28
+
+
+def test_urut_sebelum_potong_bukan_sesudah():
+    """Kalau urutan dilakukan setelah pemotongan, isi halaman berubah tiap proses.
+
+    `batas=5` harus sama dengan 5 baris pertama hasil penuh — bukan 5 baris acak
+    yang kebetulan terambil lebih dulu dari iterasi graf.
+    """
+    if not ONTO_TTL.exists():
+        pytest.skip("ontology/ tidak ada")
+    store = store_penuh()
+    penuh = fakta_turunan(store, batas=10_000)
+    assert fakta_turunan(store, batas=5) == penuh[:5]
 
 
 def test_urutan_deterministik():

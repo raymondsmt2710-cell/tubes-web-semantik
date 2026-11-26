@@ -9,10 +9,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from rdflib import BNode, Graph, Literal, URIRef
+from rdflib import BNode, Literal, URIRef
 from rdflib.namespace import OWL, RDF, RDFS
 
-from .namespace import RES, SDP
+from .namespace import RES
 from .store import MuseumStore
 
 # Predikat yang isinya aksioma vocabulary, bukan pengetahuan tentang data museum.
@@ -105,8 +105,8 @@ def fakta_turunan(
                 "subjek_n3": _n3(store, s),
                 "predikat_n3": _n3(store, p),
                 "objek_n3": _n3(store, o),
-                # Task 5 akan menggantinya dengan nama aturan sebenarnya;
-                # untuk sekarang nilai ini sah dan menjaga bentuk keluaran.
+                # Nilai sementara sampai aturan penalaran diberi label; bentuk
+                # keluaran sudah final supaya pemakainya tidak perlu berubah.
                 "aturan": ["tidak teridentifikasi"],
             }
         )
