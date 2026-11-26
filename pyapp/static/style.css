@@ -6,8 +6,11 @@
   --paper-2: #fffdf8;
   --ink: #23201b;
   --ink-soft: #57514a;
-  --ink-faint: #8d867d;
+  /* #8d867d semula hanya 3.25:1 di atas --paper; #6b645b ≥ 4.6:1 (WCAG AA). */
+  --ink-faint: #6b645b;
   --rule: #d8d2c6;
+  /* Batas kontrol formulir butuh 3:1 (WCAG 1.4.11); --rule hanya garis hias. */
+  --rule-kuat: #8f887c;
   --accent: #8c3b1e;
   --accent-soft: #f0e2d8;
   --ok: #2f6b45;
@@ -21,12 +24,61 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-  font-size: 16px;
+  /* 100% (bukan 16px) agar ukuran huruf pilihan pengguna di browser dihormati. */
+  font-size: 100%;
   line-height: 1.6;
 }
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+/* --- aksesibilitas ----------------------------------------------------- */
+
+/* Fokus keyboard selalu terlihat; :focus-visible tidak mengganggu klik tetikus. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Skip-link: tersembunyi sampai mendapat fokus Tab pertama. */
+.lompat {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 1000;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 3px;
+  font-weight: 600;
+}
+.lompat:focus { top: 12px; text-decoration: none; }
+
+/* Teks hanya untuk pembaca layar (mis. "membuka tab baru"). */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+main:focus { outline: none; }
+
+/* Tautan di dalam kalimat diberi garis bawah: warna saja tidak cukup
+   membedakannya dari teks biasa (WCAG 1.4.1). */
+main p a, main td a, main li > a, .ringkas a { text-decoration: underline; text-underline-offset: 2px; }
+main h3 a { text-decoration: none; }
+
+.judul-hasil {
+  font-family: inherit;
+  font-size: .84rem;
+  font-weight: 400;
+  color: var(--ink-faint);
+  margin: 12px 0 0;
+}
 
 h1, h2, h3, h4 {
   font-family: Georgia, "Times New Roman", serif;
@@ -64,7 +116,7 @@ header.situs .isi {
 .merek span { color: var(--ink-faint); font-weight: 400; font-size: .8rem; display: block; }
 nav.situs { display: flex; gap: 18px; font-size: .9rem; flex-wrap: wrap; }
 nav.situs a { color: var(--ink-soft); }
-nav.situs a.aktif { color: var(--accent); font-weight: 600; }
+nav.situs a.aktif, nav.situs a[aria-current="page"] { color: var(--accent); font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
 
 /* --- label kecil ------------------------------------------------------- */
 
@@ -129,13 +181,13 @@ input[type="text"], input[type="number"], select {
   font: inherit;
   font-size: .92rem;
   padding: 8px 10px;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-kuat);
   border-radius: 3px;
   background: var(--paper-2);
   color: var(--ink);
   min-width: 120px;
 }
-input[type="text"]:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+input[type="text"]:focus, input[type="number"]:focus, select:focus { border-color: var(--accent); }
 
 button, .tombol {
   font: inherit;
@@ -187,6 +239,16 @@ th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color:
 .galeri .poin li { display: flex; gap: 6px; }
 .galeri .poin li::before { content: "—"; color: var(--ink-faint); }
 
+/* --- peta ------------------------------------------------------------- */
+
+.peta {
+  height: 480px;
+  margin-top: 16px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+@media (max-width: 620px) { .peta { height: 360px; } }
+
 /* --- status ------------------------------------------------------------ */
 
 .status { display: inline-block; font-size: .78rem; padding: 3px 10px; border-radius: 3px; }
@@ -207,4 +269,8 @@ footer.situs {
 @media (max-width: 620px) {
   h1 { font-size: 1.5rem; }
   .isi { padding-left: 14px; padding-right: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }

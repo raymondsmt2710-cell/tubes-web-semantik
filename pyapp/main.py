@@ -29,7 +29,9 @@ from rdflib.namespace import RDF
 from semweb.construct import subkelas_museum, verifikasi_hierarki
 from semweb.generator import load_records, tulis_ttl
 from semweb.graphrag import ambil_konteks
+from semweb.jsonld import museum_jsonld, semua_museum_jsonld
 from semweb.namespace import RES, SDP
+from semweb.peta import titik_museum
 from semweb.nl2sparql import jawab, ke_sparql, skema_graf
 from semweb.reasoning import cek_konsistensi, fakta_turunan, jelaskan_tipe, perbandingan
 from semweb.relations import benang_merah
@@ -115,8 +117,11 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
             }
         )
 
+    nama_museum = teks(SDP.name) or _nama_dari_slug(slug)
+
     galeri = []
     for node in _urut(store.asserted.objects(iri, SDP.hasImage), SDP.imageIndex):
+        judul_foto = str(store.asserted.value(node, SDP.imageTitle) or "")
         poin = [
             str(store.asserted.value(d, SDP.detailText) or "")
             for d in _urut(store.asserted.objects(node, SDP.imageDetail), SDP.detailIndex)
@@ -124,7 +129,8 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
         galeri.append(
             {
                 "src": str(store.asserted.value(node, SDP.imageUrl) or ""),
-                "judul": str(store.asserted.value(node, SDP.imageTitle) or ""),
+                "judul": judul_foto,
+                "alt": _alt_foto(judul_foto, store.asserted.value(node, SDP.imageAlt), nama_museum),
                 "latar": str(store.asserted.value(node, SDP.imageBackground) or ""),
                 "periode": str(store.asserted.value(node, SDP.imagePeriod) or ""),
                 "kredit": str(store.asserted.value(node, SDP.imageCredit) or ""),
@@ -152,7 +158,7 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
     return {
         "iri": str(iri),
         "slug": slug,
-        "nama": teks(SDP.name) or _nama_dari_slug(slug),
+        "nama": nama_museum,
         "deskripsi": teks(SDP.description),
         "alamat": teks(SDP.address),
         "kota": store.nama(kota) if kota is not None else None,
@@ -165,6 +171,20 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
         "gallery": galeri,
         "sources": sumber,
     }
+
+
+def _alt_foto(judul: str, alt_data: Any, nama_museum: str) -> str:
+    """Teks ``alt`` yang menjelaskan isi foto, bukan asal berkasnya.
+
+    ``imageAlt`` di data berbentuk "Museum X — foto dari Wikimedia Commons":
+    itu keterangan sumber, bukan isi gambar. Judul foto ("Gedung pameran
+    tetap") lebih bermakna bagi pembaca layar, jadi diutamakan.
+    """
+    if judul.strip():
+        return f"{judul.strip()} — {nama_museum}"
+    if alt_data is not None and str(alt_data).strip():
+        return str(alt_data).strip()
+    return f"Foto {nama_museum}"
 
 
 def _nama_dari_slug(slug: str) -> str:
@@ -189,6 +209,18 @@ def _tahun_dari(nilai: Any) -> int | None:
         return int(str(nilai).strip()[:4])
     except (TypeError, ValueError):
         return None
+
+
+def _basis(request: Request) -> str:
+    """URL dasar situs untuk tautan absolut di JSON-LD.
+
+    ``SITUS_URL`` (mis. ``https://museum-sumatera.up.railway.app/``) dipakai bila
+    diisi, karena di belakang reverse proxy ``request.base_url`` bisa berisi
+    alamat internal kontainer, bukan alamat publik.
+    """
+    dari_env = os.environ.get("SITUS_URL", "").strip()
+    basis = dari_env or str(request.base_url)
+    return basis if basis.endswith("/") else basis + "/"
 
 
 def _benar(nilai: Any) -> bool:
@@ -298,6 +330,23 @@ def halaman_museum(slug: str, request: Request, store: MuseumStore = Depends(get
             "museum": _museum_dto(store, iri),
             "benang": benang_merah(store, slug, maks=6),
             "rantai_tipe": jelaskan_tipe(store, slug),
+            "jsonld": museum_jsonld(store, slug, _basis(request)),
+        },
+    )
+
+
+@app.get("/peta", response_class=HTMLResponse)
+def halaman_peta(request: Request, provinsi: str = "", store: MuseumStore = Depends(get_store)):
+    titik = titik_museum(store, provinsi or None)
+    return templates.TemplateResponse(
+        request,
+        "peta.html",
+        {
+            "titik": titik,
+            "provinsi": provinsi,
+            "daftar_provinsi": daftar_provinsi(store),
+            # Hanya museum berkoordinat yang bisa dijadikan penanda peta.
+            "penanda": [t for t in titik if t["lat"] is not None and t["lng"] is not None],
         },
     )
 
@@ -364,6 +413,26 @@ def api_cari(
         urut=urut,
     )
     return {"jumlah": len(hasil), "museum": hasil}
+
+
+# Route .jsonld didaftarkan SEBELUM /api/museum/{slug}: FastAPI mencocokkan
+# route sesuai urutan, dan slug berisi titik akan ditolak validasi slug.
+_JSONLD = "application/ld+json"
+
+
+@app.get("/api/museum.jsonld")
+def api_semua_jsonld(request: Request, store: MuseumStore = Depends(get_store)):
+    """Seluruh museum sebagai JSON-LD schema.org (``@graph``)."""
+    return JSONResponse(semua_museum_jsonld(store, _basis(request)), media_type=_JSONLD)
+
+
+@app.get("/api/museum/{slug}.jsonld")
+def api_museum_jsonld(slug: str, request: Request, store: MuseumStore = Depends(get_store)):
+    """Satu museum sebagai JSON-LD schema.org (materi P3)."""
+    doc = museum_jsonld(store, slug, _basis(request))
+    if doc is None:
+        return JSONResponse(status_code=404, content={"error": "Museum tidak ditemukan."})
+    return JSONResponse(doc, media_type=_JSONLD)
 
 
 @app.get("/api/museum/{slug}")

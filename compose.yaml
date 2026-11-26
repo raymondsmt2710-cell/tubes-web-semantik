@@ -1,0 +1,17 @@
+# Jalankan aplikasi Python dengan satu perintah dari akar repositori:
+#
+#   docker compose up --build
+#
+# lalu buka http://localhost:8000
+services:
+  web:
+    build:
+      context: .
+      dockerfile: pyapp/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      # Isi dengan URL publik bila di belakang domain/reverse proxy, mis.
+      # SITUS_URL: https://museum.example.ac.id/
+      SITUS_URL: ${SITUS_URL:-}
+    restart: unless-stopped
