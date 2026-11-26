@@ -444,11 +444,41 @@ def aturan_fakta(store: MuseumStore, fakta: dict[str, Any]) -> list[dict[str, An
     ]
 
 
+def _induk_subkelas(store: MuseumStore, kelas: URIRef) -> URIRef | None:
+    """Induk `rdfs:subClassOf` pertama dari sebuah kelas, dibaca dari `premis`.
+
+    Indeks aksioma store dipakai ulang supaya penelusuran rantai tidak menggambar
+    ulang graf premis untuk setiap langkah. Objek `BNode` dilewati: ontologi
+    menulis `sdp:Museum rdfs:subClassOf [ a owl:Restriction ... ]`, dan itu
+    batasan kardinalitas — bukan kelas atas yang bisa ditelusuri.
+
+    Bila sebuah kelas punya beberapa induk IRI, yang dipilih adalah yang
+    terkecil menurut `str`. `Graph.value()` mengembalikan salah satunya tanpa
+    jaminan urutan, sehingga rantai yang ditampilkan bisa berbeda antar-proses
+    untuk graf yang sama.
+    """
+    induk = sorted(
+        (
+            k
+            for k in _peta_aksioma_tercache(store).subkelas.get(kelas, ())
+            if isinstance(k, URIRef)
+        ),
+        key=str,
+    )
+    return induk[0] if induk else None
+
+
 def jelaskan_tipe(store: MuseumStore, slug: str) -> list[str]:
     """Susun rantai penalaran tipe museum dalam kalimat Bahasa Indonesia.
 
     Rantai ini memperlihatkan aturan `rdfs:subClassOf` bekerja: tipe yang ditulis
     di data, kelas atasnya, lalu kesimpulan yang tidak pernah ditulis.
+
+    Tipe individu dibaca dari `store.asserted` (itu instance data: apa yang
+    ditulis tentang museum), sedangkan rantai `rdfs:subClassOf` ditelusuri di
+    `store.premis` karena ia **aksioma**. Tanpa itu rantai berhenti di langkah
+    pertama untuk setiap kelas yang induknya hanya dinyatakan di ontologi, dan
+    halaman museum melaporkan "tidak ada kelas atas tambahan" padahal ada.
     """
     museum = URIRef(f"{RES}museum/{slug}")
     if (museum, None, None) not in store.asserted:
@@ -470,14 +500,21 @@ def jelaskan_tipe(store: MuseumStore, slug: str) -> list[str]:
         sekarang = tipe
         dikunjungi: set[URIRef] = set()
         while True:
-            induk = store.asserted.value(sekarang, RDFS.subClassOf)
-            if not isinstance(induk, URIRef) or induk in dikunjungi:
+            induk = _induk_subkelas(store, sekarang)
+            if induk is None or induk in dikunjungi:
                 break
             dikunjungi.add(induk)
             if induk == OWL.Thing:
                 break
+            # Asal aksiomanya disebut apa adanya: pembaca yang memeriksa ulang
+            # rantai ini harus tahu ke berkas mana ia harus melihat.
+            asal = (
+                "ditulis di data"
+                if (sekarang, RDFS.subClassOf, induk) in store.asserted
+                else "dari ontologi"
+            )
             kalimat.append(
-                f"{_n3(store, sekarang)} rdfs:subClassOf {_n3(store, induk)} (ditulis di data)."
+                f"{_n3(store, sekarang)} rdfs:subClassOf {_n3(store, induk)} ({asal})."
             )
             if (museum, RDF.type, induk) in store.closure and (
                 museum,
@@ -509,9 +546,16 @@ def cek_konsistensi(store: MuseumStore) -> list[str]:
     disjoint sering baru terpenuhi lewat `rdfs:subClassOf` atau `rdfs:domain`,
     dan justru pelanggaran hasil inferensi itulah yang paling perlu dilihat —
     tidak ada di data mentah, jadi sulit ditemukan dengan mata.
+
+    Pasangan disjoint dibaca dari `store.premis`, bukan `store.asserted`:
+    `owl:disjointWith` adalah **aksioma**, dan pada data ini satu-satunya
+    pasangan justru hanya ditulis di ontologi. Membacanya dari `asserted`
+    membuat fungsi ini selalu mengembalikan daftar kosong — panel konsistensi di
+    `/metode` tampak menyatakan "data sehat" padahal tidak pernah memeriksa
+    apa pun.
     """
     pasangan: list[tuple[URIRef, URIRef]] = []
-    for kiri, _, kanan in store.asserted.triples((None, OWL.disjointWith, None)):
+    for kiri, _, kanan in store.premis.triples((None, OWL.disjointWith, None)):
         if isinstance(kiri, URIRef) and isinstance(kanan, URIRef):
             pasangan.append((kiri, kanan))
             pasangan.append((kanan, kiri))

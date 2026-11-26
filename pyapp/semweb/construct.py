@@ -56,9 +56,16 @@ ORDER BY ?kelas
 def hierarki_kelas(
     store: MuseumStore, kelas_induk: str = "Museum", operator: str = "+"
 ) -> list[dict[str, Any]]:
-    """Daftar subkelas ``kelas_induk`` beserta labelnya."""
+    """Daftar subkelas ``kelas_induk`` beserta labelnya.
+
+    Query dijalankan pada ``store.premis``, bukan ``store.asserted``:
+    ``rdfs:subClassOf`` adalah **aksioma**, dan sebagian besar hierarki hanya
+    ditulis di ontologi. Membacanya dari ``asserted`` membuat panel hierarki di
+    ``/metode`` hanya menampilkan subkelas yang kebetulan ditulis ulang di
+    berkas data.
+    """
     hasil: list[dict[str, Any]] = []
-    for baris in store.asserted.query(kueri_hierarki(kelas_induk, operator)):
+    for baris in store.premis.query(kueri_hierarki(kelas_induk, operator)):
         kelas, nama = baris[0], baris[1]
         if not isinstance(kelas, URIRef):
             continue
@@ -140,7 +147,16 @@ def selisih_construct_select(
 
 
 def verifikasi_hierarki(store: MuseumStore) -> list[dict[str, Any]]:
-    """Periksa apakah setiap subkelas museum benar-benar terpakai individu."""
+    """Periksa apakah setiap subkelas museum benar-benar terpakai individu.
+
+    Daftar subkelasnya berasal dari ``store.premis`` (lewat
+    ``subkelas_museum``) karena ``rdfs:subClassOf`` adalah aksioma. Sebaliknya,
+    jumlah individunya dibaca dari ``store.asserted``: pertanyaan yang dijawab
+    kolom itu adalah "berapa individu yang **ditulis** bertipe kelas ini".
+    Memakai closure di sini akan menghitung tipe hasil inferensi juga, sehingga
+    museum bertipe ``StateMuseum`` ikut terhitung sebagai ``PrivateMuseum`` —
+    angka di ``/metode`` lalu berhenti berarti "apa yang ditulis di data".
+    """
     hasil: list[dict[str, Any]] = []
     for sub in subkelas_museum(store):
         kelas = URIRef(sub["uri"])

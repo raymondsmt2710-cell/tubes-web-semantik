@@ -4,9 +4,16 @@ from pathlib import Path
 
 import pytest
 from rdflib import BNode, Graph, URIRef
-from rdflib.namespace import OWL, RDFS
+from rdflib.namespace import OWL, RDF, RDFS
 
-from semweb.reasoning import aturan_fakta, fakta_turunan, langkah_penalaran
+from semweb.construct import hierarki_kelas, verifikasi_hierarki
+from semweb.reasoning import (
+    aturan_fakta,
+    cek_konsistensi,
+    fakta_turunan,
+    jelaskan_tipe,
+    langkah_penalaran,
+)
 from semweb.store import MuseumStore
 
 from store_bersama import store_data
@@ -543,3 +550,139 @@ def test_batas_putaran_dihormati():
     assert len(satu) == 1
     assert satu[0]["mentah"] > 0
     assert satu[0] == langkah_penalaran(store)[0]
+
+
+# --- aksioma dibaca dari `premis`, instance data tetap dari `asserted` -------
+#
+# `owl:disjointWith` dan sebagian `rdfs:subClassOf` hanya hidup di ontologi.
+# Pembacaan aksioma yang masih memakai `asserted` membuat pemeriksaan
+# konsistensi dan hierarki tampak bekerja padahal tidak memeriksa apa pun —
+# halaman `/metode` menampilkan panel kosong yang terbaca sebagai "data sehat".
+
+
+def test_cek_konsistensi_melihat_disjoint_dari_ontologi():
+    """Tanpa ontologi, pemeriksaan ini selalu kosong dan tidak memeriksa apa pun."""
+    if not ONTO_TTL.exists():
+        pytest.skip("ontology/ tidak ada")
+    store = store_penuh()
+    assert list(store.premis.triples((None, OWL.disjointWith, None))), (
+        "ontologi harus memuat pasangan disjointWith"
+    )
+    # Data sekarang tidak melanggar, jadi hasilnya kosong — tetapi pasangan di
+    # atas membuktikan pemeriksaannya benar-benar punya bahan untuk diperiksa.
+    assert cek_konsistensi(store) == []
+
+
+def test_cek_konsistensi_menangkap_pelanggaran_dari_ontologi():
+    """Pasangan disjoint yang hanya ada di ontologi harus benar-benar diperiksa."""
+    onto = Graph()
+    onto.parse(
+        data="""
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+sdp:StateMuseum owl:disjointWith sdp:PrivateMuseum .
+""",
+        format="turtle",
+    )
+    ttl = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+<https://museumsumatera.id/resource/museum/x> a sdp:StateMuseum, sdp:PrivateMuseum ;
+    sdp:name "Museum X"@id .
+"""
+    pesan = cek_konsistensi(MuseumStore.dari_turtle(data=ttl, ontologi=onto))
+    assert pesan
+    assert any("PrivateMuseum" in p for p in pesan)
+
+
+def test_jelaskan_tipe_memakai_rantai_ontologi():
+    if not ONTO_TTL.exists():
+        pytest.skip("ontology/ tidak ada")
+    rantai = " ".join(jelaskan_tipe(store_penuh(), "museum-negeri-aceh"))
+    assert "StateMuseum" in rantai
+    assert "Museum" in rantai
+
+
+def test_jelaskan_tipe_menelusuri_subclass_yang_hanya_ada_di_ontologi():
+    """Rantai `subClassOf` yang tidak ditulis di data tetap harus terlihat.
+
+    `test_jelaskan_tipe_memakai_rantai_ontologi` tidak bisa menangkap bug ini
+    pada data asli: `data/` kebetulan menulis sendiri `StateMuseum
+    rdfs:subClassOf Museum`. Fixture ini membuat aksiomanya hanya ada di
+    ontologi, jadi penelusuran yang masih membaca `asserted` akan berhenti di
+    langkah pertama dan melaporkan "tidak ada kelas atas tambahan".
+    """
+    onto = Graph()
+    onto.parse(
+        data="""
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+sdp:MuseumDaerah rdfs:subClassOf sdp:StateMuseum .
+sdp:StateMuseum rdfs:subClassOf sdp:Museum .
+""",
+        format="turtle",
+    )
+    ttl = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+<https://museumsumatera.id/resource/museum/x> a sdp:MuseumDaerah ;
+    sdp:name "Museum X"@id .
+"""
+    rantai = " ".join(jelaskan_tipe(MuseumStore.dari_turtle(data=ttl, ontologi=onto), "x"))
+    assert "StateMuseum" in rantai, rantai
+    assert "Museum" in rantai, rantai
+    assert "tidak ada kelas atas tambahan" not in rantai.lower(), rantai
+
+
+def test_subkelas_museum_membaca_subclass_dari_ontologi():
+    """Hierarki kelas juga aksioma: `subClassOf` di ontologi harus terlihat."""
+    onto = Graph()
+    onto.parse(
+        data="""
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+sdp:MuseumDaerah rdfs:subClassOf sdp:Museum .
+""",
+        format="turtle",
+    )
+    ttl = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+<https://museumsumatera.id/resource/museum/x> a sdp:MuseumDaerah ;
+    sdp:name "Museum X"@id .
+"""
+    store = MuseumStore.dari_turtle(data=ttl, ontologi=onto)
+    lokal = {h["lokal"] for h in hierarki_kelas(store, "Museum", "+")}
+    assert "MuseumDaerah" in lokal
+
+
+def test_verifikasi_hierarki_menghitung_individu_dari_data_yang_ditulis():
+    """Jumlah individu tetap dibaca dari `asserted`, bukan dari closure.
+
+    Kalau penghitungannya ikut memakai tipe hasil inferensi, sebuah museum yang
+    hanya ditulis bertipe `StateMuseum` akan terhitung sebagai `PrivateMuseum`
+    juga — angka di `/metode` lalu tidak lagi berarti "berapa yang ditulis".
+    """
+    onto = Graph()
+    onto.parse(
+        data="""
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+sdp:PrivateMuseum rdfs:subClassOf sdp:Museum .
+sdp:StateMuseum rdfs:subClassOf sdp:PrivateMuseum .
+""",
+        format="turtle",
+    )
+    ttl = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+<https://museumsumatera.id/resource/museum/x> a sdp:StateMuseum ;
+    sdp:name "Museum X"@id .
+"""
+    store = MuseumStore.dari_turtle(data=ttl, ontologi=onto)
+    # Prasyarat: `PrivateMuseum` memang terpenuhi lewat inferensi saja.
+    assert (
+        URIRef("https://museumsumatera.id/resource/museum/x"),
+        RDF.type,
+        URIRef("https://museumsumatera.id/ontology#PrivateMuseum"),
+    ) in store.closure
+
+    jumlah = {h["lokal"]: h["individu"] for h in verifikasi_hierarki(store)}
+    assert jumlah["StateMuseum"] == 1
+    assert jumlah["PrivateMuseum"] == 0, "tipe turunan tidak boleh dihitung sebagai data"
