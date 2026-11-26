@@ -13,6 +13,7 @@ mengikuti materi kuliah Web Semantik.
 
 | Materi | Pertemuan | Wujud di proyek ini |
 |---|---|---|
+| JSON-LD & schema.org | P3 | `semweb/jsonld.py`, `<script type="application/ld+json">` di halaman museum |
 | Model triple, URI, Turtle | P6–P7 | `semweb/generator.py`, `semweb/namespace.py` |
 | Ontologi RDFS & OWL | P5 | `ontology/museum-sumatera.ttl`, kelas di `generator.py` |
 | SPARQL SELECT | P9–P10 | `semweb/search.py` (filter di dalam query) |
@@ -80,12 +81,17 @@ pytest
 | `/` | Ringkasan graf dan hirarki kelas museum |
 | `/cari` | Pencarian dengan filter provinsi, tema, era, tahun minimum |
 | `/museum/{slug}` | Satu museum: isi pameran, galeri, benang merah, rantai penalaran |
+| `/peta` | Peta Leaflet 28 museum, saring per provinsi; tanpa JS tetap berupa daftar |
 | `/tanya` | Pertanyaan bahasa Indonesia → SPARQL → guard → jawaban |
 | `/metode` | Asserted vs closure, fakta turunan, konsistensi, skema dari graf |
 | `/api/docs` | Dokumentasi OpenAPI |
 
 API JSON tersedia di `/api/cari`, `/api/museum/{slug}`, `/api/tanya`,
-`/api/metode`, dan `/api/kesehatan`.
+`/api/metode`, dan `/api/kesehatan`. JSON-LD schema.org tersedia di
+`/api/museum/{slug}.jsonld` dan `/api/museum.jsonld` (seluruh museum).
+
+Menjalankan dengan Docker (dari akar repositori): `docker compose up --build`.
+Panduan deploy: [`../docs/deploy.md`](../docs/deploy.md).
 
 ## Cara kerja
 

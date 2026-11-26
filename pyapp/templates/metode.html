@@ -42,7 +42,7 @@
 
 <h2 style="margin-top:32px">Contoh fakta turunan ({{ jumlah_turunan }} total)</h2>
 {% if turunan %}
-<pre><code>{% for f in turunan %}{{ f.subjek_n3 }} {{ f.predikat_n3 }} {{ f.objek_n3 }} .
+<pre tabindex="0"><code>{% for f in turunan %}{{ f.subjek_n3 }} {{ f.predikat_n3 }} {{ f.objek_n3 }} .
 {% endfor %}</code></pre>
 {% else %}
 <p class="meta">
@@ -64,7 +64,7 @@
 
 <h2 style="margin-top:32px">Hirarki kelas</h2>
 <table>
-  <thead><tr><th>Subkelas</th><th>Nama</th><th>Individu</th></tr></thead>
+  <thead><tr><th scope="col">Subkelas</th><th scope="col">Nama</th><th scope="col">Individu</th></tr></thead>
   <tbody>
     {% for s in verifikasi %}
     <tr>
