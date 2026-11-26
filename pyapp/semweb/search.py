@@ -13,51 +13,27 @@ Aturan yang dipegang modul ini:
 
 from __future__ import annotations
 
-import re
 from typing import Any
 
 from rdflib import URIRef
-from rdflib.namespace import RDF
+from rdflib.namespace import RDF, RDFS
 
-from .namespace import RES, SDP
+from .namespace import SDP
+from .sparql import NAMA
+from .sparql import PREFIXES
+from .sparql import bersihkan_kata as _bersihkan_kata
+from .sparql import literal as _literal
 from .store import MuseumStore
 
-PREFIXES = """PREFIX sdp:  <https://museumsumatera.id/ontology#>
-PREFIX res:  <https://museumsumatera.id/resource/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-PREFIX owl:  <http://www.w3.org/2002/07/owl#>
-PREFIX geo:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
-"""
-
-# Karakter yang bisa mengubah struktur query bila lolos ke dalam string SPARQL.
-_BERBAHAYA = re.compile(r'["\\{};<>]|\bUNION\b|\bINSERT\b|\bDELETE\b', re.IGNORECASE)
-
-
-def _bersihkan_kata(teks: str) -> list[str]:
-    """Pecah teks menjadi kata yang aman dipakai di dalam FILTER.
-
-    Kata yang memuat karakter struktural SPARQL dibuang seluruhnya, sehingga
-    upaya menyuntikkan klausa berakhir sebagai pencarian kosong — bukan query
-    yang rusak dan bukan error 500.
-    """
-    if not teks:
-        return []
-    kata: list[str] = []
-    for bagian in teks.split():
-        if _BERBAHAYA.search(bagian):
-            continue
-        bersih = bagian.strip().strip("\"'")
-        if bersih:
-            kata.append(bersih)
-    return kata
-
-
-def _literal(teks: str) -> str:
-    """Bungkus teks sebagai literal SPARQL yang aman."""
-    aman = teks.replace("\\", "\\\\").replace('"', '\\"')
-    return f'"{aman}"'
+__all__ = [
+    "NAMA",
+    "PREFIXES",
+    "cari_museum",
+    "daftar_era",
+    "daftar_provinsi",
+    "daftar_tema",
+    "kueri_cari",
+]
 
 
 def kueri_cari(
@@ -76,11 +52,11 @@ def kueri_cari(
     """
     pola = [
         "  ?museum a sdp:Museum ;",
-        "          sdp:name ?nama .",
-        "  OPTIONAL { ?museum sdp:locatedInCity ?kotaNode . ?kotaNode sdp:name ?kota . }",
-        "  OPTIONAL { ?museum sdp:locatedInProvince ?provNode . ?provNode sdp:name ?provinsi . }",
-        "  OPTIONAL { ?museum sdp:hasTheme ?temaNode . ?temaNode sdp:name ?tema . }",
-        "  OPTIONAL { ?museum sdp:hasEra ?eraNode . ?eraNode sdp:name ?era . }",
+        f"          {NAMA} ?nama .",
+        f"  OPTIONAL {{ ?museum sdp:locatedInCity ?kotaNode . ?kotaNode {NAMA} ?kota . }}",
+        f"  OPTIONAL {{ ?museum sdp:locatedInProvince ?provNode . ?provNode {NAMA} ?provinsi . }}",
+        f"  OPTIONAL {{ ?museum sdp:hasTheme ?temaNode . ?temaNode {NAMA} ?tema . }}",
+        f"  OPTIONAL {{ ?museum sdp:hasEra ?eraNode . ?eraNode {NAMA} ?era . }}",
         "  OPTIONAL { ?museum sdp:establishedYear ?tahun . }",
         "  OPTIONAL { ?museum sdp:description ?deskripsi . }",
     ]
@@ -199,11 +175,16 @@ def daftar_era(store: MuseumStore) -> list[str]:
 
 
 def _nilai_per_kelas(store: MuseumStore, kelas) -> list[str]:
-    """Ambil semua `sdp:name` milik node bertipe `kelas`."""
-    nilai = {
-        str(label)
-        for node in store.asserted.subjects(RDF.type, kelas)
-        for label in store.asserted.objects(node, SDP.name)
-        if label is not None
-    }
+    """Ambil nama milik node bertipe ``kelas``.
+
+    Nama bisa tersimpan sebagai ``sdp:name`` (generator Python) **atau**
+    ``rdfs:label`` (generator RDF/XML). Keduanya dibaca supaya daftar provinsi
+    dan tema tidak kosong tergantung pipeline data yang dipakai.
+    """
+    nilai: set[str] = set()
+    for node in store.asserted.subjects(RDF.type, kelas):
+        for predikat in (SDP.name, RDFS.label):
+            for label in store.asserted.objects(node, predikat):
+                if label is not None:
+                    nilai.add(str(label))
     return sorted(nilai)
