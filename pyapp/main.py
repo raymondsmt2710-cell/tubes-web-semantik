@@ -186,7 +186,7 @@ def beranda(request: Request, store: MuseumStore = Depends(get_store)):
             "provinsi": daftar_provinsi(store),
             "tema": daftar_tema(store),
             "era": daftar_era(store),
-            "jumlah_museum": len(list(store.asserted.subjects(RDF.type, SDP.Museum))),
+            "jumlah_museum": len(set(store.closure.subjects(RDF.type, SDP.Museum))),
             "subkelas": subkelas_museum(store),
         },
     )
@@ -353,10 +353,15 @@ def api_metode(store: MuseumStore = Depends(get_store)):
 
 @app.get("/api/kesehatan")
 def api_kesehatan(store: MuseumStore = Depends(get_store)):
-    """Ringkas untuk memastikan server benar-benar menyajikan graf."""
+    """Ringkas untuk memastikan server benar-benar menyajikan graf.
+
+    Jumlah museum dibaca dari **closure**, bukan dari graf asserted: tipe umum
+    `sdp:Museum` kini diturunkan reasoner dari tipe spesifik (`StateMuseum` dan
+    sejenisnya), jadi di graf asserted jumlahnya nol.
+    """
     return {
         "status": "ok",
         "triple_asserted": len(store.asserted),
         "triple_closure": len(store.closure),
-        "museum": len(list(store.asserted.subjects(RDF.type, SDP.Museum))),
+        "museum": len(set(store.closure.subjects(RDF.type, SDP.Museum))),
     }
