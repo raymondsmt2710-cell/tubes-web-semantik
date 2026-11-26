@@ -7,7 +7,8 @@ perbedaan itu bisa dilihat pengguna — bukan hanya dijelaskan.
 
 from __future__ import annotations
 
-from typing import Any
+from collections import deque
+from typing import Any, NamedTuple
 
 from rdflib import BNode, Literal, URIRef
 from rdflib.namespace import OWL, RDF, RDFS
@@ -115,6 +116,177 @@ def fakta_turunan(
     # isi halaman bergantung pada urutan iterasi yang tidak dijamin stabil.
     hasil.sort(key=lambda f: (f["subjek"], f["predikat"], f["objek"]))
     return hasil[:batas]
+
+
+_URUTAN_ATURAN = ("prp-inv", "prp-symp", "rdfs9", "rdfs11", "rdfs2", "rdfs3")
+
+
+def _kalimat(store: MuseumStore, s, p, o) -> str:
+    """Satu triple premis sebagai kalimat yang bisa dibaca manusia."""
+    return f"{_n3(store, s)} {_n3(store, p)} {_n3(store, o)}"
+
+
+class _Aksioma(NamedTuple):
+    """Indeks aksioma skema, dikunci menurut peran yang dicari.
+
+    Setiap peta dikunci objek yang muncul di **ruas kanan** aksioma (kelas untuk
+    `domain`/`range`, properti tujuan untuk `inverseOf`, subkelas untuk
+    `subClassOf`), karena justifikasi selalu bermula dari fakta lalu mencari
+    aksioma yang cocok dengannya — bukan sebaliknya.
+    """
+
+    inverse: dict[URIRef, set[URIRef]]
+    domain: dict[URIRef, set[URIRef]]
+    rentang: dict[URIRef, set[URIRef]]
+    subkelas: dict[URIRef, set[URIRef]]
+
+
+def _peta_aksioma(premis) -> _Aksioma:
+    """Bangun indeks aksioma sekali, lalu pakai untuk semua aturan."""
+    inverse: dict[URIRef, set[URIRef]] = {}
+    for a, _, b in premis.triples((None, OWL.inverseOf, None)):
+        # Dua arah: `owl:inverseOf` simetris menurut OWL, dan ontologi hanya
+        # menulis satu arah untuk sebagian pasangan.
+        inverse.setdefault(a, set()).add(b)
+        inverse.setdefault(b, set()).add(a)
+
+    domain: dict[URIRef, set[URIRef]] = {}
+    for p, _, c in premis.triples((None, RDFS.domain, None)):
+        domain.setdefault(c, set()).add(p)
+
+    rentang: dict[URIRef, set[URIRef]] = {}
+    for p, _, c in premis.triples((None, RDFS.range, None)):
+        rentang.setdefault(c, set()).add(p)
+
+    subkelas: dict[URIRef, set[URIRef]] = {}
+    for a, _, b in premis.triples((None, RDFS.subClassOf, None)):
+        subkelas.setdefault(a, set()).add(b)
+
+    return _Aksioma(inverse, domain, rentang, subkelas)
+
+
+def _jejak_subkelas(
+    subkelas: dict[URIRef, set[URIRef]], awal: URIRef, target: URIRef
+) -> list[URIRef] | None:
+    """Rantai `subClassOf` terpendek dari `awal` ke `target`, atau None.
+
+    Rantai dikembalikan utuh (termasuk kedua ujungnya) karena pembaca perlu
+    melihat tiap langkah yang dipakai — bukan hanya kesimpulan akhirnya.
+    Pencarian melebar dan berhenti di jalur terpendek supaya `rdfs9` (1 langkah)
+    dan `rdfs11` (≥ 2 langkah) bisa dibedakan tanpa menebak. Induk diurutkan
+    supaya bila ada beberapa jalur sama panjang, yang dilaporkan selalu sama
+    di setiap proses (urutan himpunan tidak dijamin stabil).
+    """
+    antre: deque[list[URIRef]] = deque([[awal]])
+    dilihat: set[URIRef] = {awal}
+    while antre:
+        jalur = antre.popleft()
+        for induk in sorted(subkelas.get(jalur[-1], ()), key=str):
+            if induk == target:
+                return jalur + [induk]
+            if induk not in dilihat:
+                dilihat.add(induk)
+                antre.append(jalur + [induk])
+    return None
+
+
+def aturan_fakta(store: MuseumStore, fakta: dict[str, Any]) -> list[dict[str, Any]]:
+    """Cari aturan penalaran yang menghasilkan satu fakta turunan.
+
+    Setiap aturan yang **premisnya benar-benar ada di `store.premis`** dilaporkan,
+    bukan hanya satu yang dipilih diam-diam: sebuah fakta bisa sah diturunkan
+    lewat dua jalan (misalnya tipe dari `rdfs:domain` sekaligus dari
+    `rdfs:subClassOf`), dan menyembunyikan salah satunya membuat justifikasi di
+    `/metode` tidak bisa diperiksa ulang oleh pembaca.
+
+    `owl:inverseOf` diperlakukan **simetris** karena ontologi hanya menulis satu
+    arah untuk sebagian pasangan (`sdp:hasExhibit owl:inverseOf
+    sdp:exhibitOfMuseum` ada, arah sebaliknya tidak). Semantik OWL memang
+    simetris, jadi peta dibangun dua arah — tanpa itu seluruh fakta `prp-inv`
+    akan tampil sebagai `tidak teridentifikasi`.
+
+    Bila tidak ada aturan yang cocok, kembalikan `tidak teridentifikasi` dengan
+    `premis` kosong: itu alarm jujur bahwa reasoner menghasilkan sesuatu di luar
+    aturan yang kita kenali, bukan alasan untuk menebak.
+    """
+    subjek = URIRef(fakta["subjek"])
+    predikat = URIRef(fakta["predikat"])
+    objek = URIRef(fakta["objek"])
+    premis = store.premis
+    peta = _peta_aksioma(premis)
+
+    hasil: dict[str, list[str]] = {}
+
+    # prp-inv: (P inverseOf Q) + (objek Q subjek) => (subjek P objek).
+    # Kalimat aksiomanya menyebut arah yang **benar-benar tertulis** di premis:
+    # ontologi hanya menulis sebagian pasangan satu arah, jadi menulis arah
+    # sebaliknya berarti mengarang premis yang tidak ada di graf.
+    for q in sorted(peta.inverse.get(predikat, ()), key=str):
+        if (objek, q, subjek) not in premis:
+            continue
+        aksioma = (
+            (predikat, OWL.inverseOf, q)
+            if (predikat, OWL.inverseOf, q) in premis
+            else (q, OWL.inverseOf, predikat)
+        )
+        hasil.setdefault("prp-inv", []).extend(
+            [_kalimat(store, *aksioma), _kalimat(store, objek, q, subjek)]
+        )
+
+    # prp-symp: properti simetris + pasangan terbalik sudah ada.
+    if (predikat, RDF.type, OWL.SymmetricProperty) in premis and (
+        objek,
+        predikat,
+        subjek,
+    ) in premis:
+        hasil.setdefault("prp-symp", []).extend(
+            [
+                _kalimat(store, predikat, RDF.type, OWL.SymmetricProperty),
+                _kalimat(store, objek, predikat, subjek),
+            ]
+        )
+
+    if predikat == RDF.type:
+        # rdfs2: (P domain C) + subjek memakai P => subjek bertipe C.
+        # Setiap aksioma domain yang premisnya terpenuhi dilaporkan; pada data ini
+        # museum memang memakai belasan properti berdomain sdp:Museum, dan
+        # menyembunyikan sebagian akan membuat justifikasinya tidak lengkap.
+        for p in sorted(peta.domain.get(objek, ()), key=str):
+            for nilai in sorted(premis.objects(subjek, p), key=str):
+                hasil.setdefault("rdfs2", []).extend(
+                    [_kalimat(store, p, RDFS.domain, objek), _kalimat(store, subjek, p, nilai)]
+                )
+
+        # rdfs3: (P range C) + ada x P objek => x bertipe C, sehingga objek
+        # (subjek fakta ini) bertipe C bila ia dipakai sebagai objek P.
+        for p in sorted(peta.rentang.get(objek, ()), key=str):
+            for sumber in sorted(premis.subjects(p, subjek), key=str):
+                hasil.setdefault("rdfs3", []).extend(
+                    [_kalimat(store, p, RDFS.range, objek), _kalimat(store, sumber, p, subjek)]
+                )
+
+        # rdfs9 (1 langkah) dan rdfs11 (>= 2 langkah) saling eksklusif: jarak
+        # rantai yang menentukan namanya, bukan tebakan.
+        for tipe in sorted(
+            (t for t in premis.objects(subjek, RDF.type) if isinstance(t, URIRef)), key=str
+        ):
+            jalur = _jejak_subkelas(peta.subkelas, tipe, objek)
+            if not jalur:
+                continue
+            nama = "rdfs9" if len(jalur) == 2 else "rdfs11"
+            kalimat = [_kalimat(store, subjek, RDF.type, tipe)]
+            kalimat.extend(
+                _kalimat(store, kiri, RDFS.subClassOf, kanan)
+                for kiri, kanan in zip(jalur, jalur[1:])
+            )
+            hasil.setdefault(nama, []).extend(kalimat)
+
+    if not hasil:
+        return [{"aturan": "tidak teridentifikasi", "premis": []}]
+
+    return [
+        {"aturan": nama, "premis": hasil[nama]} for nama in _URUTAN_ATURAN if nama in hasil
+    ]
 
 
 def jelaskan_tipe(store: MuseumStore, slug: str) -> list[str]:

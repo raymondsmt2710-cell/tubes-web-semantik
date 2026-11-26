@@ -6,7 +6,7 @@ import pytest
 from rdflib import BNode
 from rdflib.namespace import OWL, RDFS
 
-from semweb.reasoning import fakta_turunan
+from semweb.reasoning import aturan_fakta, fakta_turunan
 from semweb.store import MuseumStore
 
 AKAR = Path(__file__).resolve().parent.parent.parent
@@ -112,3 +112,48 @@ res:museum_a owl:sameAs res:museum_b .
     store = MuseumStore.dari_turtle(data=ttl)
     predikat = {f["predikat"] for f in fakta_turunan(store, batas=10_000)}
     assert not any(p.endswith("sameAs") for p in predikat)
+
+
+def _fakta(store, predikat_akhir, objek_akhir=None):
+    for f in fakta_turunan(store, batas=10_000):
+        if f["predikat"].endswith(predikat_akhir) and (
+            objek_akhir is None or f["objek"].endswith(objek_akhir)
+        ):
+            return f
+    raise AssertionError(f"tidak ada fakta {predikat_akhir}")
+
+
+def test_aturan_prp_inv_dikenali():
+    store = store_penuh()
+    f = _fakta(store, "exhibitOfMuseum")
+    aturan = [a["aturan"] for a in aturan_fakta(store, f)]
+    assert "prp-inv" in aturan
+
+
+def test_aturan_rdfs2_dikenali():
+    """rdfs2 dari domain imageUrl yang salah domain (bug ontologi, lihat brief)."""
+    store = store_penuh()
+    f = _fakta(store, "#type", "#Museum")
+    aturan = [a["aturan"] for a in aturan_fakta(store, f)]
+    assert "rdfs2" in aturan
+
+
+def test_aturan_rdfs9_dikenali():
+    store = store_penuh()
+    for f in fakta_turunan(store, batas=10_000):
+        if f["predikat"].endswith("#type") and f["objek"].endswith("#Museum"):
+            if "rdfs9" in {a["aturan"] for a in aturan_fakta(store, f)}:
+                return
+    raise AssertionError("tidak ada fakta yang diatribusikan ke rdfs9")
+
+
+def test_semua_312_fakta_teratribusi():
+    """Tidak boleh ada fakta yang lolos tanpa aturan: itu berarti reasoner
+    menghasilkan sesuatu di luar keenam aturan yang kita kenali."""
+    store = store_penuh()
+    tanpa = [
+        f
+        for f in fakta_turunan(store, batas=10_000)
+        if [a["aturan"] for a in aturan_fakta(store, f)] == ["tidak teridentifikasi"]
+    ]
+    assert tanpa == [], f"{len(tanpa)} fakta tanpa justifikasi, contoh: {tanpa[:2]}"
