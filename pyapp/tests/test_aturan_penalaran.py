@@ -3,7 +3,7 @@
 from pathlib import Path
 
 import pytest
-from rdflib import BNode
+from rdflib import BNode, Graph
 from rdflib.namespace import OWL, RDFS
 
 from semweb.reasoning import aturan_fakta, fakta_turunan
@@ -157,3 +157,101 @@ def test_semua_312_fakta_teratribusi():
         if [a["aturan"] for a in aturan_fakta(store, f)] == ["tidak teridentifikasi"]
     ]
     assert tanpa == [], f"{len(tanpa)} fakta tanpa justifikasi, contoh: {tanpa[:2]}"
+
+
+# --- Tiga aturan yang tidak pernah muncul di data asli -----------------------
+#
+# `prp-symp`, `rdfs3`, dan `rdfs11` tidak punya satu pun contoh di data 28
+# museum (tidak ada properti simetris yang dipakai, tidak ada properti ber-range
+# yang dipakai, tidak ada rantai subClassOf >= 2 langkah yang menghasilkan
+# fakta). Tanpa test di bawah ini, salah ketik pada cabang tersebut tidak akan
+# pernah ketahuan — dan justru cabang itulah yang paling mudah salah.
+
+
+def _aturan_dari(ttl: str, onto: str = "") -> set[str]:
+    onto_graph = Graph()
+    if onto:
+        onto_graph.parse(data=onto, format="turtle")
+    store = MuseumStore.dari_turtle(data=ttl, ontologi=onto_graph)
+    nama: set[str] = set()
+    for f in fakta_turunan(store, batas=10_000):
+        nama.update(a["aturan"] for a in aturan_fakta(store, f))
+    return nama
+
+
+def test_aturan_prp_symp_dikenali():
+    """Properti bertipe owl:SymmetricProperty + pasangan terbalik -> prp-symp."""
+    ttl = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix res: <https://museumsumatera.id/resource/> .
+
+res:museum_a a sdp:Museum ; sdp:name "A"@id .
+res:museum_b a sdp:Museum ; sdp:name "B"@id .
+res:museum_a sdp:relatedMuseum res:museum_b .
+"""
+    onto = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+sdp:relatedMuseum a owl:SymmetricProperty .
+"""
+    assert "prp-symp" in _aturan_dari(ttl, onto)
+
+
+def test_aturan_rdfs3_dikenali():
+    """(P range C) + ada x P subjek -> subjek bertipe C."""
+    ttl = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix res: <https://museumsumatera.id/resource/> .
+
+res:pameran_1 a sdp:Exhibit ; sdp:exhibitTitle "Lonceng"@id .
+res:museum_a a sdp:Museum ; sdp:hasExhibit res:pameran_1 .
+"""
+    onto = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+sdp:hasExhibit rdfs:range sdp:Museum .
+"""
+    assert "rdfs3" in _aturan_dari(ttl, onto)
+
+
+def test_aturan_rdfs11_dikenali():
+    """Rantai subClassOf dua langkah harus dilaporkan sebagai rdfs11."""
+    ttl = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix res: <https://museumsumatera.id/resource/> .
+
+res:museum_a a sdp:MuseumDaerah ; sdp:name "A"@id .
+"""
+    onto = """
+@prefix sdp: <https://museumsumatera.id/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+sdp:MuseumDaerah rdfs:subClassOf sdp:StateMuseum .
+sdp:StateMuseum rdfs:subClassOf sdp:Museum .
+"""
+    onto_graph = Graph()
+    onto_graph.parse(data=onto, format="turtle")
+    store = MuseumStore.dari_turtle(data=ttl, ontologi=onto_graph)
+
+    # Fakta yang HANYA bisa dicapai lewat rantai dua langkah: museum bertipe
+    # sdp:Museum, padahal tipe tertulisnya sdp:MuseumDaerah.
+    fakta_museum = [
+        f
+        for f in fakta_turunan(store, batas=10_000)
+        if f["predikat"].endswith("#type") and f["objek"].endswith("#Museum")
+    ]
+    assert fakta_museum, "harus ada fakta tipe sdp:Museum"
+    aturan = {a["aturan"] for f in fakta_museum for a in aturan_fakta(store, f)}
+    assert "rdfs11" in aturan
+
+
+def test_kalimat_premis_tidak_mengulang_aksioma():
+    """Museum dengan banyak tema tidak boleh mengulang kalimat domain yang sama."""
+    store = store_penuh()
+    for f in fakta_turunan(store, batas=10_000):
+        if not (f["predikat"].endswith("#type") and f["objek"].endswith("#Museum")):
+            continue
+        for a in aturan_fakta(store, f):
+            if a["aturan"] != "rdfs2":
+                continue
+            assert len(a["premis"]) == len(set(a["premis"])), a["premis"]
+            return

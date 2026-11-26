@@ -49,11 +49,22 @@ def perbandingan(store: MuseumStore) -> dict[str, int]:
 
 
 def _n3(store: MuseumStore, node) -> str:
-    """Tulis node dalam notasi berprefiks agar mudah dibaca manusia."""
+    """Tulis node dalam notasi berprefiks agar mudah dibaca manusia.
+
+    `normalizeUri` tidak bisa dipakai apa adanya: `rdflib` hanya mau menyingkat
+    IRI bila sisa setelah prefiks adalah nama lokal yang sah (tanpa `/`). IRI
+    seperti `res:museum/museum-adityawarman` punya sisa `museum/museum-...`,
+    sehingga rdflib menyerah dan mengembalikan IRI penuh — persis yang membuat
+    justifikasi di `/metode` sulit dibaca. Karena itu `res:` dipotong manual.
+    """
     if isinstance(node, Literal):
         return f'"{node}"'
+    if isinstance(node, URIRef):
+        teks = str(node)
+        if teks.startswith(str(RES)):
+            return f"res:{teks[len(str(RES)):]}"
     try:
-        return store.asserted.namespace_manager.normalizeUri(node)
+        return store.premis.namespace_manager.normalizeUri(node)
     except Exception:
         return str(node)
 
@@ -251,11 +262,16 @@ def aturan_fakta(store: MuseumStore, fakta: dict[str, Any]) -> list[dict[str, An
         # Setiap aksioma domain yang premisnya terpenuhi dilaporkan; pada data ini
         # museum memang memakai belasan properti berdomain sdp:Museum, dan
         # menyembunyikan sebagian akan membuat justifikasinya tidak lengkap.
+        #
+        # Satu saksi per properti, bukan per nilai: museum dengan tiga tema akan
+        # mengulang kalimat aksioma yang sama tiga kali tanpa menambah informasi.
         for p in sorted(peta.domain.get(objek, ()), key=str):
-            for nilai in sorted(premis.objects(subjek, p), key=str):
-                hasil.setdefault("rdfs2", []).extend(
-                    [_kalimat(store, p, RDFS.domain, objek), _kalimat(store, subjek, p, nilai)]
-                )
+            nilai = next(iter(sorted(premis.objects(subjek, p), key=str)), None)
+            if nilai is None:
+                continue
+            hasil.setdefault("rdfs2", []).extend(
+                [_kalimat(store, p, RDFS.domain, objek), _kalimat(store, subjek, p, nilai)]
+            )
 
         # rdfs3: (P range C) + ada x P objek => x bertipe C, sehingga objek
         # (subjek fakta ini) bertipe C bila ia dipakai sebagai objek P.
