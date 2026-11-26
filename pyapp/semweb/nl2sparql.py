@@ -114,14 +114,21 @@ def skema_graf(store: MuseumStore) -> Skema:
 
 
 def kosakata(store: MuseumStore) -> set[str]:
-    """Semua IRI yang boleh dipakai: isi graf ditambah kosakata standar."""
+    """Semua IRI yang boleh dipakai: isi graf ditambah kosakata standar.
+
+    Prefiks namespace ikut dimasukkan. Sebelumnya hanya IRI yang muncul sebagai
+    triple yang dihitung, sehingga ``FROM <https://museumsumatera.id/ontology#>``
+    — alamat yang sah dan dipakai proyek sendiri — ditolak sebagai "IRI tidak
+    dikenal". Namespace adalah nama graf, bukan triple, dan tetap harus diterima.
+    """
     BAKU = {
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
         "http://www.w3.org/2000/01/rdf-schema#label",
         "http://www.w3.org/2000/01/rdf-schema#subClassOf",
     }
     isi = {str(x) for triple in store.asserted for x in triple if isinstance(x, URIRef)}
-    return isi | BAKU | set(skema_graf(store).semua_iri())
+    prefiks = set(PREFIX_MAP.values())
+    return isi | BAKU | prefiks | set(skema_graf(store).semua_iri())
 
 
 # ---------------------------------------------------------------- intent
@@ -638,6 +645,55 @@ def _slice_di(algebra: Any) -> tuple[list[Any], int]:
     return hasil, subquery
 
 
+def _klausa_terlarang(algebra: Any) -> str | None:
+    """Cari klausa dataset/federasi yang tidak boleh dipakai pengguna.
+
+    Dua bentuk ditolak, dan alasannya berbeda:
+
+    - ``GRAPH <iri>`` dan ``SERVICE <iri>`` sudah tertangkap pemeriksaan IRI
+      asing, tetapi hanya bila IRI-nya tidak dikenal. Yang tidak tertangkap
+      adalah bentuk **variabel**: ``GRAPH ?g`` dan ``SERVICE ?v`` tidak punya
+      IRI sama sekali, sehingga pemeriksaan keempat tidak melihat apa pun.
+    - ``SERVICE ?v`` paling berbahaya: variabel bisa terikat ke endpoint luar,
+      dan query menghubungi server di luar kendali aplikasi. Untuk aplikasi yang
+      hanya membaca satu graf lokal, tidak ada alasan sah memakai SERVICE.
+
+    Mengembalikan nama klausa yang ditemukan, atau ``None`` bila bersih.
+    """
+    ditemukan: list[str] = []
+
+    def jalan(node: Any, kedalaman: int = 0) -> None:
+        if node is None or kedalaman > 40 or ditemukan:
+            return
+
+        nama = getattr(node, "name", None)
+        if nama == "ServiceGraphPattern":
+            # SERVICE dengan IRI tetap sudah tertangkap pemeriksaan IRI asing di
+            # bawah. Yang perlu ditolak di sini adalah bentuk variabel, karena
+            # tidak ada IRI untuk diperiksa.
+            istilah = node.get("term") if hasattr(node, "get") else None
+            if not isinstance(istilah, URIRef):
+                ditemukan.append("SERVICE")
+                return
+        elif nama == "Graph":
+            istilah = node.get("term") if hasattr(node, "get") else None
+            if not isinstance(istilah, URIRef):
+                ditemukan.append("GRAPH")
+                return
+
+        if hasattr(node, "values"):
+            for nilai in node.values():
+                jalan(nilai, kedalaman + 1)
+            return
+
+        if isinstance(node, (list, tuple, set)):
+            for item in node:
+                jalan(item, kedalaman + 1)
+
+    jalan(algebra)
+    return ditemukan[0] if ditemukan else None
+
+
 def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]:
     """Guard: periksa query **sebelum** dijalankan (P13 bagian 16).
 
@@ -669,6 +725,19 @@ def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]
     nama = getattr(algebra, "name", "")
     if nama != "SelectQuery":
         return False, f"hanya SELECT (ditemukan {nama or 'bukan query'})"
+
+    # Pemeriksaan IRI asing dijalankan lebih dulu: bila ada IRI asing, pesan itu
+    # lebih spesifik dan lebih berguna daripada pesan bentuk klausa.
+    dikenal = kosakata(store)
+    asing = sorted({str(i) for i in _iri_di(algebra) if str(i) not in dikenal})
+    if asing:
+        return False, "IRI tidak dikenal: " + ", ".join(asing)
+
+    terlarang = _klausa_terlarang(algebra)
+    if terlarang == "SERVICE":
+        return False, "SERVICE tidak diizinkan: query hanya boleh membaca graf lokal"
+    if terlarang == "GRAPH":
+        return False, "GRAPH harus memakai IRI tetap, bukan variabel"
 
     potongan, jumlah_subquery = _slice_di(algebra)
     if not potongan:
@@ -702,11 +771,6 @@ def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]
                 return False, "OFFSET harus bilangan bulat"
             if nilai_mulai > maks:
                 return False, f"OFFSET {nilai_mulai} melebihi batas {maks}"
-
-    dikenal = kosakata(store)
-    asing = sorted({str(i) for i in _iri_di(algebra) if str(i) not in dikenal})
-    if asing:
-        return False, "IRI tidak dikenal: " + ", ".join(asing)
 
     return True, "ok"
 
