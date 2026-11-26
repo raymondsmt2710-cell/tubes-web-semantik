@@ -26,7 +26,7 @@ Yang terjadi saat build (`pyapp/Dockerfile`):
 4. Menjalankan uvicorn sebagai pengguna non-root di port `$PORT` (default 8000).
 
 Permintaan pertama butuh beberapa detik karena closure OWL-RL dihitung saat itu
-(3.625 → 6.757 triple). Permintaan berikutnya cepat.
+(beberapa ribu triple). Permintaan berikutnya cepat.
 
 Tanpa compose, perintah setaranya:
 
@@ -42,7 +42,8 @@ docker run --rm -p 8000:8000 museum-sumatera
 
 ```bash
 curl http://localhost:8000/api/kesehatan
-# {"status":"ok","triple_asserted":3625,"triple_closure":6757,"museum":28}
+# {"status":"ok","triple_asserted":...,"triple_closure":...,"museum":28}
+# Angka triple berubah setiap data diperbarui; yang penting "museum": 28.
 ```
 
 ## 2. Variabel lingkungan
