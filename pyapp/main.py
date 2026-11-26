@@ -15,6 +15,7 @@ Peta ke materi kuliah:
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 from typing import Any, Iterator
 
@@ -204,7 +205,16 @@ def _benar(nilai: Any) -> bool:
     return teks not in ("false", "0", "", "no", "tidak")
 
 
+# Slug hanya boleh memuat huruf kecil, angka, dan tanda hubung. Batas ini
+# mencegah slug dari URL (yang bisa berisi apa saja) masuk ke `URIRef` mentah —
+# rdflib akan memperingatkan IRI tidak sah untuk input seperti "'; DROP".
+_SLUG_SAH = re.compile(r"^[a-z0-9][a-z0-9-]{0,119}$")
+
+
 def _museum_iri(store: MuseumStore, slug: str) -> URIRef | None:
+    """Cari IRI museum dari slug, atau ``None`` bila slug tidak sah/tidak ada."""
+    if not slug or not _SLUG_SAH.match(slug):
+        return None
     iri = URIRef(f"{RES}museum/{slug}")
     if (iri, RDF.type, None) in store.asserted:
         return iri

@@ -24,7 +24,19 @@ TTL = """
 <https://museumsumatera.id/resource/museum/a> a sdp:StateMuseum ;
     sdp:name "Museum A"@id ;
     sdp:establishedYear "1915"^^xsd:gYear ;
-    sdp:collectionSize 100 .
+    sdp:collectionSize 100 ;
+    sdp:hasExhibit res:exhibit-a ;
+    sdp:hasImage res:image-a .
+
+res:exhibit-a a sdp:Exhibit ;
+    sdp:exhibitIndex 1 ;
+    sdp:exhibitTitle "Lonceng A"@id .
+
+res:image-a a sdp:Image ;
+    sdp:imageIndex 1 ;
+    sdp:imageTitle "Foto A"@id ;
+    sdp:imageSource "https://contoh.id/foto.jpg"^^xsd:anyURI .
+
 sdp:StateMuseum rdfs:subClassOf sdp:Museum .
 sdp:Museum rdfs:subClassOf owl:Thing .
 """
@@ -65,13 +77,10 @@ def test_exhibit_highlight_string_false_tidak_dibaca_true():
     """`Literal("false")` bernilai truthy di Python; harus dibaca sebagai False."""
     from main import _museum_dto
 
-    ttl = TTL + """
-res:ex a sdp:Exhibit ;
-    sdp:exhibitIndex 1 ;
-    sdp:exhibitTitle "Bukan andalan"@id ;
-    sdp:exhibitHighlight "false"^^xsd:boolean .
-<https://museumsumatera.id/resource/museum/a> sdp:hasExhibit res:ex .
-"""
+    ttl = TTL.replace(
+        'sdp:exhibitTitle "Lonceng A"@id .',
+        'sdp:exhibitTitle "Lonceng A"@id ;\n    sdp:exhibitHighlight "false"^^xsd:boolean .',
+    )
     s = MuseumStore.dari_turtle(data=ttl)
     dto = _museum_dto(s, URIRef(f"{RES}museum/a"))
     assert dto["exhibits"][0]["andalan"] is False
@@ -80,13 +89,10 @@ res:ex a sdp:Exhibit ;
 def test_exhibit_highlight_true_dibaca_true():
     from main import _museum_dto
 
-    ttl = TTL + """
-res:ex a sdp:Exhibit ;
-    sdp:exhibitIndex 1 ;
-    sdp:exhibitTitle "Andalan"@id ;
-    sdp:exhibitHighlight true .
-<https://museumsumatera.id/resource/museum/a> sdp:hasExhibit res:ex .
-"""
+    ttl = TTL.replace(
+        'sdp:exhibitTitle "Lonceng A"@id .',
+        'sdp:exhibitTitle "Lonceng A"@id ;\n    sdp:exhibitHighlight true .',
+    )
     s = MuseumStore.dari_turtle(data=ttl)
     dto = _museum_dto(s, URIRef(f"{RES}museum/a"))
     assert dto["exhibits"][0]["andalan"] is True
@@ -155,3 +161,43 @@ sdp:PrivateMuseum rdfs:subClassOf sdp:Museum .
 
 def test_cek_konsistensi_masih_kosong_untuk_graf_sehat(store):
     assert cek_konsistensi(store) == []
+
+
+# --- temuan tambahan: jawaban yang menyesatkan ---------------------------
+
+
+def test_daftar_pameran_tanpa_jangkar_melaporkan_jumlah_sebenarnya(store):
+    """Daftar yang dipotong LIMIT tidak boleh tampak seperti jumlah total.
+
+    "pameran" tanpa penyebut museum mengembalikan baris pertama sampai batas;
+    kalimatnya harus menyebut bahwa hasil dipotong, bukan menyatakan angka itu
+    sebagai jumlah keseluruhan.
+    """
+    from semweb.nl2sparql import MAKS_LIMIT, jawab
+
+    hasil = jawab("pameran", store)
+    assert hasil.lolos is True, hasil.pesan
+    assert len(hasil.baris) <= MAKS_LIMIT
+    if len(hasil.baris) == MAKS_LIMIT:
+        teks = hasil.jawaban.lower()
+        assert "pertama" in teks or "dipotong" in teks or "batas" in teks, hasil.jawaban
+
+
+def test_nama_tidak_ditemukan_bukan_galeri(store):
+    """Satuan jawaban untuk topik galeri adalah "foto", bukan "galeri"."""
+    from semweb.nl2sparql import jawab
+
+    hasil = jawab("foto apa saja di Museum Negeri Aceh?", store)
+    assert hasil.lolos is True, hasil.pesan
+    assert "galeri" not in hasil.jawaban.lower()
+
+
+def test_pertanyaan_alamat_tanpa_jangkar_tidak_menjawab_satu_museum(store):
+    """Menanyakan "alamat museum" tanpa menyebut museum mana pun tidak bisa
+    dijawab dengan satu museum acak — harus menyebut bahwa perlu nama museum."""
+    from semweb.nl2sparql import jawab
+
+    hasil = jawab("berapa alamat museum?", store)
+    teks = hasil.jawaban.lower()
+    assert "sebutkan" in teks or "nama museum" in teks or "tidak" in teks
+

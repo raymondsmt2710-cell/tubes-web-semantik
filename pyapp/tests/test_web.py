@@ -100,6 +100,34 @@ def test_museum_tidak_dikenal_404(client):
     assert client.get("/museum/tidak-ada").status_code == 404
 
 
+@pytest.mark.parametrize(
+    "slug",
+    [
+        "'; DROP",
+        "museum/'; DROP",
+        "../../etc/passwd",
+        "museum aceh",
+        "Museum-Negeri-Aceh",
+        "a" * 200,
+        "<script>",
+        "museum%00",
+    ],
+)
+def test_slug_tidak_sah_ditolak_tanpa_membentuk_iri(client, slug):
+    """Slug dari URL tidak boleh masuk ke `URIRef` mentah.
+
+    Tanpa validasi, rdflib memperingatkan "does not look like a valid URI" dan
+    IRI sampah ikut dibuat — jalur yang tidak perlu ada untuk data yang slug-nya
+    selalu huruf kecil dan tanda hubung.
+    """
+    assert client.get(f"/museum/{slug}").status_code == 404
+    assert client.get(f"/api/museum/{slug}").status_code == 404
+
+
+def test_slug_sah_tetap_diterima(client):
+    assert client.get("/museum/aceh").status_code == 200
+
+
 def test_halaman_museum_menampilkan_isi_pameran_dan_galeri(client):
     r = client.get("/museum/aceh")
     assert r.status_code == 200

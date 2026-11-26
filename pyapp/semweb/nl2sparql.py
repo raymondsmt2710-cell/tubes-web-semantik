@@ -863,6 +863,18 @@ def _rangkai(pertanyaan: str, baris: list[Any], niat: Intent | None = None) -> s
             "address": "alamat",
             "collectionSize": "ukuran koleksi",
         }.get(niat.atribut or "", "nilai")
+        # Menjawab satu museum acak untuk pertanyaan "alamat museum?" menyesatkan:
+        # pengguna tidak tahu museum mana yang dijawab.
+        if niat.jangkar is None and len(baris) > 1:
+            nama = str(baris[0][1]) if len(baris[0]) > 1 else "-"
+            return (
+                f"Ada {len(baris)} museum dengan data {label}. "
+                f"Contoh: {nama} — {nilai}. "
+                "Sebutkan nama museum untuk jawaban yang pasti."
+            )
+        if niat.jangkar is None and len(baris) == 1:
+            nama = str(baris[0][1]) if len(baris[0]) > 1 else "-"
+            return f"{label.capitalize()} {nama} menurut graf: {nilai}."
         return f"{label.capitalize()} menurut graf: {nilai}."
 
     if niat.topik in ("pameran", "galeri"):
@@ -872,11 +884,21 @@ def _rangkai(pertanyaan: str, baris: list[Any], niat: Intent | None = None) -> s
             for r in baris
             if r and r[-1] is not None and not str(r[-1]).startswith("http")
         ]
+        # Satuan harus mengikuti apa yang dilihat pengunjung: topik "galeri"
+        # isinya foto, bukan "galeri".
+        satuan = {"pameran": "pameran", "galeri": "foto"}.get(niat.topik, niat.topik)
         tampil = judul[:10]
         sisa = len(judul) - len(tampil)
-        teks = f"Ditemukan {len(judul)} {niat.topik}: " + "; ".join(tampil)
+        teks = f"Ditemukan {len(judul)} {satuan}: " + "; ".join(tampil)
         if sisa > 0:
             teks += f"; dan {sisa} lainnya"
+        # Bila hasil menyentuh batas LIMIT, jumlah sebenarnya bisa lebih besar.
+        # Menyebutnya "Ditemukan N" akan menyesatkan.
+        if jumlah >= MAKS_LIMIT:
+            teks += (
+                f" (baris pertama sampai batas {MAKS_LIMIT}; "
+                "sebutkan nama museum untuk mempersempit)"
+            )
         return teks + "."
 
     if jumlah == 1:
