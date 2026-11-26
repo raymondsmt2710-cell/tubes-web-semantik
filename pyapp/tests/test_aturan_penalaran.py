@@ -488,6 +488,18 @@ def test_contoh_berupa_kalimat_n3_berprefiks():
         assert c in kalimat, f"contoh bukan fakta turunan: {c}"
         assert not c.startswith("<") and not c.startswith("("), c
 
+    # Contoh harus berasal dari putaran yang informatif, bukan ditempel ke putaran
+    # lain: putaran tanpa fakta informatif tidak boleh menyertakan contoh sama sekali.
+    for langkah in _langkah_penuh():
+        if langkah["informatif"] == 0:
+            assert langkah["contoh"] == [], (
+                f"putaran {langkah['putaran']} tidak informatif tetapi menyertakan contoh"
+            )
+        else:
+            assert langkah["contoh"], (
+                f"putaran {langkah['putaran']} informatif tetapi tanpa contoh"
+            )
+
 
 def test_langkah_penalaran_tidak_memutasi_store():
     """Graf store tidak boleh ikut diperluas oleh `expand()`.

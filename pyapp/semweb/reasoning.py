@@ -215,6 +215,10 @@ def langkah_penalaran(
     Pemanggil membedakan "fixpoint tercapai" dari "batas tercapai" hanya lewat
     `mentah` elemen terakhir, jadi putaran terakhir sah bernilai > 0 bila
     `batas_putaran` habis lebih dulu.
+
+    `batas_putaran <= 0` mengembalikan daftar **kosong**: tidak ada putaran yang
+    diminta, jadi tidak ada elemen terakhir yang bisa dibaca pemanggil. Pemanggil
+    yang menampilkan "fixpoint tercapai" harus menangani daftar kosong itu.
     """
     graf = Graph()
     # Prefiks aplikasi ikut dibawa walau `expand()` tidak membutuhkannya: graf ini
