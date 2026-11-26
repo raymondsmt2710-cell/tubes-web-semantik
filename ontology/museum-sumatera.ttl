@@ -81,6 +81,21 @@ sdp:HeritageStatus a owl:Class ;
     rdfs:label "Status Cagar Budaya"@id ;
     rdfs:comment "Status penetapan cagar budaya."@id .
 
+# Kelas isi museum. Ketiganya dipakai generator sejak awal (114 pameran,
+# 66 foto, 32 sumber), tetapi baru didaftarkan di sini supaya ontologi tidak
+# lagi memuat individu bertipe kelas yang tidak pernah dideklarasikan.
+sdp:Exhibit a owl:Class ;
+    rdfs:label "Isi Pameran"@id ;
+    rdfs:comment "Satu benda atau bagian pameran di dalam museum."@id .
+
+sdp:Image a owl:Class ;
+    rdfs:label "Foto Galeri"@id ;
+    rdfs:comment "Satu foto galeri beserta kredit dan lisensinya."@id .
+
+sdp:Source a owl:Class ;
+    rdfs:label "Sumber Acuan"@id ;
+    rdfs:comment "Rujukan yang dipakai menyusun catatan sebuah museum."@id .
+
 # Restriction cardinality pada Museum
 sdp:Museum
     rdfs:subClassOf [
@@ -207,21 +222,46 @@ sdp:hasExhibit a owl:ObjectProperty ;
     rdfs:label "memiliki isi pameran"@id ;
     owl:inverseOf sdp:exhibitOfMuseum .
 
+# Pasangan invers di bawah ini dideklarasikan supaya setiap IRI yang muncul
+# sebagai objek owl:inverseOf benar-benar ada di ontologi. Mengikuti README,
+# properti ber-inverse TIDAK menyimpan rdfs:domain/rdfs:range eksplisit agar
+# graf tetap konsisten di bawah OWL 2 RL — lihat pola yang sudah dipakai
+# pasangan hasImage/imageOfMuseum di atas.
+sdp:exhibitOfMuseum a owl:ObjectProperty ;
+    rdfs:label "pameran milik museum"@id ;
+    owl:inverseOf sdp:hasExhibit .
+
 sdp:hasSource a owl:ObjectProperty ;
     rdfs:label "memiliki sumber acuan"@id ;
     owl:inverseOf sdp:sourceOfMuseum .
+
+sdp:sourceOfMuseum a owl:ObjectProperty ;
+    rdfs:label "sumber acuan milik museum"@id ;
+    owl:inverseOf sdp:hasSource .
 
 sdp:hasCollection a owl:ObjectProperty ;
     rdfs:label "memiliki koleksi"@id ;
     owl:inverseOf sdp:collectionOfMuseum .
 
+sdp:collectionOfMuseum a owl:ObjectProperty ;
+    rdfs:label "koleksi milik museum"@id ;
+    owl:inverseOf sdp:hasCollection .
+
 sdp:hasFacility a owl:ObjectProperty ;
     rdfs:label "memiliki fasilitas"@id ;
     owl:inverseOf sdp:facilityOfMuseum .
 
+sdp:facilityOfMuseum a owl:ObjectProperty ;
+    rdfs:label "fasilitas milik museum"@id ;
+    owl:inverseOf sdp:hasFacility .
+
 sdp:hasFounder a owl:ObjectProperty ;
     rdfs:label "memiliki pendiri"@id ;
     owl:inverseOf sdp:founderOfMuseum .
+
+sdp:founderOfMuseum a owl:ObjectProperty ;
+    rdfs:label "pendiri museum"@id ;
+    owl:inverseOf sdp:hasFounder .
 
 sdp:hasCurator a owl:ObjectProperty ;
     rdfs:label "memiliki kurator"@id ;
@@ -232,10 +272,18 @@ sdp:namedAfter a owl:ObjectProperty ;
     rdfs:label "dinamai menurut"@id ;
     owl:inverseOf sdp:isNamesakeOfMuseum .
 
+sdp:isNamesakeOfMuseum a owl:ObjectProperty ;
+    rdfs:label "menjadi asal nama museum"@id ;
+    owl:inverseOf sdp:namedAfter .
+
 sdp:heritageStatusOf a owl:ObjectProperty ;
     rdfs:label "status cagar budaya"@id ;
     owl:inverseOf sdp:isHeritageStatusOf ;
     a owl:FunctionalProperty .
+
+sdp:isHeritageStatusOf a owl:ObjectProperty ;
+    rdfs:label "status cagar budaya milik"@id ;
+    owl:inverseOf sdp:heritageStatusOf .
 
 sdp:relatedMuseum a owl:ObjectProperty , owl:SymmetricProperty ;
     rdfs:label "museum terkait"@id ;
@@ -273,6 +321,38 @@ sdp:personName a owl:DatatypeProperty ;
     rdfs:label "nama tokoh"@id ;
     rdfs:domain sdp:Person ;
     rdfs:range xsd:string .
+
+# `sdp:name` adalah label entitas yang dipakai generator Python untuk semua
+# kelas (museum, provinsi, kota, tema, era, bab, koleksi, fasilitas, pameran,
+# foto, sumber). `rdfs:label` tetap dipakai generator RDF/XML, dan kueri
+# membaca keduanya lewat pola `NAMA` di semweb/sparql.py. Tanpa domain/range
+# yang longgar, satu properti ini akan tampak melanggar untuk kelas mana pun
+# yang bukan Museum.
+sdp:name a owl:DatatypeProperty ;
+    rdfs:label "nama entitas"@id ;
+    rdfs:comment "Label manusiawi sebuah entitas; dipakai semua kelas."@id ;
+    rdfs:range xsd:string .
+
+sdp:history a owl:DatatypeProperty ;
+    rdfs:label "sejarah museum"@id ;
+    rdfs:comment "Catatan sejarah museum dalam bentuk paragraf."@id ;
+    rdfs:domain sdp:Museum ;
+    rdfs:range xsd:string .
+
+sdp:sourceIndex a owl:DatatypeProperty ;
+    rdfs:label "urutan sumber acuan"@id ;
+    rdfs:domain sdp:Source ;
+    rdfs:range xsd:integer .
+
+sdp:sourceLabel a owl:DatatypeProperty ;
+    rdfs:label "label sumber acuan"@id ;
+    rdfs:domain sdp:Source ;
+    rdfs:range xsd:string .
+
+sdp:sourceUrl a owl:DatatypeProperty ;
+    rdfs:label "tautan sumber acuan"@id ;
+    rdfs:domain sdp:Source ;
+    rdfs:range xsd:anyURI .
 
 sdp:heritageLabel a owl:DatatypeProperty ;
     rdfs:label "label status cagar budaya"@id ;
