@@ -334,7 +334,7 @@ test regresi di `pyapp/tests/test_rencana_regresi.py`.
 ### R2 Subquery tiga level di guard
 
 Guard menolak subquery tanpa `LIMIT` pada dua level. Belum diuji tiga level.
-Pemilik: **Orang B** (berkas `nl2sparql.py` milik Orang C — minta izin dulu).
+Pemilik: **Ryan F** (berkas `nl2sparql.py` milik Ryan D — minta izin dulu).
 
 ### R3 Jangkar meleset untuk nama museum yang pendek — **BUG, perlu diperbaiki**
 
@@ -342,18 +342,18 @@ Pemilik: **Orang B** (berkas `nl2sparql.py` milik Orang C — minta izin dulu).
 bukan museum. Museum bernama "Museum Negeri Aceh" tidak ikut terpilih karena
 pencarian menuntut label lengkap muncul di teks.
 
-Pemilik: **Orang C** (berkas `graphrag.py`).
+Pemilik: **Ryan D** (berkas `graphrag.py`).
 
 ### R4 Data tahun berbentuk tanggal
 
 `_tahun_dari()` di `main.py` sudah aman, tetapi `search.py` belum menangani
 `establishedYear` berbentuk `"1915-01-01"`. Belum ada di data, tetapi bisa muncul
-bila data diperluas. Pemilik: **Orang A**.
+bila data diperluas. Pemilik: **Alvin**.
 
 ### R5 Fuseki mati saat halaman dibuka
 
 Aplikasi Python **tidak** bergantung Fuseki (membaca Turtle langsung), jadi tetap
-jalan. Aplikasi TypeScript bergantung Fuseki; perlu pesan jelas. Pemilik: **Orang D**.
+jalan. Aplikasi TypeScript bergantung Fuseki; perlu pesan jelas. Pemilik: **Cherles**.
 
 ### Yang sudah diperbaiki (jangan dikerjakan ulang)
 
