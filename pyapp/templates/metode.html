@@ -42,6 +42,48 @@
   kota, provinsi), yaitu baris yang ditampilkan di tabel di bawah.
 </p>
 
+{% if langkah is not none %}
+<h2 style="margin-top:32px">Putaran penalaran</h2>
+<p class="ringkas">
+  Reasoner dijalankan berulang; setiap putaran mencatat berapa triple baru yang muncul.
+  Berhenti saat sebuah putaran tidak menghasilkan apa pun (<em>fixpoint</em>).
+</p>
+<table class="putaran">
+  <caption class="sr-only">Jumlah triple baru per putaran penalaran OWL-RL</caption>
+  <thead>
+    <tr>
+      <th scope="col">Putaran</th>
+      <th scope="col">Triple baru</th>
+      <th scope="col">Informatif</th>
+      <th scope="col">Contoh</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for l in langkah %}
+    <tr>
+      <td>{{ l.putaran }}</td>
+      <td>{{ "{:,}".format(l.mentah).replace(",", ".") }}</td>
+      <td>{{ "{:,}".format(l.informatif).replace(",", ".") }}</td>
+      <td>{% for c in l.contoh %}<code>{{ c }}</code>{% if not loop.last %}<br>{% endif %}{% else %}—{% endfor %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% set akhir = langkah[-1] if langkah else none %}
+<p class="ringkas">
+  {% if akhir and akhir.mentah == 0 %}
+  Reasoner berhenti: fixpoint tercapai pada putaran {{ akhir.putaran }}.
+  {% else %}
+  Reasoner belum mencapai fixpoint dalam batas putaran.
+  {% endif %}
+  Berbeda dari contoh Mona Lisa di materi P12 yang dijalankan aturan demi aturan,
+  <code>owlrl</code> sudah menjenuhkan graf sampai fixpoint dalam satu panggilan. Karena itu
+  hampir semua fakta informatif muncul di satu putaran pertama; putaran berikutnya hanya
+  menambah aksioma tipe data dan <code>owl:disjointWith</code> yang tidak menjelaskan apa pun
+  tentang museum.
+</p>
+{% endif %}
+
 <h2 style="margin-top:32px">Contoh rantai penalaran</h2>
 <p class="ringkas">Untuk Museum Negeri Aceh:</p>
 <ul class="ringkas">

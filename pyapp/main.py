@@ -34,6 +34,12 @@ from semweb.namespace import RES, SDP
 from semweb.peta import titik_museum
 from semweb.nl2sparql import jawab, ke_sparql, skema_graf
 from semweb.reasoning import cek_konsistensi, fakta_turunan, jelaskan_tipe, perbandingan
+
+try:
+    # Task 6 Ryan F. Selama belum di-merge, panel putaran tidak ditampilkan.
+    from semweb.reasoning import langkah_penalaran
+except ImportError:
+    langkah_penalaran = None
 from semweb.relations import benang_merah
 from semweb.search import cari_museum, daftar_era, daftar_provinsi, daftar_tema
 from semweb.store import MuseumStore
@@ -171,6 +177,22 @@ def _museum_dto(store: MuseumStore, iri: URIRef) -> dict[str, Any]:
         "gallery": galeri,
         "sources": sumber,
     }
+
+
+def _langkah(store: MuseumStore) -> list[dict[str, Any]] | None:
+    """Putaran penalaran sampai fixpoint, dihitung sekali per store.
+
+    Setiap putaran menjalankan ulang reasoner, jadi hasilnya disimpan di objek
+    store (yang sudah singleton proses) agar /metode tidak menghitungnya di
+    setiap kunjungan.
+    """
+    if langkah_penalaran is None:
+        return None
+    simpanan = getattr(store, "_langkah_penalaran", None)
+    if simpanan is None:
+        simpanan = langkah_penalaran(store, batas_putaran=5)
+        store._langkah_penalaran = simpanan
+    return simpanan
 
 
 def _ringkasan_turunan(fakta: list[dict[str, Any]]) -> dict[str, Any]:
@@ -422,6 +444,7 @@ def halaman_metode(request: Request, store: MuseumStore = Depends(get_store)):
             "turunan": _contoh_turunan(semua_turunan),
             "jumlah_turunan": len(semua_turunan),
             "ringkasan_turunan": _ringkasan_turunan(semua_turunan),
+            "langkah": _langkah(store),
             "rantai": jelaskan_tipe(store, "museum-negeri-aceh"),
             "konsistensi": cek_konsistensi(store),
             "kelas": sorted(skema.kelas.values()),
@@ -513,6 +536,7 @@ def api_metode(store: MuseumStore = Depends(get_store)):
         "perbandingan": perbandingan(store),
         "jumlah_fakta_turunan": len(semua_turunan),
         "ringkasan_turunan": _ringkasan_turunan(semua_turunan),
+        "langkah_penalaran": _langkah(store),
         "fakta_turunan": _contoh_turunan(semua_turunan),
         "konsistensi": cek_konsistensi(store),
         "subkelas": subkelas_museum(store),
