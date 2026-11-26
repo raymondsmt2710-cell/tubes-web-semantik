@@ -63,20 +63,34 @@ function objectProperty(
   return lines;
 }
 
+/**
+ * Deklarasi datatype property.
+ *
+ * `domain` boleh `null`, dan itu memang tepat untuk properti yang dipakai
+ * lebih dari satu kelas — misalnya `sdp:imageUrl` yang dipakai `Museum`
+ * (foto utama) **dan** `Image` (berkas foto). Di OWL, `rdfs:domain` bukan
+ * pembatas melainkan aturan penyimpulan tipe: setiap subjek yang memakai
+ * properti itu akan disimpulkan sebagai anggota domain tersebut. Bila
+ * `imageUrl` didominakan ke `Museum`, maka setiap `Image` menjadi `Museum`
+ * dan hitungan museum membengkak 28 -> 94. Karena itu domain dibiarkan
+ * kosong bila properti memang lintas kelas.
+ */
 function datatypeProperty(
   name: string,
-  domain: string,
+  domain: string | null,
   range: string,
   label: string,
 ): string[] {
-  return [
+  const lines = [
     `${INDENT}<owl:DatatypeProperty rdf:about="${SDP}${name}">`,
     `${INDENT}    <rdfs:label xml:lang="id">${label}</rdfs:label>`,
-    `${INDENT}    <rdfs:domain rdf:resource="${SDP}${domain}"/>`,
-    `${INDENT}    <rdfs:range rdf:resource="${range}"/>`,
-    `${INDENT}</owl:DatatypeProperty>`,
-    "",
   ];
+  if (domain) {
+    lines.push(`${INDENT}    <rdfs:domain rdf:resource="${SDP}${domain}"/>`);
+  }
+  lines.push(`${INDENT}    <rdfs:range rdf:resource="${range}"/>`);
+  lines.push(`${INDENT}</owl:DatatypeProperty>`, "");
+  return lines;
 }
 
 interface CityInfo {
@@ -363,7 +377,9 @@ export function buildRdf(records: MuseumRecord[]): string {
   lines.push(
     ...datatypeProperty("description", "Museum", `${XSD}string`, "deskripsi"),
   );
-  lines.push(...datatypeProperty("imageUrl", "Museum", `${XSD}anyURI`, "tautan gambar"));
+  // imageUrl dipakai Museum (foto utama) DAN Image (berkas foto). Diberi
+  // domain Museum, setiap Image akan disimpulkan sebagai Museum (28 -> 94).
+  lines.push(...datatypeProperty("imageUrl", null, `${XSD}anyURI`, "tautan gambar"));
   lines.push(
     ...datatypeProperty("officialUrl", "Museum", `${XSD}anyURI`, "situs resmi"),
   );

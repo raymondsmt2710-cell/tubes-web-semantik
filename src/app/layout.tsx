@@ -25,6 +25,7 @@ export default function RootLayout({
             <nav className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs">
               <Link href="/">Sampul</Link>
               <Link href="/katalog">Katalog</Link>
+              <Link href="/tanya">Tanya</Link>
               <Link href="/tentang">Tentang &amp; Metode</Link>
             </nav>
             <p className="label mt-6">Museum Sumatera · Pameran Digital</p>
