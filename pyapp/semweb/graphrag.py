@@ -142,20 +142,32 @@ def jangkar(store: MuseumStore, pertanyaan: str, maks: int = 3) -> list[Jangkar]
         SDP.Era: (4, "era"),
     }
 
+    # Subkelas museum (`StateMuseum`/`SiteMuseum`/`PrivateMuseum`) ditulis di
+    # data sebagai tipe spesifik; `sdp:Museum` baru diturunkan reasoner. Karena
+    # itu pencarian jangkar harus ikut menelusuri subkelas, kalau tidak museum
+    # tidak pernah ditemukan dan jangkar jatuh ke provinsi/kota.
+    jenis_museum = {SDP.Museum} | {
+        s
+        for s in store.asserted.subjects(RDFS.subClassOf, SDP.Museum)
+        if isinstance(s, URIRef)
+    }
+
     temuan: list[tuple[int, int, Jangkar]] = []
     sudah: set[str] = set()
 
     for kelas, (urutan, jenis) in prioritas_jenis.items():
-        for node in store.asserted.subjects(RDF.type, kelas):
-            if not isinstance(node, URIRef):
-                continue
-            label = store.nama(node)
-            if not label or not _memuat(teks, label):
-                continue
-            if str(node) in sudah:
-                continue
-            sudah.add(str(node))
-            temuan.append((-len(label), urutan, Jangkar(node, label, jenis)))
+        kandidat = jenis_museum if kelas == SDP.Museum else {kelas}
+        for kelas_nyata in kandidat:
+            for node in store.asserted.subjects(RDF.type, kelas_nyata):
+                if not isinstance(node, URIRef):
+                    continue
+                label = store.nama(node)
+                if not label or not _memuat(teks, label):
+                    continue
+                if str(node) in sudah:
+                    continue
+                sudah.add(str(node))
+                temuan.append((-len(label), urutan, Jangkar(node, label, jenis)))
 
     temuan.sort(key=lambda t: (t[0], t[1]))
     return [j for _, _, j in temuan[:maks]]

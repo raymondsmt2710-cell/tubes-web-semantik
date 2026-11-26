@@ -84,24 +84,27 @@ def build_graph(records: list[dict[str, Any]]) -> Graph:
 
 def _deklarasikan_ontologi(g: Graph) -> None:
     """Deklarasikan kelas inti agar graf bisa dipakai reasoner tanpa impor luar."""
-    for kelas in (
-        "Museum",
-        "StateMuseum",
-        "SiteMuseum",
-        "PrivateMuseum",
-        "Province",
-        "City",
-        "Theme",
-        "Era",
-        "Chapter",
-        "Collection",
-        "Exhibit",
-        "Image",
-        "ImageDetail",
-        "Source",
-        "Facility",
-    ):
+    label = {
+        "Museum": "Museum",
+        "StateMuseum": "Museum Negeri",
+        "SiteMuseum": "Museum Situs",
+        "PrivateMuseum": "Museum Swasta",
+        "Province": "Provinsi",
+        "City": "Kota atau Kabupaten",
+        "Theme": "Tema",
+        "Era": "Era",
+        "Chapter": "Bab",
+        "Collection": "Koleksi",
+        "Exhibit": "Isi Pameran",
+        "Image": "Gambar",
+        "ImageDetail": "Poin Pengamatan Foto",
+        "Source": "Sumber",
+        "Facility": "Fasilitas",
+    }
+    for kelas, teks in label.items():
         g.add((SDP[kelas], RDF.type, OWL.Class))
+        g.add((SDP[kelas], SDP.name, Literal(teks, lang="id")))
+        g.add((SDP[kelas], RDFS.label, Literal(teks, lang="id")))
 
     for sub in ("StateMuseum", "SiteMuseum", "PrivateMuseum"):
         g.add((SDP[sub], RDFS.subClassOf, SDP.Museum))
@@ -112,10 +115,18 @@ def _deklarasikan_ontologi(g: Graph) -> None:
 def _tulis_museum(g: Graph, record: dict[str, Any]) -> None:
     slug = record["slug"]
     museum = URIRef(f"{RES}museum/{slug}")
-    g.add((museum, RDF.type, SDP.Museum))
 
-    for tipe in record.get("types") or []:
-        g.add((museum, RDF.type, SDP[tipe]))
+    # Tipe ditulis sekali saja. Bila museum punya tipe spesifik
+    # (`StateMuseum`/`SiteMuseum`/`PrivateMuseum`), tipe umum `sdp:Museum`
+    # sengaja TIDAK ditulis: `rdfs:subClassOf` sudah menyatakannya, dan justru
+    # inilah fakta yang membuat penalaran punya sesuatu untuk diturunkan
+    # (materi P12). Menulis keduanya membuat closure tidak menambah apa pun.
+    tipe = [t for t in (record.get("types") or []) if t]
+    if tipe:
+        for t in tipe:
+            g.add((museum, RDF.type, SDP[t]))
+    else:
+        g.add((museum, RDF.type, SDP.Museum))
 
     tambah = [
         (SDP.name, _teks(record.get("name"))),

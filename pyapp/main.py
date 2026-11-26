@@ -268,13 +268,14 @@ def halaman_tanya(request: Request, q: str = "", store: MuseumStore = Depends(ge
 @app.get("/metode", response_class=HTMLResponse)
 def halaman_metode(request: Request, store: MuseumStore = Depends(get_store)):
     skema = skema_graf(store)
+    semua_turunan = fakta_turunan(store, batas=10_000)
     return templates.TemplateResponse(
         request,
         "metode.html",
         {
             "perbandingan": perbandingan(store),
-            "turunan": fakta_turunan(store, batas=20),
-            "jumlah_turunan": len(fakta_turunan(store, batas=10_000)),
+            "turunan": semua_turunan[:20],
+            "jumlah_turunan": len(semua_turunan),
             "rantai": jelaskan_tipe(store, "museum-negeri-aceh"),
             "konsistensi": cek_konsistensi(store),
             "kelas": sorted(skema.kelas.values()),

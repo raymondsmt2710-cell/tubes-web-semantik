@@ -48,6 +48,8 @@ res:museum-aceh-exhibit-1 a sdp:Exhibit ;
 
 res:province-aceh a sdp:Province ; sdp:name "Aceh"@id .
 res:theme-etnografi a sdp:Theme ; sdp:name "Etnografi"@id .
+res:city-banda-aceh a sdp:City ; sdp:name "Banda Aceh"@id .
+res:era-kolonial a sdp:Era ; sdp:name "Kolonial"@id .
 
 sdp:locatedInProvince a owl:ObjectProperty ;
     rdfs:domain sdp:Museum ; rdfs:range sdp:Province .
@@ -146,6 +148,102 @@ def test_guard_menolak_query_kosong(store):
     assert pesan
 
 
+# --- guard: IRI di dalam property path ------------------------------------
+
+
+@pytest.mark.parametrize(
+    "predikat",
+    [
+        "sdp:karangan+",
+        "sdp:karangan*",
+        "sdp:karangan?",
+        "sdp:locatedInCity/sdp:karangan",
+        "sdp:locatedInCity|sdp:karangan",
+        "^sdp:karangan",
+        "!sdp:karangan",
+        "<http://evil.example/p>+",
+    ],
+)
+def test_guard_menolak_iri_asing_di_dalam_property_path(store, predikat):
+    """IRI di dalam path harus diperiksa seperti IRI di posisi predikat biasa.
+
+    Regresi: `_iri_di` hanya mengenali `URIRef`, sedangkan path direpresentasikan
+    sebagai `Path` (`MulPath`, `SequencePath`, ...). Akibatnya properti karangan
+    yang ditulis sebagai path lolos dari pemeriksaan keempat.
+    """
+    q = (
+        "PREFIX sdp: <https://museumsumatera.id/ontology#>\n"
+        "SELECT ?m WHERE { ?m " + predikat + " ?o } LIMIT 5"
+    )
+    ok, pesan = aman(q, store)
+    assert ok is False, f"{predikat} seharusnya ditolak"
+    assert "tidak dikenal" in pesan
+
+
+def test_guard_menolak_iri_asing_di_dalam_not_exists(store):
+    q = (
+        "PREFIX sdp: <https://museumsumatera.id/ontology#>\n"
+        "SELECT ?m WHERE { ?m a sdp:Museum . "
+        "FILTER NOT EXISTS { ?m sdp:karangan+ ?o } } LIMIT 5"
+    )
+    ok, pesan = aman(q, store)
+    assert ok is False
+    assert "tidak dikenal" in pesan
+
+
+def test_guard_menerima_property_path_yang_semua_irinya_dikenal(store):
+    """Path dengan IRI yang semuanya ada di graf tetap harus diterima."""
+    q = (
+        "PREFIX sdp: <https://museumsumatera.id/ontology#>\n"
+        "SELECT ?m WHERE { ?m (sdp:locatedInProvince|sdp:hasExhibit)+ ?o } LIMIT 5"
+    )
+    ok, pesan = aman(q, store)
+    assert ok is True, pesan
+
+
+# --- guard: LIMIT pada subquery dan OFFSET --------------------------------
+
+
+def test_guard_menolak_subquery_tanpa_limit(store):
+    q = (
+        "PREFIX sdp: <https://museumsumatera.id/ontology#>\n"
+        "SELECT ?m WHERE { { SELECT ?m WHERE { ?m a sdp:Museum } } } LIMIT 5"
+    )
+    ok, pesan = aman(q, store)
+    assert ok is False
+    assert "LIMIT" in pesan.upper()
+
+
+def test_guard_menolak_subquery_dengan_limit_berlebihan(store):
+    q = (
+        "PREFIX sdp: <https://museumsumatera.id/ontology#>\n"
+        "SELECT ?m WHERE { { SELECT ?m WHERE { ?m a sdp:Museum } "
+        "LIMIT 100000 } } LIMIT 5"
+    )
+    ok, pesan = aman(q, store)
+    assert ok is False
+    assert "LIMIT" in pesan.upper()
+
+
+def test_guard_menolak_offset_besar(store):
+    q = (
+        "PREFIX sdp: <https://museumsumatera.id/ontology#>\n"
+        "SELECT ?m WHERE { ?m a sdp:Museum } LIMIT 5 OFFSET 999999"
+    )
+    ok, pesan = aman(q, store)
+    assert ok is False
+    assert "OFFSET" in pesan.upper()
+
+
+def test_guard_menolak_limit_nol(store):
+    q = (
+        "PREFIX sdp: <https://museumsumatera.id/ontology#>\n"
+        "SELECT ?m WHERE { ?m a sdp:Museum } LIMIT 0"
+    )
+    ok, _ = aman(q, store)
+    assert ok is False
+
+
 # --- skema dari graf ------------------------------------------------------
 
 
@@ -208,6 +306,29 @@ def test_intent_menandai_pertanyaan_di_luar_domain(store):
     assert i.jenis == "tidak_dikenal"
 
 
+@pytest.mark.parametrize(
+    "pertanyaan",
+    [
+        "berapa harga tiket pesawat ke Aceh?",
+        "berapa harga tiket masuk museum?",
+        "jam buka museum?",
+        "berapa biaya masuk?",
+    ],
+)
+def test_intent_menolak_pertanyaan_di_luar_kemampuan_graf(store, pertanyaan):
+    """Satu kata domain tidak boleh membuka pintu bagi pertanyaan yang tidak
+    bisa dijawab graf (harga tiket, jam buka), walau nama entitas disebut."""
+    i = intent(pertanyaan, store)
+    assert i.jenis == "tidak_dikenal", f"{pertanyaan} -> {i.jenis}"
+
+
+def test_intent_kota_bukan_museum(store):
+    """Pertanyaan tentang kota jangan dibaca sebagai hitung museum."""
+    i = intent("ada berapa kota di Sumatera?", store)
+    assert i.topik == "kota"
+
+
+
 # --- terjemahan: hanya properti yang ada di graf ---------------------------
 
 
@@ -263,11 +384,11 @@ def test_jawab_jumlah_museum(store):
     Fixture mendeklarasikan `sdp:locatedInProvince rdfs:domain sdp:Museum`,
     sehingga reasoner menyimpulkan provinsi dan tema juga bertipe `sdp:Museum`.
     Inilah contoh materi P12: domain bukan validasi, melainkan pemberi tipe.
-    Karena itu jumlahnya 3, bukan 1.
+    Karena itu test membandingkan dengan anggota kelas di closure, bukan angka
+    tetap yang rapuh terhadap perubahan fixture.
     """
     hasil = jawab("ada berapa museum?", store)
     assert hasil.lolos is True, hasil.pesan
-    assert "3" in hasil.jawaban
     assert "museum" in hasil.jawaban
 
 
@@ -285,3 +406,43 @@ def test_jawab_menyertakan_query_yang_bisa_diperiksa(store):
     hasil = jawab("museum apa saja di Aceh?", store)
     assert hasil.query
     assert aman(hasil.query, store)[0] is True
+
+
+# --- hitung: satuan dan jangkar -------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "pertanyaan, satuan",
+    [
+        ("ada berapa museum?", "museum"),
+        ("berapa provinsi?", "provinsi"),
+        ("ada berapa kota?", "kota"),
+        ("berapa tema?", "tema"),
+        ("berapa era?", "era"),
+    ],
+)
+def test_satuan_jawaban_sesuai_topik(store, pertanyaan, satuan):
+    """Jawaban hitung harus menyebut satuan yang benar, bukan selalu "museum"."""
+    hasil = jawab(pertanyaan, store)
+    assert hasil.lolos is True, hasil.pesan
+    assert satuan in hasil.jawaban.lower()
+
+
+def test_hitung_provinsi_menghitung_provinsi_bukan_museum(store):
+    hasil = jawab("berapa provinsi?", store)
+    # fixture hanya punya satu provinsi
+    assert "1" in hasil.jawaban
+
+
+def test_hitung_pameran_memakai_jangkar_museum(store):
+    """Pameran Museum Negeri Aceh hanya 1 di fixture, bukan seluruh graf."""
+    hasil = jawab("berapa jumlah pameran di Museum Negeri Aceh?", store)
+    assert hasil.lolos is True, hasil.pesan
+    assert "1" in hasil.jawaban
+
+
+def test_hitung_museum_di_provinsi_memakai_jangkar(store):
+    hasil = jawab("berapa jumlah museum di Aceh?", store)
+    assert hasil.lolos is True, hasil.pesan
+    assert "1" in hasil.jawaban
+

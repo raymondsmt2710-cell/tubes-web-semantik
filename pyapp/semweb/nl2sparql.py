@@ -24,6 +24,7 @@ from dataclasses import dataclass, field
 from typing import Any, Callable, Iterable
 
 from rdflib import URIRef
+from rdflib.paths import Path
 from rdflib.plugins.sparql import prepareQuery
 
 from .graphrag import ambil_konteks, jangkar as cari_jangkar
@@ -149,6 +150,30 @@ _TOPIK: list[tuple[str, tuple[str, ...]]] = [
 
 _HITUNG = ("berapa", "jumlah", "banyak", "hitung", "total")
 
+# Kata yang menandakan pertanyaan di luar kemampuan graf. Graf menyimpan fakta
+# museum (lokasi, tema, era, pameran, foto), bukan harga tiket atau jam buka —
+# jadi menyebut kata-kata ini berarti pertanyaannya tidak bisa dijawab, walau
+# nama museum atau provinsi ikut disebut.
+_DI_LUAR_DOMAIN = (
+    "harga",
+    "tiket",
+    "biaya",
+    "tarif",
+    "bayar",
+    "jam buka",
+    "jam operasional",
+    "jadwal",
+    "parkir",
+    "toilet",
+    "makanan",
+    "penginapan",
+    "hotel",
+    "transportasi",
+    "cuaca",
+    "presiden",
+    "mobil",
+)
+
 
 def _bersih(teks: str) -> str:
     """Rapikan pertanyaan: huruf kecil, spasi tunggal, tanpa tanda baca akhir."""
@@ -182,6 +207,22 @@ def intent(pertanyaan: str, store: MuseumStore | None = None) -> Intent:
     if not teks:
         return Intent("tidak_dikenal", "-", kata=[], alasan="Pertanyaan kosong.")
 
+    # Pertanyaan di luar kemampuan graf ditolak lebih dulu. Satu kata domain
+    # ("ke Aceh", "museum") tidak boleh membuka pintu bagi pertanyaan yang
+    # datanya tidak pernah disimpan di sini.
+    luar = [k for k in _DI_LUAR_DOMAIN if k in teks]
+    if luar:
+        return Intent(
+            "tidak_dikenal",
+            "-",
+            kata=kata,
+            alasan=(
+                f"Pertanyaan menyebut hal yang tidak disimpan di graf "
+                f"({', '.join(luar)}). Graf hanya memuat fakta museum: lokasi, "
+                "tema, era, pameran, dan foto."
+            ),
+        )
+
     atribut = None
     if re.search(
         r"(?:tahun|kapan)\b.{0,60}?\b(?:berdiri|didirikan|diresmikan|berdirinya)", teks
@@ -213,11 +254,20 @@ def intent(pertanyaan: str, store: MuseumStore | None = None) -> Intent:
     if topik is None and menyebut_museum:
         topik = "museum"
 
-    if topik is None and jangkar is None and atribut is None:
+    # Jangkar saja tidak cukup untuk menentukan topik: "berapa kota di Sumatera"
+    # menemukan jangkar "Sumatera" tetapi tidak boleh dibaca sebagai hitung
+    # museum. Tanpa topik, topik diwarisi dari jenis jangkar.
+    if topik is None and jangkar is not None and store is not None:
+        jenis_jangkar = _jenis_jangkar(store, jangkar)
+        if jenis_jangkar in ("kota", "provinsi", "museum"):
+            topik = "museum" if jenis_jangkar == "museum" else jenis_jangkar
+
+    if topik is None and atribut is None:
         return Intent(
             "tidak_dikenal",
             "-",
             kata=kata,
+            jangkar=jangkar,
             alasan=(
                 "Pertanyaan tidak menyebut museum, pameran, galeri, provinsi, "
                 "kota, tema, era, maupun nama entitas di graf."
@@ -341,11 +391,54 @@ def _rakit(pertanyaan: str, store: MuseumStore) -> str:
             pola = "  ?m a sdp:Museum ; sdp:hasImage ?x ."
         elif niat.topik == "provinsi":
             pola = "  ?x a sdp:Province ."
+        elif niat.topik == "kota":
+            pola = "  ?x a sdp:City ."
+        elif niat.topik == "tema":
+            pola = "  ?x a sdp:Theme ."
+        elif niat.topik == "era":
+            pola = "  ?x a sdp:Era ."
         else:
             pola = "  ?x a sdp:Museum ."
+
+        # Jangkar harus mempersempit hitungan. Tanpa ini, "berapa pameran di
+        # Museum X" menghitung pameran seluruh graf — angka benar untuk
+        # pertanyaan yang salah.
+        sempit: list[str] = []
+        if jangkar and niat.topik in ("pameran", "galeri"):
+            relasi = "hasExhibit" if niat.topik == "pameran" else "hasImage"
+            pola = f"  {jangkar} sdp:{relasi} ?x ."
+        elif jangkar and niat.topik == "museum":
+            jenis = _jenis_jangkar(store, niat.jangkar)
+            if jenis == "provinsi":
+                if _properti_ada(store, "locatedInProvince"):
+                    sempit.append(f"  ?x sdp:locatedInProvince {jangkar} .")
+                if _properti_ada(store, "locatedInCity", "partOfProvince"):
+                    sempit.append(
+                        f"  ?x (sdp:locatedInProvince|"
+                        f"(sdp:locatedInCity/sdp:partOfProvince)) {jangkar} ."
+                    )
+                # Cukup satu jalur: pakai union path bila tersedia.
+                if len(sempit) > 1:
+                    sempit = [sempit[1]]
+            elif jenis == "kota" and _properti_ada(store, "locatedInCity"):
+                sempit.append(f"  ?x sdp:locatedInCity {jangkar} .")
+            elif jenis == "tema" and _properti_ada(store, "hasTheme"):
+                sempit.append(f"  ?x sdp:hasTheme {jangkar} .")
+            elif jenis == "era" and _properti_ada(store, "hasEra"):
+                sempit.append(f"  ?x sdp:hasEra {jangkar} .")
+        elif jangkar and niat.topik == "provinsi":
+            pola = f"  ?x a sdp:Province . FILTER(?x = {jangkar})"
+        elif jangkar and niat.topik == "kota":
+            pola = f"  ?x a sdp:City . FILTER(?x = {jangkar})"
+        elif jangkar and niat.topik == "tema":
+            pola = f"  ?x a sdp:Theme . FILTER(?x = {jangkar})"
+        elif jangkar and niat.topik == "era":
+            pola = f"  ?x a sdp:Era . FILTER(?x = {jangkar})"
+
+        badan = pola + ("\n" + "\n".join(sempit) if sempit else "")
         return (
             f"{PREFIXES}\nSELECT (COUNT(DISTINCT ?x) AS ?jumlah) WHERE {{\n"
-            f"{pola}\n}}\nLIMIT 50"
+            f"{badan}\n}}\nLIMIT 50"
         )
 
     # --- daftar pameran / galeri -------------------------------------------
@@ -436,8 +529,18 @@ def _iri_di(algebra: Any) -> Iterable[URIRef]:
     """Telusuri pohon algebra query dan kembalikan setiap ``URIRef``.
 
     rdflib menyusun query sebagai ``CompValue`` bersarang. Penelusuran harus
-    masuk ke **semua** kunci, karena properti karangan biasanya muncul di posisi
-    predikat — kalau hanya ``p`` yang ditelusuri, properti itu lolos.
+    masuk ke **semua** kunci, karena properti karangan bisa muncul di posisi
+    predikat, di ``FILTER``, maupun di dalam **property path**.
+
+    Property path direpresentasikan sebagai ``rdflib.paths.Path`` yang bentuk
+    internalnya berbeda-beda, dan inilah yang dulu membuat pemeriksaan keempat
+    bisa dilewati:
+
+    - ``SequencePath``/``AlternativePath``/``NegatedPath`` menyimpan isinya di ``args``
+    - ``MulPath`` (``+ * ?``) menyimpan IRI di ``path``
+    - ``InvPath`` (``^``) menyimpan IRI di ``arg``
+
+    Karena itu penelusuran di sini tidak mengandalkan satu nama kunci saja.
     """
     if algebra is None:
         return
@@ -450,9 +553,23 @@ def _iri_di(algebra: Any) -> Iterable[URIRef]:
         for item in algebra:
             yield from _iri_di(item)
         return
+
+    # Property path: tangani lebih dulu, sebelum cabang generik di bawah.
+    if isinstance(algebra, Path):
+        for kunci in ("args", "path", "arg", "iri"):
+            nilai = getattr(algebra, kunci, None)
+            if nilai is not None:
+                yield from _iri_di(nilai)
+        return
+
     if hasattr(algebra, "keys") and hasattr(algebra, "values"):
         for nilai in algebra.values():
             yield from _iri_di(nilai)
+        # `CompValue` menyimpan sebagian simpul di atribut, bukan di kunci.
+        for kunci in ("args", "path", "arg", "iri", "expr", "term"):
+            nilai = getattr(algebra, kunci, None)
+            if nilai is not None:
+                yield from _iri_di(nilai)
         return
     iteratif = getattr(algebra, "__iter__", None)
     if callable(iteratif):
@@ -463,11 +580,54 @@ def _iri_di(algebra: Any) -> Iterable[URIRef]:
             return
 
 
+def _slice_di(algebra: Any) -> tuple[list[Any], int]:
+    """Kumpulkan setiap simpul ``Slice`` dan hitung jumlah subquery.
+
+    Pemeriksaan hanya pada ``algebra.p`` melewatkan subquery: query luar boleh
+    punya ``LIMIT 5`` sementara subquery di dalamnya mengambil seluruh graf.
+    Subquery dikenali dari simpul ``ToMultiSet``, karena subquery tanpa LIMIT
+    tidak menyisakan simpul ``Slice`` sama sekali.
+    """
+    hasil: list[Any] = []
+    subquery = 0
+
+    def jalan(node: Any, kedalaman: int = 0) -> None:
+        nonlocal subquery
+        if node is None or kedalaman > 40:
+            return
+        if isinstance(node, (str, bytes, URIRef)):
+            return
+        nama = getattr(node, "name", "")
+        if nama == "Slice":
+            hasil.append(node)
+        elif nama == "ToMultiSet":
+            subquery += 1
+        if isinstance(node, (list, tuple, set)):
+            for item in node:
+                jalan(item, kedalaman + 1)
+            return
+        if hasattr(node, "keys") and hasattr(node, "values"):
+            for nilai in node.values():
+                jalan(nilai, kedalaman + 1)
+            for kunci in ("p", "expr", "term", "args", "path", "arg"):
+                nilai = getattr(node, kunci, None)
+                if nilai is not None:
+                    jalan(nilai, kedalaman + 1)
+
+    jalan(algebra)
+    return hasil, subquery
+
+
 def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]:
     """Guard: periksa query **sebelum** dijalankan (P13 bagian 16).
 
     Empat pemeriksaan: sintaks sah, hanya ``SELECT``, ``LIMIT`` ada dan tidak
     melebihi ``maks``, dan semua IRI dikenal.
+
+    Pemeriksaan ``LIMIT`` berlaku untuk **setiap** blok di dalam query, bukan
+    hanya blok terluar, supaya subquery tidak bisa dipakai melewati batas.
+    ``OFFSET`` juga dibatasi agar tidak bisa dijadikan cara mengambil data
+    sangat dalam tanpa melewati ``LIMIT``.
 
     Yang **tidak** diperiksa: apakah arah relasi sesuai maksud pertanyaan, dan
     apakah pengguna berhak atas data itu.
@@ -484,20 +644,38 @@ def aman(q: str, store: MuseumStore, maks: int = MAKS_LIMIT) -> tuple[bool, str]
     if nama != "SelectQuery":
         return False, f"hanya SELECT (ditemukan {nama or 'bukan query'})"
 
-    batas: Any = None
-    if getattr(algebra.p, "name", "") == "Slice":
+    potongan, jumlah_subquery = _slice_di(algebra)
+    if not potongan:
+        return False, f"wajib LIMIT <= {maks} berupa angka tetap"
+    # Setiap subquery harus punya Slice sendiri; bila tidak, batasnya tak terjaga.
+    if len(potongan) < jumlah_subquery + 1:
+        return False, f"wajib LIMIT <= {maks} pada setiap blok, termasuk subquery"
+    if getattr(algebra.p, "name", "") != "Slice":
+        return False, f"wajib LIMIT <= {maks} pada query terluar"
+
+    for simpul in potongan:
         # rdflib menyimpan LIMIT di kunci 'length' dan OFFSET di 'start'.
-        batas = algebra.p.get("length")
+        batas = simpul.get("length")
+        mulai = simpul.get("start")
         if isinstance(batas, str) or hasattr(batas, "name"):
             batas = None
-    if batas is None:
-        return False, f"wajib LIMIT <= {maks} berupa angka tetap"
-    try:
-        nilai_batas = int(batas)
-    except (TypeError, ValueError):
-        return False, "LIMIT harus bilangan bulat"
-    if nilai_batas > maks:
-        return False, f"LIMIT {nilai_batas} melebihi batas {maks}"
+        if batas is None:
+            return False, f"wajib LIMIT <= {maks} pada setiap blok, termasuk subquery"
+        try:
+            nilai_batas = int(batas)
+        except (TypeError, ValueError):
+            return False, "LIMIT harus bilangan bulat"
+        if nilai_batas < 1:
+            return False, "LIMIT harus lebih besar dari 0"
+        if nilai_batas > maks:
+            return False, f"LIMIT {nilai_batas} melebihi batas {maks}"
+        if mulai is not None:
+            try:
+                nilai_mulai = int(mulai)
+            except (TypeError, ValueError):
+                return False, "OFFSET harus bilangan bulat"
+            if nilai_mulai > maks:
+                return False, f"OFFSET {nilai_mulai} melebihi batas {maks}"
 
     dikenal = kosakata(store)
     asing = sorted({str(i) for i in _iri_di(algebra) if str(i) not in dikenal})
@@ -639,7 +817,15 @@ def _rangkai(pertanyaan: str, baris: list[Any], niat: Intent | None = None) -> s
 
     if niat.jenis == "hitung":
         nilai = str(baris[0][0]) if baris and baris[0] else "0"
-        satuan = {"pameran": "pameran", "galeri": "foto"}.get(niat.topik, "museum")
+        satuan = {
+            "pameran": "pameran",
+            "galeri": "foto",
+            "provinsi": "provinsi",
+            "kota": "kota",
+            "tema": "tema",
+            "era": "era",
+            "museum": "museum",
+        }.get(niat.topik, "entitas")
         return f"Ada {nilai} {satuan} yang tercatat di graf."
 
     if niat.jenis == "atribut":

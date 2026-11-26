@@ -47,7 +47,7 @@ def kueri_hierarki(kelas_induk: str = "Museum", operator: str = "+") -> str:
     return f"""{PREFIXES}
 SELECT DISTINCT ?kelas ?nama WHERE {{
   ?kelas rdfs:subClassOf{operator} sdp:{kelas_induk} .
-  OPTIONAL {{ ?kelas rdfs:label ?nama . }}
+  OPTIONAL {{ ?kelas (sdp:name|rdfs:label) ?nama . }}
 }}
 ORDER BY ?kelas
 """
