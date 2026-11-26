@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% set halaman = 'cari' %}
+
+{% block judul %}Cari{% endblock %}
+
+{% block isi %}
+<h1>Cari museum</h1>
+<p class="ringkas">
+  Penyaringan dijalankan <strong>di dalam SPARQL</strong>, bukan dengan menyaring
+  daftar di Python setelah data diambil. Setiap kata pada kata kunci harus muncul
+  di salah satu bidang yang dicari: nama, kota, provinsi, tema, era, atau deskripsi.
+</p>
+
+<form class="saring" action="/cari" method="get">
+  <label style="flex:1;min-width:220px">
+    Kata kunci
+    <input type="text" name="q" value="{{ q }}" placeholder="mis. aceh, tenun, tsunami">
+  </label>
+  <label>
+    Provinsi
+    <select name="provinsi">
+      <option value="">Semua</option>
+      {% for p in daftar_provinsi %}
+      <option value="{{ p }}" {{ 'selected' if p == provinsi }}>{{ p }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    Tema
+    <select name="tema">
+      <option value="">Semua</option>
+      {% for t in daftar_tema %}
+      <option value="{{ t }}" {{ 'selected' if t == tema }}>{{ t }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    Era
+    <select name="era">
+      <option value="">Semua</option>
+      {% for e in daftar_era %}
+      <option value="{{ e }}" {{ 'selected' if e == era }}>{{ e }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    Tahun minimum
+    <input type="number" name="tahun_min" value="{{ tahun_min }}" placeholder="mis. 1980" min="0" step="1">
+  </label>
+  <label>
+    Urutkan
+    <select name="urut">
+      <option value="nama" {{ 'selected' if urut == 'nama' }}>Nama</option>
+      <option value="tahun" {{ 'selected' if urut == 'tahun' }}>Tahun</option>
+    </select>
+  </label>
+  <button type="submit">Cari</button>
+  {% if q or provinsi or tema or era or tahun_min %}
+  <a class="tombol ghost" href="/cari">Bersihkan</a>
+  {% endif %}
+</form>
+
+{% if hasil %}
+<p class="meta">{{ hasil|length }} museum ditemukan.</p>
+<ul class="hasil">
+  {% for m in hasil %}
+  <li>
+    <h3><a href="/museum/{{ m.slug }}">{{ m.nama }}</a></h3>
+    <div class="meta">
+      {{ m.kota or 'Kota tidak tercatat' }} · {{ m.provinsi or 'Provinsi tidak tercatat' }}
+      {% if m.tahun %} · berdiri {{ m.tahun }}{% endif %}
+      {% if m.era %} · era {{ m.era }}{% endif %}
+    </div>
+    <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+      {% for t in m.tema %}<span class="chip">{{ t }}</span>{% endfor %}
+    </div>
+    {% if m.deskripsi %}<p class="ringkas">{{ m.deskripsi }}</p>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<div class="kosong">
+  <p><strong>Tidak ditemukan museum yang cocok.</strong></p>
+  <p class="meta">
+    Bila penyaringan terlalu ketat, kosongkan sebagian isian.
+    Kata kunci dicocokkan pada nama, kota, provinsi, tema, era, dan deskripsi.
+  </p>
+  <p><a href="/cari">Tampilkan semua museum</a></p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% set halaman = 'beranda' %}
+
+{% block judul %}Beranda{% endblock %}
+
+{% block isi %}
+<h1>Pameran digital museum Sumatera</h1>
+<p class="ringkas">
+  Dua puluh delapan museum disusun sebagai tujuh bab perjalanan dari Aceh ke Lampung,
+  lalu dihubungkan kembali lewat tema, kota, era, dan kedekatan bab. Seluruh data
+  disimpan sebagai RDF dan dibaca lewat SPARQL — pencarian di sini bekerja dengan
+  mencocokkan pola pada graf, bukan mencocokkan teks halaman.
+</p>
+
+<div class="petak">
+  <div class="kartu">
+    <div class="label">Museum</div>
+    <div class="angka">{{ jumlah_museum }}</div>
+  </div>
+  <div class="kartu">
+    <div class="label">Triple asserted</div>
+    <div class="angka">{{ ringkasan['asserted'] }}</div>
+  </div>
+  <div class="kartu">
+    <div class="label">Setelah penalaran</div>
+    <div class="angka">{{ ringkasan['closure'] }}</div>
+  </div>
+  <div class="kartu">
+    <div class="label">Fakta turunan</div>
+    <div class="angka">{{ ringkasan['inferred'] }}</div>
+  </div>
+</div>
+
+<h2 style="margin-top:36px">Mulai dari sini</h2>
+<form class="saring" action="/cari" method="get">
+  <label style="flex:1;min-width:240px">
+    Kata kunci
+    <input type="text" name="q" placeholder="mis. aceh, tenun, tsunami, perunggu">
+  </label>
+  <label>
+    Provinsi
+    <select name="provinsi">
+      <option value="">Semua</option>
+      {% for p in provinsi %}<option value="{{ p }}">{{ p }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>
+    Tema
+    <select name="tema">
+      <option value="">Semua</option>
+      {% for t in tema %}<option value="{{ t }}">{{ t }}</option>{% endfor %}
+    </select>
+  </label>
+  <button type="submit">Cari</button>
+</form>
+
+<h2 style="margin-top:36px">Hirarki kelas museum</h2>
+<p class="ringkas">
+  Subkelas diperoleh lewat <code>CONSTRUCT</code> dengan property path
+  <code>rdfs:subClassOf+</code>: dari kelas yang ditulis di ontologi, reasoner
+  mengetahui setiap museum juga merupakan <code>sdp:Museum</code>.
+</p>
+<table>
+  <thead><tr><th>Subkelas</th><th>Nama</th><th>Individu</th></tr></thead>
+  <tbody>
+    {% for s in subkelas %}
+    <tr>
+      <td><code>sdp:{{ s.lokal }}</code></td>
+      <td>{{ s.nama }}</td>
+      <td>{{ s.individu if s.individu is defined else '—' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 style="margin-top:36px">Tanya dengan bahasa Indonesia</h2>
+<p class="ringkas">
+  Halaman <a href="/tanya">Tanya</a> menerjemahkan pertanyaan menjadi SPARQL,
+  memeriksanya dengan <em>guard</em> empat langkah sebelum dijalankan, lalu menyusun
+  jawaban hanya dari data yang ditemukan.
+</p>
+{% endblock %}

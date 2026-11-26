@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% set halaman = 'metode' %}
+
+{% block judul %}Metode{% endblock %}
+
+{% block isi %}
+<h1>Metode dan status data</h1>
+<p class="ringkas">
+  Halaman ini memperlihatkan apa yang benar-benar dilakukan mesin: berapa triple yang
+  ditulis, berapa yang diturunkan, dan bagaimana rantai kesimpulannya terbentuk.
+</p>
+
+<h2 style="margin-top:32px">Asserted, closure, dan fakta turunan</h2>
+<p class="ringkas">
+  Reasoner tidak mengubah fakta yang ditulis. Ia menambahkan fakta baru ke graf
+  terpisah; query bekerja pada gabungan keduanya.
+</p>
+<div class="petak">
+  <div class="kartu">
+    <div class="label">Asserted (ditulis)</div>
+    <div class="angka">{{ "{:,}".format(perbandingan.asserted).replace(",", ".") }}</div>
+  </div>
+  <div class="kartu">
+    <div class="label">Closure OWL-RL</div>
+    <div class="angka">{{ "{:,}".format(perbandingan.closure_owlrl).replace(",", ".") }}</div>
+  </div>
+  <div class="kartu">
+    <div class="label">Closure RDFS</div>
+    <div class="angka">{{ "{:,}".format(perbandingan.closure_rdfs).replace(",", ".") }}</div>
+  </div>
+  <div class="kartu">
+    <div class="label">Fakta turunan</div>
+    <div class="angka">{{ "{:,}".format(perbandingan.inferred).replace(",", ".") }}</div>
+  </div>
+</div>
+
+<h2 style="margin-top:32px">Contoh rantai penalaran</h2>
+<p class="ringkas">Untuk Museum Negeri Aceh:</p>
+<ul class="ringkas">
+  {% for k in rantai %}<li>{{ k }}</li>{% endfor %}
+</ul>
+
+<h2 style="margin-top:32px">Contoh fakta turunan ({{ jumlah_turunan }} total)</h2>
+{% if turunan %}
+<pre><code>{% for f in turunan %}{{ f.subjek_n3 }} {{ f.predikat_n3 }} {{ f.objek_n3 }} .
+{% endfor %}</code></pre>
+{% else %}
+<p class="meta">
+  Tidak ada fakta turunan yang perlu ditampilkan: setiap tipe museum sudah ditulis
+  lengkap di data, sehingga penalaran tidak menambah tipe baru.
+</p>
+{% endif %}
+
+<h2 style="margin-top:32px">Konsistensi</h2>
+{% if konsistensi %}
+<ul class="ringkas">
+  {% for p in konsistensi %}<li>{{ p }}</li>{% endfor %}
+</ul>
+{% else %}
+<p><span class="status lolos">konsisten</span>
+  <span class="meta">Tidak ada individu yang menempati dua kelas <code>owl:disjointWith</code>.</span>
+</p>
+{% endif %}
+
+<h2 style="margin-top:32px">Hirarki kelas</h2>
+<table>
+  <thead><tr><th>Subkelas</th><th>Nama</th><th>Individu</th></tr></thead>
+  <tbody>
+    {% for s in verifikasi %}
+    <tr>
+      <td><code>sdp:{{ s.lokal }}</code></td>
+      <td>{{ s.nama }}</td>
+      <td>{{ s.individu }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2 style="margin-top:32px">Skema dari graf</h2>
+<p class="ringkas">
+  Skema inilah yang dikirim ke prompt NL2SPARQL. Model tidak boleh mengarang IRI:
+  guard menolak IRI yang tidak ada di daftar ini.
+</p>
+<h3 style="margin-top:16px">Kelas</h3>
+<p>{% for k in kelas %}<code>sdp:{{ k }}</code>{{ " · " if not loop.last }}{% endfor %}</p>
+<h3 style="margin-top:16px">Object property</h3>
+<p>{% for o in objek %}<code>sdp:{{ o }}</code>{{ " · " if not loop.last }}{% endfor %}</p>
+<h3 style="margin-top:16px">Datatype property</h3>
+<p>{% for d in data %}<code>sdp:{{ d }}</code>{{ " · " if not loop.last }}{% endfor %}</p>
+
+<h2 style="margin-top:32px">Catatan verifikasi</h2>
+<p class="ringkas">
+  Seluruh entri berstatus <strong>perlu-verifikasi</strong>. Nama, alamat, tahun berdiri,
+  dan catatan kunjungan disusun untuk keperluan pembelajaran dan belum diperiksa ulang
+  terhadap sumber resmi museum. Jangan memakai data di situs ini sebagai rujukan
+  perjalanan tanpa memeriksanya kembali.
+</p>
+{% endblock %}

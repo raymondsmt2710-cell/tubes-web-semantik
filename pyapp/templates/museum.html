@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% set halaman = 'cari' %}
+
+{% block judul %}{{ museum.nama }}{% endblock %}
+
+{% block isi %}
+<p class="meta"><a href="/cari">← Kembali ke katalog</a></p>
+
+<h1>{{ museum.nama }}</h1>
+<p class="meta">
+  {{ museum.kota or 'Kota tidak tercatat' }} · {{ museum.provinsi or 'Provinsi tidak tercatat' }}
+  {% if museum.tahun %} · berdiri {{ museum.tahun }}{% endif %}
+  {% if museum.era %} · era {{ museum.era }}{% endif %}
+</p>
+{% if museum.verifikasi %}
+<p><span class="status info">Status data: {{ museum.verifikasi }}</span></p>
+{% endif %}
+
+{% if museum.deskripsi %}
+<p class="ringkas">{{ museum.deskripsi }}</p>
+{% endif %}
+
+{% if museum.alamat %}
+<p class="meta">Alamat: {{ museum.alamat }}</p>
+{% endif %}
+
+{# --- isi pameran --- #}
+<h2 style="margin-top:32px">Isi pameran</h2>
+{% if museum.exhibits %}
+<ol class="pameran">
+  {% for p in museum.exhibits %}
+  <li>
+    <span class="nomor">{{ "%02d"|format(loop.index) }}</span>
+    <div>
+      <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+        <h3 style="margin:0">{{ p.judul }}</h3>
+        {% if p.andalan %}<span class="chip andalan">Andalan</span>{% endif %}
+      </div>
+      {% set meta = [p.periode, p.asal, p.bahan]|select|list %}
+      {% if meta %}
+      <p class="meta" style="margin:2px 0 0">{{ meta|join(' · ') }}</p>
+      {% endif %}
+      {% if p.deskripsi %}
+      <p class="ringkas" style="margin-top:6px">{{ p.deskripsi }}</p>
+      {% endif %}
+    </div>
+  </li>
+  {% endfor %}
+</ol>
+{% else %}
+<p class="meta">Rincian isi pameran museum ini belum tercatat.</p>
+{% endif %}
+
+{# --- galeri --- #}
+<h2 style="margin-top:32px">Galeri</h2>
+{% if museum.gallery %}
+<div class="galeri">
+  {% for g in museum.gallery %}
+  <figure>
+    {% if g.src %}
+    <img src="{{ g.src }}" alt="{{ g.judul or museum.nama }}" loading="lazy">
+    {% endif %}
+    <figcaption>
+      <div style="display:flex;justify-content:space-between;gap:8px">
+        <span class="label">Foto {{ "%02d"|format(loop.index) }}</span>
+        {% if g.periode %}<span class="label">{{ g.periode }}</span>{% endif %}
+      </div>
+      {% if g.judul %}<h3 style="margin:4px 0 0">{{ g.judul }}</h3>{% endif %}
+      {% if g.latar %}<p style="margin:6px 0 0">{{ g.latar }}</p>{% endif %}
+      {% if g.poin %}
+      <ul class="poin">
+        {% for poin in g.poin %}<li>{{ poin }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      <p class="meta" style="margin-top:8px">
+        Foto: {{ g.kredit or 'Tidak dicatat' }} ·
+        {% if g.lisensi_url %}<a href="{{ g.lisensi_url }}" target="_blank" rel="noreferrer noopener">{{ g.lisensi or 'Lisensi tidak dicatat' }}</a>{% else %}{{ g.lisensi or 'Lisensi tidak dicatat' }}{% endif %}
+        {% if g.sumber_url %} · <a href="{{ g.sumber_url }}" target="_blank" rel="noreferrer noopener">Wikimedia Commons</a>{% endif %}
+      </p>
+    </figcaption>
+  </figure>
+  {% endfor %}
+</div>
+{% else %}
+<p class="meta">Belum ada foto berlisensi jelas untuk museum ini.</p>
+{% endif %}
+
+{# --- benang merah --- #}
+<h2 style="margin-top:32px">Benang merah</h2>
+{% if benang %}
+<p class="ringkas">
+  Museum lain dipilih dari graf lewat query <code>CONSTRUCT</code>: tema sama (+3),
+  relasi arsip (+4), kota sama (+2), era sama (+1), bab bersebelahan (+1).
+</p>
+<ul class="hasil">
+  {% for b in benang %}
+  <li>
+    <h3><a href="/museum/{{ b.slug }}">{{ b.nama }}</a> <span class="meta">· skor {{ b.skor }}</span></h3>
+    <p class="meta" style="margin:2px 0 0">{{ b.alasan }}</p>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="meta">Tidak ada museum lain yang berhubungan erat menurut graf.</p>
+{% endif %}
+
+{# --- penalaran --- #}
+<h2 style="margin-top:32px">Yang diturunkan reasoner</h2>
+<ul class="ringkas">
+  {% for k in rantai_tipe %}<li>{{ k }}</li>{% endfor %}
+</ul>
+
+{# --- sumber --- #}
+{% if museum.sources %}
+<h2 style="margin-top:32px">Sumber catatan</h2>
+<ul class="ringkas">
+  {% for s in museum.sources %}
+  <li><a href="{{ s.url }}" target="_blank" rel="noreferrer noopener">{{ s.label or s.url }}</a></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

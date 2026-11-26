@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% set halaman = 'tanya' %}
+
+{% block judul %}Tanya{% endblock %}
+
+{% block isi %}
+<h1>Tanya dengan bahasa Indonesia</h1>
+<p class="ringkas">
+  Alur empat langkah mengikuti materi P13: skema diambil dari graf, pertanyaan
+  diterjemahkan menjadi SPARQL, query <strong>diperiksa guard sebelum dijalankan</strong>,
+  lalu jawaban disusun dari hasil query — bukan dari ingatan model.
+</p>
+
+<form class="saring" action="/tanya" method="get">
+  <label style="flex:1;min-width:260px">
+    Pertanyaan
+    <input type="text" name="q" value="{{ q }}" placeholder="mis. museum apa saja di Aceh?">
+  </label>
+  <button type="submit">Tanya</button>
+</form>
+
+<p class="meta">
+  Contoh: <a href="/tanya?q=museum apa saja di Aceh?">museum apa saja di Aceh?</a> ·
+  <a href="/tanya?q=ada berapa museum?">ada berapa museum?</a> ·
+  <a href="/tanya?q=pameran apa saja di Museum Negeri Aceh?">pameran apa saja di Museum Negeri Aceh?</a> ·
+  <a href="/tanya?q=kapan Museum Negeri Aceh berdiri?">kapan Museum Negeri Aceh berdiri?</a>
+</p>
+
+{% if hasil %}
+<hr style="border:0;border-top:1px solid var(--rule);margin:24px 0">
+
+<h2>Jawaban</h2>
+<p class="ringkas" style="font-size:1rem;color:var(--ink)">{{ hasil.jawaban }}</p>
+
+<h2 style="margin-top:28px">Guard</h2>
+{% if hasil.lolos %}
+<p><span class="status lolos">lolos</span> <span class="meta">{{ hasil.pesan }}</span></p>
+{% else %}
+<p><span class="status tolak">ditolak</span> <span class="meta">{{ hasil.pesan }}</span></p>
+{% endif %}
+<p class="meta">
+  Empat pemeriksaan: sintaks sah · hanya <code>SELECT</code> · <code>LIMIT</code> ada
+  dan ≤ 50 · semua IRI dikenal graf. Query yang ditolak tidak pernah dieksekusi.
+</p>
+
+{% if hasil.query %}
+<h2 style="margin-top:28px">Query yang dijalankan</h2>
+<pre><code>{{ hasil.query }}</code></pre>
+{% endif %}
+
+{% if hasil.jangkar %}
+<h2 style="margin-top:28px">Jangkar (anchor) retrieval</h2>
+<table>
+  <thead><tr><th>Entitas</th><th>Jenis</th></tr></thead>
+  <tbody>
+    {% for j in hasil.jangkar %}
+    <tr><td><code>{{ j.label or j.iri }}</code></td><td>{{ j.jenis }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% if hasil.sumber %}
+<h2 style="margin-top:28px">Sumber</h2>
+<ul class="ringkas">
+  {% for s in hasil.sumber[:8] %}<li><code>{{ s }}</code></li>{% endfor %}
+</ul>
+{% endif %}
+
+{% if konteks and konteks.triple %}
+<h2 style="margin-top:28px">Konteks subgraf (GraphRAG)</h2>
+<p class="meta">
+  Yang dikirim sebagai konteks hanya subgraf di sekitar jangkar — bukan seluruh graf.
+  Total {{ konteks.triple|length }} triple pada {{ konteks.hop }} hop.
+</p>
+<pre><code>{% for t in konteks.triple[:20] %}{{ t }}
+{% endfor %}</code></pre>
+{% endif %}
+
+{% else %}
+{% if q %}
+<div class="kosong"><p>Pertanyaan kosong. Tulis pertanyaan lebih dulu.</p></div>
+{% endif %}
+{% endif %}
+{% endblock %}

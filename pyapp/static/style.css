@@ -1,0 +1,210 @@
+/* Semantic Search Engine Museum Sumatera
+   Gaya arsip: kertas, garis tipis, tipografi serif untuk judul. */
+
+:root {
+  --paper: #f6f3ec;
+  --paper-2: #fffdf8;
+  --ink: #23201b;
+  --ink-soft: #57514a;
+  --ink-faint: #8d867d;
+  --rule: #d8d2c6;
+  --accent: #8c3b1e;
+  --accent-soft: #f0e2d8;
+  --ok: #2f6b45;
+  --warn: #8a5a12;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.25;
+  margin: 0 0 .4em;
+}
+
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.3rem; }
+h3 { font-size: 1.05rem; }
+
+.isi { max-width: 960px; margin: 0 auto; padding: 0 20px 72px; }
+
+/* --- kepala ------------------------------------------------------------ */
+
+header.situs {
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-2);
+}
+header.situs .isi {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  flex-wrap: wrap;
+}
+.merek {
+  font-family: Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.merek span { color: var(--ink-faint); font-weight: 400; font-size: .8rem; display: block; }
+nav.situs { display: flex; gap: 18px; font-size: .9rem; flex-wrap: wrap; }
+nav.situs a { color: var(--ink-soft); }
+nav.situs a.aktif { color: var(--accent); font-weight: 600; }
+
+/* --- label kecil ------------------------------------------------------- */
+
+.label {
+  font-size: .68rem;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+.chip {
+  display: inline-block;
+  font-size: .72rem;
+  padding: 2px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--paper-2);
+  color: var(--ink-soft);
+}
+.chip.andalan { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+
+/* --- kartu ------------------------------------------------------------- */
+
+.kartu {
+  border: 1px solid var(--rule);
+  background: var(--paper-2);
+  border-radius: 4px;
+  padding: 18px 20px;
+}
+.kartu + .kartu { margin-top: 14px; }
+
+.petak {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: 18px;
+}
+.petak .kartu { margin: 0; }
+.petak .angka {
+  font-family: Georgia, serif;
+  font-size: 1.8rem;
+  line-height: 1.1;
+}
+
+/* --- daftar hasil ------------------------------------------------------ */
+
+.hasil { list-style: none; padding: 0; margin: 20px 0 0; }
+.hasil li {
+  border-bottom: 1px solid var(--rule);
+  padding: 16px 0;
+}
+.hasil li:first-child { border-top: 1px solid var(--rule); }
+.hasil h3 { margin-bottom: 2px; }
+.meta { font-size: .84rem; color: var(--ink-faint); }
+.ringkas { color: var(--ink-soft); font-size: .92rem; margin: .5em 0 0; max-width: 62ch; }
+
+/* --- formulir ---------------------------------------------------------- */
+
+form.saring { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; margin: 20px 0 8px; }
+form.saring label { display: flex; flex-direction: column; font-size: .78rem; color: var(--ink-soft); gap: 4px; }
+input[type="text"], input[type="number"], select {
+  font: inherit;
+  font-size: .92rem;
+  padding: 8px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--paper-2);
+  color: var(--ink);
+  min-width: 120px;
+}
+input[type="text"]:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+
+button, .tombol {
+  font: inherit;
+  font-size: .9rem;
+  padding: 9px 16px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+button:hover, .tombol:hover { background: #732f16; text-decoration: none; }
+button.ghost, .tombol.ghost {
+  background: transparent;
+  color: var(--accent);
+}
+
+/* --- blok kode --------------------------------------------------------- */
+
+pre {
+  background: #2b2721;
+  color: #f2eee6;
+  padding: 14px 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+code { font-family: "Cascadia Code", Consolas, monospace; font-size: .88em; }
+
+/* --- tabel ------------------------------------------------------------- */
+
+table { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: 12px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-faint); }
+
+/* --- pameran & galeri -------------------------------------------------- */
+
+.pameran { list-style: none; padding: 0; margin: 16px 0 0; }
+.pameran li { border-bottom: 1px solid var(--rule); padding: 14px 0; display: grid; grid-template-columns: 2rem 1fr; gap: 12px; }
+.pameran li:first-child { border-top: 1px solid var(--rule); }
+.pameran .nomor { color: var(--ink-faint); font-variant-numeric: tabular-nums; font-size: .84rem; padding-top: 3px; }
+
+.galeri { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 16px; }
+.galeri figure { margin: 0; border: 1px solid var(--rule); background: var(--paper-2); border-radius: 4px; overflow: hidden; }
+.galeri img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-bottom: 1px solid var(--rule); }
+.galeri figcaption { padding: 12px 14px; font-size: .86rem; color: var(--ink-soft); }
+.galeri .poin { list-style: none; padding: 0; margin: 8px 0 0; }
+.galeri .poin li { display: flex; gap: 6px; }
+.galeri .poin li::before { content: "—"; color: var(--ink-faint); }
+
+/* --- status ------------------------------------------------------------ */
+
+.status { display: inline-block; font-size: .78rem; padding: 3px 10px; border-radius: 3px; }
+.status.lolos { background: #e2efe6; color: var(--ok); }
+.status.tolak { background: #f7e6dc; color: var(--accent); }
+.status.info { background: #efeade; color: var(--warn); }
+
+.kosong { border: 1px dashed var(--rule); padding: 24px; text-align: center; color: var(--ink-soft); border-radius: 4px; }
+
+footer.situs {
+  border-top: 1px solid var(--rule);
+  margin-top: 40px;
+  padding: 20px 0 40px;
+  font-size: .82rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 620px) {
+  h1 { font-size: 1.5rem; }
+  .isi { padding-left: 14px; padding-right: 14px; }
+}
