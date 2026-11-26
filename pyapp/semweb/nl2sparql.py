@@ -343,9 +343,15 @@ def intent(pertanyaan: str, store: MuseumStore | None = None) -> Intent:
         if temuan:
             jangkar = temuan[0].iri
 
-    # Domain graf adalah museum; kata "museum" sendiri dihitung sebagai topik.
+    # Kata "museum" berarti yang ditanya **museum**, kecuali pertanyaan menyebut
+    # topik yang lebih spesifik (pameran, galeri, koleksi). "museum apa saja di
+    # kota Banda Aceh" menyebut "kota", tetapi topiknya museum dan kota hanya
+    # jangkar penyaring — tanpa aturan ini jawabannya berbunyi "Ditemukan 2 kota"
+    # padahal isinya nama museum. Sebaliknya "berapa pameran di Museum X" harus
+    # tetap dihitung sebagai pameran, bukan museum.
     menyebut_museum = _ada_kata(teks, "museum")
-    if topik is None and menyebut_museum:
+    topik_spesifik = {"pameran", "galeri", "koleksi"}
+    if menyebut_museum and topik not in topik_spesifik:
         topik = "museum"
 
     # Jangkar saja tidak cukup untuk menentukan topik: "berapa kota di Sumatera"
@@ -673,7 +679,14 @@ def _rakit(pertanyaan: str, store: MuseumStore) -> str:
         )
 
     # --- daftar tema / era / provinsi / kota ------------------------------
-    if niat.jenis == "daftar" and niat.topik in ("tema", "era", "provinsi", "kota"):
+    # Hanya dijalankan bila pertanyaan **tidak** menyebut museum. Tanpa syarat
+    # ini, "museum apa yang ada di kota Banda Aceh?" dibaca sebagai "daftar
+    # kota" — karena kata "kota" muncul, padahal yang ditanya museumnya.
+    if (
+        niat.jenis == "daftar"
+        and niat.topik in ("tema", "era", "provinsi", "kota")
+        and not _ada_kata(pertanyaan.lower(), "museum")
+    ):
         kelas = {
             "tema": "Theme",
             "era": "Era",

@@ -29,16 +29,26 @@ TTL = """
 <https://museumsumatera.id/resource/museum/negeri-aceh> a sdp:Museum ;
     sdp:name "Museum Negeri Aceh"@id ;
     sdp:locatedInProvince res:province-aceh ;
+    sdp:locatedInCity res:city-banda-aceh ;
     sdp:hasTheme res:theme-etnografi ;
     sdp:establishedYear "1915"^^xsd:gYear ;
     sdp:hasImage res:aceh-img-1 ;
+    sdp:hasExhibit res:aceh-ex-1 , res:aceh-ex-2 ;
     sdp:relatedMuseum <https://museumsumatera.id/resource/museum/tsunami-aceh> .
 
 <https://museumsumatera.id/resource/museum/tsunami-aceh> a sdp:Museum ;
     sdp:name "Museum Tsunami Aceh"@id ;
     sdp:locatedInProvince res:province-aceh ;
+    sdp:locatedInCity res:city-banda-aceh ;
     sdp:establishedYear "2009"^^xsd:gYear ;
     sdp:hasImage res:tsunami-img-1 .
+
+res:aceh-ex-1 a sdp:Exhibit ; sdp:exhibitTitle "Lonceng Cakra Donya"@id .
+res:aceh-ex-2 a sdp:Exhibit ; sdp:exhibitTitle "Rumoh Aceh"@id .
+
+res:city-banda-aceh a sdp:City ;
+    sdp:name "Banda Aceh"@id ;
+    sdp:partOfProvince res:province-aceh .
 
 <https://museumsumatera.id/resource/museum/tua-sumut> a sdp:Museum ;
     sdp:name "Museum Tua Sumatera Utara"@id ;
@@ -55,6 +65,14 @@ res:theme-sejarah a sdp:Theme ; sdp:name "Sejarah"@id .
 
 sdp:locatedInProvince a owl:ObjectProperty ;
     rdfs:domain sdp:Museum ; rdfs:range sdp:Province .
+sdp:locatedInCity a owl:ObjectProperty ;
+    rdfs:domain sdp:Museum ; rdfs:range sdp:City .
+sdp:partOfProvince a owl:ObjectProperty ;
+    rdfs:domain sdp:City ; rdfs:range sdp:Province .
+sdp:hasExhibit a owl:ObjectProperty ;
+    rdfs:domain sdp:Museum ; rdfs:range sdp:Exhibit .
+sdp:exhibitTitle a owl:DatatypeProperty ;
+    rdfs:domain sdp:Exhibit ; rdfs:range xsd:string .
 sdp:hasTheme a owl:ObjectProperty ;
     rdfs:domain sdp:Museum ; rdfs:range sdp:Theme .
 sdp:hasImage a owl:ObjectProperty ;
@@ -254,6 +272,52 @@ def test_daftar_tema_tidak_menyebut_museum(store):
     kalimat = hasil.jawaban.split("\n")[0]
     assert "tema" in kalimat.lower()
     assert "museum" not in kalimat.lower()
+
+
+# ============================ topik museum vs kata wilayah
+
+
+def test_museum_di_kota_tetap_bertopik_museum(store):
+    """'museum apa saja di kota X' menanyakan museum, bukan daftar kota.
+
+    Kata "kota" muncul, tetapi hanya sebagai penyaring wilayah. Sebelum
+    diperbaiki, jawabannya berbunyi "Ditemukan N kota" padahal isinya nama
+    museum.
+    """
+    hasil = jawab("museum apa saja di kota Banda Aceh?", store)
+    assert hasil.lolos is True
+    kalimat = hasil.jawaban.split("\n")[0]
+    assert "museum" in kalimat.lower()
+    assert "Museum Negeri Aceh" in kalimat
+
+
+def test_hitung_museum_di_kota_menghitung_museum(store):
+    hasil = jawab("berapa museum di kota Banda Aceh?", store)
+    assert hasil.lolos is True
+    assert "museum" in hasil.jawaban.lower()
+
+
+def test_museum_di_provinsi_tetap_bertopik_museum(store):
+    hasil = jawab("museum apa saja di provinsi Aceh?", store)
+    kalimat = hasil.jawaban.split("\n")[0]
+    assert "museum" in kalimat.lower()
+
+
+def test_berapa_pameran_tidak_berubah_jadi_museum(store):
+    """Perbaikan topik tidak boleh menimpa topik yang lebih spesifik."""
+    hasil = jawab("berapa pameran di Museum Negeri Aceh?", store)
+    assert "pameran" in hasil.jawaban.lower()
+
+
+def test_berapa_foto_tidak_berubah_jadi_museum(store):
+    hasil = jawab("berapa foto di Museum Negeri Aceh?", store)
+    assert "foto" in hasil.jawaban.lower()
+
+
+def test_daftar_pameran_tidak_berubah_jadi_museum(store):
+    hasil = jawab("apa saja pameran di Museum Negeri Aceh?", store)
+    assert hasil.lolos is True
+    assert "pameran" in hasil.jawaban.lower()
 
 
 # ============================================ jangan merusak yang lama
