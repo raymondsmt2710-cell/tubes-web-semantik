@@ -16,10 +16,10 @@ from .namespace import RES, SDP
 from .store import MuseumStore
 
 # Predikat yang isinya aksioma vocabulary, bukan pengetahuan tentang data museum.
-# `owl:sameAs` ikut dibuang karena reasoner menurunkan `x owl:sameAs x` untuk
-# setiap individu (2.316 triple di data asli) — refleksivitas itu tidak
-# menjelaskan apa pun, dan dulu lolos justru karena penyaring `s == o` hanya
-# berlaku untuk sebagian predikat.
+# `owl:sameAs` ikut dibuang seluruhnya: reasoner menurunkan `x owl:sameAs x` untuk
+# setiap individu (2.316 triple di data asli). Dulu penyaringnya bersyarat
+# `s == o`, sehingga hanya refleksivitas yang tertahan dan `sameAs` antar dua IRI
+# berbeda tetap lolos ke daftar fakta — padahal itu artefak mesin, bukan temuan.
 _AKSIOMA_PREDIKAT = frozenset(
     {
         OWL.sameAs,
