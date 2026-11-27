@@ -39,7 +39,8 @@ describe("buildRdf", () => {
   it("menulis tepat satu sdp:Museum per entri data", () => {
     const xml = buildRdf(museums);
     expect(countOf(xml, "<sdp:Museum ")).toBe(museums.length);
-    expect(museums.length).toBe(28);
+    // Data boleh bertambah; yang dijaga hanya agar tidak ada museum yang hilang.
+    expect(museums.length).toBeGreaterThanOrEqual(28);
   });
 
   it("meng-escape karakter XML berbahaya", () => {

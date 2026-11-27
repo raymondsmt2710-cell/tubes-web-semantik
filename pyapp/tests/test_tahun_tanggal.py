@@ -9,6 +9,7 @@ Perbaikan harus di dalam SPARQL, bukan menyaring hasil di Python — aturan modu
 ini: semua penyaringan terjadi di query supaya bisa dipindah ke Fuseki apa adanya.
 """
 
+import json
 from pathlib import Path
 
 import pytest
@@ -85,7 +86,9 @@ def test_data_asli_tetap_benar():
     store = MuseumStore.dari_turtle(path=DATA_TTL)
     semua = cari_museum(store, batas=1000)
 
-    assert len(semua) == 28, "jumlah museum di data berubah; periksa data/museums.json"
+    berkas = DATA_TTL.parent / "museums.json"
+    jumlah_data = len(json.loads(berkas.read_text(encoding="utf-8")))
+    assert len(semua) == jumlah_data, "jumlah museum hasil kueri tidak sama dengan data/museums.json"
 
     for ambang in (1000, 1950, 2000):
         hasil = cari_museum(store, tahun_min=ambang, batas=1000)

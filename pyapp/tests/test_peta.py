@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import re
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -115,8 +116,14 @@ def titik_nyata():
     return titik_museum(muat_store())
 
 
-def test_28_museum_nyata_punya_koordinat(titik_nyata):
-    assert len(titik_nyata) == 28
+def _jumlah_museum_data() -> int:
+    # Dihitung dari sumber kebenaran, bukan angka mati: data museum bertambah.
+    berkas = Path(__file__).resolve().parents[2] / "data" / "museums.json"
+    return len(json.loads(berkas.read_text(encoding="utf-8")))
+
+
+def test_semua_museum_nyata_punya_koordinat(titik_nyata):
+    assert len(titik_nyata) == _jumlah_museum_data()
     assert all(t["lat"] is not None and t["lng"] is not None for t in titik_nyata)
 
 

@@ -58,6 +58,10 @@ describe("validateMuseums", () => {
 
     const dalam = validateMuseums([{ ...ok, latitude: 5.5, longitude: 95.3 }]);
     expect(dalam.some((i) => i.field === "latitude")).toBe(false);
+
+    // Pulau Belitung (Bangka Belitung) berada di bujur ±108,2°.
+    const belitung = validateMuseums([{ ...ok, latitude: -2.967, longitude: 108.164 }]);
+    expect(belitung.some((i) => i.field === "latitude")).toBe(false);
   });
 
   it("memperingatkan museum yang belum terverifikasi", () => {

@@ -14,12 +14,16 @@ export interface ValidationIssue {
   message: string;
 }
 
-/** Kotak pembatas Pulau Sumatera; koordinat di luar ini hampir pasti salah. */
+/**
+ * Kotak pembatas wilayah 10 provinsi Sumatera; koordinat di luar ini hampir pasti salah.
+ * Bujur maksimum 109 (bukan 107,5) karena Pulau Belitung (±108,2°) dan Kepulauan
+ * Natuna (±108,4°) termasuk provinsi Bangka Belitung dan Kepulauan Riau.
+ */
 export const SUMATRA_BOUNDS = {
   minLat: -6.5,
   maxLat: 6.5,
   minLon: 94,
-  maxLon: 107.5,
+  maxLon: 109,
 };
 
 /** Ambang kedalaman teks; di bawah ini isi dianggap masih terlalu tipis. */

@@ -23,6 +23,24 @@ import type { SparqlBinding } from "./sparql";
 
 const rdfPath = fileURLToPath(new URL("../../data/museum-sumatera.rdf", import.meta.url));
 
+// Angka harapan dihitung dari sumber kebenaran (data/museums.json), bukan ditulis
+// mati: data bertambah dan dikoreksi (tugas A4, museum baru), dan angka mati
+// membuat test gagal bukan karena kuerinya salah.
+interface RecordSumber {
+  slug: string;
+  province: string;
+  themes: string[];
+  era: string | null;
+  chapter: number;
+  establishedYear: number | string | null;
+}
+const sumber = JSON.parse(
+  readFileSync(fileURLToPath(new URL("../../data/museums.json", import.meta.url)), "utf8"),
+) as RecordSumber[];
+const tahun = (m: RecordSumber) =>
+  Number.parseInt(String(m.establishedYear ?? "").slice(0, 4), 10);
+const tahunData = sumber.map(tahun).filter((t) => Number.isFinite(t));
+
 interface OxTerm {
   termType: string;
   value: string;
@@ -55,24 +73,33 @@ function search(params: CatalogParams): MuseumDTO[] {
 }
 
 describe("kueri katalog terhadap RDF asli", () => {
-  it("mengembalikan seluruh 28 museum tanpa filter", () => {
-    expect(search({})).toHaveLength(28);
+  it("mengembalikan seluruh museum tanpa filter", () => {
+    expect(sumber.length).toBeGreaterThanOrEqual(28);
+    expect(search({})).toHaveLength(sumber.length);
   });
 
-  it("menyaring provinsi Aceh menjadi 4 museum", () => {
-    expect(search({ province: "Aceh" })).toHaveLength(4);
+  it("menyaring provinsi Aceh sesuai data sumber", () => {
+    const harapan = sumber.filter((m) => m.province === "Aceh").length;
+    expect(harapan).toBeGreaterThan(0);
+    expect(search({ province: "Aceh" })).toHaveLength(harapan);
   });
 
-  it("menyaring tema etnografi menjadi 15 museum", () => {
-    expect(search({ theme: "etnografi" })).toHaveLength(15);
+  it("menyaring tema etnografi sesuai data sumber", () => {
+    const harapan = sumber.filter((m) => m.themes.includes("etnografi")).length;
+    expect(harapan).toBeGreaterThan(0);
+    expect(search({ theme: "etnografi" })).toHaveLength(harapan);
   });
 
-  it("menyaring era kolonial menjadi 12 museum", () => {
-    expect(search({ era: "kolonial" })).toHaveLength(12);
+  it("menyaring era kolonial sesuai data sumber", () => {
+    const harapan = sumber.filter((m) => m.era === "kolonial").length;
+    expect(harapan).toBeGreaterThan(0);
+    expect(search({ era: "kolonial" })).toHaveLength(harapan);
   });
 
-  it("menyaring tahun minimum 1900 menjadi 13 museum", () => {
-    expect(search({ minYear: 1900 })).toHaveLength(13);
+  it("menyaring tahun minimum 1900 sesuai data sumber", () => {
+    const harapan = tahunData.filter((t) => t >= 1900).length;
+    expect(harapan).toBeGreaterThan(0);
+    expect(search({ minYear: 1900 })).toHaveLength(harapan);
   });
 
   it("menggabungkan filter provinsi dan tema", () => {
@@ -92,7 +119,7 @@ describe("kueri katalog terhadap RDF asli", () => {
 
   it("mengurutkan tahun menurun dari tahun terbaru", () => {
     const results = search({ sort: "year", order: "desc" });
-    expect(results[0].establishedYear).toBe(2009);
+    expect(results[0].establishedYear).toBe(Math.max(...tahunData));
   });
 });
 
@@ -107,7 +134,7 @@ describe("kueri detail terhadap RDF asli", () => {
 
   it("mengecualikan museum itu sendiri dari kandidat benang merah", () => {
     const candidates = rows(relatedCandidatesQuery("museum-negeri-aceh")).map(mapMuseumRow);
-    expect(candidates).toHaveLength(27);
+    expect(candidates).toHaveLength(sumber.length - 1);
     expect(candidates.some((m) => m.slug === "museum-negeri-aceh")).toBe(false);
   });
 
@@ -115,7 +142,10 @@ describe("kueri detail terhadap RDF asli", () => {
     const counts = [1, 2, 3, 4, 5, 6, 7].map(
       (chapter) => rows(museumsByChapterQuery(chapter)).length,
     );
-    expect(counts).toEqual([4, 5, 4, 4, 4, 4, 3]);
+    const harapan = [1, 2, 3, 4, 5, 6, 7].map(
+      (chapter) => sumber.filter((m) => m.chapter === chapter).length,
+    );
+    expect(counts).toEqual(harapan);
   });
 
   it("membaca sejarah museum sebagai paragraf terpisah", () => {

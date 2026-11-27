@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import re
 from decimal import Decimal
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -188,7 +189,8 @@ def store_nyata() -> MuseumStore:
 
 def test_seluruh_museum_nyata_tanpa_null_dan_punya_geo(store_nyata):
     koleksi = semua_museum_jsonld(store_nyata, BASIS)
-    assert len(koleksi["@graph"]) == 28
+    berkas = Path(__file__).resolve().parents[2] / "data" / "museums.json"
+    assert len(koleksi["@graph"]) == len(json.loads(berkas.read_text(encoding="utf-8")))
     assert not _ada_null(koleksi)
     for m in koleksi["@graph"]:
         assert m["@type"] == "Museum"
